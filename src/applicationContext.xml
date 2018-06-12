@@ -17,7 +17,7 @@
 	
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+		<property name="url" value="jdbc:oracle:thin:@47.106.199.176:1521:orcl"/>
 		<property name="username" value="OneStepService"/>
 		<property name="password" value="OneStepService"/>
 	</bean>
