@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	黄绍鹏主干是否冲突啊实打实大苏打萨达萨达萨达萨达
+=======
+	黄绍鹏主干是否冲突11111111111111111hhahaahahah
+>>>>>>> refs/heads/sp
 </body>
 </html>
