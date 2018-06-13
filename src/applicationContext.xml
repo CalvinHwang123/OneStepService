@@ -24,12 +24,26 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource"/>
-		<property name="mapperLocations" value="classpath:oss/entity/*.xml"/>
+		<property name="mapperLocations" value="classpath:oss/bean/*.xml"/>
+		<property name="plugins">
+    	  <array>
+     		 <bean class="com.github.pagehelper.PageInterceptor">
+       			 <property name="properties">
+          			<!--使用下面的方式配置参数，一行配置一个 -->
+         			 <value>
+           				 reasonable=true
+         			 </value>
+       			 </property>
+     		 </bean>
+   		  </array>
+  		</property>
 	</bean>
 	
 	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="oss.mapper"/>
 		<property name="annotationClass" value="oss.annotation.MyRepository"></property>
 	</bean>
+	
+	
 	
 </beans>
