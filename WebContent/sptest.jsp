@@ -8,9 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< Upstream, based on master
 	 
 	<a href="<%=path%>/logs/logsList.action" target="_blank">查询日志列表</a>
 
+=======
+	黄绍鹏测试000000000012312312321
+>>>>>>> 6175cbf 8:42
 </body>
 
 <script type="text/javascript" src="<%=path%>/js/jquery-1.4.2.min.js"></script>
