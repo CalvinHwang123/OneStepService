@@ -9,7 +9,6 @@
 </head>
 <body> 
 	<a href="<%=path%>/logs/logsList.action" target="_blank">查询日志列表</a>
-
 </body>
 
 <script type="text/javascript" src="<%=path%>/js/jquery-1.4.2.min.js"></script>
