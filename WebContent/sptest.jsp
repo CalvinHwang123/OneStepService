@@ -8,10 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body> 
-	<a href="<%=path%>/logs/logsList.action" target="_blank">查询日志列表</a>
+	<a href="<%=path%>/PortalManage/userStoryList.action" target="_blank">查询</a>
+	<a href="<%=path%>/logs/logsList.action" target="_blank">增加</a>
+	<a href="<%=path%>/logs/logsList.action" target="_blank">查询</a>
+	<a href="<%=path%>/logs/logsList.action" target="_blank">修改</a>
 </body>
-
+	
 <script type="text/javascript" src="<%=path%>/assets/js/jquery-3.3.1.js"></script>
-<!-- <script type="text/javascript"> -->
-</script>
 </html>
