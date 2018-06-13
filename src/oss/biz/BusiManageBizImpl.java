@@ -10,7 +10,7 @@ import oss.mapper.BusiManageMapper;
  * 业务管理Biz业务实现类
  */
 @Service
-public class BusiManageBizImpl {
+public class BusiManageBizImpl implements BusiManageBiz {
 	@Resource
 	private BusiManageMapper busiManageMapper;
 

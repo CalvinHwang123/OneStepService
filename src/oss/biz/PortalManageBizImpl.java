@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  */
 import oss.mapper.PortalManageMapper;
 @Service
-public class PortalManageBizImpl {
+public class PortalManageBizImpl implements PortalManageBiz{
 	@Resource
 	private PortalManageMapper portalManageMapper;
 

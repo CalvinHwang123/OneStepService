@@ -11,7 +11,7 @@ import oss.mapper.PortalMapper;
  * 前端门户Biz业务实现类
  */
 @Service
-public class PortalBizImpl {
+public class PortalBizImpl  implements PortalBiz{
 	@Resource
 	private PortalMapper portalMapper;
 

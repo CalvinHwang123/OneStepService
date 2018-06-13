@@ -10,7 +10,7 @@ import oss.mapper.EmployerMapper;
  * 雇主Biz业务实现类
  */
 @Service
-public class EmployerBizImpl {
+public class EmployerBizImpl implements EmployerBiz {
 	@Resource
 	private EmployerMapper employerMapper;
 

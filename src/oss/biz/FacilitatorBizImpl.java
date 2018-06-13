@@ -10,7 +10,7 @@ import oss.mapper.FacilitatorMapper;
  * 服务商Biz业务实现类
  */
 @Service
-public class FacilitatorBizImpl {
+public class FacilitatorBizImpl implements FacilitatorBiz{
 	@Resource
 	private FacilitatorMapper facilitatorMapper;
 
