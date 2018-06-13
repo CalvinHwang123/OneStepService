@@ -545,30 +545,15 @@
                         <div class="example-wrap">
                             <h4 class="example-title">事件</h4>
                             <div class="example">
-                                <div class="alert alert-success" id="examplebtTableEventsResult" role="alert">
-                                    事件结果
+                                <div class="bootstrap-table">
+                                	<div class="fixed-table-toolbar">
+                                		
+                                	
+                                	
+                                	</div>
+                                
+                                
                                 </div>
-                                <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true">
-                                    <thead>
-                                        <tr>
-                                            <th data-field="state" data-checkbox="true"></th>
-                                            <th data-field="id">ID</th>
-                                            <th data-field="name">名称</th>
-                                            <th data-field="price">价格</th>
-                                        </tr>
-                                    </thead>
-                                </table>
                             </div>
                         </div>
                         <!-- End Example Events -->
