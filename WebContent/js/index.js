@@ -1,9 +1,13 @@
-$(function(){
-    //菜单点击
-    J_iframe
-    $(".J_menuItem").on('click',function(){
-        var url = $(this).attr('href');
-        $("#J_iframe").attr('src',url);
-        return false;
-    });
-});
+/**
+ * 
+ */
+var iframeNode;
+
+$(function() {
+	iframeNode = document.getElementById("page");
+	$("#d2").accordion();
+})
+function changePage(node) {
+	var url = node.getAttribute("title");
+	iframeNode.setAttribute("src", url);
+}

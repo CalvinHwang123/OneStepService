@@ -50,7 +50,7 @@ public class PortalManageHandler {
 	public ModelAndView linksList(HttpServletRequest req) {
 		List<Links> linksList = portalManageBizImpl.listLinks();
 		req.setAttribute("linksList", linksList);
-		ModelAndView mav = new ModelAndView("LinksTest1");
+		ModelAndView mav = new ModelAndView("LinksList");
 		return mav;
 	}
 
