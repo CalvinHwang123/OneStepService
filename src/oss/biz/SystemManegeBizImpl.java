@@ -17,7 +17,7 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 	@Resource
 	private SystemManegeMapper systemManegeMapper;
 
-	// jhx 获取权限列表 2018-6-13 9:00
+	// jhx 获取权限列表 2018-6-13 23：00
 	@Override
 	public List<Powers> powerList() {
 		// TODO Auto-generated method stub
