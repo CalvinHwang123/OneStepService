@@ -60,4 +60,16 @@ public class PortalManageBizImpl implements PortalManageBiz{
 		System.out.println("updateById");
 		return portalManageMapper.updateById(links);
 	}
+
+	// 批量删除雇主故事 黄绍鹏 6-14 15：47
+	@Override
+	public int deleteUserStorys(List<UserStory> storyList) {
+		return portalManageMapper.deleteStoryByID(storyList);
+	}
+
+	// 增加雇主故事  黄绍鹏 6-14 21：32
+	@Override
+	public int addUserStory(UserStory userStory) {
+		return portalManageMapper.insertStory(userStory);
+	}
 }

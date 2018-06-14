@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,6 +22,7 @@ import oss.biz.PortalManageBiz;
 /*
  * 后端门户管理Handler
  */
+import oss.util.DateUtil;
 
 @Controller
 @RequestMapping("/PortalManage")
@@ -108,4 +111,20 @@ public class PortalManageHandler {
 		ModelAndView mav = new ModelAndView("redirect:userStoryList.action");
 		return mav;
 	}
+
+	//批量删除雇主故事 黄绍鹏 6-14 15:57(修改)
+	@RequestMapping("/deleteStory.action")
+	public @ResponseBody String deleteStory(HttpServletRequest req, @RequestBody List<UserStory> storyList) {
+		portalManageBizImpl.deleteUserStorys(storyList);
+		return "success";
+	}
+	
+	//增加雇主故事  黄绍鹏 6-14 21：32
+	@RequestMapping("/addStory.action")
+	public @ResponseBody String addStory(HttpServletRequest req, @RequestBody UserStory userStory) {
+		userStory.setStoryTime(DateUtil.getCurrentDate());
+		portalManageBizImpl.addUserStory(userStory);
+		return "success";
+	}
+	
 }
