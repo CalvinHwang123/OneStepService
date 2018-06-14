@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalManageMapper">
+<!-- by hlq 2018-06-14 -->
+	<insert id="insertViolations" parameterType="oss.bean.Violations">
+		<selectKey keyProperty="violationsID" order="BEFORE" resultType="long">
+			select violationsSeq.nextVal from dual
+		</selectKey>
+		insert into violations
+		(violationsID, violationsTime, violationsWhy, violationsResult, userID)
+		values (#{violationsID}, #{violationsTime}, #{violationsWhy}, #{violationsResult}, #{userID})
+	</insert>
+	<delete id="deleteViolations" parameterType="int">
+		delete from violations
+		where violationsID = #{violationsID}
+	</delete>
+	<update id="updateViolations" parameterType="oss.bean.Violations">
+		update violations set user_status = #{user_status,jdbcType=VARCHAR}
+		where user_id = #{user_id,jdbcType=INTEGER}
+	</update>
+	<select id="listViolations" resultType="oss.bean.Violations">
+		select * from violations where 1 = 1
+	</select>
+</mapper>

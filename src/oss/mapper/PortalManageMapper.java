@@ -5,6 +5,7 @@ import java.util.List;
 
 import oss.annotation.MyRepository;
 import oss.bean.UserStory;
+import oss.bean.Violations;
 /*
  * 后端门户管理Mapper接口
  */
@@ -15,4 +16,6 @@ public interface PortalManageMapper {
 	
 	//修改雇主故事 黄绍鹏6-13  23：10
 	public int updateStory(UserStory userStory);
+	// by hlq 2018-06-14
+	public List<Violations> listViolations();
 }
