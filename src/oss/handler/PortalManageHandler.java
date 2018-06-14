@@ -7,15 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Links;
+import oss.biz.BusiManageBiz;
 import oss.biz.PortalManageBiz;
-
 /*
  * 后端门户管理Handler
  */
@@ -43,6 +44,44 @@ public class PortalManageHandler {
 		ModelAndView mav = new ModelAndView("violationslist");
 		return mav;
 	}
+	private Links links;
+
+	@RequestMapping("/linksList.action")
+	public ModelAndView linksList(HttpServletRequest req) {
+		List<Links> linksList = portalManageBizImpl.listLinks();
+		req.setAttribute("linksList", linksList);
+		ModelAndView mav = new ModelAndView("LinksTest1");
+		return mav;
+	}
+
+	@RequestMapping("/addlinks.action")
+	public ModelAndView Addlinks(HttpServletRequest req, Links links) {
+		links.setLinksname("华清");
+		links.setLinksurl("www.huaqing.com");
+		int addlinks = portalManageBizImpl.AddLinks(links);
+		ModelAndView mav = new ModelAndView("redirect:linksList.action");
+		return mav;
+	}
+
+	@RequestMapping("/deleteById.action")
+	public ModelAndView deleteById(HttpServletRequest req,
+			@RequestParam(value = "linksid", required = true, defaultValue = "empty") Long linksid) {
+		System.out.println(linksid);
+		int delete = portalManageBizImpl.deleteById(linksid);
+		ModelAndView mav = new ModelAndView("redirect:linksList.action");
+		return mav;
+	}
+
+	@RequestMapping("/updateById.action")
+	public ModelAndView updateById(HttpServletRequest req, Links links) {
+	links.setLinksurl("www.314464654");
+	links.setLinksid(8l);
+		int up=portalManageBizImpl.updateById(links);
+		ModelAndView mav = new ModelAndView("redirect:linksList.action");
+		return mav;
+
+	}
+
 
 	// 雇主故事列表 黄绍鹏6-13 22：20
 	@RequestMapping("/userStoryList.action")

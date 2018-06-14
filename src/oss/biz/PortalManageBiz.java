@@ -1,10 +1,9 @@
 package oss.biz;
 
 import java.util.List;
-
 import oss.bean.UserStory;
 import oss.bean.Violations;
-
+import oss.bean.Links;
 /*
  * 门户管理Biz业务接口
  */
@@ -18,4 +17,8 @@ public interface PortalManageBiz {
 	// by hlq 2018-06-14
 	public List<Violations> violationsList();
 
+	public List<Links> listLinks();
+	public abstract int AddLinks(Links links);
+	public abstract int deleteById(Long linksid);
+	public abstract int updateById(Links links);
 }
