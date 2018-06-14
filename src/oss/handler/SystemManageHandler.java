@@ -23,7 +23,7 @@ public class SystemManageHandler {
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
 
-	// jhx 获取权限列表 2018-6-13 9:00
+	// jhx 获取权限列表 2018-6-14 9:00
 	@Test
 	@RequestMapping("/powerList.action")
 	public List<Powers> powerList(HttpServletRequest req) {
