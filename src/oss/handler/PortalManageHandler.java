@@ -96,7 +96,7 @@ public class PortalManageHandler {
 		PageInfo pageInfo = new PageInfo<>(userStoryList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
-		ModelAndView mav = new ModelAndView("logslist");
+		ModelAndView mav = new ModelAndView("userStory");
 		return mav;
 	}
 

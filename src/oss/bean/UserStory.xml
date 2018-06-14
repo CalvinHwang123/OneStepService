@@ -10,4 +10,9 @@
 	    update UserStory set storyTitle=#{storyTitle},storyContext=#{storyContext},storyTime=#{storyTime}
 	    where storyID=#{storyID}
 	</update>
+	
+<!-- 	<delete id="deleteByID" parameterType="oss.bean.UserStory"> -->
+<!-- 		delete from -->
+	
+<!-- 	</delete> -->
 </mapper>

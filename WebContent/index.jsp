@@ -153,10 +153,10 @@
 					</ul></li>
 					
 					<li><a href="javascript:;"> <i class="iconfont">&#xe726;</i>
-						<cite>业务员管理</cite> <i class="iconfont nav_right">&#xe697;</i>
+						<cite>门户管理员</cite> <i class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
-						<li><a _href="admin-list.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="PortalManage/userStoryList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>雇主故事配置</cite>
 						</a></li>
 						<li><a _href="admin-role.html"> <i class="iconfont">&#xe6a7;</i>
