@@ -12,5 +12,21 @@
 		delete from Dynamics where
 		dynamicId=#{dynamicId}
 	</delete>
+	
+		<!-- 修改动态 -->
+	<update id="updateDynaById" parameterType="oss.bean.Dynamics">
+		update Dynamics set
+		dynamicTitle=#{dynamicTitle},dynamicContext=#{dynamicContext},dynamicTime=#{dynamicTime} where dynamicId=#{dynamicId}
+	</update>
+	
+	<!-- 	增加动态 -->
+		<insert id="AddDyna" parameterType="oss.bean.Dynamics">
+		<selectKey keyProperty="dynamicId" order="BEFORE" resultType="long">
+			select DYNAMICSEQ.nextval from dual
+		</selectKey>
+		insert into Dynamics(dynamicId,dynamicTitle,dynamicContext,dynamicTime)
+		values(#{dynamicId},#{dynamicTitle},#{dynamicContext},#{dynamicTime})	
+	</insert>
+	
 </mapper>
 	

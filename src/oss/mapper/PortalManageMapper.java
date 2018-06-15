@@ -37,9 +37,16 @@ public interface PortalManageMapper {
 	public List<Dynamics> ListDyna();
 	//删除动态   王伟杰6-13
 	public abstract int deleteDynaById(Long dynamicId);
+	//修改动态   wwj  6-15
+	public abstract int updateDynaById(Dynamics dynamics);
+	//增加动态   wwj  6-15
+	public abstract int AddDyna(Dynamics dynamics);
 	//资讯列表  王伟杰6-13
 	public List<Information> ListInfo();
 	//删除资讯王伟杰6-13
 	public abstract int deleteInfoById(Long InformationId);
-
+	//修改资讯    wwj   6-15
+	public abstract int updateInfoById(Information information);
+	//增加资讯  wwj  6-15
+	public abstract int AddInfo(Information information);
 }
