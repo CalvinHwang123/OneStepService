@@ -11,8 +11,18 @@
 	    where storyID=#{storyID}
 	</update>
 	
-<!-- 	<delete id="deleteByID" parameterType="oss.bean.UserStory"> -->
-<!-- 		delete from -->
+	<delete id="deleteStoryByID" parameterType="java.util.List">
+		delete from UserStory where storyID in 
+		<foreach collection="list" item="story" open="(" close=")" separator=",">
+			#{story.storyID}
+		</foreach>
+	</delete>
 	
-<!-- 	</delete> -->
+	<insert id="insertStory" parameterType="oss.bean.UserStory">
+		<selectKey keyProperty="storyID" order="BEFORE" resultType="java.lang.Long" >
+			select userStorySeq.nextval  from dual 
+		</selectKey>
+		insert into UserStory (storyID,storyTitle,userID,storyContext,storyTime) values 
+		(#{storyID},#{storyTitle},#{userID},#{storyContext},#{storyTime})
+	</insert>
 </mapper>

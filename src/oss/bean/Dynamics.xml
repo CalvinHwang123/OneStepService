@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalManageMapper">
+	<!-- 动态列表 -->
+<select id="ListDyna" resultType="oss.bean.Dynamics">
+		select * from dynamics where 1 = 1
+	</select>
+	
+	<!-- 	删除动态 -->
+	<delete id="deleteDynaById" parameterType="long">
+		delete from Dynamics where
+		dynamicId=#{dynamicId}
+	</delete>
+</mapper>
+	
