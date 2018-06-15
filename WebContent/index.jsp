@@ -159,7 +159,7 @@
 						<li><a _href="PortalManage/userStoryList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>雇主故事配置</cite>
 						</a></li>
-						<li><a _href="admin-role.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="PortalManage/violationsList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>曝光台配置</cite>
 						</a></li>
 						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i>

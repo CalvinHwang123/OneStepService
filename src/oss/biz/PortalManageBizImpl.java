@@ -2,8 +2,6 @@ package oss.biz;
 
 import java.util.List;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -71,5 +69,11 @@ public class PortalManageBizImpl implements PortalManageBiz{
 	@Override
 	public int addUserStory(UserStory userStory) {
 		return portalManageMapper.insertStory(userStory);
+	}
+		
+	// 违规记录删除 By Hlq 2018-06-14 22:01
+	@Override
+	public boolean violationsDelete(long violationsID) {
+		return portalManageMapper.deleteViolationsByID(violationsID) > 0;
 	}
 }
