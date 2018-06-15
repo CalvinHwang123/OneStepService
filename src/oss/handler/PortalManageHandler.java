@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
@@ -102,15 +103,17 @@ public class PortalManageHandler {
 		return mav;
 	}
 
-	// 雇主故事列表 黄绍鹏6-13 22：20
+	// 雇主故事列表 黄绍鹏6-15 15：13
 	@RequestMapping("/userStoryList.action")
-	public ModelAndView userStoryList(HttpServletRequest req) {
+	public ModelAndView userStoryList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,
+			Condition condition
+			) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
-		int pageNum = 1;// 当前显示的页码
-		int pageSize = 5;// 每一页显示的数据条数
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
-		List<UserStory> userStoryList = portalManageBizImpl.userStoryList();
+		List<UserStory> userStoryList = portalManageBizImpl.userStoryList(condition);
 		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
 		PageInfo pageInfo = new PageInfo<>(userStoryList, pageSize);
 		System.out.println(pageInfo.getTotal());

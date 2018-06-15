@@ -1,15 +1,18 @@
 package oss.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import oss.bean.UserStory;
-import oss.bean.Violations;
+
+import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.UserStory;
+import oss.bean.Violations;
 /*
  * 门户管理Biz业务实现类
  */
@@ -22,8 +25,8 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// 雇主故事列表 黄绍鹏6-13 22：20
 	@Override
-	public List<UserStory> userStoryList() {
-		return portalManageMapper.storyList();
+	public List<UserStory> userStoryList(Condition condition) {
+		return portalManageMapper.storyList(condition);
 	}
 
 	@Override

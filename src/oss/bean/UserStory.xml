@@ -2,8 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.PortalManageMapper">
-	<select id="storyList" resultType="oss.bean.UserStory">
+	<select id="storyList" resultType="oss.bean.UserStory" parameterType="oss.bean.Condition">
 		select * from UserStory where 1 = 1
+		<if test="startDate != null and endDate != null">
+			and storyTime between #{startDate} and #{endDate}
+		</if>
+		<if test="title != null">
+			and  storyTitle like concat(concat('%',#{title}),'%')
+		</if>
+		
 	</select>
 	
 	<update id="updateStory" parameterType="oss.bean.UserStory">
