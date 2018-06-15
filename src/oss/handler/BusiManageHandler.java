@@ -91,7 +91,7 @@ public class BusiManageHandler {
 		PageInfo pageInfo=new PageInfo<>(Userlist,pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("Userlist", pageInfo);
-		ModelAndView mav = new ModelAndView("Employer");
+		ModelAndView mav = new ModelAndView("provider");
 		return mav;
 	}
 	//修改密码
