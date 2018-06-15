@@ -1,44 +1,53 @@
 package oss.bean;
 
 public class Information {
-	private Long InformationId;// 资讯ID
-	private String InformationTitle;// 资讯标题
-	private String InformationContext;// 资讯内容
-	private String InformationTime;// 资讯时间
+	private Long informationId;// 资讯ID
+	private String informationTitle;// 资讯标题
+	private String informationContext;// 资讯内容
+	private String informationTime;// 资讯时间
 	
 	public Information() {
 		
 	}
+
 	public Information(Long informationId, String informationTitle, String informationContext, String informationTime) {
 		super();
-		InformationId = informationId;
-		InformationTitle = informationTitle;
-		InformationContext = informationContext;
-		InformationTime = informationTime;
-	}
-	public Long getInformationId() {
-		return InformationId;
-	}
-	public void setInformationId(Long informationId) {
-		InformationId = informationId;
-	}
-	public String getInformationTitle() {
-		return InformationTitle;
-	}
-	public void setInformationTitle(String informationTitle) {
-		InformationTitle = informationTitle;
-	}
-	public String getInformationContext() {
-		return InformationContext;
-	}
-	public void setInformationContext(String informationContext) {
-		InformationContext = informationContext;
-	}
-	public String getInformationTime() {
-		return InformationTime;
-	}
-	public void setInformationTime(String informationTime) {
-		InformationTime = informationTime;
+		this.informationId = informationId;
+		this.informationTitle = informationTitle;
+		this.informationContext = informationContext;
+		this.informationTime = informationTime;
 	}
 
+	public Long getInformationId() {
+		return informationId;
+	}
+
+	public void setInformationId(Long informationId) {
+		this.informationId = informationId;
+	}
+
+	public String getInformationTitle() {
+		return informationTitle;
+	}
+
+	public void setInformationTitle(String informationTitle) {
+		this.informationTitle = informationTitle;
+	}
+
+	public String getInformationContext() {
+		return informationContext;
+	}
+
+	public void setInformationContext(String informationContext) {
+		this.informationContext = informationContext;
+	}
+
+	public String getInformationTime() {
+		return informationTime;
+	}
+
+	public void setInformationTime(String informationTime) {
+		this.informationTime = informationTime;
+	}
+	
 }

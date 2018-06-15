@@ -20,6 +20,7 @@
 <script type="text/javascript" src="./lib/layui/layui.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="./js/xadmin.js"></script>
+<link rel="stylesheet" href="/static/build/layui.css" media="all">
 </head>
 <body>
 	<div class="x-nav">
@@ -66,7 +67,7 @@
 			<i class="layui-icon"></i>批量删除
 		</button>
 		<button class="layui-btn"
-			onclick="x_admin_show('增加','AddLinks.jsp',600,400)">
+			onclick="openAddDyna()">
 			<i class="layui-icon"></i>增加
 		</button>
 		<span class="x-right" style="line-height: 40px">共有数据：88 条</span> </xblock>
@@ -87,16 +88,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="i" items="${ListDyna}" begin="0"
-						varStatus="status">
+					<c:forEach var="i" items="${ListDyna}" begin="0" varStatus="status">
 						<tr>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getDynamicTitle()}"></c:out></td>
 							<td><c:out value="${i.getDynamicContext()}"></c:out></td>
 							<td><c:out value="${i.getDynamicTime()}"></c:out></td>
 							<td class="td-manage"><a title="编辑"
-								onclick="x_admin_show('编辑','UpdateLinks.jsp')" href="javascript:;">
-									<i class="layui-icon">&#xe642;</i>
+								onclick="openUpdateDyna(this,'${i.getDynamicId()}')"
+								href="javascript:;"> <i class="layui-icon">&#xe642;</i>
 							</a> <a title="删除" onclick="member_del(this,'${i.getDynamicId()}')"
 								href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 							</a></td>
@@ -114,6 +114,171 @@
 			</div>
 		</div>
 	</div>
+	<div id="update" style="display: none">
+		<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">动态标题</label>
+				<div class="layui-input-block">
+					<input type="text" name="linksname" required lay-verify="required"
+						placeholder="请输入标题" autocomplete="off" class="layui-input"
+						id="newDynaTitle">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">动态内容</label>
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
+						id="newDynaCon"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">动态時間</label>
+				<div class="layui-input-block">
+					<input type="datetime" name="linksname" placeholder="请输入時間"
+						class="layui-input" id="test1">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" type="button" onclick="UpdateDyna()">修改</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+<!-- 增加动态 -->
+<div id="addDyna" style="display: none">
+		<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">动态标题</label>
+				<div class="layui-input-block">
+					<input type="text" name="linksname" required lay-verify="required"
+						placeholder="请输入标题" autocomplete="off" class="layui-input"
+						id="newDynaTitle1">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">动态内容</label>
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
+						id="newDynaCon1"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">动态時間</label>
+				<div class="layui-input-block">
+					<input type="datetime" name="linksname" placeholder="请输入時間"
+						class="layui-input" id="test2">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" type="button" onclick="AddDyna()">确定</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<script type="text/javascript">
+		var dynamicId;
+		function openUpdateDyna(obj, id) {
+			dynamicId = id;
+			layer.open({
+				type : 1,
+				area : [ '500px', '300px' ],
+				content : $('#update')
+			});
+		}
+		
+		function openAddDyna() {
+			layer.open({
+				type : 1,
+				area : [ '500px', '300px' ],
+				content : $('#addDyna')
+			});
+		}
+		
+      // 修改
+		function UpdateDyna() {//修改链接
+			layer.confirm('确认要提交吗？', function(index) {
+
+				var DynaTitle = $("#newDynaTitle").val();
+				var DynaCon = $("#newDynaCon").val();
+				var DynaTime = $("#test1").val();
+				var newDyna = {
+					"dynamicTitle" : DynaTitle,
+					"dynamicContext" : DynaCon,
+					"dynamicTime" : DynaTime,
+					"dynamicId" : dynamicId
+				};
+				$.ajax({
+					url : "PortalManage/updateDynaById.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newDyna),
+					async : true,
+					success : function(msg) {
+						layer.closeAll();
+						window.location.reload();
+					}
+				})
+			})
+		}
+		//增加动态
+		function AddDyna() {
+			layer.confirm('确认要提交吗？', function(index) {
+
+				var DynaTitle = $("#newDynaTitle1").val();
+				var DynaCon = $("#newDynaCon1").val();
+				var DynaTime = $("#test2").val();
+				var newDyna = {
+					"dynamicTitle" : DynaTitle,
+					"dynamicContext" : DynaCon,
+					"dynamicTime" : DynaTime,
+					"dynamicId" : dynamicId
+				};
+				$.ajax({
+					url : "PortalManage/addDyna.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newDyna),
+					async : true,
+					success : function(msg) {
+						layer.closeAll();
+						window.location.reload();
+					}
+				})
+			})
+		}
+		
+	</script>
+
+	<script>
+		layui.use('laydate', function() {
+			var laydate = layui.laydate;
+
+			//执行一个laydate实例
+			laydate.render({
+				elem : '#test1' //指定元素
+			});
+		});
+	</script>
+	
+		<script>
+		layui.use('laydate', function() {
+			var laydate = layui.laydate;
+
+			//执行一个laydate实例
+			laydate.render({
+				elem : '#test2' //指定元素
+			});
+		});
+	</script>
+
 	<script>
 		layui.use('laydate', function() {
 			var laydate = layui.laydate;
