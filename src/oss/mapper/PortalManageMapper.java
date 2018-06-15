@@ -2,9 +2,12 @@ package oss.mapper;
 
 
 import java.util.List;
+import java.util.Map;
+
 import oss.annotation.MyRepository;
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
@@ -14,7 +17,7 @@ import oss.bean.Links;
 @MyRepository
 public interface PortalManageMapper {
 	//雇主故事列表 黄绍鹏6-13  22：20
-	public List<UserStory> storyList();
+	public List<UserStory> storyList(Condition condition);
 	
 	//修改雇主故事 黄绍鹏6-13  23：10
 	public int updateStory(UserStory userStory);

@@ -32,10 +32,17 @@
 	</div>
 	<div class="x-body">
 		<div class="layui-row">
-			<form class="layui-form layui-col-md12 x-so">
-				<input class="layui-input" placeholder="开始日" name="start" id="start">
-				<input class="layui-input" placeholder="截止日" name="end" id="end">
-				<input type="text" name="username" placeholder="请输入用户名"
+			<form id="pageForm" class="layui-form layui-col-md12 x-so"
+				action="PortalManage/userStoryList.action">
+				<!-- 隐藏域 每页条数 -->
+				<input type="hidden" id="pageSizeInput" name="pageSize"
+					value="${pageInfo.getPageSize()}">
+				<!-- 隐藏域 当前页数 -->
+				<input type="hidden" id="currentPageInput" name="pageNum"
+					value="${pageInfo.getPageNum()}"> <input
+					class="layui-input" placeholder="开始日" name="startDate" id="start">
+				<input class="layui-input" placeholder="截止日" name="endDate" id="end">
+				<input type="text" name="title" placeholder="请输入故事标题"
 					autocomplete="off" class="layui-input">
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
@@ -86,8 +93,7 @@
 							href="javascript:;"> <i class="layui-icon">&#xe642;</i>
 						</a> <a title="详情" onclick="member_del(this,${story.storyID})"
 							href="javascript:;"> <i class="layui-icon">&#xe60a;</i>
-						</a>
-						</a> <a title="删除" onclick="member_del(this,${story.storyID})"
+						</a> </a> <a title="删除" onclick="member_del(this,${story.storyID})"
 							href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 						</a></td>
 					</tr>
@@ -96,21 +102,71 @@
 		</table>
 		<div class="page">
 			<div>
-				<c:if test="${pageInfo.hasPreviousPage}">
-					<a class="prev" href="">&lt;&lt;</a>
-				</c:if>
+				共${pageInfo.getPages() }页，每页 <select
+					style="width: 6%; height: 30px;" name="pageSize"
+					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
+					id="pageSizeSelect">
+					<option value="5" ${pageInfo.getPageSize() == 5 ? "selected" : ""}>5</option>
+					<option value="10" ${pageInfo.getPageSize() == 10 ? "selected" : ""}>10</option>
+					<option value="20" ${pageInfo.getPageSize() == 20 ? "selected" : ""}>20</option>
+				</select> 条
+				<c:choose>
+					<c:when test="${!pageInfo.hasPreviousPage}">
+						<span class="prev">上一页</span>
+					</c:when>
+					<c:otherwise>
+						<a class="prev" href="javascript:void(0);"
+							onclick="changePage(${pageInfo.getPrePage()})">上一页</a>
+					</c:otherwise>
+				</c:choose>
 
-				<a class="num" href="">1</a> <span class="current">2</span> <a
-					class="num" href="">3</a> <a class="num" href="">489</a> <a
-					class="next" href="">&gt;&gt;</a>
-
+				<c:choose>
+					<c:when test="${pageInfo.pageNum <= 2}">
+						<c:if test="${pageInfo.pageNum != 1}">
+							<a class="num" href="javascript:void(0);"
+							onclick="changePage(${pageInfo.pageNum-1})"><c:out
+									value="${pageInfo.pageNum-1}"></c:out> </a>
+						</c:if>
+						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
+						<c:forEach begin="1" step="1" end="4" var="num">
+							<c:if test="${pageInfo.pages - pageInfo.pageNum - num> 0}">
+								<a class="num" href="javascript:void(0);"
+									onclick="changePage(${pageInfo.pageNum+num})"><c:out
+										value="${pageInfo.pageNum+num}"></c:out> </a>
+							</c:if>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					  <a class="num" href="javascript:void(0);"
+							onclick="changePage(${pageInfo.pageNum-1})"><c:out
+									value="${pageInfo.pageNum-1}"></c:out> </a>
+									
+					 <span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
+					 <c:forEach begin="1" step="1" end="4" var="num">
+							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
+								<a class="num" href="javascript:void(0);"
+									onclick="changePage(${pageInfo.pageNum+num})"><c:out
+										value="${pageInfo.pageNum+num}"></c:out> </a>
+							</c:if>
+					 </c:forEach>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${!pageInfo.hasNextPage}">
+						<span class="next">下一页</span>
+					</c:when>
+					<c:otherwise>
+						<a class="next" href="javascript:void(0);"
+							onclick="changePage(${pageInfo.getNextPage()})">下一页</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
 	</div>
 	<div style="display: none;" id="storyLayer">
 		<form class="layui-form" action="PortalManage/userStoryList.action">
-			<div class="layui-form-item"  >
+			<div class="layui-form-item">
 				<label class="layui-form-label">故事标题</label>
 				<div class="layui-input-block">
 					<input type="text" name="storyTitle" required lay-verify="required"
@@ -118,7 +174,7 @@
 						id="newStoryTitle">
 				</div>
 			</div>
-			<div class="layui-form-item"  >
+			<div class="layui-form-item">
 				<label class="layui-form-label">雇主ID</label>
 				<div class="layui-input-block">
 					<input type="text" name="userID" required lay-verify="required"
@@ -129,8 +185,8 @@
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">故事主文</label>
 				<div class="layui-input-block">
-					<textarea name="storyContext" placeholder="请输入内容" class="layui-textarea"
-					id="newStoryContext"></textarea>
+					<textarea name="storyContext" placeholder="请输入内容"
+						class="layui-textarea" id="newStoryContext"></textarea>
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -142,11 +198,24 @@
 		</form>
 	</div>
 	<script>
-// 	var index = layer.load(2, {time: 10*1000}); //又换了种风格，并且设定最长等待10秒 
-// 	$(function(){
-// 		 layer.load(2); 
-// 		layer.close(index);
-// 		});
+	// 曝光台脚本 by hlq 21:53
+
+	// 更改当前页
+	function changePage(pageNum) {
+		//1 将页码的值放入对应表单隐藏域中
+		$("#currentPageInput").val(pageNum);
+		//2 提交表单
+		$("#pageForm").submit();
+	};
+
+	// 更改每页条数
+	function changePageSize(pageSize) {
+		//1 将页码的值放入对应表单隐藏域中
+		$("#pageSizeInput").val(pageSize);
+		//2 提交表单
+		$("#pageForm").submit();
+	};
+	
 	
     	function openAddStory(){
     		layer.open({
@@ -164,6 +233,7 @@
     			  var userID=$("#newUserID").val();
     			  var storyContext=$("#newStoryContext").val();
     			  var newStory={"storyTitle":storyTitle, "userID":userID,"storyContext":storyContext};
+    			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
     			  $.ajax({
     	       			url:"PortalManage/addStory.action",
     	       			type:"post",
@@ -173,6 +243,7 @@
     	       			async:true,
     	       			success:function(msg){//
     	       				layer.closeAll();
+//     	       				layer.close(index);
     	       			  	window.location.reload();
     	       			}
     	       		})

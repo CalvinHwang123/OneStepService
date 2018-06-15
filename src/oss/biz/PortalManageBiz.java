@@ -1,8 +1,11 @@
 package oss.biz;
 
 import java.util.List;
+import java.util.Map;
+
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
@@ -12,7 +15,7 @@ import oss.bean.Links;
 public interface PortalManageBiz {
 
 	//雇主故事列表 黄绍鹏6-13  22：20
-	public List<UserStory> userStoryList();
+	public List<UserStory> userStoryList(Condition condition);
 	
 	//修改雇主故事
 	public int updateStory(UserStory userStory);
