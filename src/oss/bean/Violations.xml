@@ -11,7 +11,7 @@
 		(violationsID, violationsTime, violationsWhy, violationsResult, userID)
 		values (#{violationsID}, #{violationsTime}, #{violationsWhy}, #{violationsResult}, #{userID})
 	</insert>
-	<delete id="deleteViolations" parameterType="int">
+	<delete id="deleteViolationsByID" parameterType="long">
 		delete from violations
 		where violationsID = #{violationsID}
 	</delete>

@@ -6,8 +6,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -15,7 +18,6 @@ import com.github.pagehelper.PageInfo;
 import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.bean.Links;
-import oss.biz.BusiManageBiz;
 import oss.biz.PortalManageBiz;
 /*
  * 后端门户管理Handler
@@ -28,22 +30,37 @@ public class PortalManageHandler {
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
 	
-	// by hlq 2018-06-14
-	@RequestMapping("/violationssList.action")
-	public ModelAndView violationssList(HttpServletRequest req) {
+	// 违规列表 by hlq 2018-06-14
+	@RequestMapping("/violationsList.action")
+	public ModelAndView violationsList(HttpServletRequest req,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
+			@RequestParam(value = "pageSize", required = true, defaultValue = "3") int pageSize) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
-		int pageNum=3;//当前显示的页码
-		int pageSize=2;//每一页显示的数据条数
+//		int pageNum=1;//当前显示的页码
+//		int pageSize=2;//每一页显示的数据条数
 		//在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
 		List<Violations> violationsList = portalManageBizImpl.violationsList();
 		//把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-		PageInfo pageInfo=new PageInfo<>(violationsList,pageSize);
+		PageInfo<Violations> pageInfo=new PageInfo<>(violationsList,pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
-		ModelAndView mav = new ModelAndView("violationslist");
+		ModelAndView mav = new ModelAndView("violationsList");
 		return mav;
 	}
+	
+	// 违规记录删除 by hlq 2018-06-14 21:58 返回json
+	@RequestMapping(value = "/violationsDelete.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String violationsDelete(@RequestBody Violations violations) {
+		System.out.println("violationsID=" + violations.getViolationsID());
+		boolean ret = portalManageBizImpl.violationsDelete(violations.getViolationsID());
+		if (ret) {
+			return "删除成功";
+		} else {
+			return "删除失败";
+		}
+	}
+	
 	private Links links;
 
 	@RequestMapping("/linksList.action")

@@ -16,6 +16,8 @@ public interface PortalManageBiz {
 	public int updateStory(UserStory userStory);
 	// by hlq 2018-06-14
 	public List<Violations> violationsList();
+	// 违规记录删除 by hlq 2018-06-14 21:59
+	public boolean violationsDelete(long violationsID);
 
 	public List<Links> listLinks();
 	public abstract int AddLinks(Links links);

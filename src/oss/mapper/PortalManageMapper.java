@@ -18,6 +18,9 @@ public interface PortalManageMapper {
 	public int updateStory(UserStory userStory);
 	// by hlq 2018-06-14
 	public List<Violations> listViolations();
+	// 根据id删除违规记录 by hlq 2018-06-14 22:02
+	public int deleteViolationsByID(long violationsID);
+	
 	public List<Links> listLinks();
 	public abstract int AddLinks(Links links);
 	public abstract int deleteById(Long linksid);
