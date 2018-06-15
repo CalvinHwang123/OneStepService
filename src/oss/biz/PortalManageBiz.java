@@ -3,6 +3,8 @@ package oss.biz;
 import java.util.List;
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Dynamics;
+import oss.bean.Information;
 import oss.bean.Links;
 /*
  * 门户管理Biz业务接口
@@ -29,4 +31,14 @@ public interface PortalManageBiz {
 	
 	// 增加雇主故事  黄绍鹏 6-14 21：32
 	public int addUserStory(UserStory userStory);
+	
+	//动态列表   王伟杰6-13
+	public List<Dynamics> ListDyna();
+	//删除动态   王伟杰6-13
+	public abstract int deleteDynaById(Long dynamicId);
+	//资讯列表  王伟杰6-13
+	public List<Information> ListInfo();
+	//删除资讯王伟杰6-13
+	public abstract int deleteInfoById(Long InformationId);
+
 }

@@ -80,21 +80,24 @@
 								<i class="layui-icon">&#xe605;</i>
 							</div>
 						</th>
-						<th>地址名称</th>
-						<th>路径</th>
+						<th>资讯标题</th>
+						<th>资讯内容</th>
+						<th>资讯时间</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="i" items="${linksList}" begin="0"
+					<c:forEach var="i" items="${ListInfo}" begin="0"
 						varStatus="status">
 						<tr>
 							<td><c:out value="${status.index+1}"></c:out></td>
-							<td><c:out value="${i.getLinksname()}"></c:out></td>
-							<td><c:out value="${i.getLinksurl()}"></c:out></td>
-							<td class="td-manage"><a class="updtae" 
-							onclick="updateLinks()"	title="${i.getLinksid()}"> <i class="layui-icon">&#xe642;</i>
-							</a> <a title="删除" onclick="member_del(this,'${i.getLinksid()}')"
+							<td><c:out value="${i.getInformationTitle()}"></c:out></td>
+							<td><c:out value="${i.getInformationContext()}"></c:out></td>
+							<td><c:out value="${i.getInformationTime()}"></c:out></td>
+							<td class="td-manage"><a title="编辑"
+								onclick="x_admin_show('编辑','UpdateLinks.jsp')" href="javascript:;">
+									<i class="layui-icon">&#xe642;</i>
+							</a> <a title="删除" onclick="member_del(this,'${i.getInformationId()}')"
 								href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 							</a></td>
 						</tr>
@@ -111,84 +114,6 @@
 			</div>
 		</div>
 	</div>
-	<div id="update">
-		<form class="layui-form" action="">
-			<div class="layui-form-item">
-				<label class="layui-form-label">输入框</label>
-				<div class="layui-input-block">
-					<input type="text" name="title" required lay-verify="required"
-						placeholder="请输入标题" autocomplete="off" class="layui-input">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">密码框</label>
-				<div class="layui-input-inline">
-					<input type="password" name="password" required
-						lay-verify="required" placeholder="请输入密码" autocomplete="off"
-						class="layui-input">
-				</div>
-				<div class="layui-form-mid layui-word-aux">辅助文字</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">选择框</label>
-				<div class="layui-input-block">
-					<select name="city" lay-verify="required">
-						<option value=""></option>
-						<option value="0">北京</option>
-						<option value="1">上海</option>
-						<option value="2">广州</option>
-						<option value="3">深圳</option>
-						<option value="4">杭州</option>
-					</select>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">复选框</label>
-				<div class="layui-input-block">
-					<input type="checkbox" name="like[write]" title="写作"> <input
-						type="checkbox" name="like[read]" title="阅读" checked> <input
-						type="checkbox" name="like[dai]" title="发呆">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">开关</label>
-				<div class="layui-input-block">
-					<input type="checkbox" name="switch" lay-skin="switch">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">单选框</label>
-				<div class="layui-input-block">
-					<input type="radio" name="sex" value="男" title="男"> <input
-						type="radio" name="sex" value="女" title="女" checked>
-				</div>
-			</div>
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">文本域</label>
-				<div class="layui-input-block">
-					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<div class="layui-input-block">
-					<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	
-	<script type="text/javascript">
-	function updateLinks(){
-	layer.open({
-		  type: 1,
-		  area: ['500px', '300px'],
-		  content: $('#update') 
-		});
-	})
-	</script>
-
-
 	<script>
 		layui.use('laydate', function() {
 			var laydate = layui.laydate;
@@ -208,22 +133,19 @@
 		function member_del(obj, id) {
 			layer.confirm('确认要删除吗？', function(index) {
 				$.ajax({
-					url : "PortalManage/deleteById.action",
+					url : "PortalManage/deleteInfoById.action",
 					type : "POST",
-					data : "linksid=" + id,
+					data : "InformationId=" + id,
 					dataType : "text",
 					async : true,
 					success : function(msg) {
 						//发异步删除数据
-
 						if (msg == "success") {
-							// 							$(obj).parents("tr").remove();
 							layer.msg('已删除!', {
 								icon : 1,
 								time : 1000
 							});
 							window.location.reload();
-
 						}
 					}
 				})
