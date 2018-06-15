@@ -19,33 +19,83 @@ function changePageSize(pageSize) {
 // 单个删除违规记录
 function violationDelete(obj, id) {
 	layer.confirm('确认要删除吗？',function(index){
+	var deleteViolation=[];
+  	var data ={"violationsID":id};
+  	deleteViolation.push(data);
   	  $.ajax({
   			url: $("base").attr("href") + "PortalManage/violationsDelete.action",
   			type:"post",
   			dataType:"text",
   			contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
-  			data:JSON.stringify({"violationsID":id}),
+  			data:JSON.stringify(deleteViolation),
   			async:true,
   			success:function(msg){
   				layer.msg('已删除!',{icon:1,time:1000});
   				window.location.reload();
   			}
   		})
-  	  
-        //发异步删除数据
-//         $(obj).parents("tr").remove();
-
     });
 }
 
 //批量删除违规记录
 function delAll (argument) {
 
-    var data = tableCheck.getData();
-
-    layer.confirm('确认要删除吗？'+data,function(index){
-        //捉到所有被选中的，发异步进行删除
-        layer.msg('删除成功', {icon: 1});
-        $(".layui-form-checked").not('.header').parents('tr').remove();
+    var vioId = tableCheck.getData();
+    if (vioId.length == 0) {
+    	layer.msg('请先选择!',{icon:1,time:1000});
+    	return;
+    }
+    var vioIdArr = [];
+    for (var i = 0; i < vioId.length; ++i) {
+    	vioIdArr.push({"violationsID": parseInt(vioId[i])});
+    }
+    
+    layer.confirm('确认要批量删除吗？',function(index){
+    	
+    	$.ajax({
+  			url: $("base").attr("href") + "PortalManage/violationsDelete.action",
+  			type:"post",
+  			dataType:"text",
+  			contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
+  			data:JSON.stringify(vioIdArr),
+  			async:true,
+  			success:function(msg){
+  				layer.msg('已删除!',{icon:1,time:1000});
+  				window.location.reload();
+  			}
+  		})
     });
+}
+
+// 打开新增违规记录弹出层
+function openAddViolations(){
+	layer.open({
+	      type: 1,
+	      title:"新增违规记录",
+	      area: ['600px', '360px'],
+	      shadeClose: false, //点击遮罩关闭
+	      content: $('#violationsLayer')
+	    });
+}
+
+// 新增违规记录
+function addViolations(){
+	  layer.confirm('确认要提交吗？',function(index){
+		  var violationsWhy=$("#newViolationsWhy").val();
+		  var violationsResult=$("#newViolationsResult").val();
+		  var userID=$("#newUserID").val();
+		  var newViolations={"violationsWhy":violationsWhy, "violationsResult":violationsResult,"userID":userID};
+		  $.ajax({
+     			url:"PortalManage/violationsInsert.action",
+     			type:"post",
+     			dataType:"text",
+     			contentType : "application/json;charset=utf-8",
+     			data:JSON.stringify(newViolations),
+     			async:true,
+     			success:function(msg){
+     				layer.closeAll();
+     			  	window.location.reload();
+     			}
+     		})
+	  })
 }

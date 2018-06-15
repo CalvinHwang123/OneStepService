@@ -52,13 +52,26 @@ public class PortalManageHandler {
 	
 	// 违规记录删除 by hlq 2018-06-14 21:58 返回json
 	@RequestMapping(value = "/violationsDelete.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String violationsDelete(@RequestBody Violations violations) {
-		System.out.println("violationsID=" + violations.getViolationsID());
-		boolean ret = portalManageBizImpl.violationsDelete(violations.getViolationsID());
+	public @ResponseBody String violationsDelete(@RequestBody List<Violations> violationsList) {
+		System.out.println("violationsID list size=" + violationsList.size());
+		boolean ret = portalManageBizImpl.violationsDelete(violationsList);
 		if (ret) {
 			return "删除成功";
 		} else {
 			return "删除失败";
+		}
+	}
+	
+	// 违规记录新增 by hlq 2018-06-15 11:36 返回json
+	@RequestMapping(value = "/violationsInsert.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String violationsInsert(@RequestBody Violations violations) {
+		violations.setViolationsTime(DateUtil.getCurrentDate());
+		System.out.println(violations);
+		boolean ret = portalManageBizImpl.insertViolations(violations);
+		if (ret) {
+			return "新增成功";
+		} else {
+			return "新增失败";
 		}
 	}
 	

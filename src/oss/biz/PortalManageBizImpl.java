@@ -73,7 +73,13 @@ public class PortalManageBizImpl implements PortalManageBiz{
 		
 	// 违规记录删除 By Hlq 2018-06-14 22:01
 	@Override
-	public boolean violationsDelete(long violationsID) {
-		return portalManageMapper.deleteViolationsByID(violationsID) > 0;
+	public boolean violationsDelete(List<Violations> violationsList) {
+		return portalManageMapper.deleteViolationsByID(violationsList) > 0;
+	}
+
+
+	@Override
+	public boolean insertViolations(Violations violations) {
+		return portalManageMapper.insertViolations(violations) > 0;
 	}
 }

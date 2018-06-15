@@ -18,6 +18,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
     <script type="text/javascript" src="./js/violationsList.js"></script>
+    <style>
+		.layui-input, .layui-textarea {
+			padding-right 10px;
+		}
+	</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -44,7 +49,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>新发布</button>
+        <button class="layui-btn" onclick="openAddViolations()"><i class="layui-icon"></i>新发布</button>
         <span class="x-right" style="line-height:40px">共有数据：${pageInfo.getTotal() } 条</span>
       </xblock>
       <table class="layui-table">
@@ -104,6 +109,42 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</div>
 
     </div>
+    
+    <!-- 新发布曝光 -->
+    <div style="display: none;" id="violationsLayer">
+		<form class="layui-form">
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">违规原因</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsWhy" required lay-verify="required"
+						placeholder="请输入违规原因" autocomplete="off" class="layui-input"
+						id="newViolationsWhy">
+				</div>
+			</div>
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">违规结果</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsResult" required lay-verify="required"
+						placeholder="请输入违规结果" autocomplete="off" class="layui-input"
+						id="newViolationsResult">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">用户ID</label>
+				<div class="layui-input-block">
+					<textarea name="userID" placeholder="请输入用户ID" class="layui-textarea"
+					id="newUserID"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button type="button" class="layui-btn" onclick="addViolations()">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+    
     <script>
       layui.use('laydate', function(){
         var laydate = layui.laydate;
