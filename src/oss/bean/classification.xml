@@ -12,4 +12,9 @@
 	<select id="seekclasslist" resultType="oss.bean.classification">
 		SELECT * FROM CLASSIFICATION
 	</select>
+	
+	<!-- 分类列表数据删除 袁楠文 2018-6-15 11:11 -->
+	<delete id="deleteViolationsByID" parameterType="long">
+		DELETE FROM CLASSIFICATION WHERE CLASSIFICATIONID = #{violationsID}
+	</delete>
 </mapper>

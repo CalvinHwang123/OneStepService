@@ -48,5 +48,10 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		List<classification> seekclasslist = systemManegeMapper.seekclasslist();
 		return seekclasslist;
 	}
-
+	// 分类列表数据删除 袁楠文 2018-6-15 11:11
+	public List<classification> delClasslistData() {
+		// TODO 自动生成的方法存根
+		
+		return null;
+	}
 }

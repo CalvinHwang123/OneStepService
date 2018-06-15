@@ -26,7 +26,7 @@ import oss.biz.SystemManegeBiz;
 @Controller
 @RequestMapping("/SystemManage")
 public class SystemManageHandler {
-
+	String flg = "error";
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
 	ModelAndView mav;
@@ -65,7 +65,7 @@ public class SystemManageHandler {
 	// 一级分类唯一验证 袁楠文 2018-6-14 10:50
 	@RequestMapping("/classUniquequery")
 	public @ResponseBody String classUniquequery(HttpServletRequest request) {
-		String flg = "error";
+		
 		String oneclassname = request.getParameter("oneclassname");
 		List<Object> oneclass = systemManegeBizImpl.Classuniquequery(oneclassname);
 		if (oneclass.size() == 0) {
@@ -80,7 +80,6 @@ public class SystemManageHandler {
 
 		int pageNum = 1;// 当前显示的页码;
 		int pageSize = 5;// 每一页显示的数据条数;
-
 		PageHelper.startPage(pageNum, pageSize);
 		List<classification> classlist = systemManegeBizImpl.seekclasslist();
 		PageInfo pageInfo = new PageInfo<>(classlist, pageSize);
@@ -90,18 +89,12 @@ public class SystemManageHandler {
 		return classification;
 	}
 
-	// 删除分类列表数据 袁楠文 2018-6-14 22:50
+	// 删除分类列表数据 袁楠文 2018-6-15 11:11
 	@RequestMapping("/delclasslistdata")
-	public ModelAndView delclasslistdata(HttpServletRequest request) {
-
-		/*
-		 * PageHelper.startPage(pageNum, pageSize); classlist=
-		 * systemManegeBizImpl.seekclasslist(); PageInfo pageInfo = new
-		 * PageInfo<>(classlist, pageSize);
-		 * System.out.println("pageInfo:"+pageInfo.getTotal());
-		 * request.setAttribute("pageInfo", pageInfo); ModelAndView classification = new
-		 * ModelAndView("classification");
-		 */
-		return null;
+	public @ResponseBody String delclasslistdata(HttpServletRequest request) {
+		String delclassid = request.getParameter("delclassid");
+		
+		
+		return flg;
 	}
 }

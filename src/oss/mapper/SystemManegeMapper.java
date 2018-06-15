@@ -23,4 +23,7 @@ public interface SystemManegeMapper {
 
 	// 请求分类列表数据 袁楠文 2018-6-14 16:00
 	public List<classification> seekclasslist();
+	
+	// 删除分类列表数据 袁楠文 2018-6-15 11:11
+	public int deleteViolationsByID(long violationsID);
 }
