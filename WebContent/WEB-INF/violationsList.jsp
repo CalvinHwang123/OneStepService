@@ -18,6 +18,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
     <script type="text/javascript" src="./js/violationsList.js"></script>
+    <style>
+		.layui-input-block {
+			margin-top: 10px;
+			margin-right: 10px;
+		}
+	</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -44,7 +50,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>新发布</button>
+        <button class="layui-btn" onclick="openAddViolations()"><i class="layui-icon"></i>新发布</button>
         <span class="x-right" style="line-height:40px">共有数据：${pageInfo.getTotal() } 条</span>
       </xblock>
       <table class="layui-table">
@@ -72,7 +78,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<td><c:out value="${violation.violationsResult}"></c:out></td>
 				<td><c:out value="${violation.userID}"></c:out>	</td>
 				 <td class="td-manage">
-              			 <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
+               			 <a title="修改"  onclick="openUpdateViolations('${violation.violationsID}','${violation.violationsTime}','${violation.violationsWhy}',
+               			 '${violation.violationsResult}','${violation.userID}')" href="javascript:;">
                				  <i class="layui-icon">&#xe642;</i>
               			 </a>
             		     <a title="删除" onclick="violationDelete(this,${violation.violationsID})" href="javascript:;">
@@ -86,7 +93,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
       <div class="page">
 			<div>
 				共${pageInfo.getPages() }页，每页 <select
-					style="width: 5%; height: 30px;" name="pageSize"
+					style="width: 6%; height: 30px;" name="pageSize"
 					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
 					id="pageSizeSelect">
 					<option value="1" ${pageInfo.getPageSize() == 1 ? "selected" : ""}>1</option>
@@ -95,8 +102,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</select> 条
 				<!-- 上一页 -->
 				<a class="prev" href="javaScript:void(0)"
-					onclick="changePage(${pageInfo.getPrePage() })">&lt;&lt;</a> <span
-					class="current">${pageInfo.getPageNum() }</span>
+					onclick="changePage(${pageInfo.getPrePage() })">&lt;&lt;</a> 
+				<span class="current">${pageInfo.getPageNum() }</span>
 				<!-- 下一页 -->
 				<a class="next" href="javaScript:void(0)"
 					onclick="changePage(${pageInfo.getNextPage() })">&gt;&gt;</a>
@@ -104,6 +111,85 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</div>
 
     </div>
+    
+    <!-- 新发布曝光 -->
+    <div style="display: none;" id="violationsLayer">
+		<form class="layui-form">
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">用户ID</label>
+				<div class="layui-input-block">
+					<input type="text" name="userID" required lay-verify="required"
+						placeholder="请输入用户ID" autocomplete="off" class="layui-input"
+						id="newUserID">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">违规原因</label>
+				<div class="layui-input-block">
+					<textarea name="violationsWhy" placeholder="请输入违规原因" class="layui-textarea"
+					id="newViolationsWhy"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">违规结果</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsResult" required lay-verify="required"
+						placeholder="请输入违规结果" autocomplete="off" class="layui-input"
+						id="newViolationsResult">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button type="button" class="layui-btn" onclick="addViolations()">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- 修改曝光 -->
+    <div style="display: none;" id="violationsUpdateLayer">
+		<form class="layui-form">
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">用户ID</label>
+				<div class="layui-input-block">
+					<input type="text" name="userID" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="updateUserID">
+				</div>
+			</div>
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">违规时间</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsTime" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="updateViolationsTime">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">违规原因</label>
+				<div class="layui-input-block">
+					<textarea name="violationsWhy" class="layui-textarea" required
+					id="updateViolationsWhy"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item"  >
+				<label class="layui-form-label">违规结果</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsResult" lay-verify="required" required
+						autocomplete="off" class="layui-input"
+						id="updateViolationsResult">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button type="button" class="layui-btn" onclick="updateViolations()">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+    
     <script>
       layui.use('laydate', function(){
         var laydate = layui.laydate;

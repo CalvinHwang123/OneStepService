@@ -8,18 +8,20 @@
 			select violationsSeq.nextVal from dual
 		</selectKey>
 		insert into violations
-		(violationsID, violationsTime, violationsWhy, violationsResult, userID)
-		values (#{violationsID}, #{violationsTime}, #{violationsWhy}, #{violationsResult}, #{userID})
+		(violationsID, violationsWhy, violationsResult, userID, violationsTime)
+		values (#{violationsID}, #{violationsWhy}, #{violationsResult}, #{userID}, #{violationsTime})
 	</insert>
-	<delete id="deleteViolationsByID" parameterType="long">
-		delete from violations
-		where violationsID = #{violationsID}
+	<delete id="deleteViolationsByID" parameterType="java.util.List">
+		delete from violations where violationsID in 
+		<foreach collection="list" item="violations" open="(" close=")" separator=",">
+			#{violations.violationsID}
+		</foreach>
 	</delete>
-	<update id="updateViolations" parameterType="oss.bean.Violations">
-		update violations set user_status = #{user_status,jdbcType=VARCHAR}
-		where user_id = #{user_id,jdbcType=INTEGER}
+	<update id="updateViolationsByID" parameterType="oss.bean.Violations">
+		update violations set violationsWhy = #{violationsWhy}, violationsResult = #{violationsResult}
+		where violationsID = #{violationsID}
 	</update>
 	<select id="listViolations" resultType="oss.bean.Violations">
-		select * from violations where 1 = 1
+		select * from violations where 1 = 1 order by violationsTime desc
 	</select>
 </mapper>

@@ -50,6 +50,12 @@ public class Violations {
 	public void setUserID(Long userID) {
 		this.userID = userID;
 	}
+
+	@Override
+	public String toString() {
+		return "Violations [violationsID=" + violationsID + ", violationsTime=" + violationsTime + ", violationsWhy="
+				+ violationsWhy + ", violationsResult=" + violationsResult + ", userID=" + userID + "]";
+	}
 	
 	
 }

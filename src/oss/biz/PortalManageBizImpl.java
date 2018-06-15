@@ -76,8 +76,20 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		
 	// 违规记录删除 By Hlq 2018-06-14 22:01
 	@Override
-	public boolean violationsDelete(long violationsID) {
-		return portalManageMapper.deleteViolationsByID(violationsID) > 0;
+	public boolean violationsDelete(List<Violations> violationsList) {
+		return portalManageMapper.deleteViolationsByID(violationsList) > 0;
+	}
+
+	// 违规记录新增 By Hlq 2018-06-15 13:51
+	@Override
+	public boolean insertViolations(Violations violations) {
+		return portalManageMapper.insertViolations(violations) > 0;
+	}
+	
+	// 违规记录修改 By Hlq 2018-06-15 13:51
+	@Override
+	public boolean updateViolationsByID(Violations violations) {
+		return portalManageMapper.updateViolationsByID(violations) > 0;
 	}
 
 	// 动态列表 王伟杰6-13
@@ -105,4 +117,5 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		
 		return portalManageMapper.deleteInfoById(InformationId);
 	}
+	
 }
