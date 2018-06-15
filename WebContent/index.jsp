@@ -96,7 +96,7 @@
 								<cite>系统配置</cite>
 						</a>
 							<ul class="sub-menu">
-							<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
+							<li><a _href=<%=path+"/SystemManage/seekclasslist.action" %>> <i class="iconfont">&#xe6a7;</i>
 										<cite>需求类型配置</cite>
 
 								</a></li>
