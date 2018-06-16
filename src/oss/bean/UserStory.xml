@@ -4,17 +4,17 @@
 <mapper namespace="oss.mapper.PortalManageMapper">
 	<select id="storyList" resultType="oss.bean.UserStory" parameterType="oss.bean.Condition">
 		select * from UserStory where 1 = 1
-		<if test="startDate != null and endDate != null">
+		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
 			and storyTime between #{startDate} and #{endDate}
 		</if>
-		<if test="title != null">
+		<if test="title != null and title != ''">
 			and  storyTitle like concat(concat('%',#{title}),'%')
 		</if>
 		
 	</select>
 	
 	<update id="updateStory" parameterType="oss.bean.UserStory">
-	    update UserStory set storyTitle=#{storyTitle},storyContext=#{storyContext},storyTime=#{storyTime}
+	    update UserStory set storyTitle=#{storyTitle},storyContext=#{storyContext} 
 	    where storyID=#{storyID}
 	</update>
 	

@@ -203,8 +203,9 @@
 	<!-- 中部结束 -->
 	<!-- 底部开始 -->
 	<div class="footer">
-		<div class="copyright">Copyright ©2017 x-admin v2.3 All Rights
-			Reserved</div>
+		<div class="copyright">Copyright 2018-2018 dlr.com 版权所有 
+		渝ICP备10202274-4号 渝B2-20080005 渝公网安备 50019002500154号 厦门帝六人网络有限公司 
+		</div>
 	</div>
 	<!-- 底部结束 -->
 	<script>
