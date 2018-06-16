@@ -66,7 +66,7 @@
 			<i class="layui-icon"></i>批量删除
 		</button>
 		<button class="layui-btn"
-			onclick="x_admin_show('增加','AddLinks.jsp',600,400)">
+			onclick="openAddInfo()">
 			<i class="layui-icon"></i>增加
 		</button>
 		<span class="x-right" style="line-height: 40px">共有数据：88 条</span> </xblock>
@@ -87,17 +87,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="i" items="${ListInfo}" begin="0"
-						varStatus="status">
+					<c:forEach var="i" items="${ListInfo}" begin="0" varStatus="status">
 						<tr>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getInformationTitle()}"></c:out></td>
 							<td><c:out value="${i.getInformationContext()}"></c:out></td>
 							<td><c:out value="${i.getInformationTime()}"></c:out></td>
 							<td class="td-manage"><a title="编辑"
-								onclick="x_admin_show('编辑','UpdateLinks.jsp')" href="javascript:;">
-									<i class="layui-icon">&#xe642;</i>
-							</a> <a title="删除" onclick="member_del(this,'${i.getInformationId()}')"
+								onclick="openUpdateInfo('编辑','${i.getInformationId()}')"
+								href="javascript:;"> <i class="layui-icon">&#xe642;</i>
+							</a> <a title="删除"
+								onclick="member_del(this,'${i.getInformationId()}')"
 								href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 							</a></td>
 						</tr>
@@ -114,6 +114,170 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="update" style="display: none">
+		<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">资讯标题</label>
+				<div class="layui-input-block">
+					<input type="text" name="linksname" required lay-verify="required"
+						placeholder="请输入标题" autocomplete="off" class="layui-input"
+						id="newInfoTitle">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">资讯内容</label>
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="newInfoCon"></textarea>
+				</div>
+			</div>
+	<div class="layui-form-item">
+				<label class="layui-form-label">资讯時間</label>
+				<div class="layui-input-block">
+					<input type="datetime" name="linksname" placeholder="请输入時間"
+						class="layui-input" id="test1">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" type="button" onclick="UpdateInfo()">立即提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+		<div id="add" style="display: none">
+		<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">资讯标题</label>
+				<div class="layui-input-block">
+					<input type="text" name="linksname" required lay-verify="required"
+						placeholder="请输入标题" autocomplete="off" class="layui-input"
+						id="newInfoTitle1">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">资讯内容</label>
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="newInfoCon1"></textarea>
+				</div>
+			</div>
+	<div class="layui-form-item">
+				<label class="layui-form-label">资讯時間</label>
+				<div class="layui-input-block">
+					<input type="datetime" name="linksname" placeholder="请输入時間"
+						class="layui-input" id="test2">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" type="button" onclick="AddInfo()">确定</button>
+					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+
+	<script type="text/javascript">
+	var infoid;
+		function openUpdateInfo(obj, id) {
+			infoid=id;
+			layer.open({
+				type : 1,
+				area : [ '500px', '300px' ],
+				content : $('#update')
+			});
+		}
+		function openAddInfo() {
+			layer.open({
+				type : 1,
+				area : [ '500px', '300px' ],
+				content : $('#add')
+			});
+		}
+		
+		//修改资讯
+		function UpdateInfo() {
+			layer.confirm('确认要提交吗？', function(index) {
+
+				var InfoTitle = $("#newInfoTitle").val();
+				var InfoCon = $("#newInfoCon").val();
+				var InfoTime = $("#test1").val();
+				var newInfo = {
+					"informationTitle" : InfoTitle,
+					"informationContext" : InfoCon,
+					"informationTime" : InfoTime,
+					"informationId":infoid
+				};
+				$.ajax({
+					url : "PortalManage/updateInfoById.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newInfo),
+					async : true,
+					success : function(msg) {
+						layer.closeAll();
+						window.location.reload();
+					}
+				})
+			})
+		}
+		
+		
+		//增加资讯
+		function AddInfo() {
+			layer.confirm('确认要提交吗？', function(index) {
+
+				var InfoTitle = $("#newInfoTitle1").val();
+				var InfoCon = $("#newInfoCon1").val();
+				var InfoTime = $("#test2").val();
+				var newInfo = {
+					"informationTitle" : InfoTitle,
+					"informationContext" : InfoCon,
+					"informationTime" : InfoTime,
+					"informationId":infoid
+				};
+				$.ajax({
+					url : "PortalManage/addInfo.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newInfo),
+					async : true,
+					success : function(msg) {
+						layer.closeAll();
+						window.location.reload();
+					}
+				})
+			})
+		}
+		
+	</script>
+	<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#test1' //指定元素
+  });
+});
+</script>
+
+	<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#test2' //指定元素
+  });
+});
+</script>
+	
 	<script>
 		layui.use('laydate', function() {
 			var laydate = layui.laydate;

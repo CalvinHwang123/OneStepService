@@ -3,14 +3,35 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.PortalManageMapper">
 	<!-- 资讯列表 -->
-<select id="ListInfo" resultType="oss.bean.Information">
-		select * from information where 1 = 1
+	<select id="ListInfo" resultType="oss.bean.Information">
+		select * from information where
+		1 = 1
 	</select>
-	<!-- 	删除资讯 -->
+	<!-- 删除资讯 -->
 	<delete id="deleteInfoById" parameterType="long">
-		delete from information where
-		InformationId=#{InformationId}
-	</delete> 
-	
+		delete from
+		information where
+		informationId=#{informationId}
+	</delete>
+
+	<!-- 修改资讯 -->
+	<update id="updateInfoById" parameterType="oss.bean.Information">
+		update Information set
+		informationTitle=#{informationTitle},informationContext=#{informationContext},informationTime=#{informationTime}
+		where informationId=#{informationId}
+	</update>
+
+	<!-- 增加资讯 -->
+	<insert id="AddInfo" parameterType="oss.bean.Information">
+		<selectKey keyProperty="informationId" order="BEFORE"
+			resultType="long">
+			select INFORMATIONSEQ.nextval from dual
+		</selectKey>
+		insert into
+		Information(informationId,informationTitle,informationContext,informationTime)
+		values(#{informationId},#{informationTitle},#{informationContext},#{informationTime})
+	</insert>
+
+
 </mapper>
 	

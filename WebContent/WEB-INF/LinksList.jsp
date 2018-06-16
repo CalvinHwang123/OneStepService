@@ -93,7 +93,7 @@
 							<td><c:out value="${i.getLinksname()}"></c:out></td>
 							<td><c:out value="${i.getLinksurl()}"></c:out></td>
 							<td class="td-manage"><a class="updtae" 
-							onclick="updateLinks()"	title="${i.getLinksid()}"> <i class="layui-icon">&#xe642;</i>
+							onclick="openUpdateLinks(this,'${i.getLinksid()}')"	title="${i.getLinksid()}"> <i class="layui-icon">&#xe642;</i>
 							</a> <a title="删除" onclick="member_del(this,'${i.getLinksid()}')"
 								href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 							</a></td>
@@ -111,67 +111,26 @@
 			</div>
 		</div>
 	</div>
-	<div id="update">
-		<form class="layui-form" action="">
+	<div id="update" style="display: none">
+		<form class="layui-form" action="" >
 			<div class="layui-form-item">
-				<label class="layui-form-label">输入框</label>
+				<label class="layui-form-label">地址名称</label>
 				<div class="layui-input-block">
-					<input type="text" name="title" required lay-verify="required"
-						placeholder="请输入标题" autocomplete="off" class="layui-input">
+					<input type="text" name="linksname" required lay-verify="required"
+						placeholder="请输入地址" autocomplete="off" class="layui-input" id="newLinksName">
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">密码框</label>
-				<div class="layui-input-inline">
-					<input type="password" name="password" required
-						lay-verify="required" placeholder="请输入密码" autocomplete="off"
-						class="layui-input">
-				</div>
-				<div class="layui-form-mid layui-word-aux">辅助文字</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">选择框</label>
+				<label class="layui-form-label">地址路径</label>
 				<div class="layui-input-block">
-					<select name="city" lay-verify="required">
-						<option value=""></option>
-						<option value="0">北京</option>
-						<option value="1">上海</option>
-						<option value="2">广州</option>
-						<option value="3">深圳</option>
-						<option value="4">杭州</option>
-					</select>
+					<input type="text" name="linksurl" required lay-verify="required"
+						placeholder="请输入路径" autocomplete="off" class="layui-input" id="newLinksUrl">
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">复选框</label>
-				<div class="layui-input-block">
-					<input type="checkbox" name="like[write]" title="写作"> <input
-						type="checkbox" name="like[read]" title="阅读" checked> <input
-						type="checkbox" name="like[dai]" title="发呆">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">开关</label>
-				<div class="layui-input-block">
-					<input type="checkbox" name="switch" lay-skin="switch">
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">单选框</label>
-				<div class="layui-input-block">
-					<input type="radio" name="sex" value="男" title="男"> <input
-						type="radio" name="sex" value="女" title="女" checked>
-				</div>
-			</div>
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">文本域</label>
-				<div class="layui-input-block">
-					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-				</div>
-			</div>
+		
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+					<button class="layui-btn" type="button" onclick="UpdateLinks()">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 				</div>
 			</div>
@@ -179,13 +138,39 @@
 	</div>
 	
 	<script type="text/javascript">
-	function updateLinks(){
+	var linksid;
+	function openUpdateLinks(obj,id){
+		 linksid=id;
+		 alert(linksid);
 	layer.open({
 		  type: 1,
 		  area: ['500px', '300px'],
 		  content: $('#update') 
 		});
-	})
+	}
+	
+	
+	function UpdateLinks(){//修改链接
+		  layer.confirm('确认要提交吗？',function(index){
+			  
+			  var LinksName=$("#newLinksName").val();
+			  var LinksUrl=$("#newLinksUrl").val();
+			  var newLinks={"linksname":LinksName, "linksurl":LinksUrl,"linksid":linksid};
+			  $.ajax({
+	       			url:"PortalManage/updateById.action",
+	       			type:"post",
+	       			dataType:"text",
+	       			contentType : "application/json;charset=utf-8",
+	       			data:JSON.stringify(newLinks),
+	       			async:true,
+	       			success:function(msg){
+	       				layer.closeAll();
+	       			  	window.location.reload();
+	       			}
+	       		})
+		  })
+	}
+	
 	</script>
 
 
@@ -215,9 +200,7 @@
 					async : true,
 					success : function(msg) {
 						//发异步删除数据
-
 						if (msg == "success") {
-							// 							$(obj).parents("tr").remove();
 							layer.msg('已删除!', {
 								icon : 1,
 								time : 1000

@@ -70,12 +70,12 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		return portalManageMapper.deleteStoryByID(storyList);
 	}
 
-	// 增加雇主故事  黄绍鹏 6-14 21：32
+	// 增加雇主故事 黄绍鹏 6-14 21：32
 	@Override
 	public int addUserStory(UserStory userStory) {
 		return portalManageMapper.insertStory(userStory);
 	}
-		
+
 	// 违规记录删除 By Hlq 2018-06-14 22:01
 	@Override
 	public boolean violationsDelete(List<Violations> violationsList) {
@@ -107,17 +107,44 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 		return portalManageMapper.ListInfo();
 	}
-//删除动态  王伟杰 6-13
+
+	// 删除动态 王伟杰 6-13
 	@Override
 	public int deleteDynaById(Long dynamicId) {
-		
+
 		return portalManageMapper.deleteDynaById(dynamicId);
 	}
-//删除资讯  王伟杰 6-13
+
+	// 删除资讯 王伟杰 6-13
 	@Override
 	public int deleteInfoById(Long InformationId) {
-		
+
 		return portalManageMapper.deleteInfoById(InformationId);
 	}
+
+	// 修改动态 WWJ 6-15
+	@Override
+	public int updateDynaById(Dynamics dynamics) {
+
+		return portalManageMapper.updateDynaById(dynamics);
+	}
+
+	// 修改资讯 wwj 6-15
+	@Override
+	public int updateInfoById(Information information) {
+		// TODO Auto-generated method stub
+		return portalManageMapper.updateInfoById(information);
+	}
+//增加动态   wwj 6-15
+	@Override
+	public int AddDyna(Dynamics dynamics) {
+		
+		return portalManageMapper.AddDyna(dynamics);
+	}
+//增加资讯   wwj 6-15
+	@Override
+	public int AddInfo(Information information) {
 	
+		return portalManageMapper.AddInfo(information);
+	}
 }

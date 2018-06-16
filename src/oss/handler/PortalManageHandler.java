@@ -102,7 +102,6 @@ public class PortalManageHandler {
 
 	@RequestMapping("/addlinks.action")
 	public ModelAndView Addlinks(HttpServletRequest req, Links links) {
-		System.out.println(links);
 		int addlinks = portalManageBizImpl.AddLinks(links);
 		ModelAndView mav = new ModelAndView("redirect:linksList.action");
 		return mav;
@@ -111,19 +110,16 @@ public class PortalManageHandler {
 	@RequestMapping(value = "/deleteById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String deleteById(HttpServletRequest req,
 			@RequestParam(value = "linksid", required = true, defaultValue = "empty") Long linksid) {
-		System.out.println(linksid);
 		int delete = portalManageBizImpl.deleteById(linksid);
 		// ModelAndView mav = new ModelAndView("redirect:linksList.action");
 		return "success";
 	}
 
 	@RequestMapping("/updateById.action")
-	public ModelAndView updateById(HttpServletRequest req, Links links) {
-		links.setLinksurl("www.314464654");
-		links.setLinksid(8l);
+
+	public @ResponseBody  String updateById(HttpServletRequest req,@RequestBody Links links) {
 		int up = portalManageBizImpl.updateById(links);
-		ModelAndView mav = new ModelAndView("redirect:linksList.action");
-		return mav;
+		return "success";
 	}
 
 	// 雇主故事列表 黄绍鹏6-15 15：13
@@ -141,17 +137,16 @@ public class PortalManageHandler {
 		PageInfo pageInfo = new PageInfo<>(userStoryList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("userStory");
 		return mav;
 	}
 
-	// 修改雇主故事列表 黄绍鹏6-13 23：05
+	// 修改雇主故事列表 黄绍鹏6-16 10:43
 	@RequestMapping("/updateStory.action")
-	public ModelAndView updateStory(HttpServletRequest req, UserStory userStory) {
-		System.out.println(userStory.getStoryTitle());
+	public @ResponseBody String updateStory(HttpServletRequest req,@RequestBody UserStory userStory) {
 		portalManageBizImpl.updateStory(userStory);
-		ModelAndView mav = new ModelAndView("redirect:userStoryList.action");
-		return mav;
+		return "success";
 	}
 
 	// 批量删除雇主故事 黄绍鹏 6-14 15:57(修改)
@@ -177,22 +172,36 @@ public class PortalManageHandler {
 		ModelAndView mav = new ModelAndView("DynaList");
 		return mav;
 	}
-
-	// 资讯列表 王伟杰 6-13
+	
+	//增加动态
+	@RequestMapping("/addDyna.action")
+	public @ResponseBody String AddDyna(HttpServletRequest req, @RequestBody Dynamics dynamics) {
+		int addlinks = portalManageBizImpl.AddDyna(dynamics);
+		return "success";
+	}
+	
+	//删除动态  王伟杰  6-13
+	@RequestMapping(value = "/deleteDynaById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String deleteDynaById(HttpServletRequest req,
+			@RequestParam(value = "dynamicId", required = true, defaultValue = "empty") Long dynamicId) {
+		int delete = portalManageBizImpl.deleteDynaById(dynamicId);
+		return "success";
+	}
+	
+	//修改动态
+	@RequestMapping("/updateDynaById.action")
+	public @ResponseBody  String updateDynaById(HttpServletRequest req,@RequestBody Dynamics dynamics) {
+	
+		int up = portalManageBizImpl.updateDynaById(dynamics);
+		return "success";
+	}
+	//资讯列表   王伟杰  6-13
 	@RequestMapping("/ListInfo.action")
 	public ModelAndView ListInfo(HttpServletRequest req) {
 		List<Information> ListInfo = portalManageBizImpl.ListInfo();
 		req.setAttribute("ListInfo", ListInfo);
 		ModelAndView mav = new ModelAndView("InfoList");
 		return mav;
-	}
-
-	// 删除动态 王伟杰 6-13
-	@RequestMapping(value = "/deleteDynaById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String deleteDynaById(HttpServletRequest req,
-			@RequestParam(value = "dynamicId", required = true, defaultValue = "empty") Long dynamicId) {
-		int delete = portalManageBizImpl.deleteDynaById(dynamicId);
-		return "success";
 	}
 
 	// 删除资讯 王伟杰 6-13
@@ -202,5 +211,20 @@ public class PortalManageHandler {
 		int delete = portalManageBizImpl.deleteInfoById(InformationId);
 		return "success";
 	}
+	
+	//修改资讯
+	@RequestMapping("/updateInfoById.action")
+	public @ResponseBody  String updateInfoById(HttpServletRequest req,@RequestBody Information information) {
+	System.out.println(information);
+		int up = portalManageBizImpl.updateInfoById(information);
+		return "success";
+	}
+	
+	//增加资讯
+		@RequestMapping("/addInfo.action")
+		public @ResponseBody  String AddInfo(HttpServletRequest req, @RequestBody Information information) {
+			int addlinks = portalManageBizImpl.AddInfo(information);
+			return "success";
+		}
 
 }

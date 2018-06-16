@@ -24,6 +24,6 @@
 <!-- 修改链接 -->
 	<update id="updateById" parameterType="oss.bean.Links">
 		update links set
-		linksurl=#{linksurl} where linksid=#{linksid}
+		linksurl=#{linksurl},linksname=#{linksname} where linksid=#{linksid}
 	</update>
 </mapper>
