@@ -104,10 +104,6 @@
 										<cite>服务商类型配置</cite>
 
 								</a></li>
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>服务类型配置</cite>
-
-								</a></li>
 								
 							</ul>
 						

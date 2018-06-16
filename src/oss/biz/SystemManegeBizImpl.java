@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import oss.bean.Classification;
 import oss.bean.Emps;
 import oss.bean.Powers;
-import oss.bean.classification;
 import oss.mapper.SystemManegeMapper;
 
 /*
@@ -43,15 +43,33 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 
 	// 请求分类列表数据 袁楠文 2018-6-14 16:00
 	@Override
-	public List<classification> seekclasslist() {
+	public List<Classification> seekclasslist() {
 		// TODO 自动生成的方法存根
-		List<classification> seekclasslist = systemManegeMapper.seekclasslist();
+		List<Classification> seekclasslist = systemManegeMapper.seekclasslist();
 		return seekclasslist;
 	}
+	
 	// 分类列表数据删除 袁楠文 2018-6-15 11:11
-	public List<classification> delClasslistData() {
+	@Override
+	public int delclasslistdata(long classificationId) {
 		// TODO 自动生成的方法存根
-		
-		return null;
+		int delclassnumber=systemManegeMapper.delclasslistdata(classificationId);
+		return delclassnumber;
+	}
+	
+	// 一级分类菜单数据 袁楠文 2018-6-15 15:17
+	@Override
+	public List<Classification> oneclassMenu() {
+		// TODO 自动生成的方法存根
+		List<Classification> oneclassMenuList = systemManegeMapper.oneclassMenu();
+		return oneclassMenuList;
+	}
+	
+	// 分类数据添加 袁楠文 2018-6-16 12:33
+	@Override
+	public int addclasslistdata(Classification classification) {
+		// TODO 自动生成的方法存根
+		int addclasslistdata = systemManegeMapper.addclasslistdata(classification);
+		return addclasslistdata;
 	}
 }
