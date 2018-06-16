@@ -70,18 +70,23 @@ public class PortalManageHandler {
 	}
 
 	@RequestMapping("/linksList.action")
-	public ModelAndView linksList(HttpServletRequest req) {
-		List<Links> linksList = portalManageBizImpl.listLinks();
-		req.setAttribute("linksList", linksList);
+	public ModelAndView linksList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<Links> linksList = portalManageBizImpl.listLinks(condition);
+		PageInfo pageInfo = new PageInfo<>(linksList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
 		ModelAndView mav = new ModelAndView("LinksList");
 		return mav;
 	}
 
 	@RequestMapping("/addlinks.action")
-	public ModelAndView Addlinks(HttpServletRequest req, Links links) {
+	public @ResponseBody String Addlinks(HttpServletRequest req, @RequestBody Links links) {
+		System.out.println(links.getLinksid());
 		int addlinks = portalManageBizImpl.AddLinks(links);
-		ModelAndView mav = new ModelAndView("redirect:linksList.action");
-		return mav;
+		return "success";
 	}
 
 	@RequestMapping(value = "/deleteById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
@@ -93,7 +98,6 @@ public class PortalManageHandler {
 	}
 
 	@RequestMapping("/updateById.action")
-
 	public @ResponseBody  String updateById(HttpServletRequest req,@RequestBody Links links) {
 		int up = portalManageBizImpl.updateById(links);
 		return "success";
@@ -143,10 +147,16 @@ public class PortalManageHandler {
 	}
 
 	// 动态列表 王伟杰 6-13
-	@RequestMapping("/ListDyna.action")
-	public ModelAndView ListDyna(HttpServletRequest req) {
-		List<Dynamics> ListDyna = portalManageBizImpl.ListDyna();
-		req.setAttribute("ListDyna", ListDyna);
+	@RequestMapping("/listDyna.action")
+	public ModelAndView ListDyna(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+	
+		PageHelper.startPage(pageNum, pageSize);
+		List<Dynamics> ListDyna = portalManageBizImpl.ListDyna(condition);
+		PageInfo pageInfo = new PageInfo<>(ListDyna, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
 		ModelAndView mav = new ModelAndView("DynaList");
 		return mav;
 	}
@@ -174,10 +184,15 @@ public class PortalManageHandler {
 		return "success";
 	}
 	//资讯列表   王伟杰  6-13
-	@RequestMapping("/ListInfo.action")
-	public ModelAndView ListInfo(HttpServletRequest req) {
-		List<Information> ListInfo = portalManageBizImpl.ListInfo();
-		req.setAttribute("ListInfo", ListInfo);
+	@RequestMapping("/listInfo.action")
+	public ModelAndView ListInfo(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<Information> ListInfo = portalManageBizImpl.ListInfo(condition);
+		PageInfo pageInfo = new PageInfo<>(ListInfo, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
 		ModelAndView mav = new ModelAndView("InfoList");
 		return mav;
 	}

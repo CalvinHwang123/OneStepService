@@ -3,8 +3,11 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.PortalManageMapper">
 <!-- 链接列表 -->
-	<select id="listLinks" resultType="oss.bean.Links">
+	<select id="listLinks" resultType="oss.bean.Links" parameterType="oss.bean.Condition">
 		select * from links where 1 = 1
+		<if test="title != null and title !=''" >
+			and  linksname like concat(concat('%',#{title}),'%')
+		</if>
 	</select>
 <!-- 	增加链接 -->
 		<insert id="AddLinks" parameterType="oss.bean.Links">

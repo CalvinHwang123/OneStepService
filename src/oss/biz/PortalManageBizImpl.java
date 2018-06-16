@@ -42,9 +42,9 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	}
 
 	@Override
-	public List<Links> listLinks() {
+	public List<Links> listLinks(Condition condition) {
 		System.out.println("listLinks");
-		return portalManageMapper.listLinks();
+		return portalManageMapper.listLinks(condition);
 	}
 
 	@Override
@@ -85,16 +85,16 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// 动态列表 王伟杰6-13
 	@Override
-	public List<Dynamics> ListDyna() {
+	public List<Dynamics> ListDyna(Condition condition) {
 
-		return portalManageMapper.ListDyna();
+		return portalManageMapper.ListDyna(condition);
 	}
 
 	// 资讯列表 王伟杰 6-13
 	@Override
-	public List<Information> ListInfo() {
+	public List<Information> ListInfo(Condition condition) {
 
-		return portalManageMapper.ListInfo();
+		return portalManageMapper.ListInfo(condition);
 	}
 
 	// 删除动态 王伟杰 6-13
