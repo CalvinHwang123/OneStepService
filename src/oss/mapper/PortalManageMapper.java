@@ -2,7 +2,6 @@ package oss.mapper;
 
 
 import java.util.List;
-import java.util.Map;
 
 import oss.annotation.MyRepository;
 import oss.bean.UserStory;
@@ -22,7 +21,7 @@ public interface PortalManageMapper {
 	//修改雇主故事 黄绍鹏6-13  23：10
 	public int updateStory(UserStory userStory);
 	// by hlq 2018-06-14
-	public List<Violations> listViolations();
+	public List<Violations> listViolations(Condition condition);
 	// 根据id删除违规记录 by hlq 2018-06-14 22:02
 	public int deleteViolationsByID(List<Violations> list);
 	// 新增违规记录 by hlq 2018-06-15 11:25

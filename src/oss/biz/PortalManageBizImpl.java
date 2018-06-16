@@ -1,7 +1,6 @@
 package oss.biz;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -37,8 +36,8 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// by hlq 2018-06-14
 	@Override
-	public List<Violations> violationsList() {
-		return portalManageMapper.listViolations();
+	public List<Violations> violationsList(Condition condition) {
+		return portalManageMapper.listViolations(condition);
 	}
 
 	@Override

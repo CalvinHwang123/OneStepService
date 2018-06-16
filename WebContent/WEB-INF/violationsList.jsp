@@ -29,7 +29,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <body>
 	  <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a ><cite>业务管理员</cite></a>
+        <a ><cite>门户管理员</cite></a>
         <a ><cite>曝光台配置</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
@@ -42,9 +42,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         	<input type="hidden" id="pageSizeInput" name="pageSize" value="${pageInfo.getPageSize() }">
         	<!-- 隐藏域 当前页数 -->
         	<input type="hidden" id="currentPageInput" name="pageNum" value="${pageInfo.getPageNum() }">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          <input class="layui-input" placeholder="开始日" name="startDate" id="start" value="${condition.startDate }">
+          <input class="layui-input" placeholder="截止日" name="endDate" id="end" value="${condition.endDate }">
+          <input type="text" name="title"  value="${condition.title }"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -101,12 +101,47 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<option value="5" ${pageInfo.getPageSize() == 5 ? "selected" : ""}>5</option>
 				</select> 条
 				<!-- 上一页 -->
-				<a class="prev" href="javaScript:void(0)"
-					onclick="changePage(${pageInfo.getPrePage() })">&lt;&lt;</a> 
+				<c:choose>
+					<%-- 上一页 可点击 --%>
+					<c:when test="${pageInfo.getPageNum() > 1 }">
+						<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPrePage() }')">上一页</a>		
+					</c:when>
+					<%-- 上一页 不可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4;cursor: default;"  href ="javascript:return false;" onclick="return false;">上一页</a>
+					</c:otherwise>
+				</c:choose>
+				<!-- foreach不支持递减，所以分开写 -->
+				<c:if test="${pageInfo.getPageNum() - 2 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPageNum() - 2}')">${pageInfo.getPageNum() - 2}</a>	
+				</c:if>
+				<c:if test="${pageInfo.getPageNum() - 1 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPageNum() - 1}')">${pageInfo.getPageNum() - 1}</a>	
+				</c:if>
+				<!-- 当前页 -->
 				<span class="current">${pageInfo.getPageNum() }</span>
+				<!-- foreach支持递增 -->
+				<c:forEach begin="1" end="2" var="next" step="1">
+					<c:if test="${pageInfo.getPageNum() + next le pageInfo.getPages() }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPageNum() + next}')">${pageInfo.getPageNum() + next}</a>	
+					</c:if>
+				</c:forEach>
 				<!-- 下一页 -->
-				<a class="next" href="javaScript:void(0)"
-					onclick="changePage(${pageInfo.getNextPage() })">&gt;&gt;</a>
+				<c:choose>
+					<%-- 下一页 可点击 --%>
+					<c:when test="${pageInfo.getPageNum() < pageInfo.getPages() }">
+						<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getNextPage() }')">下一页</a>		
+					</c:when>
+					<%-- 下一页 可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4;cursor: default;"  href ="javascript:return false;" onclick="return false;">下一页</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 

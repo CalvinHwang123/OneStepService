@@ -39,15 +39,17 @@ public class PortalManageHandler {
 	@RequestMapping("/violationsList.action")
 	public ModelAndView violationsList(HttpServletRequest req, 
 			@RequestParam(value = "pageSize", required = true, defaultValue = "3") int pageSize, 
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
+		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
+		Condition condition) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
-		List<Violations> violationsList = portalManageBizImpl.violationsList();
+		List<Violations> violationsList = portalManageBizImpl.violationsList(condition);
 		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
 		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("violationsList");
 		return mav;
 	}

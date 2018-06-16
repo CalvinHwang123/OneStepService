@@ -162,7 +162,6 @@
 				</c:choose>
 			</div>
 		</div>
-
 	</div>
 	<div style="display: none;" id="storyLayer">
 		<form class="layui-form" action="PortalManage/userStoryList.action">

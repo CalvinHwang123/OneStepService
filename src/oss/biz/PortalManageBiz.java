@@ -1,7 +1,6 @@
 package oss.biz;
 
 import java.util.List;
-import java.util.Map;
 
 import oss.bean.UserStory;
 import oss.bean.Violations;
@@ -20,7 +19,7 @@ public interface PortalManageBiz {
 	//修改雇主故事
 	public int updateStory(UserStory userStory);
 	// by hlq 2018-06-14
-	public List<Violations> violationsList();
+	public List<Violations> violationsList(Condition condition);
 	// 违规记录删除 by hlq 2018-06-14 21:59
 	public boolean violationsDelete(List<Violations> violationsList);
 	// 新增违规记录 by hlq 2018-06-15 11:25

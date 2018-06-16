@@ -31,7 +31,7 @@ function violationDelete(obj, id) {
   			data:JSON.stringify(deleteViolation),
   			async:true,
   			success:function(msg){
-  				layer.msg('已删除!',{icon:1,time:1000});
+  				layer.msg(msg,{icon:1,time:1000});
   				window.location.reload();
   			}
   		})
@@ -61,7 +61,7 @@ function delAll (argument) {
   			data:JSON.stringify(vioIdArr),
   			async:true,
   			success:function(msg){
-  				layer.msg('已删除!',{icon:1,time:1000});
+  				layer.msg(msg,{icon:1,time:1000});
   				window.location.reload();
   			}
   		})
@@ -99,7 +99,7 @@ function addViolations(){
      			async:true,
      			success:function(msg){
      				layer.closeAll();
-     				layer.msg('已增加!',{icon:1,time:1000});
+     				layer.msg(msg,{icon:1,time:1000});
      			  	window.location.reload();
      			}
      		})
@@ -145,7 +145,7 @@ function updateViolations(){
      			async:true,
      			success:function(msg){
      				layer.closeAll();
-     				layer.msg('已修改!',{icon:1,time:1000});
+     				layer.msg(msg,{icon:1,time:1000});
      			  	window.location.reload();
      			}
      		})
