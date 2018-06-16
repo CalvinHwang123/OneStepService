@@ -29,7 +29,7 @@ public interface PortalManageBiz {
 	// 违规记录删除 by hlq 2018-06-14 21:59
 	public boolean violationsDelete(long violationsID);
 
-	public List<Links> listLinks();
+	public List<Links> listLinks(Condition condition);
 
 	public abstract int AddLinks(Links links);
 
@@ -44,7 +44,7 @@ public interface PortalManageBiz {
 	public int addUserStory(UserStory userStory);
 
 	// 动态列表 王伟杰6-13
-	public List<Dynamics> ListDyna();
+	public List<Dynamics> ListDyna(Condition condition);
 
 	// 删除动态 王伟杰6-13
 	public abstract int deleteDynaById(Long dynamicId);
@@ -56,7 +56,7 @@ public interface PortalManageBiz {
 	public abstract int AddDyna(Dynamics dynamics);
 
 	// 资讯列表 王伟杰6-13
-	public List<Information> ListInfo();
+	public List<Information> ListInfo(Condition condition);
 
 	// 删除资讯王伟杰6-13
 	public abstract int deleteInfoById(Long InformationId);
