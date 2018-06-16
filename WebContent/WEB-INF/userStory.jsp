@@ -40,10 +40,10 @@
 				<!-- 隐藏域 当前页数 -->
 				<input type="hidden" id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}"> <input
-					class="layui-input" placeholder="开始日" name="startDate" id="start">
-				<input class="layui-input" placeholder="截止日" name="endDate" id="end">
+					class="layui-input" placeholder="开始日" name="startDate" id="start" value="${condition.startDate}">
+				<input class="layui-input" placeholder="截止日" name="endDate" id="end" value="${condition.endDate}">
 				<input type="text" name="title" placeholder="请输入故事标题"
-					autocomplete="off" class="layui-input">
+					autocomplete="off" class="layui-input"  value="${condition.title}">
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
 				</button>
@@ -88,12 +88,10 @@
 						<td><c:out value="${story.storyTitle}"></c:out></td>
 						<td><c:out value="${story.storyTime}"></c:out></td>
 						<td><c:out value="${story.userID}"></c:out></td>
-						<td class="td-manage"><a title="编辑"
-							onclick="x_admin_show('编辑','admin-edit.html')"
+						<td class="td-manage"><a title="编辑" class="updateA"
+							 storyContext="${story.storyContext}" storyID="${story.storyID}"
 							href="javascript:;"> <i class="layui-icon">&#xe642;</i>
-						</a> <a title="详情" onclick="member_del(this,${story.storyID})"
-							href="javascript:;"> <i class="layui-icon">&#xe60a;</i>
-						</a> </a> <a title="删除" onclick="member_del(this,${story.storyID})"
+						</a><a title="删除" onclick="member_del(this,${story.storyID})"
 							href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 						</a></td>
 					</tr>
@@ -129,7 +127,7 @@
 						</c:if>
 						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
 						<c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num> 0}">
+							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
 								<a class="num" href="javascript:void(0);"
 									onclick="changePage(${pageInfo.pageNum+num})"><c:out
 										value="${pageInfo.pageNum+num}"></c:out> </a>
@@ -165,7 +163,7 @@
 
 	</div>
 	<div style="display: none;" id="storyLayer">
-		<form class="layui-form" action="PortalManage/userStoryList.action">
+		<form class="layui-form" action="PortalManage/userStoryList.action" id="storyForm">
 			<div class="layui-form-item">
 				<label class="layui-form-label">故事标题</label>
 				<div class="layui-input-block">
@@ -197,6 +195,32 @@
 			</div>
 		</form>
 	</div>
+	
+	<div style="display: none;" id="updataStoryLayer">
+		<form class="layui-form" action="PortalManage/userStoryList.action" id="updateStoryForm">
+			<div class="layui-form-item">
+				<label class="layui-form-label">故事标题</label>
+				<div class="layui-input-block">
+					<input type="text" name="storyTitle" required lay-verify="required"
+						placeholder="请输入标题" autocomplete="off" class="layui-input"
+						id="updateStoryTitle">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">故事主文</label>
+				<div class="layui-input-block">
+					<textarea name="storyContext" placeholder="请输入内容"
+						class="layui-textarea" id="updateStoryContext"></textarea>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button type="button" class="layui-btn" onclick="updateStory()">提交修改</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
 	<script>
 	// 曝光台脚本 by hlq 21:53
 
@@ -218,6 +242,7 @@
 	
 	
     	function openAddStory(){
+    		document.getElementByID("storyForm").reset();
     		layer.open({
     		      type: 1,
     		      title:"新增雇主故事",
@@ -227,6 +252,52 @@
     		    });
     	}
     
+    	
+    	$(function(){
+    		$(".updateA").click(openUpdateStory);
+    	})
+    	var updateA;
+    	function openUpdateStory(){
+    		updateA=$(this);
+    		$("#updateStoryTitle").val($(this).parent().parent().children().eq(2).text());
+    		$("#updateStoryContext").val($(this).attr("storyContext"));
+    		layer.open({
+  		      type: 1,
+  		      title:"新增雇主故事",
+  		      area: ['600px', '360px'],
+  		      shadeClose: false, //点击遮罩关闭
+  		      content: $('#updataStoryLayer')
+  		    });
+    	}
+    	function updateStory(){
+    		layer.confirm('确认要提交修改吗？',function(index){
+  			  var storyTitle=$("#updateStoryTitle").val();
+  			  var storyContext=$("#updateStoryContext").val();
+  			  var storyID=updateA.attr("storyID");
+  			  var updateStory={"storyID":storyID,"storyTitle":storyTitle,"storyContext":storyContext};
+  			  alert(storyID);
+  			  alert(storyTitle);
+  			  alert(storyContext);
+  			  
+  			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
+  			  $.ajax({
+  	       			url:"PortalManage/updateStory.action",
+  	       			type:"post",
+  	       			dataType:"text",
+  	       			contentType : "application/json;charset=utf-8",
+  	       			data:JSON.stringify(updateStory),
+  	       			async:true,
+  	       			success:function(msg){//
+  	       				updateA.parent().parent().children().eq(2).text(storyTitle);
+  	       				updateA.attr("storyContext",storyContext);
+  	       				layer.closeAll();
+  	       			}
+  	       		})
+  		  })
+    	}
+    	
+    	
+    	
     	function addStory(){//添加新雇主故事
     		  layer.confirm('确认要提交吗？',function(index){
     			  var storyTitle=$("#newStoryTitle").val();

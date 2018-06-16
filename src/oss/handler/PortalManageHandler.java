@@ -114,17 +114,16 @@ public class PortalManageHandler {
 		PageInfo pageInfo = new PageInfo<>(userStoryList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("userStory");
 		return mav;
 	}
 
-	// 修改雇主故事列表 黄绍鹏6-13 23：05
+	// 修改雇主故事列表 黄绍鹏6-16 10:43
 	@RequestMapping("/updateStory.action")
-	public ModelAndView updateStory(HttpServletRequest req, UserStory userStory) {
-		System.out.println(userStory.getStoryTitle());
+	public @ResponseBody String updateStory(HttpServletRequest req,@RequestBody UserStory userStory) {
 		portalManageBizImpl.updateStory(userStory);
-		ModelAndView mav = new ModelAndView("redirect:userStoryList.action");
-		return mav;
+		return "success";
 	}
 
 	// 批量删除雇主故事 黄绍鹏 6-14 15:57(修改)
