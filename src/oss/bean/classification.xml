@@ -31,4 +31,10 @@
 		insert into CLASSIFICATION(classificationId,classificationName,classificationPid)
 		values(#{classificationId},#{classificationName},#{classificationPid})	
 	</insert>
+	
+	<!--  分类列表数据修改  袁楠文 2018-6-16 22:36 -->
+	<update id="reviseClasslistData" parameterType="oss.bean.Classification">
+		update CLASSIFICATION set classificationName = #{classificationName},classificationPid = #{classificationPid}
+		where classificationId = #{classificationId}
+	</update>
 </mapper>

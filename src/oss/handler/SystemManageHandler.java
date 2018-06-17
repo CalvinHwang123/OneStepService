@@ -100,19 +100,44 @@ public class SystemManageHandler {
 		List<Classification> classlist = systemManegeBizImpl.seekclasslist();
 		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
 		PageInfo pageInfo = new PageInfo<>(classlist, pageSize);
-		// System.out.println("pageInfo:"+pageInfo.getTotal());
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("listsize", classlist.size());
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		ModelAndView classification = new ModelAndView("classification");
 		return classification;
 	}
+	
+	// 服务商列表数据请求 袁楠文 2018-6-16 23:52
+	@RequestMapping("/seekServicelist")
+	public ModelAndView seekServicelist(HttpServletRequest request) {
 
+		int pageNum = 1;// 当前显示的页码;
+		int pageSize = 5;// 每一页显示的数据条数;
+		PageHelper.startPage(pageNum, pageSize);
+		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
+		PageInfo pageInfo = new PageInfo<>(oneclassmenulist, pageSize);
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("listsize", oneclassmenulist.size());
+		request.setAttribute("oneclassmenulist", oneclassmenulist);
+		ModelAndView classification = new ModelAndView("Serviceprovidertype");
+		return classification;
+	}
+	
 	// 分类列表数据删除 袁楠文 2018-6-15 11:11
 	@RequestMapping("/delclasslistdata")
 	public @ResponseBody String delclasslistdata(HttpServletRequest request,@RequestParam(value = "classificationId", required = true, defaultValue = "empty") Long classificationId) {
 		int delclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
 		if (delclassnumber==1) {
+			flg = "success";
+		}
+		return flg;
+	}
+	// 分类列表数据修改  袁楠文 2018-6-16 22:36
+	@RequestMapping("/reviseClasslistData")
+	public @ResponseBody String reviseClasslistData(HttpServletRequest request,@RequestBody Classification classification) {
+		int reviseclassnumber = 0;
+		reviseclassnumber= systemManegeBizImpl.reviseClasslistData(classification);
+		if (reviseclassnumber==1) {
 			flg = "success";
 		}
 		return flg;

@@ -32,4 +32,7 @@ public interface SystemManegeMapper {
 	
 	// 分类数据添加 袁楠文 2018-6-16 12:33
 	public int addclasslistdata(Classification classification);
+
+	// 分类列表数据修改  袁楠文 2018-6-16 22:36
+	public int reviseClasslistData(Classification classification);
 }

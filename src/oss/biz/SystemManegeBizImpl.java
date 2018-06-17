@@ -72,4 +72,12 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		int addclasslistdata = systemManegeMapper.addclasslistdata(classification);
 		return addclasslistdata;
 	}
+
+	// 分类列表数据修改  袁楠文 2018-6-16 22:36
+	@Override
+	public int reviseClasslistData(Classification classification) {
+		// TODO 自动生成的方法存根
+		int reviseClasslistData = systemManegeMapper.reviseClasslistData(classification);
+		return reviseClasslistData;
+	}
 }
