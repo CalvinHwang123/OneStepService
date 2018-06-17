@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import oss.bean.UserStory;
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
@@ -66,5 +67,8 @@ public interface PortalManageBiz {
 
 	// 增加资讯 wwj 6-15
 	public abstract int AddInfo(Information information);
+	
+	//前台登入  wwj  6-17
+		public abstract Users Forelogin(Users users);
 
 }
