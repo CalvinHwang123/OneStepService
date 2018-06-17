@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -12,10 +13,11 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./lib/layui/css/layui.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/xadmin.css">
 <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
 <!-- 引入 ECharts 文件 -->
     <script src="./js/echarts.min.js"></script>
-<title>曝光台设置</title>
+<title>曝光台</title>
 
 <style type="text/css">
 ui, li {
@@ -39,45 +41,113 @@ color: #e3e3e3;
 
 </head>
 <body>
-<form action="PortalManage/violationssList.action">
-	<button type="submit">查询曝光台列表</button>
-</form>
 
-<div id="news"> 
-<ul> 
-<li><a href="#" title="aaaaaaaaaaaaaaa">aaaaaaaaaaaaaaa</a></li> 
-<li><a href="#" title="bbbbbbbbbbbbbbb">bbbbbbbbbbbbbbb</a></li> 
-<li><a href="#" title="ccccccccccccccc">ccccccccccccccc</a></li> 
-<li><a href="#" title="ddddddddddddddd">ddddddddddddddd</a></li> 
-<li><a href="#" title="eeeeeeeeeeeeeee">eeeeeeeeeeeeeee</a></li> 
-<li><a href="#" title="fffffffffffffff">fffffffffffffff</a></li> 
-<li><a href="#" title="ggggggggggggggg">ggggggggggggggg</a></li> 
-</ul> 
-</div> 
+	<div style="background-color: #293c55;">
+		<h2 style="font-size: 24px; font-weight: 400; color: #e3e3e3;">严惩违规行为，我们在行动</h2>
+		<div id="news"
+			style="text-align: center; background-color: #e3e3e3; color: #e3e3e3; width: 80%; height: 150px; border-radius: 10px; margin: 10px auto; line-height: 1.5">
+			<ul>
+				<c:forEach items="${stickList }" var="violations">
+					<li><a href="#">
+							<div class="div-userName-violationsResult">
+								${violations.userID },${violations.violationsResult }</div>
+							<div class="div-violationsWhy">${violations.violationsWhy }
+							</div>
+					</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
 
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+<%-- 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
   <legend>简洁风格的Tab</legend>
 </fieldset>
  
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
   <ul class="layui-tab-title">
-    <li class="layui-this">网站设置</li>
-    <li>用户管理</li>
-    <li>权限分配</li>
-    <li>商品管理</li>
-    <li>订单管理</li>
+    <li class="layui-this">所有</li>
+    <li>近1月</li>
+    <li>近2月</li>
+    <li>近3月</li>
   </ul>
   <div class="layui-tab-content" style="height: 100px;">
-    <div class="layui-tab-item layui-show">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
+    <div class="layui-tab-item layui-show">${pageInfo.list }</div>
     <div class="layui-tab-item">内容2</div>
     <div class="layui-tab-item">内容3</div>
     <div class="layui-tab-item">内容4</div>
-    <div class="layui-tab-item">内容5</div>
   </div>
 </div> 
- 
+  --%>
+  
  <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
     <div id="main" style="width: 600px;height:400px;"></div>
+ 
+ <table class="layui-table" style="width: 90%; margin: 0 auto;">
+        <thead>
+          <tr>
+          	<th>处罚用户</th>
+			<th>处罚原因</th>
+			<th>处罚结果</th>
+			<th>处罚日期</th>
+        </thead>
+        <tbody>
+           <c:forEach items="${pageInfo.list}" var="violation" begin="0">
+				<tr>
+					<td><c:out value="${violation.userID}"></c:out></td>
+					<td><c:out value="${violation.violationsWhy}"></c:out></td>
+					<td><c:out value="${violation.violationsResult}"></c:out></td>
+					<td><c:out value="${violation.violationsTime}"></c:out></td>
+				</tr>
+			</c:forEach>
+        </tbody>
+      </table>
+      <div class="page">
+			<div>
+				<!-- 上一页 -->
+				<c:choose>
+					<%-- 上一页 可点击 --%>
+					<c:when test="${pageInfo.getPageNum() > 1 }">
+						<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPrePage() }')">上一页</a>		
+					</c:when>
+					<%-- 上一页 不可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4;cursor: default;"  href ="javascript:return false;" onclick="return false;">上一页</a>
+					</c:otherwise>
+				</c:choose>
+				<!-- foreach不支持递减，所以分开写 -->
+				<c:if test="${pageInfo.getPageNum() - 2 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPageNum() - 2}')">${pageInfo.getPageNum() - 2}</a>	
+				</c:if>
+				<c:if test="${pageInfo.getPageNum() - 1 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPageNum() - 1}')">${pageInfo.getPageNum() - 1}</a>	
+				</c:if>
+				<!-- 当前页 -->
+				<span class="current">${pageInfo.getPageNum() }</span>
+				<!-- foreach支持递增 -->
+				<c:forEach begin="1" end="2" var="next" step="1">
+					<c:if test="${pageInfo.getPageNum() + next le pageInfo.getPages() }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getPageNum() + next}')">${pageInfo.getPageNum() + next}</a>	
+					</c:if>
+				</c:forEach>
+				<!-- 下一页 -->
+				<c:choose>
+					<%-- 下一页 可点击 --%>
+					<c:when test="${pageInfo.getPageNum() < pageInfo.getPages() }">
+						<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${pageInfo.getNextPage() }')">下一页</a>		
+					</c:when>
+					<%-- 下一页 可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4;cursor: default;"  href ="javascript:return false;" onclick="return false;">下一页</a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+ 
  
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -118,13 +188,13 @@ $(function() {
 
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));
-
-var data = genData(50);
+var count = 16;
+var data = genData(count);
 
 option = {
     title : {
-        text: '同名数量统计',
-        subtext: '纯属虚构',
+        text: '处罚原因',
+        subtext: '用户',
         x:'center'
     },
     tooltip : {
@@ -143,7 +213,7 @@ option = {
     },
     series : [
         {
-            name: '姓名',
+            name: '处罚原因',
             type: 'pie',
             radius : '55%',
             center: ['40%', '50%'],
@@ -165,12 +235,12 @@ myChart.setOption(option);
 
 function genData(count) {
     var nameList = [
-        '赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨', '朱', '秦', '尤', '许', '何', '吕', '施', '张', '孔', '曹', '严', '华', '金', '魏', '陶', '姜', '戚', '谢', '邹', '喻', '柏', '水', '窦', '章', '云', '苏', '潘', '葛', '奚', '范', '彭', '郎', '鲁', '韦', '昌', '马', '苗', '凤', '花', '方', '俞', '任', '袁', '柳', '酆', '鲍', '史', '唐', '费', '廉', '岑', '薛', '雷', '贺', '倪', '汤', '滕', '殷', '罗', '毕', '郝', '邬', '安', '常', '乐', '于', '时', '傅', '皮', '卞', '齐', '康', '伍', '余', '元', '卜', '顾', '孟', '平', '黄', '和', '穆', '萧', '尹', '姚', '邵', '湛', '汪', '祁', '毛', '禹', '狄', '米', '贝', '明', '臧', '计', '伏', '成', '戴', '谈', '宋', '茅', '庞', '熊', '纪', '舒', '屈', '项', '祝', '董', '梁', '杜', '阮', '蓝', '闵', '席', '季', '麻', '强', '贾', '路', '娄', '危'
+        '赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨'
     ];
     var legendData = [];
     var seriesData = [];
     var selected = {};
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < count; i++) {
         name = Math.random() > 0.65
             ? makeWord(4, 1) + '·' + makeWord(3, 0)
             : makeWord(2, 1);
@@ -179,7 +249,7 @@ function genData(count) {
             name: name,
             value: Math.round(Math.random() * 100000)
         });
-        selected[name] = i < 6;
+        selected[name] = i < count;
     }
 
     return {

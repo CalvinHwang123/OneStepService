@@ -1,10 +1,14 @@
 package oss.biz;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import oss.bean.Condition;
+import oss.bean.Violations;
 import oss.mapper.PortalMapper;
 
 /*
@@ -14,5 +18,10 @@ import oss.mapper.PortalMapper;
 public class PortalBizImpl  implements PortalBiz{
 	@Resource
 	private PortalMapper portalMapper;
+
+	@Override
+	public List<Violations> violationsList(Condition condition) {
+		return null;
+	}
 
 }
