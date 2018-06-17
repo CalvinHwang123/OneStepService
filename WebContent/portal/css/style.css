@@ -511,9 +511,10 @@ h3.w3ls-title {
 .w3ls-add-grids {
     background: url(../images/img1.jpg)no-repeat 0px 0px;
     background-size: cover;
-	width: 32.5%;
+	width: 30%;
 	min-height: 250px;
 	float:left;
+	margin: 0.5em 0.5em 0.5em 0.5em;
 }
 .w3ls-add-grids.w3ls-add-grids-mdl{
     background: url(../images/img2.jpg)no-repeat 0px 0px; 
@@ -523,9 +524,9 @@ h3.w3ls-title {
     background: url(../images/img3.jpg)no-repeat 0px 0px; 
 	background-size: cover;
 }
-.w3ls-add-grids.w3ls-add-grids-mdl {
-    margin: 0 1em;
-} 
+/* .w3ls-add-grids.w3ls-add-grids-mdl { */
+/*     margin: 0 1em; */
+/* }  */
 .w3ls-add-grids a {
     display: block;
     padding: 1em;
@@ -547,9 +548,12 @@ h3.w3ls-title {
     display: block;
 }
 .w3ls-add-grids h6 {
-    font-size: 1.2em;
-    color: #f32e20;
-    margin: 1.65em 0;
+    font-size: 1.4em;
+/*     color: #f32e20; */
+/*     margin: 1.65em 0; */
+  	color: #fff;
+  	text-align: center;
+    margin-top: 8em;
     font-family: 'Offside', cursive;
 }
 .w3ls-add-grids.w3ls-add-grids-mdl h4 {
@@ -3922,3 +3926,47 @@ h3.w3ls-title.w3ls-title1 {
 }
 }
 /*-- //responsive-design --*/
+
+/*-- 分页的样式 --*/
+.page{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.page a{
+    display: inline-block;
+    background: #fff url() 0 0 no-repeat;
+    color: #888;
+    padding: 10px;
+    min-width: 15px;
+    border: 1px solid #E2E2E2;
+
+}
+.page span{
+    display: inline-block;
+    padding: 10px;
+    min-width: 15px;
+    border: 1px solid #E2E2E2;
+}
+.page span.current{
+    display: inline-block;
+    background: #037fe3 url() 0 0 no-repeat;
+    color: #fff;
+    padding: 10px;
+    min-width: 15px;
+    border: 1px solid #037fe3;
+}
+.page .pagination li{
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+}
+.page .pagination li.active span{
+    background: #009688 url() 0 0 no-repeat;
+    color: #fff;
+    border: 1px solid #009688;
+
+}
+
+

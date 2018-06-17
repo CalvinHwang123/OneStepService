@@ -119,7 +119,7 @@ public class PortalManageHandler {
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
 		req.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("userStory");
+		ModelAndView mav = new ModelAndView("background/userStory");
 		return mav;
 	}
 

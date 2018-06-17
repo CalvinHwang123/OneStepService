@@ -242,7 +242,7 @@
 	
 	
     	function openAddStory(){
-    		document.getElementByID("storyForm").reset();
+//     		document.getElementByID("storyForm").reset();
     		layer.open({
     		      type: 1,
     		      title:"新增雇主故事",
