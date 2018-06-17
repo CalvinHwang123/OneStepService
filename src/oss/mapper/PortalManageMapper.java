@@ -2,14 +2,15 @@ package oss.mapper;
 
 
 import java.util.List;
+import java.util.Map;
 
 import oss.annotation.MyRepository;
-import oss.bean.UserStory;
-import oss.bean.Violations;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.UserStory;
+import oss.bean.Violations;
 /*
  * 后端门户管理Mapper接口
  */
@@ -20,6 +21,7 @@ public interface PortalManageMapper {
 	
 	//修改雇主故事 黄绍鹏6-13  23：10
 	public int updateStory(UserStory userStory);
+	
 	// by hlq 2018-06-14
 	public List<Violations> listViolations(Condition condition);
 	// 根据id删除违规记录 by hlq 2018-06-14 22:02
@@ -28,6 +30,14 @@ public interface PortalManageMapper {
 	public int insertViolations(Violations violations);
 	// 根据id修改违规记录 by hlq 2018-06-15 13:49
 	public int updateViolationsByID(Violations violations);
+	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21：04
+	public int stickUpdateViolationsByID(Violations violations);
+	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
+	public List<Violations> listViolationsDesc();
+	// 查询置顶违规记录 by hlq 2018-06-16 22:05
+	public List<Violations> listStickViolations();
+	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
+	public List<Violations> listViolationsGroupByWhy();
 	
 	public List<Links> listLinks();
 	public abstract int AddLinks(Links links);

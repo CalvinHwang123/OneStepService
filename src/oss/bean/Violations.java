@@ -7,7 +7,9 @@ public class Violations {
 	private String violationsWhy;//违规原因
 	private String violationsResult;//违规结果
 	private Long userID;//雇主ID
+	private String stickTime;//置顶时间
 	
+	private Integer whyCount;
 	public Violations() {
 	}
 
@@ -51,11 +53,26 @@ public class Violations {
 		this.userID = userID;
 	}
 
+	public String getStickTime() {
+		return stickTime;
+	}
+
+	public void setStickTime(String stickTime) {
+		this.stickTime = stickTime;
+	}
+
+	public Integer getWhyCount() {
+		return whyCount;
+	}
+
+	public void setWhyCount(Integer whyCount) {
+		this.whyCount = whyCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Violations [violationsID=" + violationsID + ", violationsTime=" + violationsTime + ", violationsWhy="
-				+ violationsWhy + ", violationsResult=" + violationsResult + ", userID=" + userID + "]";
+				+ violationsWhy + ", violationsResult=" + violationsResult + ", userID=" + userID + ", stickTime="
+				+ stickTime + "]";
 	}
-	
-	
 }

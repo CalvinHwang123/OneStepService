@@ -1,6 +1,7 @@
 package oss.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import oss.bean.UserStory;
 import oss.bean.Violations;
@@ -31,6 +32,17 @@ public interface PortalManageBiz {
 	public boolean insertViolations(Violations violations);
 	// 根据id修改违规记录 by hlq 2018-06-15 13:49
 	public boolean updateViolationsByID(Violations violations);
+	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21:04
+	public boolean stickUpdateViolationsByID(Violations violations);
+	
+	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
+	public List<Violations> listViolationsDesc();
+
+	// 查询置顶违规记录 by hlq 2018-06-16 22:05
+	public List<Violations> listStickViolations();
+
+	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
+	public List<Violations> listViolationsGroupByWhy();
 
 	public List<Links> listLinks();
 

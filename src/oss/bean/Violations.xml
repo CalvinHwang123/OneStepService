@@ -8,8 +8,8 @@
 			select violationsSeq.nextVal from dual
 		</selectKey>
 		insert into violations
-		(violationsID, violationsWhy, violationsResult, userID, violationsTime)
-		values (#{violationsID}, #{violationsWhy}, #{violationsResult}, #{userID}, #{violationsTime})
+		(violationsID, violationsWhy, violationsResult, userID, violationsTime, stickTime)
+		values (#{violationsID}, #{violationsWhy}, #{violationsResult}, #{userID}, #{violationsTime}, '1970-01-01 00:00:00')
 	</insert>
 	
 	<delete id="deleteViolationsByID" parameterType="java.util.List">
@@ -24,14 +24,38 @@
 		where violationsID = #{violationsID}
 	</update>
 	
+	<!-- 置顶与取消置顶违规记录 -->
+	<update id="stickUpdateViolationsByID" parameterType="oss.bean.Violations">
+		update violations set stickTime = #{stickTime}
+		where violationsID = #{violationsID}
+	</update>
+	
+	<!-- 置顶时间倒序排序优先，未置顶违规时间倒序排序次之 -->
 	<select id="listViolations" parameterType="oss.bean.Condition" resultType="oss.bean.Violations">
 		select * from violations where 1 = 1
 		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
 			and violationsTime between '${startDate} 00:00:00' and '${endDate} 23:59:59'
 		</if>
-		<if test="title != null">
+		<if test="title != null and title != ''">
 			and userID like '%${title}%'
 		</if>
-		order by violationsTime desc
+		order by stickTime desc, violationsTime desc
 	</select>
+	
+	<!-- 按违规时间倒序查询违规记录 -->
+	<select id="listViolationsDesc" resultType="oss.bean.Violations">
+		select * from violations order by violationsTime desc
+	</select>
+	
+	<!-- 查询置顶违规记录 -->
+	<select id="listStickViolations" resultType="oss.bean.Violations">
+		select * from violations where stickTime != '1970-01-01 00:00:00' 
+		order by stickTime desc
+	</select>
+	
+	<!-- 按违规原因分组查询违规列表 -->
+	<select id="listViolationsGroupByWhy" resultType="oss.bean.Violations">
+		select violationsWhy, count(violationsWhy) as whyCount from violations group by violationsWhy;
+	</select>
+	
 </mapper>

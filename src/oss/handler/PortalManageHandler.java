@@ -38,9 +38,33 @@ public class PortalManageHandler {
 	// by hlq 2018-06-14
 	@RequestMapping("/violationsList.action")
 	public ModelAndView violationsList(HttpServletRequest req, 
-			@RequestParam(value = "pageSize", required = true, defaultValue = "3") int pageSize, 
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
 		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
 		Condition condition) {
+		getViolationsPageInfo(req, pageSize, pageNum, condition);
+		ModelAndView mav = new ModelAndView("violationsList");
+		return mav;
+	}
+	
+	// 前端雇主列表请求 by hlq 2018-06-16 13:36
+	@RequestMapping("/foreViolationsList.action")
+	public ModelAndView foreViolationsList(HttpServletRequest req, 
+			@RequestParam(value = "pageSize", required = true, defaultValue = "10") int pageSize, 
+		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
+		getViolationsPageInfo(req, pageSize, pageNum, null);
+		
+//		List<Violations> map = portalManageBizImpl.listViolationsGroupByWhy();
+//		System.out.println("map 长度：" + map.size());
+		List<Violations> stickList = portalManageBizImpl.listStickViolations();
+		System.out.println("stickList 长度：" + stickList.size());
+		req.setAttribute("stickList", stickList);
+		
+		ModelAndView mav = new ModelAndView("foreViolations");
+		return mav;
+	}
+	
+	// 获取违规列表的pageinfo by hlq 2018-06-16 13:40
+	private void getViolationsPageInfo(HttpServletRequest req, int pageSize, int pageNum, Condition condition) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
@@ -49,9 +73,6 @@ public class PortalManageHandler {
 		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
-		req.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("violationsList");
-		return mav;
 	}
 
 	// 违规记录删除 by hlq 2018-06-14 21:58 返回json
@@ -87,6 +108,23 @@ public class PortalManageHandler {
 			return "修改成功";
 		} else {
 			return "修改失败";
+		}
+	}
+	
+	// 违规记录置顶 by hlq 2018-06-16 21:01 返回json
+	@RequestMapping(value = "/violationsStickTimeUpdate.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String violationsStickTimeUpdate(@RequestBody Violations violations) {
+		System.out.println(violations);
+		// 准备置顶(注意写法避免空指针)
+		if (!"1970-01-01 00:00:00".equals(violations.getStickTime())) {
+			// 设置当前时间为置顶时间
+			violations.setStickTime(DateUtil.getCurrentDate());
+		}
+		boolean ret = portalManageBizImpl.stickUpdateViolationsByID(violations);
+		if (ret) {
+			return "操作成功";
+		} else {
+			return "操作失败";
 		}
 	}
 	

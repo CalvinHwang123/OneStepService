@@ -151,3 +151,42 @@ function updateViolations(){
      		})
 	  })
 }
+
+// 置顶与取消置顶
+function stickViolations(obj,id){
+	if($(obj).attr('title')=='置顶'){
+		layer.confirm('确认要置顶吗？',function(index){
+			//发异步把用户状态进行更改
+			$.ajax({
+                url: $("base").attr("href") + "PortalManage/violationsStickTimeUpdate.action",
+                type: "POST",
+                dataType: "text",
+                contentType : "application/json;charset=utf-8",
+                data: JSON.stringify({"violationsID":id}),
+                async: true,
+                success: function(msg) {
+                	layer.closeAll();
+     				layer.msg("置顶成功",{icon:1,time:1000});
+     			  	window.location.reload();
+                }
+        	});
+        });
+    }else{
+    	layer.confirm('确认要取消置顶吗？',function(index){
+    		//发异步把用户状态进行更改
+			$.ajax({
+                url: $("base").attr("href") + "PortalManage/violationsStickTimeUpdate.action",
+                type: "POST",
+                dataType: "text",
+                contentType : "application/json;charset=utf-8",
+                data: JSON.stringify({"violationsID":id,"stickTime":"1970-01-01 00:00:00"}),
+                async: true,
+                success: function(msg) {
+                	layer.closeAll();
+     				layer.msg("取消置顶成功",{icon:1,time:1000});
+     			  	window.location.reload();
+                }
+        	});
+    	});
+    }
+}
