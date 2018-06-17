@@ -41,28 +41,25 @@ color: #e3e3e3;
 
 </head>
 <body>
-<form action="PortalManage/violationssList.action">
-	<button type="submit">查询曝光台列表</button>
-</form>
 
-<div id="news"> 
-<ul>
-<c:forEach items="${stickList }" var="violations">
-	<li>
-		<a href="#">
-			<div class="div-userName-violationsResult">
-				${violations.userID },${violations.violationsResult }
-			</div>
-			<div class="div-violationsWhy">
-				${violations.violationsWhy }
-			</div>
-		</a>
-	</li>	
-</c:forEach>
-</ul> 
-</div> 
+	<div style="background-color: #293c55;">
+		<h2 style="font-size: 24px; font-weight: 400; color: #e3e3e3;">严惩违规行为，我们在行动</h2>
+		<div id="news"
+			style="text-align: center; background-color: #e3e3e3; color: #e3e3e3; width: 80%; height: 150px; border-radius: 10px; margin: 10px auto; line-height: 1.5">
+			<ul>
+				<c:forEach items="${stickList }" var="violations">
+					<li><a href="#">
+							<div class="div-userName-violationsResult">
+								${violations.userID },${violations.violationsResult }</div>
+							<div class="div-violationsWhy">${violations.violationsWhy }
+							</div>
+					</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
 
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+<%-- 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
   <legend>简洁风格的Tab</legend>
 </fieldset>
  
@@ -80,7 +77,8 @@ color: #e3e3e3;
     <div class="layui-tab-item">内容4</div>
   </div>
 </div> 
- 
+  --%>
+  
  <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
     <div id="main" style="width: 600px;height:400px;"></div>
  

@@ -35,23 +35,36 @@ public class PortalManageHandler {
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
 
-	// by hlq 2018-06-14
+	// 后端违规列表请求 by hlq 2018-06-14
 	@RequestMapping("/violationsList.action")
 	public ModelAndView violationsList(HttpServletRequest req, 
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
 		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
 		Condition condition) {
-		getViolationsPageInfo(req, pageSize, pageNum, condition);
+		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Violations> violationsList = portalManageBizImpl.violationsList(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
 		ModelAndView mav = new ModelAndView("violationsList");
 		return mav;
 	}
 	
-	// 前端雇主列表请求 by hlq 2018-06-16 13:36
+	// 前端曝光台请求 by hlq 2018-06-16 13:36
 	@RequestMapping("/foreViolationsList.action")
 	public ModelAndView foreViolationsList(HttpServletRequest req, 
 			@RequestParam(value = "pageSize", required = true, defaultValue = "10") int pageSize, 
 		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
-		getViolationsPageInfo(req, pageSize, pageNum, null);
+		
+		PageHelper.startPage(pageNum, pageSize);
+		List<Violations> violationsList = portalManageBizImpl.listViolationsDesc();
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
 		
 //		List<Violations> map = portalManageBizImpl.listViolationsGroupByWhy();
 //		System.out.println("map 长度：" + map.size());
@@ -63,18 +76,6 @@ public class PortalManageHandler {
 		return mav;
 	}
 	
-	// 获取违规列表的pageinfo by hlq 2018-06-16 13:40
-	private void getViolationsPageInfo(HttpServletRequest req, int pageSize, int pageNum, Condition condition) {
-		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
-		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
-		PageHelper.startPage(pageNum, pageSize);
-		List<Violations> violationsList = portalManageBizImpl.violationsList(condition);
-		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
-		System.out.println(pageInfo.getTotal());
-		req.setAttribute("pageInfo", pageInfo);
-	}
-
 	// 违规记录删除 by hlq 2018-06-14 21:58 返回json
 	@RequestMapping(value = "/violationsDelete.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String violationsDelete(@RequestBody List<Violations> violationsList) {
