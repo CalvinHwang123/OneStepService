@@ -12,6 +12,7 @@ import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
 import oss.bean.UserStory;
+import oss.bean.Users;
 import oss.bean.Violations;
 /*
  * 门户管理Biz业务实现类
@@ -135,6 +136,12 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	public int AddInfo(Information information) {
 	
 		return portalManageMapper.AddInfo(information);
+	}
+
+	@Override
+	public Users Forelogin(Users users) {
+		
+		return portalManageMapper.Forelogin(users);
 	}
 
 }
