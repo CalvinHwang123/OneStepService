@@ -3,9 +3,9 @@ package oss.mapper;
 import java.util.List;
 
 import oss.annotation.MyRepository;
+import oss.bean.Classification;
 import oss.bean.Emps;
 import oss.bean.Powers;
-import oss.bean.classification;
 
 /*
  * 系统管理Mapper接口
@@ -22,5 +22,17 @@ public interface SystemManegeMapper {
 	public List<Object> Classuniquequery(String oneclassname);
 
 	// 请求分类列表数据 袁楠文 2018-6-14 16:00
-	public List<classification> seekclasslist();
+	public List<Classification> seekclasslist();
+	
+	// 分类列表数据删除 袁楠文 2018-6-15 11:11
+	public int delclasslistdata(long classificationId);
+	
+	// 一级分类菜单数据 袁楠文 2018-6-15 15:17
+	public List<Classification> oneclassMenu();
+	
+	// 分类数据添加 袁楠文 2018-6-16 12:33
+	public int addclasslistdata(Classification classification);
+
+	// 分类列表数据修改  袁楠文 2018-6-16 22:36
+	public int reviseClasslistData(Classification classification);
 }

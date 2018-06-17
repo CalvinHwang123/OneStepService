@@ -7,16 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
+import oss.bean.Classification;
 import oss.bean.Emps;
 import oss.bean.Powers;
-import oss.bean.classification;
 import oss.biz.SystemManegeBiz;
 
 /*
@@ -26,7 +29,7 @@ import oss.biz.SystemManegeBiz;
 @Controller
 @RequestMapping("/SystemManage")
 public class SystemManageHandler {
-
+	String flg = "error";
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
 	ModelAndView mav;
@@ -62,10 +65,23 @@ public class SystemManageHandler {
 		return powerList;
 	}
 
+	// 类型数据添加 袁楠文 2018-6-16 12:17
+	@RequestMapping("/addClasslistData")
+	public @ResponseBody String addclasslistData(HttpServletRequest request, @RequestBody Classification classification) {	
+		int addclasslistdata =0;
+		if (String.valueOf(classification.getClassificationPid()).equals("0")) {
+			addclasslistdata= systemManegeBizImpl.addclasslistdata(classification);
+		}else {
+			addclasslistdata= systemManegeBizImpl.addclasslistdata(classification);
+	}
+		if(addclasslistdata==1){
+			flg="success";
+		}
+		return flg;
+}	
 	// 一级分类唯一验证 袁楠文 2018-6-14 10:50
 	@RequestMapping("/classUniquequery")
 	public @ResponseBody String classUniquequery(HttpServletRequest request) {
-		String flg = "error";
 		String oneclassname = request.getParameter("oneclassname");
 		List<Object> oneclass = systemManegeBizImpl.Classuniquequery(oneclassname);
 		if (oneclass.size() == 0) {
@@ -74,34 +90,56 @@ public class SystemManageHandler {
 		return flg;
 	}
 
-	// 一级分类唯一验证 袁楠文 2018-6-14 10:50
+	// 分类数据请求 袁楠文 2018-6-14 10:50
 	@RequestMapping("/seekclasslist")
 	public ModelAndView seekclasslist(HttpServletRequest request) {
 
 		int pageNum = 1;// 当前显示的页码;
 		int pageSize = 5;// 每一页显示的数据条数;
-
 		PageHelper.startPage(pageNum, pageSize);
-		List<classification> classlist = systemManegeBizImpl.seekclasslist();
+		List<Classification> classlist = systemManegeBizImpl.seekclasslist();
+		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
 		PageInfo pageInfo = new PageInfo<>(classlist, pageSize);
-		// System.out.println("pageInfo:"+pageInfo.getTotal());
 		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("listsize", classlist.size());
+		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		ModelAndView classification = new ModelAndView("classification");
 		return classification;
 	}
+	
+	// 服务商列表数据请求 袁楠文 2018-6-16 23:52
+	@RequestMapping("/seekServicelist")
+	public ModelAndView seekServicelist(HttpServletRequest request) {
 
-	// 删除分类列表数据 袁楠文 2018-6-14 22:50
+		int pageNum = 1;// 当前显示的页码;
+		int pageSize = 5;// 每一页显示的数据条数;
+		PageHelper.startPage(pageNum, pageSize);
+		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
+		PageInfo pageInfo = new PageInfo<>(oneclassmenulist, pageSize);
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("listsize", oneclassmenulist.size());
+		request.setAttribute("oneclassmenulist", oneclassmenulist);
+		ModelAndView classification = new ModelAndView("Serviceprovidertype");
+		return classification;
+	}
+	
+	// 分类列表数据删除 袁楠文 2018-6-15 11:11
 	@RequestMapping("/delclasslistdata")
-	public ModelAndView delclasslistdata(HttpServletRequest request) {
-
-		/*
-		 * PageHelper.startPage(pageNum, pageSize); classlist=
-		 * systemManegeBizImpl.seekclasslist(); PageInfo pageInfo = new
-		 * PageInfo<>(classlist, pageSize);
-		 * System.out.println("pageInfo:"+pageInfo.getTotal());
-		 * request.setAttribute("pageInfo", pageInfo); ModelAndView classification = new
-		 * ModelAndView("classification");
-		 */
-		return null;
+	public @ResponseBody String delclasslistdata(HttpServletRequest request,@RequestParam(value = "classificationId", required = true, defaultValue = "empty") Long classificationId) {
+		int delclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
+		if (delclassnumber==1) {
+			flg = "success";
+		}
+		return flg;
+	}
+	// 分类列表数据修改  袁楠文 2018-6-16 22:36
+	@RequestMapping("/reviseClasslistData")
+	public @ResponseBody String reviseClasslistData(HttpServletRequest request,@RequestBody Classification classification) {
+		int reviseclassnumber = 0;
+		reviseclassnumber= systemManegeBizImpl.reviseClasslistData(classification);
+		if (reviseclassnumber==1) {
+			flg = "success";
+		}
+		return flg;
 	}
 }

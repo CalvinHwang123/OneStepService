@@ -4,12 +4,37 @@
 <mapper namespace="oss.mapper.SystemManegeMapper">
 
 	<!-- 一级分类唯一验证  袁楠文 2018-6-14 10:50 -->
-	<select id="Classuniquequery" resultType="oss.bean.classification">
+	<select id="Classuniquequery" resultType="oss.bean.Classification">
 		SELECT * FROM CLASSIFICATION WHERE CLASSIFICATIONNAME = #{oneclassname}
 	</select>
 	
 	<!-- 请求分类列表数据 袁楠文 2018-6-14 16:00 -->
-	<select id="seekclasslist" resultType="oss.bean.classification">
+	<select id="seekclasslist" resultType="oss.bean.Classification">
 		SELECT * FROM CLASSIFICATION
 	</select>
+	
+	<!-- 分类列表数据删除 袁楠文 2018-6-15 11:11 -->
+	<delete id="delclasslistdata" parameterType="long">
+		DELETE FROM CLASSIFICATION WHERE CLASSIFICATIONID = #{classificationId}
+	</delete>
+	
+	<!--  一级分类菜单数据 袁楠文 2018-6-15 15:17 -->
+	<select id="oneclassMenu" resultType="oss.bean.Classification">
+		SELECT * FROM CLASSIFICATION WHERE CLASSIFICATIONPID=0
+	</select>
+	
+	<!-- 分类数据增加   袁楠文 2018-6-16 12:33-->
+		<insert id="addclasslistdata" parameterType="oss.bean.Classification">
+		<selectKey keyProperty="classificationId" order="BEFORE" resultType="long">
+			select CLASSIFICATIONSEQ.nextval from dual
+		</selectKey>
+		insert into CLASSIFICATION(classificationId,classificationName,classificationPid)
+		values(#{classificationId},#{classificationName},#{classificationPid})	
+	</insert>
+	
+	<!--  分类列表数据修改  袁楠文 2018-6-16 22:36 -->
+	<update id="reviseClasslistData" parameterType="oss.bean.Classification">
+		update CLASSIFICATION set classificationName = #{classificationName},classificationPid = #{classificationPid}
+		where classificationId = #{classificationId}
+	</update>
 </mapper>
