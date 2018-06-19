@@ -2,3 +2,5 @@
 /log4j.properties
 /oss/
 /springmvc.xml
+/com/
+/CensorWords.txt

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import oss.bean.Users;
+import oss.bean.demands;
 import oss.mapper.BusiManageMapper;
 /*
  * 业务管理Biz业务实现类
@@ -64,5 +65,43 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		// TODO Auto-generated method stub
 		return busiManageMapper.providerDisable(lo);
 	}
+
+	@Override
+	public int enable(long lo) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.enable(lo);
+	}
+
+	@Override
+	public int cancelBlacklist(long lo) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.cancelBlacklist(lo);
+	}
+
+	@Override
+	public List<Users> searchUser(String userAccount) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.searchUser(userAccount);
+	}
+
+	@Override
+	public List<demands> demandList() {
+		// TODO Auto-generated method stub
+		return busiManageMapper.demandList();
+	}
+
+	@Override
+	public int examine(long examine) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.examine(examine);
+	}
+
+	@Override
+	public int Audited(long audited) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.Audited(audited);
+	}
+
+	
 
 }

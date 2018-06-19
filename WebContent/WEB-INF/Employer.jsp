@@ -24,22 +24,26 @@
 </head>
 <body>
 	<div class="x-nav">
-		<span class="layui-breadcrumb">
-   
-		</span> <a class="layui-btn layui-btn-small"
+		<span class="layui-breadcrumb"> </span> <a
+			class="layui-btn layui-btn-small"
 			style="line-height: 1.6em; margin-top: 3px; float: right"
 			href="javascript:location.replace(location.href);" title="刷新"> <i
 			class="layui-icon" style="line-height: 30px">ဂ</i></a>
 	</div>
 	<div class="x-body">
 		<div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>	
-      </div>
-	
+			<form class="layui-form layui-col-md12 x-so"  id="searchform" method="post" action="BusiManage/searchUser.action">
+
+				<input type="text" name="userAccount" id="userAccount" placeholder="请输入用户名"
+					autocomplete="off" class="layui-input">
+			
+				<button class="layui-btn" type="submit" lay-filter="sreach">
+				
+					<i class="layui-icon">&#xe615;</i>
+				</button>
+			</form>
+		</div>
+
 		<button class="layui-btn layui-btn-danger" onclick="delAll()">
 			<i class="layui-icon"></i>批量删除
 		</button>
@@ -47,54 +51,87 @@
 			onclick="x_admin_show('添加用户','./admin-add.html')">
 			<i class="layui-icon"></i>添加
 		</button>
-		<span class="x-right" style="line-height: 40px">共有数据：88 条</span> </xblock>
-		<form  id="form1"  method="post" action="">
-		<table class="layui-table">
-			<thead>
-				<tr>
-					<th>
-						<div class="layui-unselect header layui-form-checkbox"
-							lay-skin="primary">
-							<i class="layui-icon">&#xe605;</i>
-						</div>
-					</th>
+		<span class="x-right" style="line-height: 40px">共有数据：88 条</span>
+		</xblock>
+		<form id="form1" method="post" action="">
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>
+							<div class="layui-unselect header layui-form-checkbox"
+								lay-skin="primary">
+								<i class="layui-icon">&#xe605;</i>
+							</div>
+						</th>
 
-					<th>雇主名称</th>
-					<th>雇主账号</th>
-					<th>余额</th>
-					<th>雇主状态</th>
-					<th>信用分</th>
-					<th>操作</th>
-			</thead>
-			<tbody>
-				<tr>
+						<th>雇主名称</th>
+						<th>雇主账号</th>
+						<th>余额</th>
+						<th>信用分</th>
+						<th>雇主状态</th>
+						<th>操作</th>
+				</thead>
+				<tbody>
+					<tr>
 
 
-					<c:forEach var="user" items="${Userlist.list}">
+						<c:forEach var="user" items="${Userlist.list}">
 
-						<tr>
+							<tr>
 
-							<td>
-								<div class="layui-unselect layui-form-checkbox"
-									lay-skin="primary" data-id='2'>
-									<i class="layui-icon">&#xe605;</i>
-								</div>
-							</td>
-							<td>${user.userName }</td>
-							<td>${user.userAccount }</td>
-							<td>${user.userBalance }</td>
-							<td>${user.userStatusID }</td>
-							<td>${user.userCredit }</td>
-							<td><input type="button" value="重置密码"
-								title="${user.userID }" onclick="changge(this)"> <input
-								type="button" value="禁用"  title="${user.userID }" onclick="changge3(this)"><input type="button"
-								value="加入黑名单" title="${user.userID }" onclick="changge2(this)"> <input
-								type="hidden" name="userID" id="userID"></td>
-		
-						</tr>
-					</c:forEach>
-			</tbody>
-		</table>
+								<td>
+									<div class="layui-unselect layui-form-checkbox"
+										lay-skin="primary" data-id='2'>
+										<i class="layui-icon">&#xe605;</i>
+									</div>
+								</td>
+								<td>${user.userName }</td>
+								<td>${user.userAccount }</td>
+								<td>${user.userBalance }</td>
+								<td>${user.userCredit }</td>
+								<c:if test="${user.userStatusID==1 }">
+									<td><span
+										class="layui-btn layui-btn-normal layui-btn-mini">启用</span></td>
+								</c:if>
+								<c:if test="${user.userStatusID==2 }">
+									<td><span
+										class="layui-btn layui-btn-normal layui-btn-mini">禁用</span></td>
+								</c:if>
+								<c:if test="${user.userStatusID==3 }">
+									<td><span
+										class="layui-btn layui-btn-normal layui-btn-mini">黑名单</span></td>
+								</c:if>
+
+								<td><input onclick="Reset()" title="${user.userID }"
+									style="height: 30px; width: 125px;" value="重置"
+									class=" Reset   layui-btn layui-btn-primary"> <a
+									onclick="member_stop(this,'${user.userID}')"
+									href="javascript:;" title="${user.userStatusID }"> <i
+										class="layui-icon">&#xe601;</i>
+								</a>
+								<c:if test="${user.userStatusID==3 }">
+								<input onclick="cancelBlacklist()" title="${user.userID }"
+									style="height: 30px; width: 125px;" value="取消黑名单"
+									class="Blacklist  layui-btn layui-btn-primary">
+								
+								</c:if>
+								 <c:if test="${user.userStatusID==1 }">
+								<input onclick="Blacklist()" title="${user.userID }"
+									style="height: 30px; width: 125px;" value="加入黑名单"
+									class="Blacklist  layui-btn layui-btn-primary">
+								
+								</c:if>
+								<c:if test="${user.userStatusID==2 }">
+								<input onclick="Blacklist()" title="${user.userID }"
+									style="height: 30px; width: 125px;" value="加入黑名单"
+									class="Blacklist  layui-btn layui-btn-primary">
+								
+								</c:if> <!-- <input type="hidden" name="userID" id="userID"> --></td>
+
+							</tr>
+						</c:forEach>
+				</tbody>
+			</table>
 		</form>
 		<div class="page">
 			<div>
@@ -119,37 +156,208 @@
 				elem : '#end' //指定元素
 			});
 		});
+		//加入黑名单
 
+		function Blacklist() {
+			layer.confirm('确认要加入黑名单吗？', function(index) {
+				var userID = $(".Blacklist").attr("title");
+				var newBlacklist = {
+					"userID" : userID
+				};
+				$.ajax({
+
+					url : "BusiManage/Blacklist.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newBlacklist),
+					async : true,
+					success : function(msg) {//
+						layer.closeAll();
+						window.location.reload(); 
+						layer.msg('已加入黑名单!', {
+							icon : 5,
+							time : 3000
+						});
+					}
+
+				})
+			})
+		}
+		
+		
+		//取消黑名单
+
+		function cancelBlacklist() {
+			layer.confirm('确认要取消黑名单吗？', function(index) {
+				var userID = $(".Blacklist").attr("title");
+				var newBlacklist = {
+					"userID" : userID	
+				};
+				$.ajax({
+
+					url : "BusiManage/cancelBlacklist.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newBlacklist),
+					async : true,
+					success : function(msg) {//
+						layer.closeAll();
+						layer.msg('取消成功，账号为启用状态!', {
+							icon : 5,
+							time : 3000
+						});
+						window.location.reload();
+					}
+
+				})
+			})
+		}
+		//重置密码
+
+		function Reset() {
+			layer.confirm('确认要重置吗？', function(index) {
+				var userID = $(".Reset").attr("title");
+
+				var newStory = {
+					"userID" : userID
+
+				};
+				$.ajax({
+					url : "BusiManage/updatepow.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newStory),
+					async : true,
+					success : function(msg) {//
+						layer.closeAll();
+						layer.msg('重置密码成功!', {
+							icon : 5,
+							time : 3000
+						});
+						window.location.reload();
+					}
+				})
+			})
+
+		}
+       //搜索 
+       function search() {
+			
+    	      var userAccount=$("#userAccount").val();
+               alert(userAccount);
+				var newuserAccount = {
+					"userAccount" : userAccount
+
+				};
+				$.ajax({
+					url : "BusiManage/searchUser.action",
+					type : "post",
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					data : JSON.stringify(newuserAccount),
+					async : true,
+					success : function(msg) {//
+						layer.closeAll();
+						layer.msg('正在搜索中!', {
+							icon : 5,
+							time : 3000
+						});
+						window.location.reload();
+					}
+				})
+			
+
+		}
 		/*用户-停用*/
+		//1是启用 2是禁用 3是黑名单
 		function member_stop(obj, id) {
 			layer.confirm('确认要停用吗？', function(index) {
+				if ($(obj).attr('title') == '1') {
 
-				if ($(obj).attr('title') == '启用') {
+					var newStory = {
+						"userID" : id
+					};
+
+					$
+							.ajax({
+								url : "BusiManage/Disable.action",
+								type : "post",
+								dataType : "text",
+								contentType : "application/json;charset=utf-8",
+								data : JSON.stringify(newStory),
+								async : true,
+								success : function(msg) {//
+									layer.closeAll();
+									$(obj).find('i').html('&#xe62f;');
+
+									window.location.reload();
+									$(obj).parents("tr").find(".td-status")
+											.find('span').addClass(
+													'layui-btn-disabled').html(
+													'已停用');
+									layer.msg('已停用!', {
+										icon : 5,
+										time : 3000
+									});
+								}
+							})
 
 					//发异步把用户状态进行更改
-					$(obj).attr('title', '停用')
-					$(obj).find('i').html('&#xe62f;');
+
+				}
+
+				if ($(obj).attr('title') == '2') {
+
+					var newStory = {
+						"userID" : id
+					};
+
+					$
+							.ajax({
+								url : "BusiManage/enable.action",
+								type : "post",
+								dataType : "text",
+								contentType : "application/json;charset=utf-8",
+								data : JSON.stringify(newStory),
+								async : true,
+								success : function(msg) {//
+									layer.closeAll();
+
+									window.location.reload();
+
+									$(obj).find('i').html('&#xe62f;');
+
+									$(obj).parents("tr").find(".td-status")
+											.find('span').addClass(
+													'layui-btn-disabled').html(
+													'已启用');
+									layer.msg('已启用!', {
+										icon : 5,
+										time : 3000
+									});
+								}
+							})
+					//发异步把用户状态进行更改
+
+				}
+
+				if ($(obj).attr('title') == '3') {
 
 					$(obj).parents("tr").find(".td-status").find('span')
-							.addClass('layui-btn-disabled').html('已停用');
-					layer.msg('已停用!', {
+							.removeClass('layui-btn-disabled').html(
+									'当前账号为黑名单状态');
+					layer.msg('当前账号为黑名单状态!', {
 						icon : 5,
-						time : 1000
+						time : 3000
 					});
 
-				} else {
-					$(obj).attr('title', '启用')
-					$(obj).find('i').html('&#xe601;');
-
-					$(obj).parents("tr").find(".td-status").find('span')
-							.removeClass('layui-btn-disabled').html('1');
-					layer.msg('已启用!', {
-						icon : 5,
-						time : 1000
-					});
 				}
 
 			});
+
 		}
 
 		/*用户-删除*/
