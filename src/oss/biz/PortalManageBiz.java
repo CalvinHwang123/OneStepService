@@ -25,10 +25,25 @@ public interface PortalManageBiz {
 	public int updateStory(UserStory userStory);
 
 	// by hlq 2018-06-14
-	public List<Violations> violationsList();
+	public List<Violations> violationsList(Condition condition);
 
 	// 违规记录删除 by hlq 2018-06-14 21:59
-	public boolean violationsDelete(long violationsID);
+	public boolean violationsDelete(List<Violations> violationsList);
+	// 新增违规记录 by hlq 2018-06-15 11:25
+	public boolean insertViolations(Violations violations);
+	// 根据id修改违规记录 by hlq 2018-06-15 13:49
+	public boolean updateViolationsByID(Violations violations);
+	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21:04
+	public boolean stickUpdateViolationsByID(Violations violations);
+	
+	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
+	public List<Violations> listViolationsDesc();
+
+	// 查询置顶违规记录 by hlq 2018-06-16 22:05
+	public List<Violations> listStickViolations();
+
+	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
+	public List<Violations> listViolationsGroupByWhy();
 
 	public List<Links> listLinks(Condition condition);
 

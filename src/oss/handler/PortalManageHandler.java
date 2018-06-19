@@ -35,18 +35,16 @@ public class PortalManageHandler {
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
 
-	// by hlq 2018-06-14
-	@RequestMapping("/violationssList.action")
-	public ModelAndView violationssList(HttpServletRequest req) {
+	// 后端违规列表请求 by hlq 2018-06-14
+	@RequestMapping("/violationsList.action")
+	public ModelAndView violationsList(HttpServletRequest req, 
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
+		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
+		Condition condition) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
-		// int pageNum=1;//当前显示的页码
-		// int pageSize=2;//每一页显示的数据条数
-		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
-		int pageNum = 3;// 当前显示的页码
-		int pageSize = 2;// 每一页显示的数据条数
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
-		List<Violations> violationsList = portalManageBizImpl.violationsList();
+		List<Violations> violationsList = portalManageBizImpl.violationsList(condition);
 		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
 		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
 		System.out.println(pageInfo.getTotal());
@@ -54,20 +52,84 @@ public class PortalManageHandler {
 		ModelAndView mav = new ModelAndView("violationsList");
 		return mav;
 	}
-
-	private Links links;
-
+	
+	// 前端曝光台请求 by hlq 2018-06-16 13:36
+	@RequestMapping("/foreViolationsList.action")
+	public ModelAndView foreViolationsList(HttpServletRequest req, 
+			@RequestParam(value = "pageSize", required = true, defaultValue = "10") int pageSize, 
+		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
+		
+		PageHelper.startPage(pageNum, pageSize);
+		List<Violations> violationsList = portalManageBizImpl.listViolationsDesc();
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
+		
+//		List<Violations> map = portalManageBizImpl.listViolationsGroupByWhy();
+//		System.out.println("map 长度：" + map.size());
+		List<Violations> stickList = portalManageBizImpl.listStickViolations();
+		System.out.println("stickList 长度：" + stickList.size());
+		req.setAttribute("stickList", stickList);
+		
+		ModelAndView mav = new ModelAndView("foreViolations");
+		return mav;
+	}
+	
 	// 违规记录删除 by hlq 2018-06-14 21:58 返回json
 	@RequestMapping(value = "/violationsDelete.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String violationsDelete(@RequestBody Violations violations) {
-		System.out.println("violationsID=" + violations.getViolationsID());
-		boolean ret = portalManageBizImpl.violationsDelete(violations.getViolationsID());
+	public @ResponseBody String violationsDelete(@RequestBody List<Violations> violationsList) {
+		System.out.println("violationsID list size=" + violationsList.size());
+		boolean ret = portalManageBizImpl.violationsDelete(violationsList);
 		if (ret) {
 			return "删除成功";
 		} else {
 			return "删除失败";
 		}
 	}
+	
+	// 违规记录新增 by hlq 2018-06-15 11:36 返回json
+	@RequestMapping(value = "/violationsInsert.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String violationsInsert(@RequestBody Violations violations) {
+		violations.setViolationsTime(DateUtil.getCurrentDate());
+		boolean ret = portalManageBizImpl.insertViolations(violations);
+		if (ret) {
+			return "新增成功";
+		} else {
+			return "新增失败";
+		}
+	}
+	
+	// 违规记录修改 by hlq 2018-06-15 11:36 返回json
+	@RequestMapping(value = "/violationsUpdate.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String violationsUpdate(@RequestBody Violations violations) {
+		System.out.println(violations);
+		boolean ret = portalManageBizImpl.updateViolationsByID(violations);
+		if (ret) {
+			return "修改成功";
+		} else {
+			return "修改失败";
+		}
+	}
+	
+	// 违规记录置顶 by hlq 2018-06-16 21:01 返回json
+	@RequestMapping(value = "/violationsStickTimeUpdate.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String violationsStickTimeUpdate(@RequestBody Violations violations) {
+		System.out.println(violations);
+		// 准备置顶(注意写法避免空指针)
+		if (!"1970-01-01 00:00:00".equals(violations.getStickTime())) {
+			// 设置当前时间为置顶时间
+			violations.setStickTime(DateUtil.getCurrentDate());
+		}
+		boolean ret = portalManageBizImpl.stickUpdateViolationsByID(violations);
+		if (ret) {
+			return "操作成功";
+		} else {
+			return "操作失败";
+		}
+	}
+	
+	private Links links;
 
 	@RequestMapping("/linksList.action")
 	public ModelAndView linksList(HttpServletRequest req,

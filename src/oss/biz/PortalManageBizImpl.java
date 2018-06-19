@@ -1,7 +1,6 @@
 package oss.biz;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -38,8 +37,8 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// by hlq 2018-06-14
 	@Override
-	public List<Violations> violationsList() {
-		return portalManageMapper.listViolations();
+	public List<Violations> violationsList(Condition condition) {
+		return portalManageMapper.listViolations(condition);
 	}
 
 	@Override
@@ -80,8 +79,26 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// 违规记录删除 By Hlq 2018-06-14 22:01
 	@Override
-	public boolean violationsDelete(long violationsID) {
-		return portalManageMapper.deleteViolationsByID(violationsID) > 0;
+	public boolean violationsDelete(List<Violations> violationsList) {
+		return portalManageMapper.deleteViolationsByID(violationsList) > 0;
+	}
+
+	// 违规记录新增 By Hlq 2018-06-15 13:51
+	@Override
+	public boolean insertViolations(Violations violations) {
+		return portalManageMapper.insertViolations(violations) > 0;
+	}
+	
+	// 违规记录修改 By Hlq 2018-06-15 13:51
+	@Override
+	public boolean updateViolationsByID(Violations violations) {
+		return portalManageMapper.updateViolationsByID(violations) > 0;
+	}
+	
+	// 违规记录置顶与取消置顶 By Hlq 2018-06-16 21:05
+	@Override
+	public boolean stickUpdateViolationsByID(Violations violations) {
+		return portalManageMapper.stickUpdateViolationsByID(violations) > 0;
 	}
 
 	// 动态列表 王伟杰6-13
@@ -144,4 +161,21 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		return portalManageMapper.Forelogin(users);
 	}
 
+	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
+	@Override
+	public List<Violations> listViolationsDesc() {
+		return portalManageMapper.listViolationsDesc();
+	}
+
+	// 查询置顶违规记录 by hlq 2018-06-16 22:05
+	@Override
+	public List<Violations> listStickViolations() {
+		return portalManageMapper.listStickViolations();
+	}
+
+	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
+	@Override
+	public List<Violations> listViolationsGroupByWhy() {
+		return portalManageMapper.listViolationsGroupByWhy();
+	}
 }
