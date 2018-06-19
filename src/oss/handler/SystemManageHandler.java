@@ -42,9 +42,10 @@ public class SystemManageHandler {
 		Emps emp = systemManegeBizImpl.findEmp(empAccount);
 		System.out.println("登陆员工为" + emp);
 		if (emp != null && emp.getEmpPwd().equals(empPwd)) {
-			req.setAttribute("emp", emp);
+			req.getSession().setAttribute("empss", emp);
+			// req.setAttribute("emp", emp);
 			System.out.println("登录成功");
-			mav = new ModelAndView("index");
+			mav = new ModelAndView("redirect:menu.action");
 
 		} else {
 			System.out.println("登陆失败");
@@ -53,6 +54,14 @@ public class SystemManageHandler {
 
 		return mav;
 
+	}
+
+	// jhx 登录成功后跳转查找对应菜单
+	@RequestMapping("/menu.action")
+	public ModelAndView menuList(HttpServletRequest req) {
+		// System.out.println(emp.getEmpName());
+		ModelAndView mav = new ModelAndView("index");
+		return mav;
 	}
 
 	// jhx 获取权限列表 2018-6-14 9:00

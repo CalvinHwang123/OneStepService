@@ -47,7 +47,7 @@
 				</dl></li>
 		</ul>
 		<ul class="layui-nav right" lay-filter="">
-			<li class="layui-nav-item"><a href="javascript:;">admin</a>
+			<li class="layui-nav-item"><a href="javascript:;">${empss.getEmpName()}</a>
 				<dl class="layui-nav-child">
 					<!-- 二级菜单 -->
 					<dd>
@@ -69,117 +69,117 @@
 	<!-- 左侧菜单开始 -->
 	<div class="left-nav">
 		<div id="side-nav">
-			<ul id="nav">
-				<li><a href="javascript:;"> <i class="iconfont">&#xe6b8;</i>
-						<cite>系统管理员</cite> <i class="iconfont nav_right">&#xe697;</i>
-				</a>
-					<ul class="sub-menu">
-						<li><a _href="member-list.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>系统管理</cite>
-						</a>
-							<ul class="sub-menu">
-							<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>日志查看</cite>
+<!-- 			<ul id="nav"> -->
+<!-- 				<li><a href="javascript:;"> <i class="iconfont">&#xe6b8;</i> -->
+<!-- 						<cite>系统管理员</cite> <i class="iconfont nav_right">&#xe697;</i> -->
+<!-- 				</a> -->
+<!-- 					<ul class="sub-menu"> -->
+<!-- 						<li><a _href="member-list.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>系统管理</cite> -->
+<!-- 						</a> -->
+<!-- 							<ul class="sub-menu"> -->
+<!-- 							<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>日志查看</cite> -->
 
-								</a></li>
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>参数配置</cite>
+<!-- 								</a></li> -->
+<!-- 								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>参数配置</cite> -->
 
-								</a></li>
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>权限配置</cite>
+<!-- 								</a></li> -->
+<!-- 								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>权限配置</cite> -->
 
-								</a></li>
+<!-- 								</a></li> -->
 								
-							</ul></li>
-						<li><a _href="member-del.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>系统配置</cite>
-						</a>
-							<ul class="sub-menu">
-							<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>需求类型配置</cite>
+<!-- 							</ul></li> -->
+<!-- 						<li><a _href="member-del.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>系统配置</cite> -->
+<!-- 						</a> -->
+<!-- 							<ul class="sub-menu"> -->
+<!-- 							<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>需求类型配置</cite> -->
 
-								</a></li>
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>服务商类型配置</cite>
+<!-- 								</a></li> -->
+<!-- 								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>服务商类型配置</cite> -->
 
-								</a></li>
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>服务类型配置</cite>
+<!-- 								</a></li> -->
+<!-- 								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>服务类型配置</cite> -->
 
-								</a></li>
+<!-- 								</a></li> -->
 								
-							</ul>
+<!-- 							</ul> -->
 						
 						
-						</li>
-						<li><a href="javascript:;"> <i class="iconfont">&#xe6ce;</i>
-								<cite>数据统计</cite> <i class="iconfont nav_right">&#xe697;</i>
-						</a>
-							<ul class="sub-menu">
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>订单统计</cite>
+<!-- 						</li> -->
+<!-- 						<li><a href="javascript:;"> <i class="iconfont">&#xe6ce;</i> -->
+<!-- 								<cite>数据统计</cite> <i class="iconfont nav_right">&#xe697;</i> -->
+<!-- 						</a> -->
+<!-- 							<ul class="sub-menu"> -->
+<!-- 								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>订单统计</cite> -->
 
-								</a></li>
-								<li><a _href="xx.html"> <i class="iconfont">&#xe6a7;</i>
-										<cite>金额统计</cite>
+<!-- 								</a></li> -->
+<!-- 								<li><a _href="xx.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 										<cite>金额统计</cite> -->
 
-								</a></li>
-							</ul></li>
-					</ul></li>
+<!-- 								</a></li> -->
+<!-- 							</ul></li> -->
+<!-- 					</ul></li> -->
 			
-				<li><a href="javascript:;"> <i class="iconfont">&#xe726;</i>
-						<cite>业务员管理</cite> <i class="iconfont nav_right">&#xe697;</i>
-				</a>
-					<ul class="sub-menu">
-						<li><a _href="admin-list.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>雇主管理</cite>
-						</a></li>
-						<li><a _href="admin-role.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>服务商管理</cite>
-						</a></li>
-						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>财务对账</cite>
-						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>需求管理</cite>
-						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>作品管理</cite>
-						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>顾问配置</cite>
-						</a></li>
-					</ul></li>
+<!-- 				<li><a href="javascript:;"> <i class="iconfont">&#xe726;</i> -->
+<!-- 						<cite>业务管理员</cite> <i class="iconfont nav_right">&#xe697;</i> -->
+<!-- 				</a> -->
+<!-- 					<ul class="sub-menu"> -->
+<!-- 						<li><a _href="admin-list.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>雇主管理</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-role.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>服务商管理</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>财务对账</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>需求管理</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>作品管理</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>顾问配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 					</ul></li> -->
 					
-					<li><a href="javascript:;"> <i class="iconfont">&#xe726;</i>
-						<cite>门户管理员</cite> <i class="iconfont nav_right">&#xe697;</i>
-				</a>
-					<ul class="sub-menu">
-						<li><a _href="PortalManage/userStoryList.action"> <i class="iconfont">&#xe6a7;</i>
-								<cite>雇主故事配置</cite>
-						</a></li>
-						<li><a _href="admin-role.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>曝光台配置</cite>
-						</a></li>
-						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>规则中心配置</cite>
-						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>成功案例配置</cite>
-						</a></li>
-						<li><a _href="<%=path%>/PortalManage/linksList.action"> <i class="iconfont">&#xe6a7;</i>
-								<cite>友情链接配置</cite>
-						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>行业动态配置</cite>
-						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
-								<cite>最新资讯配置</cite>
-						</a></li>
-					</ul></li>
+<!-- 					<li><a href="javascript:;"> <i class="iconfont">&#xe726;</i> -->
+<!-- 						<cite>门户管理员</cite> <i class="iconfont nav_right">&#xe697;</i> -->
+<!-- 				</a> -->
+<!-- 					<ul class="sub-menu"> -->
+<!-- 						<li><a _href="PortalManage/userStoryList.action"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>雇主故事配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-role.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>曝光台配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>规则中心配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>成功案例配置</cite> -->
+<!-- 						</a></li> -->
+<%-- 						<li><a _href="<%=path%>/PortalManage/linksList.action"> <i class="iconfont">&#xe6a7;</i> --%>
+<!-- 								<cite>友情链接配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>行业动态配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i> -->
+<!-- 								<cite>最新资讯配置</cite> -->
+<!-- 						</a></li> -->
+<!-- 					</ul></li> -->
 			
-			</ul>
+<!-- 			</ul> -->
 		</div>
 	</div>
 	<!-- <div class="x-slide_left"></div> -->
