@@ -100,8 +100,12 @@
 										<cite>需求类型配置</cite>
 
 								</a></li>
-								<li><a _href=<%=path+"/SystemManage/seekServicelist.action" %>> <i class="iconfont">&#xe6a7;</i>
+								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
 										<cite>服务商类型配置</cite>
+
+								</a></li>
+								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
+										<cite>服务类型配置</cite>
 
 								</a></li>
 								
@@ -128,16 +132,16 @@
 						<cite>业务员管理</cite> <i class="iconfont nav_right">&#xe697;</i>
 				</a>
 					<ul class="sub-menu">
-						<li><a _href="BusiManage/providerlist.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="BusiManage/Userlist.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>雇主管理</cite>
 						</a></li>
-						<li><a _href="BusiManage/Userlist.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="BusiManage/providerlist.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>服务商管理</cite>
 						</a></li>
 						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i>
 								<cite>财务对账</cite>
 						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="BusiManage/demandList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>需求管理</cite>
 						</a></li>
 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
@@ -167,10 +171,10 @@
 						<li><a _href="<%=path%>/PortalManage/linksList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>友情链接配置</cite>
 						</a></li>
-						<li><a _href="<%=path%>/PortalManage/listDyna.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="<%=path%>/PortalManage/ListDyna.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>行业动态配置</cite>
 						</a></li>
-						<li><a _href="<%=path%>/PortalManage/listInfo.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="<%=path%>/PortalManage/ListInfo.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>最新资讯配置</cite>
 						</a></li>
 					</ul></li>
@@ -198,10 +202,9 @@
 	<!-- 右侧主体结束 -->
 	<!-- 中部结束 -->
 	<!-- 底部开始 -->
-	<div class="footer" style="text-align: center;">
-		<div class="copyright">Copyright 2018-2018 dlr.com 版权所有 
-		渝ICP备10202274-4号 渝B2-20080005 渝公网安备 50019002500154号 厦门帝六人网络有限公司 
-		</div>
+	<div class="footer">
+		<div class="copyright">Copyright ©2017 x-admin v2.3 All Rights
+			Reserved</div>
 	</div>
 	<!-- 底部结束 -->
 	<script>
