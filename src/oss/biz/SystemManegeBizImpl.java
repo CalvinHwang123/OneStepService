@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import oss.bean.Classification;
+import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Powers;
 import oss.mapper.SystemManegeMapper;
@@ -43,9 +44,9 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 
 	// 请求分类列表数据 袁楠文 2018-6-14 16:00
 	@Override
-	public List<Classification> seekclasslist() {
+	public List<Classification> seekclasslist(Condition condition) {
 		// TODO 自动生成的方法存根
-		List<Classification> seekclasslist = systemManegeMapper.seekclasslist();
+		List<Classification> seekclasslist = systemManegeMapper.seekclasslist(condition);
 		return seekclasslist;
 	}
 	
@@ -79,5 +80,13 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		// TODO 自动生成的方法存根
 		int reviseClasslistData = systemManegeMapper.reviseClasslistData(classification);
 		return reviseClasslistData;
+	}
+
+	// 服务商列表数据请求 袁楠文 2018-6-16 23:52
+	@Override
+	public List<Classification> seroneclassMenu(Condition condition) {
+		// TODO 自动生成的方法存根
+		List<Classification> seroneclassMenuList = systemManegeMapper.seroneclassMenu(condition);
+		return seroneclassMenuList;
 	}
 }

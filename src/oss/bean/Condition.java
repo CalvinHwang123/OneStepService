@@ -9,7 +9,8 @@ public class Condition {
 	private String startDate;// 开始日期
 	private String endDate;// 截至日期
 	private String title;// 标题
-
+	private int classPid;// 上级id
+	
 	public Condition() {
 	}
 
@@ -35,6 +36,14 @@ public class Condition {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public int getClassPid() {
+		return classPid;
+	}
+
+	public void setClassPid(int classPid) {
+		this.classPid = classPid;
 	}
 
 	

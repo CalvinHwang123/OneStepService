@@ -100,7 +100,7 @@
 										<cite>需求类型配置</cite>
 
 								</a></li>
-								<li><a _href=<%=path+"/SystemManage/seekServicelist.action" %>> <i class="iconfont">&#xe6a7;</i>
+								<li><a _href=<%=path+"/SystemManage/serseekServicelist.action" %>> <i class="iconfont">&#xe6a7;</i>
 										<cite>服务商类型配置</cite>
 
 								</a></li>

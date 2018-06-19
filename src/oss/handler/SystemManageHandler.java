@@ -15,9 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.gson.Gson;
-
 import oss.bean.Classification;
+import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Powers;
 import oss.biz.SystemManegeBiz;
@@ -92,12 +91,11 @@ public class SystemManageHandler {
 
 	// 分类数据请求 袁楠文 2018-6-14 10:50
 	@RequestMapping("/seekclasslist")
-	public ModelAndView seekclasslist(HttpServletRequest request) {
-
-		int pageNum = 1;// 当前显示的页码;
-		int pageSize = 5;// 每一页显示的数据条数;
+	public ModelAndView seekclasslist(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
 		PageHelper.startPage(pageNum, pageSize);
-		List<Classification> classlist = systemManegeBizImpl.seekclasslist();
+		List<Classification> classlist = systemManegeBizImpl.seekclasslist(condition);
 		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
 		PageInfo pageInfo = new PageInfo<>(classlist, pageSize);
 		request.setAttribute("pageInfo", pageInfo);
@@ -108,16 +106,17 @@ public class SystemManageHandler {
 	}
 	
 	// 服务商列表数据请求 袁楠文 2018-6-16 23:52
-	@RequestMapping("/seekServicelist")
-	public ModelAndView seekServicelist(HttpServletRequest request) {
-
-		int pageNum = 1;// 当前显示的页码;
-		int pageSize = 5;// 每一页显示的数据条数;
+	@RequestMapping("/serseekServicelist")
+	public ModelAndView seekServicelist(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition
+			) {
 		PageHelper.startPage(pageNum, pageSize);
+		List<Classification> seroneclassmenulist = systemManegeBizImpl.seroneclassMenu(condition);
 		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
-		PageInfo pageInfo = new PageInfo<>(oneclassmenulist, pageSize);
+		PageInfo pageInfo = new PageInfo<>(seroneclassmenulist, pageSize);
 		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("listsize", oneclassmenulist.size());
+		request.setAttribute("listsize", seroneclassmenulist.size());
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		ModelAndView classification = new ModelAndView("Serviceprovidertype");
 		return classification;
