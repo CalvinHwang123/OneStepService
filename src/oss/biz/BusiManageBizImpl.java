@@ -1,6 +1,5 @@
 package oss.biz;
 
-
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import oss.bean.Users;
 import oss.bean.demands;
 import oss.mapper.BusiManageMapper;
+
 /*
  * 业务管理Biz业务实现类
  */
@@ -102,6 +102,22 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		return busiManageMapper.Audited(audited);
 	}
 
-	
+	// 前台登入 wwj 6-17
+	@Override
+	public Users ForeLogin(Users users) {
+		return busiManageMapper.ForeLogin(users);
+	}
 
+	// 前台注册 王伟杰 6-17
+	@Override
+	public int AddUsers(Users users) {
+
+		return busiManageMapper.AddUsers(users);
+	}
+	// 唯一性验证  王伟杰 6-17
+	@Override
+	public List<Users> SelectName(Users users) {
+	
+		return busiManageMapper.SelectName(users);
+	}
 }

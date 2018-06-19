@@ -24,4 +24,13 @@ public interface BusiManageBiz {
 		  public List<demands> demandList();
 		  public int  examine  (long examine);
 		  public int  Audited  (long audited); 
+	
+	// 前台登入 wwj 6-17
+	public abstract Users ForeLogin(Users users);
+
+	// 前台注册 王伟杰 6-17
+	public abstract int AddUsers(Users users);
+	
+	//唯一性验证   wwj  6-17
+	public abstract List<Users> SelectName(Users users);
 }

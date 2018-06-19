@@ -19,8 +19,14 @@
 	
 	
 	
+	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
 
 
 
@@ -40,7 +46,7 @@
 <script src="portal/js/jquery-2.2.3.min.js"></script>
 <script src="portal/js/jquery-scrolltofixed-min.js"
 	type="text/javascript"></script>
-	<script src="portal/js/login.js" type="text/javascript"></script>
+<script src="portal/js/login.js" type="text/javascript"></script>
 <!-- fixed nav js -->
 <script>
 	$(document).ready(function() {
@@ -70,7 +76,6 @@
 	rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Offside'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="portal/css/jigsaw.css">
 <script type="text/javascript" src="portal/js/move-top.js"></script>
 <script type="text/javascript" src="portal/js/easing.js"></script>
 <script type="text/javascript" src="portal/js/md5.js"></script>
@@ -101,19 +106,6 @@
 
 	});
 </script>
-
-<style>
-.container1 {
-	width: 200px;
-}
-
-#msg {
-	width: 100%;
-	line-height: 40px;
-	font-size: 14px;
-	text-align: center;
-}
-</style>
 
 <!-- //smooth-scrolling-of-move-up -->
 </head>
@@ -917,22 +909,24 @@
 	<!-- login-page -->
 	<div class="login-page">
 		<div class="container">
-			<h3 class="w3ls-title w3ls-title1">登录到您的帐户</h3>
+			<h3 class="w3ls-title w3ls-title1">注册您的帐户</h3>
 			<div class="login-body">
-				<form action="foregroundindex.jsp" method="post" id="Login">
+				<form action="ForeLogin.jsp" method="post" id="ForeSign">
 					<input type="text" class="user" name="userAccount"
-						placeholder="userAccount" required=""> <input
-						type="password" name="userPwd" class="pwd"
+						placeholder="userAccount" required=""> <span id="span1"></span>
+					<input type="password" name="userPwd" class="pwd"
 						placeholder="userPwd" required="">
-					<div class="container1">
-						<div id="captcha" style="position: relative"></div>
-						<div id="msg"></div>
-					</div>
-<!-- 					<input type="submit" value="Login"  disabled="disabled" id="login"> -->
+					<!-- 						 <input type="submit" value="Sign" id="sign"> -->
+					<label class="radio-inline"> 
+						<input type="radio" class="optionsRadios" value="1" name="userType" checked="checked"> 雇主
+						</label> 
+						<label class="radio-inline"> 
+						<input type="radio" class="optionsRadios" value="2" name="userType">服务商
+						</label>
 					<div class="col-md-12 column">
-											<input type="button"
-												class="btn btn-primary btn-default btn-block"  disabled="disabled" id="login" value="Login">
-										</div>
+						<button type="button"
+							class="btn btn-primary btn-default btn-block" id="sign">Sign</button>
+					</div>
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox"
 							name="checkbox"><i></i>记住密码</label>
@@ -1132,13 +1126,6 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="portal/js/bootstrap.js"></script>
-	<script src="portal/js/jigsaw.js"></script>
-	<script>
-		jigsaw.init(document.getElementById('captcha'), function() {
-		   $("#login").attr("disabled", false)
-		})
-	</script>
-
 
 </body>
 </html>

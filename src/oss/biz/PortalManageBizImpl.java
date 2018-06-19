@@ -156,11 +156,6 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		return portalManageMapper.AddInfo(information);
 	}
 
-	@Override
-	public Users Forelogin(Users users) {
-		
-		return portalManageMapper.Forelogin(users);
-	}
 
 	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
 	@Override
@@ -179,4 +174,5 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	public List<Violations2> listViolationsGroupByWhy() {
 		return portalManageMapper.listViolationsGroupByWhy();
 	}
+
 }
