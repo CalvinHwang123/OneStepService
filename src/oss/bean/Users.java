@@ -14,7 +14,7 @@ public class Users {
 	private String userAddress;// 用户地址
 	private Long userStatusID;// 用户账号状态
 	private Long userCredit;// 用户信用分
-
+	private Long userType;// 用户类型
 	public Users() {
 
 	}

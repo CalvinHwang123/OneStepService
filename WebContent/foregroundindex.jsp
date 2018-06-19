@@ -140,8 +140,8 @@ $(document).ready(function() {
 							<li><a href="signup.html">注册</a></li> 
 							<li><a href="login.html">我的命令</a></li>  
 							<li><a href="login.html">我的钱包</a></li> 
+							<li><a href="BusiManage/usersExit.action">退出</a></li> 
 						</ul> 
-					</li> 
 					</li> 
 					<li class="dropdown head-dpdn">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span class="caret"></span></a>

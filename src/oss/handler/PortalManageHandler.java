@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
 import oss.bean.UserStory;
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.biz.PortalManageBiz;
 /*
@@ -71,8 +74,8 @@ public class PortalManageHandler {
 
 	@RequestMapping("/linksList.action")
 	public ModelAndView linksList(HttpServletRequest req,
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
-			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		PageHelper.startPage(pageNum, pageSize);
 		List<Links> linksList = portalManageBizImpl.listLinks(condition);
 		PageInfo pageInfo = new PageInfo<>(linksList, pageSize);
@@ -98,7 +101,7 @@ public class PortalManageHandler {
 	}
 
 	@RequestMapping("/updateById.action")
-	public @ResponseBody  String updateById(HttpServletRequest req,@RequestBody Links links) {
+	public @ResponseBody String updateById(HttpServletRequest req, @RequestBody Links links) {
 		int up = portalManageBizImpl.updateById(links);
 		return "success";
 	}
@@ -106,10 +109,8 @@ public class PortalManageHandler {
 	// 雇主故事列表 黄绍鹏6-15 15：13
 	@RequestMapping("/userStoryList.action")
 	public ModelAndView userStoryList(HttpServletRequest req,
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
-			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,
-			Condition condition
-			) {
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
@@ -125,7 +126,7 @@ public class PortalManageHandler {
 
 	// 修改雇主故事列表 黄绍鹏6-16 10:43
 	@RequestMapping("/updateStory.action")
-	public @ResponseBody String updateStory(HttpServletRequest req,@RequestBody UserStory userStory) {
+	public @ResponseBody String updateStory(HttpServletRequest req, @RequestBody UserStory userStory) {
 		portalManageBizImpl.updateStory(userStory);
 		return "success";
 	}
@@ -148,9 +149,9 @@ public class PortalManageHandler {
 	// 动态列表 王伟杰 6-13
 	@RequestMapping("/listDyna.action")
 	public ModelAndView ListDyna(HttpServletRequest req,
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
-			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-	
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
 		PageHelper.startPage(pageNum, pageSize);
 		List<Dynamics> ListDyna = portalManageBizImpl.ListDyna(condition);
 		PageInfo pageInfo = new PageInfo<>(ListDyna, pageSize);
@@ -159,34 +160,35 @@ public class PortalManageHandler {
 		ModelAndView mav = new ModelAndView("DynaList");
 		return mav;
 	}
-	
-	//增加动态
+
+	// 增加动态
 	@RequestMapping("/addDyna.action")
 	public @ResponseBody String AddDyna(HttpServletRequest req, @RequestBody Dynamics dynamics) {
 		int addlinks = portalManageBizImpl.AddDyna(dynamics);
 		return "success";
 	}
-	
-	//删除动态  王伟杰  6-13
+
+	// 删除动态 王伟杰 6-13
 	@RequestMapping(value = "/deleteDynaById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String deleteDynaById(HttpServletRequest req,
 			@RequestParam(value = "dynamicId", required = true, defaultValue = "empty") Long dynamicId) {
 		int delete = portalManageBizImpl.deleteDynaById(dynamicId);
 		return "success";
 	}
-	
-	//修改动态
+
+	// 修改动态
 	@RequestMapping("/updateDynaById.action")
-	public @ResponseBody  String updateDynaById(HttpServletRequest req,@RequestBody Dynamics dynamics) {
-	
+	public @ResponseBody String updateDynaById(HttpServletRequest req, @RequestBody Dynamics dynamics) {
+
 		int up = portalManageBizImpl.updateDynaById(dynamics);
 		return "success";
 	}
-	//资讯列表   王伟杰  6-13
+
+	// 资讯列表 王伟杰 6-13
 	@RequestMapping("/listInfo.action")
 	public ModelAndView ListInfo(HttpServletRequest req,
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
-			@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		PageHelper.startPage(pageNum, pageSize);
 		List<Information> ListInfo = portalManageBizImpl.ListInfo(condition);
 		PageInfo pageInfo = new PageInfo<>(ListInfo, pageSize);
@@ -203,20 +205,20 @@ public class PortalManageHandler {
 		int delete = portalManageBizImpl.deleteInfoById(InformationId);
 		return "success";
 	}
-	
-	//修改资讯
+
+	// 修改资讯
 	@RequestMapping("/updateInfoById.action")
-	public @ResponseBody  String updateInfoById(HttpServletRequest req,@RequestBody Information information) {
-	System.out.println(information);
+	public @ResponseBody String updateInfoById(HttpServletRequest req, @RequestBody Information information) {
+		System.out.println(information);
 		int up = portalManageBizImpl.updateInfoById(information);
 		return "success";
 	}
-	
-	//增加资讯
-		@RequestMapping("/addInfo.action")
-		public @ResponseBody  String AddInfo(HttpServletRequest req, @RequestBody Information information) {
-			int addlinks = portalManageBizImpl.AddInfo(information);
-			return "success";
-		}
+
+	// 增加资讯
+	@RequestMapping("/addInfo.action")
+	public @ResponseBody String AddInfo(HttpServletRequest req, @RequestBody Information information) {
+		int addlinks = portalManageBizImpl.AddInfo(information);
+		return "success";
+	}	
 
 }

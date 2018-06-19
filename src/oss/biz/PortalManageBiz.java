@@ -68,7 +68,5 @@ public interface PortalManageBiz {
 	// 增加资讯 wwj 6-15
 	public abstract int AddInfo(Information information);
 	
-	//前台登入  wwj  6-17
-		public abstract Users Forelogin(Users users);
 
 }

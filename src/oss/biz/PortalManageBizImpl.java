@@ -138,10 +138,4 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		return portalManageMapper.AddInfo(information);
 	}
 
-	@Override
-	public Users Forelogin(Users users) {
-		
-		return portalManageMapper.Forelogin(users);
-	}
-
 }
