@@ -3,6 +3,7 @@ package oss.biz;
 import java.util.List;
 
 import oss.bean.Classification;
+import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Powers;
 
@@ -20,7 +21,7 @@ public interface SystemManegeBiz {
 	public List<Object> Classuniquequery(String oneclassname);
 
 	// 请求分类列表数据 袁楠文 2018-6-14 16:00
-	public List<Classification> seekclasslist();
+	public List<Classification> seekclasslist(Condition condition);
 	
 	// 分类列表数据删除 袁楠文 2018-6-15 11:11
 	public int delclasslistdata(long classificationId);
@@ -33,4 +34,7 @@ public interface SystemManegeBiz {
 
 	// 分类列表数据修改  袁楠文 2018-6-16 22:36
 	public int reviseClasslistData(Classification classification);
+	
+	// 服务商列表数据请求 袁楠文 2018-6-16 23:52
+	public List<Classification> seroneclassMenu(Condition condition);
 }
