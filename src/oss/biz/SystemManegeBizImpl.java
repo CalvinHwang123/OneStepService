@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Emps;
-import oss.bean.Powers;
+import oss.bean.Menu;
 import oss.mapper.SystemManegeMapper;
 
 /*
@@ -22,9 +22,15 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 
 	// jhx 获取权限列表 2018-6-14
 	@Override
-	public List<Powers> powerList() {
+	public List<Menu> MenuListTwo(Long empId) {
 		// TODO Auto-generated method stub
-		return systemManegeMapper.listPower();
+		return systemManegeMapper.twoMenulist(empId);
+	}
+
+	@Override
+	public List<Menu> MenuListOne(Long empId) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.oneMenulist(empId);
 	}
 
 	// jhx 查找用户 2018-6-14
@@ -49,15 +55,15 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		List<Classification> seekclasslist = systemManegeMapper.seekclasslist(condition);
 		return seekclasslist;
 	}
-	
+
 	// 分类列表数据删除 袁楠文 2018-6-15 11:11
 	@Override
 	public int delclasslistdata(long classificationId) {
 		// TODO 自动生成的方法存根
-		int delclassnumber=systemManegeMapper.delclasslistdata(classificationId);
+		int delclassnumber = systemManegeMapper.delclasslistdata(classificationId);
 		return delclassnumber;
 	}
-	
+
 	// 一级分类菜单数据 袁楠文 2018-6-15 15:17
 	@Override
 	public List<Classification> oneclassMenu() {
@@ -65,7 +71,7 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		List<Classification> oneclassMenuList = systemManegeMapper.oneclassMenu();
 		return oneclassMenuList;
 	}
-	
+
 	// 分类数据添加 袁楠文 2018-6-16 12:33
 	@Override
 	public int addclasslistdata(Classification classification) {
@@ -74,7 +80,7 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		return addclasslistdata;
 	}
 
-	// 分类列表数据修改  袁楠文 2018-6-16 22:36
+	// 分类列表数据修改 袁楠文 2018-6-16 22:36
 	@Override
 	public int reviseClasslistData(Classification classification) {
 		// TODO 自动生成的方法存根

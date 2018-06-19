@@ -2,7 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.SystemManegeMapper">
-	<select id="listMenu" resultType="oss.bean.Menu">
-		select * from Menu where 1 = 1
+	<select id="twoMenulist" resultType="oss.bean.Menu" parameterType="Long">
+		select c.MENUID,c.MENUPID,c.Menuname,c.URL from ROLEPOWER a,powers b,menu c
+where a.roleid=(select roleid from emprole where empid=#{id})
+and a.POWERID=b.POWERID and b.MENUID=c.MENUID
+;
 	</select>
+	
+	<select id="oneMenulist" resultType="oss.bean.Menu" parameterType="Long">
+	select * from menu where MENUID in (select c.MENUPID from ROLEPOWER a,powers b,menu c
+where a.roleid=(select roleid from emprole where empid=#{id})
+and a.POWERID=b.POWERID and b.MENUID=c.MENUID);
+		
+	</select>
+	
 </mapper>
