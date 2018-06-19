@@ -73,6 +73,7 @@
 <link rel="stylesheet" href="portal/css/jigsaw.css">
 <script type="text/javascript" src="portal/js/move-top.js"></script>
 <script type="text/javascript" src="portal/js/easing.js"></script>
+<script type="text/javascript" src="portal/js/md5.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event) {

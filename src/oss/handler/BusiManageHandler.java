@@ -131,6 +131,7 @@ public class BusiManageHandler {
 	// 前台登入
 	@RequestMapping("/foreLogin.action")
 	public @ResponseBody String ForeLogin(HttpServletRequest request, @RequestBody Users users) {
+		System.out.println(users.getUserAccount());
 		String flag = "error";
 		Users forelogin = busiManageBizImpl.ForeLogin(users);
 		String pwd = forelogin.getUserPwd();

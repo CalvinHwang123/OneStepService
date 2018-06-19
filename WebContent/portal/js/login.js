@@ -25,9 +25,12 @@ $(function() {
 	$("#sign").on("click", function() {
 		var useracc = $(".user").val();
 		var pwd = $(".pwd").val();
+		var userType=$(".optionsRadios:checked").val();
+		var pwd1=$.md5(pwd);
 		var newName = {
 			"userAccount" : useracc,
-			"userPwd" : pwd
+			"userPwd" : pwd1,
+			"userType":userType			
 		};
 		$.ajax({
 			url : "BusiManage/addUsers.action",
@@ -47,9 +50,10 @@ $(function() {
 	$("#login").on("click", function() {
 		var useracc = $(".user").val();
 		var pwd = $(".pwd").val();
+		var pwd1=$.md5(pwd);
 		var newName = {
 			"userAccount" : useracc,
-			"userPwd" : pwd
+			"userPwd" : pwd1
 		};
 		$.ajax({
 			url : "BusiManage/foreLogin.action",

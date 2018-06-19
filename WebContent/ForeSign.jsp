@@ -21,8 +21,10 @@
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -76,6 +78,7 @@
 	rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="portal/js/move-top.js"></script>
 <script type="text/javascript" src="portal/js/easing.js"></script>
+<script type="text/javascript" src="portal/js/md5.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event) {
@@ -914,10 +917,16 @@
 					<input type="password" name="userPwd" class="pwd"
 						placeholder="userPwd" required="">
 					<!-- 						 <input type="submit" value="Sign" id="sign"> -->
+					<label class="radio-inline"> 
+						<input type="radio" class="optionsRadios" value="1" name="userType" checked="checked"> 雇主
+						</label> 
+						<label class="radio-inline"> 
+						<input type="radio" class="optionsRadios" value="2" name="userType">服务商
+						</label>
 					<div class="col-md-12 column">
-											<button type="button"
-												class="btn btn-primary btn-default btn-block" id="sign">Sign</button>
-										</div>
+						<button type="button"
+							class="btn btn-primary btn-default btn-block" id="sign">Sign</button>
+					</div>
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox"
 							name="checkbox"><i></i>记住密码</label>
