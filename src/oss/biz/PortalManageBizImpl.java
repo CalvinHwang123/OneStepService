@@ -13,6 +13,7 @@ import oss.bean.Links;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Violations2;
 /*
  * 门户管理Biz业务实现类
  */
@@ -175,7 +176,7 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
 	@Override
-	public List<Violations> listViolationsGroupByWhy() {
+	public List<Violations2> listViolationsGroupByWhy() {
 		return portalManageMapper.listViolationsGroupByWhy();
 	}
 }

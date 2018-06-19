@@ -53,9 +53,13 @@
 		order by stickTime desc
 	</select>
 	
+	<resultMap type="oss.bean.Violations2" id="violationsGroupByWhyMap">
+		<result column="violationsWhy" property="violationsWhy"/>
+		<result column="whyCount" property="whyCount"/>
+	</resultMap>
 	<!-- 按违规原因分组查询违规列表 -->
-	<select id="listViolationsGroupByWhy" resultType="oss.bean.Violations">
-		select violationsWhy, count(violationsWhy) as whyCount from violations group by violationsWhy;
+	<select id="listViolationsGroupByWhy" resultMap="violationsGroupByWhyMap" >
+		select violationsWhy, count(violationsWhy) as "whyCount" from violations group by violationsWhy
 	</select>
 	
 </mapper>

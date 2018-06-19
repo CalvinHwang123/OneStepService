@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import oss.bean.Condition;
 import oss.bean.Dynamics;
@@ -22,6 +23,7 @@ import oss.bean.Information;
 import oss.bean.Links;
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Violations2;
 import oss.biz.PortalManageBiz;
 /*
  * 后端门户管理Handler
@@ -66,14 +68,28 @@ public class PortalManageHandler {
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
 		
-//		List<Violations> map = portalManageBizImpl.listViolationsGroupByWhy();
-//		System.out.println("map 长度：" + map.size());
+		List<Violations2> map = portalManageBizImpl.listViolationsGroupByWhy();
+		System.out.println("map 长度：" + map.size());
+		String vioWhyList =  new Gson().toJson(map);
+		req.setAttribute("vioWhyList", vioWhyList);
+		
 		List<Violations> stickList = portalManageBizImpl.listStickViolations();
 		System.out.println("stickList 长度：" + stickList.size());
 		req.setAttribute("stickList", stickList);
 		
 		ModelAndView mav = new ModelAndView("foreViolations");
 		return mav;
+	}
+	
+	// 前端ajax请求所有处罚翻页 by hlq 2018-06-17 12:02 返回json
+	@RequestMapping(value = "/foreViolationsPage.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody PageInfo<Violations> foreViolationsPage(@RequestBody Violations pageNum) {
+		// 每页默认为10条数据
+		PageHelper.startPage(pageNum.getViolationsID().intValue(), 10);
+		List<Violations> violationsList = portalManageBizImpl.listViolationsDesc();
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, 10);
+		return pageInfo;
 	}
 	
 	// 违规记录删除 by hlq 2018-06-14 21:58 返回json

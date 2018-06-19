@@ -14,7 +14,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./lib/layui/css/layui.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/xadmin.css">
+<script type="text/javascript" src="./js/json2.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
 <!-- 引入 ECharts 文件 -->
     <script src="./js/echarts.min.js"></script>
 <title>曝光台</title>
@@ -41,16 +44,21 @@ color: #e3e3e3;
 
 </head>
 <body>
-
+	
+	<!-- 置顶处罚列表 -->
 	<div style="background-color: #293c55;">
-		<h2 style="font-size: 24px; font-weight: 400; color: #e3e3e3;">严惩违规行为，我们在行动</h2>
+		<h2 style="font-size: 24px; font-weight: 400; color: #e3e3e3; padding-left: 50px;
+		padding-top: 30px;">严惩违规行为，我们在行动</h2>
 		<div id="news"
-			style="text-align: center; background-color: #e3e3e3; color: #e3e3e3; width: 80%; height: 150px; border-radius: 10px; margin: 10px auto; line-height: 1.5">
+			style="text-align: center; background-color: #e3e3e3; color: #e3e3e3; width: 80%; height: 150px; border-radius: 10px; margin: 0 auto; 
+			line-height: 1.5; margin-top: 30px;">
 			<ul>
 				<c:forEach items="${stickList }" var="violations">
 					<li><a href="#">
 							<div class="div-userName-violationsResult">
-								${violations.userID },${violations.violationsResult }</div>
+								<span>${violations.userID }</span>
+								<span style="color: #56b5c7;">${violations.violationsResult }</span>
+							</div>
 							<div class="div-violationsWhy">${violations.violationsWhy }
 							</div>
 					</a></li>
@@ -58,6 +66,7 @@ color: #e3e3e3;
 			</ul>
 		</div>
 	</div>
+	<div style="background-color: #293c55; height: 30px;"></div>
 
 <%-- 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
   <legend>简洁风格的Tab</legend>
@@ -80,76 +89,138 @@ color: #e3e3e3;
   --%>
   
  <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-    <div id="main" style="width: 600px;height:400px;"></div>
- 
- <table class="layui-table" style="width: 90%; margin: 0 auto;">
-        <thead>
-          <tr>
-          	<th>处罚用户</th>
-			<th>处罚原因</th>
-			<th>处罚结果</th>
-			<th>处罚日期</th>
-        </thead>
-        <tbody>
-           <c:forEach items="${pageInfo.list}" var="violation" begin="0">
+    <div id="main" style="width: 600px;height:400px; margin: 20px auto;"></div>
+	
+	<h2 style="background-color: #e3e3e3; font-size: 24px; font-weight: 400; color: #000; padding-left: 50px;
+		padding-top: 30px;">所有处罚</h2>
+	<!-- 所有处罚列表 -->
+	<div style="background-color: #e3e3e3; padding-top: 10px; padding-bottom: 10px;">
+		<table class="layui-table" style="width: 90%; margin: 0 auto;">
+			<thead>
 				<tr>
-					<td><c:out value="${violation.userID}"></c:out></td>
-					<td><c:out value="${violation.violationsWhy}"></c:out></td>
-					<td><c:out value="${violation.violationsResult}"></c:out></td>
-					<td><c:out value="${violation.violationsTime}"></c:out></td>
-				</tr>
-			</c:forEach>
-        </tbody>
-      </table>
-      <div class="page">
-			<div>
+					<th>处罚用户</th>
+					<th>处罚原因</th>
+					<th>处罚结果</th>
+					<th>处罚日期</th>
+			</thead>
+			<tbody>
+				<c:forEach items="${pageInfo.list}" var="violation" begin="0">
+					<tr>
+						<td><c:out value="${violation.userID}"></c:out></td>
+						<td><c:out value="${violation.violationsWhy}"></c:out></td>
+						<td><c:out value="${violation.violationsResult}"></c:out></td>
+						<td><c:out value="${violation.violationsTime}"></c:out></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div class="page">
+			<div id="div_page" style="display: inline-block;">
 				<!-- 上一页 -->
 				<c:choose>
 					<%-- 上一页 可点击 --%>
 					<c:when test="${pageInfo.getPageNum() > 1 }">
 						<a class="prev" href="javaScript:void(0)"
-						onclick="changePage('${pageInfo.getPrePage() }')">上一页</a>		
+							onclick="changePage('${pageInfo.getPrePage() }')">上一页</a>
 					</c:when>
 					<%-- 上一页 不可点击 --%>
 					<c:otherwise>
-						<a style="opacity: 0.4;cursor: default;"  href ="javascript:return false;" onclick="return false;">上一页</a>
+						<a style="opacity: 0.4; cursor: default;"
+							href="javascript:return false;" onclick="return false;">上一页</a>
 					</c:otherwise>
 				</c:choose>
-				<!-- foreach不支持递减，所以分开写 -->
-				<c:if test="${pageInfo.getPageNum() - 2 ge 1 }">
-					<a class="prev" href="javaScript:void(0)"
-						onclick="changePage('${pageInfo.getPageNum() - 2}')">${pageInfo.getPageNum() - 2}</a>	
-				</c:if>
-				<c:if test="${pageInfo.getPageNum() - 1 ge 1 }">
-					<a class="prev" href="javaScript:void(0)"
-						onclick="changePage('${pageInfo.getPageNum() - 1}')">${pageInfo.getPageNum() - 1}</a>	
-				</c:if>
 				<!-- 当前页 -->
 				<span class="current">${pageInfo.getPageNum() }</span>
-				<!-- foreach支持递增 -->
-				<c:forEach begin="1" end="2" var="next" step="1">
-					<c:if test="${pageInfo.getPageNum() + next le pageInfo.getPages() }">
-					<a class="prev" href="javaScript:void(0)"
-						onclick="changePage('${pageInfo.getPageNum() + next}')">${pageInfo.getPageNum() + next}</a>	
-					</c:if>
-				</c:forEach>
 				<!-- 下一页 -->
 				<c:choose>
 					<%-- 下一页 可点击 --%>
 					<c:when test="${pageInfo.getPageNum() < pageInfo.getPages() }">
 						<a class="prev" href="javaScript:void(0)"
-						onclick="changePage('${pageInfo.getNextPage() }')">下一页</a>		
+							onclick="changePage('${pageInfo.getNextPage() }')">下一页</a>
 					</c:when>
 					<%-- 下一页 可点击 --%>
 					<c:otherwise>
-						<a style="opacity: 0.4;cursor: default;"  href ="javascript:return false;" onclick="return false;">下一页</a>
+						<a style="opacity: 0.4; cursor: default;"
+							href="javascript:return false;" onclick="return false;">下一页</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
+			<!-- 跳页 -->
+			<select style="width: 6%; height: 30px; padding: 0 10px;" name="pageSize"
+					onchange="changePage($('#pageSizeSelect option:selected').val())"
+					id="pageSizeSelect">
+					<c:forEach begin="1" end="${pageInfo.pages }" var="page">
+						<option value="${page }">${page }</option>
+					</c:forEach>
+			</select><span>跳页</span>
 		</div>
- 
- 
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+	</div>
+	
+<script type="text/javascript">
+//更改当前页
+function changePage(pageNum) {
+	
+	$.ajax({
+			url : $("base").attr("href")
+					+ "PortalManage/foreViolationsPage.action",
+			type : "post",
+			dataType : "text",
+			contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
+			data : JSON.stringify({
+				"violationsID" : pageNum
+			}),
+			async : true,
+			success : function(msg) {
+				// 清空table的tbody
+				$("table tbody").text("");
+				// string 2 json
+				var jsonObj = JSON.parse(msg);
+				var vioListObj = jsonObj["list"];
+				for (var i = 0; i < vioListObj.length; ++i) {
+					// 动态生成tbody
+					$("table tbody").append(
+							"<tr>" + "<td>" + vioListObj[i]["userID"] + "</td>"
+									+ "<td>" + vioListObj[i]["violationsWhy"]
+									+ "</td>" + "<td>"
+									+ vioListObj[i]["violationsResult"]
+									+ "</td>" + "<td>"
+									+ vioListObj[i]["violationsTime"] + "</td>"
+									+ "</tr>");
+				}
+				// 动态生成分页区域
+				$("#div_page").text("");
+				// 上一页
+				if (jsonObj["pageNum"] > 1) {
+					$("#div_page").append("<a class=\"prev\" href=\"javaScript:void(0)\"" + 
+							"onclick=\"changePage(" + jsonObj["prePage"] +  ")\">上一页</a>");
+				} else {
+					$("#div_page").append("<a style=\"opacity: 0.4; cursor: default;\"" + 
+					"href=\"javascript:return false;\" onclick=\"return false;\">上一页</a>");
+				}
+				// 当前页
+				$("#div_page").append("<span class=\"current\">" +  jsonObj["pageNum"] + 
+						"</span>");
+				// 下一页
+				if (jsonObj["pageNum"] < jsonObj["pages"]) {
+					$("#div_page").append("<a class=\"next\" href=\"javaScript:void(0)\"" + 
+							"onclick=\"changePage(" + jsonObj["nextPage"] + ")\">下一页</a>");
+				} else {
+					$("#div_page").append("<a style=\"opacity: 0.4; cursor: default;\"" + 
+					"href=\"javascript:return false;\" onclick=\"return false;\">下一页</a>");
+				}
+				// 跳页
+				$("select option").remove("");
+				for (var i = 1; i <= jsonObj["pages"]; ++i) {
+					if (jsonObj["pageNum"] == i) {
+						$("select").append("<option value='" + i + "'" + " selected >" + i + "</option>");
+					} else {
+						$("select").append("<option value='" + i + "'" + ">" + i + "</option>");
+					}
+				}
+			}
+		});
+	};
+</script>
 <script type="text/javascript">
 
 //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
@@ -185,11 +256,9 @@ $(function() {
 </script>
 
 <script type="text/javascript">
-
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));
-var count = 16;
-var data = genData(count);
+var data = genData();
 
 option = {
     title : {
@@ -208,7 +277,6 @@ option = {
         top: 20,
         bottom: 20,
         data: data.legendData,
-
         selected: data.selected
     },
     series : [
@@ -233,42 +301,29 @@ option = {
 myChart.setOption(option);
 
 
-function genData(count) {
-    var nameList = [
-        '赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨'
-    ];
-    var legendData = [];
+function genData() {
+
+	var legendData = [];
     var seriesData = [];
     var selected = {};
-    for (var i = 0; i < count; i++) {
-        name = Math.random() > 0.65
-            ? makeWord(4, 1) + '·' + makeWord(3, 0)
-            : makeWord(2, 1);
-        legendData.push(name);
+    
+	var vioListObj = JSON.parse('${vioWhyList}');
+	for (var i = 0; i < vioListObj.length; ++i) {
+		name = vioListObj[i]["violationsWhy"];
+		legendData.push(name);
         seriesData.push({
             name: name,
-            value: Math.round(Math.random() * 100000)
+            value: vioListObj[i]["whyCount"]
         });
-        selected[name] = i < count;
-    }
-
+	}
+	
     return {
         legendData: legendData,
         seriesData: seriesData,
         selected: selected
     };
-
-    function makeWord(max, min) {
-        var nameLen = Math.ceil(Math.random() * max + min);
-        var name = [];
-        for (var i = 0; i < nameLen; i++) {
-            name.push(nameList[Math.round(Math.random() * nameList.length - 1)]);
-        }
-        return name.join('');
-    }
 }
-
-    </script>
+</script>
 
 </body>
 </html>

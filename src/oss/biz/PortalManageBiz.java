@@ -1,11 +1,11 @@
 package oss.biz;
 
 import java.util.List;
-import java.util.Map;
 
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Violations2;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
@@ -43,7 +43,7 @@ public interface PortalManageBiz {
 	public List<Violations> listStickViolations();
 
 	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
-	public List<Violations> listViolationsGroupByWhy();
+	public List<Violations2> listViolationsGroupByWhy();
 
 	public List<Links> listLinks(Condition condition);
 
