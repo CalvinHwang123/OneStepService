@@ -19,8 +19,10 @@
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -40,7 +42,8 @@
 <script src="portal/js/jquery-2.2.3.min.js"></script>
 <script src="portal/js/jquery-scrolltofixed-min.js"
 	type="text/javascript"></script>
-	<script src="portal/js/login.js" type="text/javascript"></script>
+<script src="portal/js/login.js" type="text/javascript"></script>
+<script src="portal/js/toastr.min.js" type="text/javascript"></script>
 <!-- fixed nav js -->
 <script>
 	$(document).ready(function() {
@@ -71,6 +74,7 @@
 <link href='https://fonts.googleapis.com/css?family=Offside'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="portal/css/jigsaw.css">
+<link rel="stylesheet" href="portal/css/toastr.min.css">
 <script type="text/javascript" src="portal/js/move-top.js"></script>
 <script type="text/javascript" src="portal/js/easing.js"></script>
 <script type="text/javascript" src="portal/js/md5.js"></script>
@@ -921,18 +925,18 @@
 			<div class="login-body">
 				<form action="foregroundindex.jsp" method="post" id="Login">
 					<input type="text" class="user" name="userAccount"
-						placeholder="userAccount" required=""> <input
-						type="password" name="userPwd" class="pwd"
-						placeholder="userPwd" required="">
+						placeholder="userAccount" required=""> <span id="span2"></span>
+					<input type="password" name="userPwd" class="pwd"
+						placeholder="userPwd" required=""> <span id="span2"></span>
 					<div class="container1">
 						<div id="captcha" style="position: relative"></div>
 						<div id="msg"></div>
 					</div>
-<!-- 					<input type="submit" value="Login"  disabled="disabled" id="login"> -->
+					<!-- 					<input type="submit" value="Login"  disabled="disabled" id="login"> -->
 					<div class="col-md-12 column">
-											<input type="button"
-												class="btn btn-primary btn-default btn-block"  disabled="disabled" id="login" value="Login">
-										</div>
+						<input type="button" class="btn btn-primary btn-default btn-block"
+							disabled="disabled" id="login" value="Login">
+					</div>
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox"
 							name="checkbox"><i></i>记住密码</label>
@@ -1135,7 +1139,7 @@
 	<script src="portal/js/jigsaw.js"></script>
 	<script>
 		jigsaw.init(document.getElementById('captcha'), function() {
-		   $("#login").attr("disabled", false)
+			$("#login").attr("disabled", false)
 		})
 	</script>
 

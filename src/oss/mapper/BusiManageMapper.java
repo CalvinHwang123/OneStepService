@@ -31,6 +31,7 @@ public interface BusiManageMapper {
 	  public int  Audited  (long audited); 
 		//前台登入  wwj  6-17
 		public abstract Users ForeLogin(Users users);
+	
 		//前台注册  王伟杰  6-17
 		public abstract int AddUsers(Users users);
 		

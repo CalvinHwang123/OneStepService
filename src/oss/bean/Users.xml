@@ -57,6 +57,7 @@
 		parameterType="oss.bean.Users">
 		select * from Users where userAccount=#{userAccount}
 	</select>
+	
 
 </mapper>
 

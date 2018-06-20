@@ -49,7 +49,7 @@ public interface PortalManageBiz {
 
 	public abstract int AddLinks(Links links);
 
-	public abstract int deleteById(Long linksid);
+	public abstract int deleteById(List<Links> linksList);
 
 	public abstract int updateById(Links links);
 
@@ -63,7 +63,7 @@ public interface PortalManageBiz {
 	public List<Dynamics> ListDyna(Condition condition);
 
 	// 删除动态 王伟杰6-13
-	public abstract int deleteDynaById(Long dynamicId);
+	public abstract int deleteDynaById(List<Dynamics> dynaList);
 
 	// 修改动态 wwj 6-15
 	public abstract int updateDynaById(Dynamics dynamics);
@@ -75,7 +75,7 @@ public interface PortalManageBiz {
 	public List<Information> ListInfo(Condition condition);
 
 	// 删除资讯王伟杰6-13
-	public abstract int deleteInfoById(Long InformationId);
+	public abstract int deleteInfoById(List<Information> infoList);
 
 	// 修改资讯 wwj 6-15
 	public abstract int updateInfoById(Information information);
