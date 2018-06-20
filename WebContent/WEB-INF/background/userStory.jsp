@@ -20,6 +20,7 @@
 <script type="text/javascript" src="./lib/layui/layui.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="./js/xadmin.js"></script>
+<script src="js/summernote.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -40,10 +41,12 @@
 				<!-- 隐藏域 当前页数 -->
 				<input type="hidden" id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}"> <input
-					class="layui-input" placeholder="开始日" name="startDate" id="start" value="${condition.startDate}">
-				<input class="layui-input" placeholder="截止日" name="endDate" id="end" value="${condition.endDate}">
-				<input type="text" name="title" placeholder="请输入故事标题"
-					autocomplete="off" class="layui-input"  value="${condition.title}">
+					class="layui-input" placeholder="开始日" name="startDate" id="start"
+					value="${condition.startDate}"> <input class="layui-input"
+					placeholder="截止日" name="endDate" id="end"
+					value="${condition.endDate}"> <input type="text"
+					name="title" placeholder="请输入故事标题" autocomplete="off"
+					class="layui-input" value="${condition.title}">
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
 				</button>
@@ -89,7 +92,7 @@
 						<td><c:out value="${story.storyTime}"></c:out></td>
 						<td><c:out value="${story.userID}"></c:out></td>
 						<td class="td-manage"><a title="编辑" class="updateA"
-							 storyContext="${story.storyContext}" storyID="${story.storyID}"
+							storyContext='${story.storyContext}' storyID="${story.storyID}"
 							href="javascript:;"> <i class="layui-icon">&#xe642;</i>
 						</a><a title="删除" onclick="member_del(this,${story.storyID})"
 							href="javascript:;"> <i class="layui-icon">&#xe640;</i>
@@ -98,74 +101,14 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="page">
-			<div>
-				共${pageInfo.getPages() }页，每页 <select
-					style="width: 6%; height: 30px;" name="pageSize"
-					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
-					id="pageSizeSelect">
-					<option value="5" ${pageInfo.getPageSize() == 5 ? "selected" : ""}>5</option>
-					<option value="10" ${pageInfo.getPageSize() == 10 ? "selected" : ""}>10</option>
-					<option value="20" ${pageInfo.getPageSize() == 20 ? "selected" : ""}>20</option>
-				</select> 条
-				<c:choose>
-					<c:when test="${!pageInfo.hasPreviousPage}">
-						<span class="prev">上一页</span>
-					</c:when>
-					<c:otherwise>
-						<a class="prev" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.getPrePage()})">上一页</a>
-					</c:otherwise>
-				</c:choose>
-
-				<c:choose>
-					<c:when test="${pageInfo.pageNum <= 2}">
-						<c:if test="${pageInfo.pageNum != 1}">
-							<a class="num" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.pageNum-1})"><c:out
-									value="${pageInfo.pageNum-1}"></c:out> </a>
-						</c:if>
-						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
-						<c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
-								<a class="num" href="javascript:void(0);"
-									onclick="changePage(${pageInfo.pageNum+num})"><c:out
-										value="${pageInfo.pageNum+num}"></c:out> </a>
-							</c:if>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-					  <a class="num" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.pageNum-1})"><c:out
-									value="${pageInfo.pageNum-1}"></c:out> </a>
-									
-					 <span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
-					 <c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
-								<a class="num" href="javascript:void(0);"
-									onclick="changePage(${pageInfo.pageNum+num})"><c:out
-										value="${pageInfo.pageNum+num}"></c:out> </a>
-							</c:if>
-					 </c:forEach>
-					</c:otherwise>
-				</c:choose>
-				<c:choose>
-					<c:when test="${!pageInfo.hasNextPage}">
-						<span class="next">下一页</span>
-					</c:when>
-					<c:otherwise>
-						<a class="next" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.getNextPage()})">下一页</a>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</div>
-
+<!-- 		分頁页脚 -->
+	<%@ include file="/pagefoot.jsp" %>
 	</div>
 	<div style="display: none;" id="storyLayer">
-		<form class="layui-form" action="PortalManage/userStoryList.action" id="storyForm">
+		<form class="layui-form" action="PortalManage/userStoryList.action"
+			id="storyForm">
 			<div class="layui-form-item">
-				<label class="layui-form-label">故事标题</label>
+				<label class="layui-form-label">标题</label>
 				<div class="layui-input-block">
 					<input type="text" name="storyTitle" required lay-verify="required"
 						placeholder="请输入标题" autocomplete="off" class="layui-input"
@@ -180,26 +123,38 @@
 						id="newUserID">
 				</div>
 			</div>
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">故事主文</label>
+			<div class="layui-form-item">
+				<label class="layui-form-label">封面</label>
 				<div class="layui-input-block">
-					<textarea name="storyContext" placeholder="请输入内容"
-						class="layui-textarea" id="newStoryContext"></textarea>
+					<button type="button" class="layui-btn" id="cover">
+						<i class="layui-icon">&#xe67c;</i>选择封面
+					</button>
+					<input type="hidden" name="imageURL" id="newStoryImageURL" value=""/>
+					<label  id="coverLabel" >请选择图片作为故事封面</label>
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">主文</label>
+				<div class="layui-input-block">
+					<%@ include file="/summernote.jsp"%>
+					<input type="hidden" name="storyContext" id="newStoryContext" />
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<div class="layui-input-block">
 					<button type="button" class="layui-btn" onclick="addStory()">立即提交</button>
-					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					<button type="reset" class="layui-btn layui-btn-primary"
+						onclick="resetNewStory()">重置</button>
 				</div>
 			</div>
 		</form>
 	</div>
-	
+
 	<div style="display: none;" id="updataStoryLayer">
-		<form class="layui-form" action="PortalManage/userStoryList.action" id="updateStoryForm">
+		<form class="layui-form" action="PortalManage/userStoryList.action"
+			id="updateStoryForm">
 			<div class="layui-form-item">
-				<label class="layui-form-label">故事标题</label>
+				<label class="layui-form-label">标题</label>
 				<div class="layui-input-block">
 					<input type="text" name="storyTitle" required lay-verify="required"
 						placeholder="请输入标题" autocomplete="off" class="layui-input"
@@ -207,10 +162,10 @@
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">故事主文</label>
+				<label class="layui-form-label">主文</label>
 				<div class="layui-input-block">
-					<textarea name="storyContext" placeholder="请输入内容"
-						class="layui-textarea" id="updateStoryContext"></textarea>
+					<%@ include file="/summernote.jsp"%>
+					<input type="hidden" name="storyContext" id="updateStoryContext" />
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -220,9 +175,8 @@
 			</div>
 		</form>
 	</div>
-	
+
 	<script>
-	// 曝光台脚本 by hlq 21:53
 
 	// 更改当前页
 	function changePage(pageNum) {
@@ -240,31 +194,37 @@
 		$("#pageForm").submit();
 	};
 	
+	function resetNewStory(){
+		$('.summernote').summernote('code',"");
+	}
 	
-    	function openAddStory(){
-//     		document.getElementByID("storyForm").reset();
+    function openAddStory(){
+    		$('.summernote').eq(0).summernote('code',"");
     		layer.open({
     		      type: 1,
     		      title:"新增雇主故事",
-    		      area: ['600px', '360px'],
+    		      area: ['800px', '500px'],
     		      shadeClose: false, //点击遮罩关闭
     		      content: $('#storyLayer')
     		    });
-    	}
+    }
     
     	
     	$(function(){
     		$(".updateA").click(openUpdateStory);
     	})
+    	
+    	
     	var updateA;
     	function openUpdateStory(){
     		updateA=$(this);
     		$("#updateStoryTitle").val($(this).parent().parent().children().eq(2).text());
     		$("#updateStoryContext").val($(this).attr("storyContext"));
+    		$('.summernote').eq(1).summernote('code',$(this).attr("storyContext"));
     		layer.open({
   		      type: 1,
   		      title:"新增雇主故事",
-  		      area: ['600px', '360px'],
+  		      area: ['800px', '500px'],
   		      shadeClose: false, //点击遮罩关闭
   		      content: $('#updataStoryLayer')
   		    });
@@ -275,10 +235,7 @@
   			  var storyContext=$("#updateStoryContext").val();
   			  var storyID=updateA.attr("storyID");
   			  var updateStory={"storyID":storyID,"storyTitle":storyTitle,"storyContext":storyContext};
-  			  alert(storyID);
-  			  alert(storyTitle);
-  			  alert(storyContext);
-  			  
+  			  console.log($('.summernote').eq(1).summernote('code'));
   			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
   			  $.ajax({
   	       			url:"PortalManage/updateStory.action",
@@ -300,10 +257,17 @@
     	
     	function addStory(){//添加新雇主故事
     		  layer.confirm('确认要提交吗？',function(index){
+    			  if ($("#newStoryImageURL").val() == "") {
+    				  layer.msg('请选择封面进行上传!',{icon:1,time:1000});
+    				  return ;
+				  }
     			  var storyTitle=$("#newStoryTitle").val();
     			  var userID=$("#newUserID").val();
-    			  var storyContext=$("#newStoryContext").val();
-    			  var newStory={"storyTitle":storyTitle, "userID":userID,"storyContext":storyContext};
+    			  var storyContext =$('.summernote').eq(0).summernote('code');
+    			  var coverUrl=$("#newStoryImageURL").val();
+    			  var newStory={"storyTitle":storyTitle, "userID":userID,"storyContext":storyContext
+    					        ,"imageURL":coverUrl};
+    			  console.log(newStory);
     			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
     			  $.ajax({
     	       			url:"PortalManage/addStory.action",
@@ -314,7 +278,6 @@
     	       			async:true,
     	       			success:function(msg){//
     	       				layer.closeAll();
-//     	       				layer.close(index);
     	       			  	window.location.reload();
     	       			}
     	       		})
@@ -385,6 +348,29 @@
  		})
         });
       }
+      
+      //封面上傳 by  hsp  6-19 20：46
+      //设定文件大小限制
+      
+      layui.use('upload',function(){
+    	  var $ = layui.jquery
+    	  ,upload = layui.upload;
+    	  var uploadInst = 	upload.render({
+   				 elem: '#cover'
+    			,url: 'File/upload.action'
+  			    ,size: 60 //限制文件大小，单位 KB
+   			    ,done: function(data){
+                 console.log("上传封面成功");
+   			     //1  把封面路径传给hidden等待表单提交   
+   			     $("#newStoryImageURL").val(data.path);
+   			     //2 更改label
+   			     $("#coverLabel").text(data.name);
+    		}
+  			})
+      }
+      );
+      
+      
     </script>
 	<script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");

@@ -272,10 +272,8 @@
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="offers.html">规则中心</a></li>
-							<li><a href="offers.html">雇主故事</a></li>
+							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
 							<li><a href="PortalManage/foreViol.action">曝光台</a></li> 
-						
-							
 						</ul> 
 					</li> 
 					<li class="dropdown head-dpdn">
