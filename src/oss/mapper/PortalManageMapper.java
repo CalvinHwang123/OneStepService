@@ -33,11 +33,11 @@ public interface PortalManageMapper {
 	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21：04
 	public int stickUpdateViolationsByID(Violations violations);
 	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
-	public List<Violations> listViolationsDesc();
+	public List<Violations> listViolationsDesc(int userType);
 	// 查询置顶违规记录 by hlq 2018-06-16 22:05
-	public List<Violations> listStickViolations();
+	public List<Violations> listStickViolations(int userType);
 	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
-	public List<Violations2> listViolationsGroupByWhy();
+	public List<Violations2> listViolationsGroupByWhy(int userType);
 	
 	public List<Links> listLinks(Condition condition);
 	public abstract int AddLinks(Links links);

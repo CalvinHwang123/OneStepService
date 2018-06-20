@@ -14,6 +14,7 @@ public class Users {
 	private String userAddress;// 用户地址
 	private Long userStatusID;// 用户账号状态
 	private Long userCredit;// 用户信用分
+	private Long userType;// 用户类型
 
 	public Users() {
 
@@ -21,7 +22,7 @@ public class Users {
 
 	public Users(Long userID, String userName, String userAccount, String userPwd, String userIdentity,
 			String userPhone, String userEmail, Long userBalance, String userIntroduction, String userAddress,
-			Long userStatusID, Long userCredit) {
+			Long userStatusID, Long userCredit, Long userType) {
 		super();
 		this.userID = userID;
 		this.userName = userName;
@@ -35,6 +36,15 @@ public class Users {
 		this.userAddress = userAddress;
 		this.userStatusID = userStatusID;
 		this.userCredit = userCredit;
+		this.userType = userType;
+	}
+
+	public Long getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Long userType) {
+		this.userType = userType;
 	}
 
 	public Long getUserID() {
