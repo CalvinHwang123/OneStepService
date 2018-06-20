@@ -1,53 +1,53 @@
 package oss.bean;
 
 public class Menu {
-	private Long MenuID;// 菜单ID
-	private String MenuPID;// 一级菜单ID
-	private String MenuName;// 菜单名称
-	private String Url;// 菜单路径
+	private Long menuID;// 菜单ID
+	private String menuPID;// 一级菜单ID
+	private String menuName;// 菜单名称
+	private String url;// 菜单路径
 
 	public Menu() {
 
 	}
 
 	public Menu(Long menuID, String menuPID, String menuName, String url) {
-
-		MenuID = menuID;
-		MenuPID = menuPID;
-		MenuName = menuName;
-		Url = url;
+		super();
+		this.menuID = menuID;
+		this.menuPID = menuPID;
+		this.menuName = menuName;
+		this.url = url;
 	}
 
 	public Long getMenuID() {
-		return MenuID;
+		return menuID;
 	}
 
 	public void setMenuID(Long menuID) {
-		MenuID = menuID;
+		this.menuID = menuID;
 	}
 
 	public String getMenuPID() {
-		return MenuPID;
+		return menuPID;
 	}
 
 	public void setMenuPID(String menuPID) {
-		MenuPID = menuPID;
+		this.menuPID = menuPID;
 	}
 
 	public String getMenuName() {
-		return MenuName;
+		return menuName;
 	}
 
 	public void setMenuName(String menuName) {
-		MenuName = menuName;
+		this.menuName = menuName;
 	}
 
 	public String getUrl() {
-		return Url;
+		return url;
 	}
 
 	public void setUrl(String url) {
-		Url = url;
+		this.url = url;
 	}
 
 }
