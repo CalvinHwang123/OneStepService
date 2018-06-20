@@ -2194,8 +2194,6 @@
 							</div>
 						</div>
 					</div>
-					<br>
-					&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
 				</div>
 				<br>&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
 			</div>
