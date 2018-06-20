@@ -15,9 +15,11 @@
 	</select>
 	
 	<!-- 	删除动态 -->
-	<delete id="deleteDynaById" parameterType="long">
-		delete from Dynamics where
-		dynamicId=#{dynamicId}
+	<delete id="deleteDynaById" parameterType="java.util.List">
+		delete from Dynamics where dynamicId in
+		<foreach collection="list" item="i" open="(" close=")" separator=",">
+			#{i.dynamicId}
+		</foreach>
 	</delete>
 	
 		<!-- 修改动态 -->

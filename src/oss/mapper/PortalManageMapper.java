@@ -41,7 +41,7 @@ public interface PortalManageMapper {
 	
 	public List<Links> listLinks(Condition condition);
 	public abstract int AddLinks(Links links);
-	public abstract int deleteById(Long linksid);
+	public abstract int deleteById(List<Links> linksList);
 	public abstract int updateById(Links links);
 	
 	// 批量删除雇主故事 黄绍鹏 6-14 15：47
@@ -52,7 +52,7 @@ public interface PortalManageMapper {
 	//动态列表   王伟杰6-13
 	public List<Dynamics> ListDyna(Condition condition);
 	//删除动态   王伟杰6-13
-	public abstract int deleteDynaById(Long dynamicId);
+	public abstract int deleteDynaById(List<Dynamics> dynaList);
 	//修改动态   wwj  6-15
 	public abstract int updateDynaById(Dynamics dynamics);
 	//增加动态   wwj  6-15
@@ -60,7 +60,7 @@ public interface PortalManageMapper {
 	//资讯列表  王伟杰6-13
 	public List<Information> ListInfo(Condition condition);
 	//删除资讯王伟杰6-13
-	public abstract int deleteInfoById(Long InformationId);
+	public abstract int deleteInfoById(List<Information> infoList);
 	//修改资讯    wwj   6-15
 	public abstract int updateInfoById(Information information);
 	//增加资讯  wwj  6-15

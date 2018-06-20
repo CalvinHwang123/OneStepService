@@ -19,9 +19,11 @@
 	</insert>
 	
 <!-- 	删除链接 -->
-	<delete id="deleteById" parameterType="long">
-		delete from Links where
-		linksid=#{linksid}
+	<delete id="deleteById" parameterType="java.util.List">
+		delete from Links where linksid in
+		<foreach collection="list" item="i" open="(" close=")" separator=",">
+			#{i.linksid}
+		</foreach>
 	</delete>
 
 <!-- 修改链接 -->

@@ -915,7 +915,7 @@
 					<input type="text" class="user" name="userAccount"
 						placeholder="userAccount" required=""> <span id="span1"></span>
 					<input type="password" name="userPwd" class="pwd"
-						placeholder="userPwd" required="">
+						placeholder="userPwd" required="">  <span id="span2"></span>
 					<!-- 						 <input type="submit" value="Sign" id="sign"> -->
 					<label class="radio-inline"> 
 						<input type="radio" class="optionsRadios" value="1" name="userType" checked="checked"> 雇主

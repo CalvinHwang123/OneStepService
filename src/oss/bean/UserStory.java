@@ -9,6 +9,8 @@ public class UserStory {
 	private String storyContext;
 	private String storyTime;
 	private Long userID;
+	private String imageURL;
+	private String stickTime;
 
 	public UserStory() {
 	}
@@ -51,6 +53,22 @@ public class UserStory {
 
 	public void setUserID(Long userID) {
 		this.userID = userID;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
+	public String getStickTime() {
+		return stickTime;
+	}
+
+	public void setStickTime(String stickTime) {
+		this.stickTime = stickTime;
 	}
 
 }

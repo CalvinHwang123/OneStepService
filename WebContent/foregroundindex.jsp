@@ -17,8 +17,10 @@
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 </script>
 <!-- Custom Theme files -->
@@ -160,101 +162,118 @@
 			</div>
 			<div class="w3ls-header-right">
 				<ul>
-
 					<li class="dropdown head-dpdn"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"><i
 							class="fa fa-user" aria-hidden="true"></i> 我的账户<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="login.html">登录 </a></li>
-							<li><a href="signup.html">注册</a></li>
+							<li><c:out value="${forelogin.userType}"></c:out></li>
+							<li><a href="ForeLogin.jsp">登录 </a></li>
+							<li><a href="ForeSign.jsp">注册</a></li>
 							<li><a href="login.html">我的命令</a></li>
 							<li><a href="login.html">我的钱包</a></li>
 							<li><a href="BusiManage/usersExit.action">退出</a></li>
 						</ul></li>
-						
-					<c:choose>
-						<c:when test="${forelogin.userType eq 1}">
-					<li class="dropdown head-dpdn"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
-							class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="offers.html">我的订单</a></li>
-							<li><a href="offers.html">我的足迹</a></li>
-							<li><a href="offers.html">我的收藏</a></li>
-							<li><a href="offers.html">真经</a></li>
-							<li><a href="offers.html">红包中心</a></li>
-							<li><a href="offers.html">服务百科</a></li>
-							<li><a href="offers.html">雇主俱乐部</a></li>
-
-						</ul></li>
-						
-							<li class="dropdown head-dpdn"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"><i
-							class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
-							class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="offers.html">立即开店赚钱</a></li>
-							<li><a href="offers.html">具体开店流程</a></li>
-							<li><a href="offers.html">开店须知</a></li>
-						</ul></li>
-						</c:when>
-						<c:when test="${forelogin.getUserType() eq '2'} ">
+					<c:if test="${forelogin.userType eq ''}">
 						<li class="dropdown head-dpdn"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
-							class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="offers.html">我的订单</a></li>
-							<li><a href="offers.html">我的足迹</a></li>
-							<li><a href="offers.html">我的收藏</a></li>
-							<li><a href="offers.html">真经</a></li>
-							<li><a href="offers.html">红包中心</a></li>
-							<li><a href="offers.html">服务百科</a></li>
-							<li><a href="offers.html">雇主俱乐部</a></li>
+							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="offers.html">我的订单</a></li>
+								<li><a href="offers.html">我的足迹</a></li>
+								<li><a href="offers.html">我的收藏</a></li>
+								<li><a href="offers.html">真经</a></li>
+								<li><a href="offers.html">红包中心</a></li>
+								<li><a href="offers.html">服务百科</a></li>
+								<li><a href="offers.html">雇主俱乐部</a></li>
 
-						</ul></li>
-						
+							</ul></li>
+
+						<li class="dropdown head-dpdn"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"><i
+								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="offers.html">服务商中心</a></li>
+							</ul></li>
+					</c:if>
+						<c:if test="${forelogin.userType eq 1}">
 							<li class="dropdown head-dpdn"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"><i
-							class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
-							class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="offers.html">服务商中心</a></li>
-						</ul></li>
-						</c:when>
-					</c:choose>
-						
-<!-- 					<li class="dropdown head-dpdn"><a href="#" -->
-<!-- 						class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span -->
-<!-- 							class="caret"></span></a> -->
-<!-- 						<ul class="dropdown-menu"> -->
-<!-- 							<li><a href="offers.html">我的订单</a></li> -->
-<!-- 							<li><a href="offers.html">我的足迹</a></li> -->
-<!-- 							<li><a href="offers.html">我的收藏</a></li> -->
-<!-- 							<li><a href="offers.html">真经</a></li> -->
-<!-- 							<li><a href="offers.html">红包中心</a></li> -->
-<!-- 							<li><a href="offers.html">服务百科</a></li> -->
-<!-- 							<li><a href="offers.html">雇主俱乐部</a></li> -->
+								class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
+									class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="offers.html">我的订单</a></li>
+									<li><a href="offers.html">我的足迹</a></li>
+									<li><a href="offers.html">我的收藏</a></li>
+									<li><a href="offers.html">真经</a></li>
+									<li><a href="offers.html">红包中心</a></li>
+									<li><a href="offers.html">服务百科</a></li>
+									<li><a href="offers.html">雇主俱乐部</a></li>
 
-<!-- 						</ul></li> -->
-<!-- 					<li class="dropdown head-dpdn"><a href="#" -->
-<!-- 						class="dropdown-toggle" data-toggle="dropdown"><i -->
-<!-- 							class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span -->
-<!-- 							class="caret"></span></a> -->
-<!-- 						<ul class="dropdown-menu"> -->
-<!-- 							<li><a href="offers.html">立即开店赚钱</a></li> -->
-<!-- 							<li><a href="offers.html">具体开店流程</a></li> -->
-<!-- 							<li><a href="offers.html">开店须知</a></li> -->
-<!-- 						</ul></li> -->
+								</ul></li>
+
+							<li class="dropdown head-dpdn"><a href="#"
+								class="dropdown-toggle" data-toggle="dropdown"><i
+									class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
+									class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="offers.html">立即开店赚钱</a></li>
+									<li><a href="offers.html">具体开店流程</a></li>
+									<li><a href="offers.html">开店须知</a></li>
+								</ul></li>
+						</c:if>
+					<c:if test="${forelogin.userType == 2} ">
+						<li class="dropdown head-dpdn"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="offers.html">我的订单</a></li>
+								<li><a href="offers.html">我的足迹</a></li>
+								<li><a href="offers.html">我的收藏</a></li>
+								<li><a href="offers.html">真经</a></li>
+								<li><a href="offers.html">红包中心</a></li>
+								<li><a href="offers.html">服务百科</a></li>
+								<li><a href="offers.html">雇主俱乐部</a></li>
+
+							</ul></li>
+
+						<li class="dropdown head-dpdn"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"><i
+								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="offers.html">服务商中心</a></li>
+							</ul></li>
+					</c:if>
+					<!-- 					<li class="dropdown head-dpdn"><a href="#" -->
+					<!-- 						class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span -->
+					<!-- 							class="caret"></span></a> -->
+					<!-- 						<ul class="dropdown-menu"> -->
+					<!-- 							<li><a href="offers.html">我的订单</a></li> -->
+					<!-- 							<li><a href="offers.html">我的足迹</a></li> -->
+					<!-- 							<li><a href="offers.html">我的收藏</a></li> -->
+					<!-- 							<li><a href="offers.html">真经</a></li> -->
+					<!-- 							<li><a href="offers.html">红包中心</a></li> -->
+					<!-- 							<li><a href="offers.html">服务百科</a></li> -->
+					<!-- 							<li><a href="offers.html">雇主俱乐部</a></li> -->
+
+					<!-- 						</ul></li> -->
+					<!-- 					<li class="dropdown head-dpdn"><a href="#" -->
+					<!-- 						class="dropdown-toggle" data-toggle="dropdown"><i -->
+					<!-- 							class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span -->
+					<!-- 							class="caret"></span></a> -->
+					<!-- 						<ul class="dropdown-menu"> -->
+					<!-- 							<li><a href="offers.html">立即开店赚钱</a></li> -->
+					<!-- 							<li><a href="offers.html">具体开店流程</a></li> -->
+					<!-- 							<li><a href="offers.html">开店须知</a></li> -->
+					<!-- 						</ul></li> -->
 					<li class="dropdown head-dpdn"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="offers.html">规则中心</a></li>
-							<li><a href="offers.html">雇主故事</a></li>
+							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
 							<li><a href="PortalManage/foreViol.action">曝光台</a></li> 
-						
-							
 						</ul> 
 					</li> 
 					<li class="dropdown head-dpdn">
