@@ -32,7 +32,7 @@ public class PortalHandler {
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStoryList.action")
 	public ModelAndView userStoryList(HttpServletRequest req,
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "9") int pageSize,
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法

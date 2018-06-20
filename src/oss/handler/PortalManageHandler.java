@@ -203,6 +203,7 @@ public class PortalManageHandler {
 	@RequestMapping("/addStory.action")
 	public @ResponseBody String addStory(HttpServletRequest req, @RequestBody UserStory userStory) {
 		userStory.setStoryTime(DateUtil.getCurrentDate());
+		userStory.setStickTime(DateUtil.getCurrentDate());
 		portalManageBizImpl.addUserStory(userStory);
 		return "success";
 	}
