@@ -2197,22 +2197,14 @@
 									</div>
 								</div>
 							</div>
-<<<<<<< HEAD
 						</div>
 					</div>
+					<br>
+					&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
 				</div>
 			</div>
 		</div>
 	</div>
-=======
-						</div> 
-					</div><br>
-					&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
-				</div>  
-			</div>  	
-		</div>  	
-	</div> 
->>>>>>> refs/remotes/origin/nw
 	<!-- //welcome -->
 	<!-- add-products -->
 	<div class="add-products">
