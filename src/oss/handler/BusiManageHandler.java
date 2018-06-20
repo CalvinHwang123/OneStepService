@@ -134,15 +134,17 @@ public class BusiManageHandler {
 		System.out.println(users.getUserAccount());
 		String flag = "error";
 		Users forelogin = busiManageBizImpl.ForeLogin(users);
-		String pwd = forelogin.getUserPwd();
-		String acc = forelogin.getUserAccount();
-		System.out.println(pwd);
-		if (forelogin!=null&&users.getUserPwd().equals(pwd) && users.getUserAccount().equals(acc)) {
-			flag = "success";
-			request.getSession().setAttribute("forelogin", forelogin);
-		} else {
-			flag = "error";
-		}
+
+			if (forelogin!=null) {
+					if(forelogin.getUserStatusID()==2) {
+						flag="fail";		
+					}else {						
+				flag = "success";
+				request.getSession().setAttribute("forelogin", forelogin);
+					}
+			} else {
+				flag = "error";		
+			}
 		return flag;
 	}
 
@@ -179,7 +181,7 @@ public class BusiManageHandler {
 	            
          //从session移除
          session.removeAttribute("forelogin");
-		ModelAndView mav = new ModelAndView("ForeLogin");
+		ModelAndView mav = new ModelAndView("../ForeLogin");
 		return mav;		
 	}
 

@@ -55,9 +55,9 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	}
 
 	@Override
-	public int deleteById(Long linksid) {
+	public int deleteById(List<Links> linksList) {
 		System.out.println("deleteById");
-		return portalManageMapper.deleteById(linksid);
+		return portalManageMapper.deleteById(linksList);
 	}
 
 	@Override
@@ -100,16 +100,16 @@ public class PortalManageBizImpl implements PortalManageBiz {
 
 	// 删除动态 王伟杰 6-13
 	@Override
-	public int deleteDynaById(Long dynamicId) {
+	public int deleteDynaById(List<Dynamics> dynaList) {
 
-		return portalManageMapper.deleteDynaById(dynamicId);
+		return portalManageMapper.deleteDynaById(dynaList);
 	}
 
 	// 删除资讯 王伟杰 6-13
 	@Override
-	public int deleteInfoById(Long InformationId) {
+	public int deleteInfoById(List<Information> infoList) {
 
-		return portalManageMapper.deleteInfoById(InformationId);
+		return portalManageMapper.deleteInfoById(infoList);
 	}
 
 	// 修改动态 WWJ 6-15

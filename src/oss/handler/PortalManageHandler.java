@@ -93,9 +93,8 @@ public class PortalManageHandler {
 	}
 
 	@RequestMapping(value = "/deleteById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String deleteById(HttpServletRequest req,
-			@RequestParam(value = "linksid", required = true, defaultValue = "empty") Long linksid) {
-		int delete = portalManageBizImpl.deleteById(linksid);
+	public @ResponseBody String deleteById(HttpServletRequest req, @RequestBody List<Links> linksList) {
+		int delete = portalManageBizImpl.deleteById(linksList);
 		// ModelAndView mav = new ModelAndView("redirect:linksList.action");
 		return "success";
 	}
@@ -170,9 +169,8 @@ public class PortalManageHandler {
 
 	// 删除动态 王伟杰 6-13
 	@RequestMapping(value = "/deleteDynaById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String deleteDynaById(HttpServletRequest req,
-			@RequestParam(value = "dynamicId", required = true, defaultValue = "empty") Long dynamicId) {
-		int delete = portalManageBizImpl.deleteDynaById(dynamicId);
+	public @ResponseBody String deleteDynaById(HttpServletRequest req, @RequestBody List<Dynamics> dynaList) {
+		int delete = portalManageBizImpl.deleteDynaById(dynaList);
 		return "success";
 	}
 
@@ -200,9 +198,8 @@ public class PortalManageHandler {
 
 	// 删除资讯 王伟杰 6-13
 	@RequestMapping(value = "/deleteInfoById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String deleteInfoById(HttpServletRequest req,
-			@RequestParam(value = "InformationId", required = true, defaultValue = "empty") Long InformationId) {
-		int delete = portalManageBizImpl.deleteInfoById(InformationId);
+	public @ResponseBody String deleteInfoById(HttpServletRequest req, @RequestBody List<Information> infoList) {
+		int delete = portalManageBizImpl.deleteInfoById(infoList);
 		return "success";
 	}
 
@@ -219,6 +216,6 @@ public class PortalManageHandler {
 	public @ResponseBody String AddInfo(HttpServletRequest req, @RequestBody Information information) {
 		int addlinks = portalManageBizImpl.AddInfo(information);
 		return "success";
-	}	
+	}
 
 }

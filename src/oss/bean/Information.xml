@@ -13,10 +13,11 @@
 		</if>
 	</select>
 	<!-- 删除资讯 -->
-	<delete id="deleteInfoById" parameterType="long">
-		delete from
-		information where
-		informationId=#{informationId}
+	<delete id="deleteInfoById" parameterType="java.util.List">
+		delete from information where informationId in 
+		<foreach collection="list" item="i" open="(" close=")" separator=",">
+			#{i.informationId}
+		</foreach>
 	</delete>
 
 	<!-- 修改资讯 -->

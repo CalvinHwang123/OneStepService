@@ -25,49 +25,65 @@ $(function() {
 	$("#sign").on("click", function() {
 		var useracc = $(".user").val();
 		var pwd = $(".pwd").val();
-		var userType=$(".optionsRadios:checked").val();
-		var pwd1=$.md5(pwd);
+		var userType = $(".optionsRadios:checked").val();
+		var pwd1 = $.md5(pwd);
 		var newName = {
 			"userAccount" : useracc,
 			"userPwd" : pwd1,
-			"userType":userType			
+			"userType" : userType
 		};
-		$.ajax({
-			url : "BusiManage/addUsers.action",
-			// 数据发送方式
-			type : "post",
-			// 接受数据格式
-			dataType : "text",
-			contentType : "application/json;charset=utf-8",
-			// 要传递的数据
-			data : JSON.stringify(newName),
-			async : true,
-			// 回调函数，接受服务器端返回给客户端的值，即result值
-			success : regist
-		});
+		if (useracc == null && useracc == "") {
+			$("#span1").text("请输入账号");
+			$("#span1").css("color", "red");
+		} else if (pwd == null && pwd == "") {
+			$("#span2").text("请输入密码");
+			$("#span2").css("color", "red");
+		} else {
+			$.ajax({
+				url : "BusiManage/addUsers.action",
+				// 数据发送方式
+				type : "post",
+				// 接受数据格式
+				dataType : "text",
+				contentType : "application/json;charset=utf-8",
+				// 要传递的数据
+				data : JSON.stringify(newName),
+				async : true,
+				// 回调函数，接受服务器端返回给客户端的值，即result值
+				success : regist
+			});
+		}
 	})
 
-	$("#login").on("click", function() {
+	$("#login").on("click", function() { 
 		var useracc = $(".user").val();
 		var pwd = $(".pwd").val();
-		var pwd1=$.md5(pwd);
+		var pwd1 = $.md5(pwd);
 		var newName = {
 			"userAccount" : useracc,
 			"userPwd" : pwd1
 		};
-		$.ajax({
-			url : "BusiManage/foreLogin.action",
-			// 数据发送方式
-			type : "post",
-			// 接受数据格式
-			dataType : "text",
-			contentType : "application/json;charset=utf-8",
-			// 要传递的数据
-			data : JSON.stringify(newName),
-			async : true,
-			// 回调函数，接受服务器端返回给客户端的值，即result值
-			success : login
-		});
+		if (useracc == null && useracc == "") {
+			$("#span1").text("请输入账号");
+			$("#span1").css("color", "red");
+		} else if (pwd == null && pwd == "") {
+			$("#span2").text("请输入密码");
+			$("#span2").css("color", "red");
+		} else {
+			$.ajax({
+				url : "BusiManage/foreLogin.action",
+				// 数据发送方式
+				type : "post",
+				// 接受数据格式
+				dataType : "text",
+				contentType : "application/json;charset=utf-8",
+				// 要传递的数据
+				data : JSON.stringify(newName),
+				async : true,
+				// 回调函数，接受服务器端返回给客户端的值，即result值
+				success : login
+			});
+		}
 	})
 
 });
@@ -94,7 +110,10 @@ function regist(result) {
 function login(result) {
 	if (result == "success") {
 		$("#Login").submit();
+	}else if(result=="fail"){
+		toastr.error("账号失效");
 	} else {
+//		toastr.error("登入失败"); 
 		alert("登入失败");
 		$("#Login").attr("action", "ForeLogin.jsp")
 		$("#Login").submit();

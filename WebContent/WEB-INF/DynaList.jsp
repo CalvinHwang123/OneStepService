@@ -73,6 +73,7 @@
 								<i class="layui-icon">&#xe605;</i>
 							</div>
 						</th>
+						<th>序列</th>
 						<th>动态标题</th>
 						<th>动态内容</th>
 						<th>动态时间</th>
@@ -83,6 +84,12 @@
 					<c:forEach var="i" items="${pageInfo.list}" begin="0"
 						varStatus="status">
 						<tr>
+							<td>
+								<div class="layui-unselect layui-form-checkbox"
+									lay-skin="primary" data-id='${i.dynamicId}'>
+									<i class="layui-icon">&#xe605;</i>
+								</div>
+							</td>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getDynamicTitle()}"></c:out></td>
 							<td><c:out value="${i.getDynamicContext()}"></c:out></td>
@@ -325,6 +332,9 @@
 			})
 		}
 		
+		
+
+		
 	</script>
 
 	<script>
@@ -390,16 +400,30 @@
 		}
 
 		function delAll(argument) {
-
-			var data = tableCheck.getData();
-
-			layer.confirm('确认要删除吗？' + data, function(index) {
-				//捉到所有被选中的，发异步进行删除
-				layer.msg('删除成功', {
-					icon : 1
-				});
-				$(".layui-form-checked").not('.header').parents('tr').remove();
-			});
+			  var deleteIDs = tableCheck.getData();
+		         if (deleteIDs.length == 0) {
+		        	 layer.msg('请选择要删除的动态!',{icon:1,time:500});
+		        	 return;
+				 }
+		         layer.confirm('确认要删除吗？',function(index){
+			     		var deleteDyna=[];
+			          for (var i = 0; i < deleteIDs.length; i++) {
+			  				var data =	{"dynamicId":deleteIDs[i]};
+			  				deleteDyna.push(data);
+			  		}
+			          $.ajax({
+			  			url:"PortalManage/deleteDynaById.action",
+			  			type:"post",
+			  			dataType:"text",
+			  			contentType:"application/json",
+			  			data:JSON.stringify(deleteDyna),
+			  			async:true,
+			  			success:function(msg){//
+			               layer.msg('已删除!',{icon:1,time:1000});
+			               window.location.reload();
+			  			}
+			  		})
+			         });
 		}
 	</script>
 	<script>
