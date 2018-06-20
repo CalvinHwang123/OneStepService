@@ -250,9 +250,38 @@
 						class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
+<<<<<<< HEAD
 							<li><a href="offers.html">规则中心</a></li>
 							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
 							<li><a href="PortalManage/foreViol.action">曝光台</a></li> 
+=======
+							<li><a href="offers.html">我的订单</a></li> 
+							<li><a href="offers.html">我的足迹</a></li>
+							<li><a href="offers.html">我的收藏</a></li> 
+							<li><a href="offers.html">真经</a></li> 
+							<li><a href="offers.html">红包中心</a></li>
+							<li><a href="offers.html">服务百科</a></li> 
+							<li><a href="offers.html">雇主俱乐部</a></li> 
+							
+						</ul> 
+					</li> 
+					<li class="dropdown head-dpdn">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="offers.html">立即开店赚钱</a></li> 
+							<li><a href="offers.html">具体开店流程</a></li>
+							<li><a href="offers.html">开店须知</a></li> 
+						</ul> 
+					</li> 
+					<li class="dropdown head-dpdn">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="offers.html">规则中心</a></li> 
+							<li><a href="offers.html">雇主故事</a></li>
+							<li><a href="Portal/foreViolationsList.action">曝光台</a></li> 
+							
+							
+>>>>>>> refs/heads/hlq
 						</ul> 
 					</li> 
 					<li class="dropdown head-dpdn">
