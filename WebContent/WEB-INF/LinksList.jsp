@@ -68,6 +68,7 @@
 								<i class="layui-icon">&#xe605;</i>
 							</div>
 						</th>
+						<th>序列</th>
 						<th>地址名称</th>
 						<th>路径</th>
 						<th>操作</th>
@@ -77,6 +78,12 @@
 					<c:forEach var="i" items="${pageInfo.list}" begin="0"
 						varStatus="status">
 						<tr>
+						<td>
+							<div class="layui-unselect layui-form-checkbox"
+								lay-skin="primary" data-id='${i.linksid}'>
+								<i class="layui-icon">&#xe605;</i>
+							</div>
+						</td>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getLinksname()}"></c:out></td>
 							<td><c:out value="${i.getLinksurl()}"></c:out></td>
@@ -342,15 +349,29 @@
 		}
 
 		function delAll(argument) {
-
-			var data = tableCheck.getData();
-
-			layer.confirm('确认要删除吗？' + data, function(index) {
-				//捉到所有被选中的，发异步进行删除
-				layer.msg('删除成功', {
-					icon : 1
-				});
-				$(".layui-form-checked").not('.header').parents('tr').remove();
+			var deleteIDs = tableCheck.getData();
+			if (deleteIDs.length == 0) {
+	        	 layer.msg('请选择要删除的链接!',{icon:1,time:500});
+	        	 return;
+			 }
+			layer.confirm('确认要删除吗？', function(index) {
+				var deleteLinks=[];
+				 for (var i = 0; i < deleteIDs.length; i++) {
+		 				var data =	{"linksid":deleteIDs[i]};
+		 				deleteLinks.push(data);
+		 		}
+		         $.ajax({
+		 			url:"PortalManage/deleteById.action",
+		 			type:"post",
+		 			dataType:"text",
+		 			contentType:"application/json",
+		 			data:JSON.stringify(deleteLinks),
+		 			async:true,
+		 			success:function(msg){//
+		              layer.msg('已删除!',{icon:1,time:1000});
+		              window.location.reload();
+		 			}
+		 		})
 			});
 		}
 		

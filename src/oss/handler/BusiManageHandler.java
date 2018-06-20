@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import oss.bean.Logs;
 import oss.bean.UserStory;
 import oss.bean.Users;
@@ -97,6 +97,8 @@ public class BusiManageHandler {
 	// }
 
 	// 重置密码
+	// 修改密码
+
 	@RequestMapping("/updatepow.action")
 	public @ResponseBody String updatepow(HttpServletRequest req, @RequestBody Users users) {
 		System.out.println("重置密码");
@@ -105,7 +107,6 @@ public class BusiManageHandler {
 	}
 
 	// 加入黑名单
-
 	@RequestMapping("/Blacklist.action")
 	public @ResponseBody String Blacklist(HttpServletRequest req, @RequestBody Users users) {
 		System.out.println("加入黑名单");
@@ -124,13 +125,13 @@ public class BusiManageHandler {
 
 	// 禁用
 
+	// 禁用
 	@RequestMapping("/Disable.action")
 	public @ResponseBody String Disable(HttpServletRequest req, @RequestBody Users users) {
 		System.out.println("禁用");
 		busiManageBizImpl.Disable(users.getUserID());
 		return "success";
 	}
-
 	// 启用
 
 	@RequestMapping("/enable.action")
@@ -205,6 +206,63 @@ public class BusiManageHandler {
 		System.out.println("审核不通过");
 		busiManageBizImpl.Audited(demands.getDemandID());
 		return "success";
+	}
+
+	// 前台登入
+	@RequestMapping("/foreLogin.action")
+	public @ResponseBody String ForeLogin(HttpServletRequest request, @RequestBody Users users) {
+		System.out.println(users.getUserAccount());
+		String flag = "error";
+		Users forelogin = busiManageBizImpl.ForeLogin(users);
+
+			if (forelogin!=null) {
+					if(forelogin.getUserStatusID()==2) {
+						flag="fail";		
+					}else {						
+				flag = "success";
+				request.getSession().setAttribute("forelogin", forelogin);
+					}
+			} else {
+				flag = "error";		
+			}
+		return flag;
+	}
+
+	// 前台注册
+	@RequestMapping("/addUsers.action")
+	public @ResponseBody String AddUsers(HttpServletRequest req, @RequestBody Users users) {
+		String flag = "error";
+		int regist = busiManageBizImpl.AddUsers(users);
+		if (regist == 1) {
+			flag = "success";
+		} else {
+			flag = "error";
+		}
+		return flag;
+	}
+
+	// 唯一性验证
+	@RequestMapping("/selectName.action")
+	public @ResponseBody String SelectName(HttpServletRequest req, @RequestBody Users users) {
+		String flag = "error";
+		System.out.println(users.getUserAccount());
+		List<Users> list = busiManageBizImpl.SelectName(users);
+		if (list.size() > 0) {
+			flag = "error";
+		} else {
+			flag = "success";
+		}
+		return flag;
+	}
+	// 退出
+	@RequestMapping("/usersExit.action")
+	public ModelAndView usersExit(HttpServletRequest request, Users user) {
+		 HttpSession session=request.getSession(false);
+	            
+         //从session移除
+         session.removeAttribute("forelogin");
+		ModelAndView mav = new ModelAndView("../ForeLogin");
+		return mav;		
 	}
 
 }

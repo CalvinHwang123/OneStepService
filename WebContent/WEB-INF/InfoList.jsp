@@ -71,6 +71,7 @@
 								<i class="layui-icon">&#xe605;</i>
 							</div>
 						</th>
+						<th>序列</th>
 						<th>资讯标题</th>
 						<th>资讯内容</th>
 						<th>资讯时间</th>
@@ -81,6 +82,12 @@
 					<c:forEach var="i" items="${pageInfo.list}" begin="0"
 						varStatus="status">
 						<tr>
+						<td>
+							<div class="layui-unselect layui-form-checkbox"
+								lay-skin="primary" data-id='${i.informationId}'>
+								<i class="layui-icon">&#xe605;</i>
+							</div>
+						</td>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getInformationTitle()}"></c:out></td>
 							<td><c:out value="${i.getInformationContext()}"></c:out></td>
@@ -372,7 +379,7 @@ layui.use('laydate', function(){
 				$.ajax({
 					url : "PortalManage/deleteInfoById.action",
 					type : "POST",
-					data : "InformationId=" + id,
+					data : "informationId=" + id,
 					dataType : "text",
 					async : true,
 					success : function(msg) {
@@ -390,16 +397,30 @@ layui.use('laydate', function(){
 		}
 
 		function delAll(argument) {
-
-			var data = tableCheck.getData();
-
-			layer.confirm('确认要删除吗？' + data, function(index) {
-				//捉到所有被选中的，发异步进行删除
-				layer.msg('删除成功', {
-					icon : 1
-				});
-				$(".layui-form-checked").not('.header').parents('tr').remove();
-			});
+			 var deleteIDs = tableCheck.getData();
+	         if (deleteIDs.length == 0) {
+	        	 layer.msg('请选择要删除的资讯!',{icon:1,time:500});
+	        	 return;
+			 }
+	         layer.confirm('确认要删除吗？',function(index){
+	     		var deleteInfo=[];
+	          for (var i = 0; i < deleteIDs.length; i++) {
+	  				var data =	{"informationId":deleteIDs[i]};
+	  				deleteInfo.push(data);
+	  		}
+	          $.ajax({
+	  			url:"PortalManage/deleteInfoById.action",
+	  			type:"post",
+	  			dataType:"text",
+	  			contentType:"application/json",
+	  			data:JSON.stringify(deleteInfo),
+	  			async:true,
+	  			success:function(msg){//
+	               layer.msg('已删除!',{icon:1,time:1000});
+	               window.location.reload();
+	  			}
+	  		})
+	         });
 		}
 	</script>
 	<script>

@@ -4,36 +4,61 @@
 
 <mapper namespace="oss.mapper.BusiManageMapper">
 	<update id="DlUserID" parameterType="long">
-	update  Users set userPwd =123456 where userID=#{dl}
+		update Users set userPwd =123456 where userID=#{dl}
 	</update>
-	
+
 	<update id="Blacklist" parameterType="long">
-	update  Users set userStatusID =3 where userID=#{dl}
+		update Users set userStatusID =3 where userID=#{dl}
 	</update>
-	
+
 	<update id="Disable" parameterType="long">
-	update  Users set userStatusID =2 where userID=#{dl}
+		update Users set userStatusID =2 where userID=#{dl}
 	</update>
-	
+
 	<select id="listUser" resultType="oss.bean.Users">
 		select * from Users where 1 = 1
 	</select>
-	
+
 	<update id="providerupdatepow" parameterType="long">
-	update  Users set userPwd =123456 where userID=#{dl}
+		update Users set userPwd =123456 where userID=#{dl}
 	</update>
-	
+
 	<update id="providerBlacklist" parameterType="long">
-	update  Users set userStatusID =3 where userID=#{dl}
+		update Users set userStatusID =3 where userID=#{dl}
 	</update>
-	
+
 	<update id="providerDisable" parameterType="long">
-	update  Users set userStatusID =2 where userID=#{dl}
+		update Users set userStatusID =2 where userID=#{dl}
 	</update>
-	
+
 	<select id="providerlist" resultType="oss.bean.Users">
-		select * from Users where 1 = 1
+		select * from Users where 1
+		= 1
+	</select>
+
+	<!-- 前台登入 -->
+	<select id="ForeLogin" resultType="oss.bean.Users" parameterType="oss.bean.Users">
+		select *
+		from Users where userAccount=#{userAccount} and userPwd=#{userPwd}
+	</select>
+
+	<!-- 注册 -->
+	<insert id="AddUsers" parameterType="oss.bean.Users">
+		<selectKey keyProperty="userID" order="BEFORE" resultType="long">
+			select UsersSEQ.nextval from dual
+		</selectKey>
+		insert into
+		USERS(userID,userAccount,userPwd,userType)
+		values(#{userID},#{userAccount},#{userPwd},#{userType})
+	</insert>
+
+	<!-- 用户唯一性 -->
+	<select id="SelectName" resultType="oss.bean.Users"
+		parameterType="oss.bean.Users">
+		select * from Users where userAccount=#{userAccount}
 	</select>
 	
+
 </mapper>
+
 
