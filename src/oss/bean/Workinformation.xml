@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalMapper">
+	<!-- 前端 作品 数据 袁楠文 2018-6-19 22:45 -->
+	<select id="workInfoList" resultType="oss.bean.Workinformation" parameterType="oss.bean.Condition">
+		SELECT * FROM WORKS
+		<!-- <if test="endDate != null and endDate !='' ">
+			and  CLASSIFICATIONNAME like concat(concat('%',#{endDate}),'%')
+		</if> -->
+	</select>
+</mapper>

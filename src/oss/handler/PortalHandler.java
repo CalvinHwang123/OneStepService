@@ -1,20 +1,16 @@
 package oss.handler;
-
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import oss.bean.Condition;
 import oss.bean.UserStory;
+import oss.bean.Workinformation;
 import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 
@@ -28,6 +24,8 @@ public class PortalHandler {
 
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
+	@Resource
+	private PortalBiz portalBizImpl;
 
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStoryList.action")
@@ -46,5 +44,19 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/userStory");
 		return mav;
 	}
+	
 
+	
+	// 前端 作品 数据 袁楠文 2018-6-19 22:45
+	@RequestMapping("/workInfoList")
+	public ModelAndView workInfoList(HttpServletRequest request,
+		@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
+		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+		
+		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
+		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
+		request.setAttribute("pageInfo", pageInfo);
+		ModelAndView classification = new ModelAndView("worksindex");
+		return classification;
+	}
 }

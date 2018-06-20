@@ -101,12 +101,8 @@
 								</a></li>
 								<li><a _href=<%=path+"/SystemManage/serseekServicelist.action" %>> <i class="iconfont">&#xe6a7;</i>
 										<cite>服务商类型配置</cite>
-
-								</a></li>
-								
-							</ul>
-						
-						
+								</a></li>						
+							</ul>					
 						</li>
 						<li><a href="javascript:;"> <i class="iconfont">&#xe6ce;</i>
 								<cite>数据统计</cite> <i class="iconfont nav_right">&#xe697;</i>

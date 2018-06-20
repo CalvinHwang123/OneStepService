@@ -174,7 +174,7 @@
 							<li><a href="login.html">我的钱包</a></li>
 							<li><a href="BusiManage/usersExit.action">退出</a></li>
 						</ul></li>
-					<c:if test="${forelogin.userType eq ''}">
+					<c:if test="${forelogin.userType == ''}">
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 								class="caret"></span></a>
@@ -197,7 +197,7 @@
 								<li><a href="offers.html">服务商中心</a></li>
 							</ul></li>
 					</c:if>
-						<c:if test="${forelogin.userType eq 1}">
+						<c:if test="${forelogin.userType == 1}">
 							<li class="dropdown head-dpdn"><a href="#"
 								class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 									class="caret"></span></a>
@@ -245,28 +245,7 @@
 								<li><a href="offers.html">服务商中心</a></li>
 							</ul></li>
 					</c:if>
-					<!-- 					<li class="dropdown head-dpdn"><a href="#" -->
-					<!-- 						class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span -->
-					<!-- 							class="caret"></span></a> -->
-					<!-- 						<ul class="dropdown-menu"> -->
-					<!-- 							<li><a href="offers.html">我的订单</a></li> -->
-					<!-- 							<li><a href="offers.html">我的足迹</a></li> -->
-					<!-- 							<li><a href="offers.html">我的收藏</a></li> -->
-					<!-- 							<li><a href="offers.html">真经</a></li> -->
-					<!-- 							<li><a href="offers.html">红包中心</a></li> -->
-					<!-- 							<li><a href="offers.html">服务百科</a></li> -->
-					<!-- 							<li><a href="offers.html">雇主俱乐部</a></li> -->
-
-					<!-- 						</ul></li> -->
-					<!-- 					<li class="dropdown head-dpdn"><a href="#" -->
-					<!-- 						class="dropdown-toggle" data-toggle="dropdown"><i -->
-					<!-- 							class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span -->
-					<!-- 							class="caret"></span></a> -->
-					<!-- 						<ul class="dropdown-menu"> -->
-					<!-- 							<li><a href="offers.html">立即开店赚钱</a></li> -->
-					<!-- 							<li><a href="offers.html">具体开店流程</a></li> -->
-					<!-- 							<li><a href="offers.html">开店须知</a></li> -->
-					<!-- 						</ul></li> -->
+				
 					<li class="dropdown head-dpdn"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span
 							class="caret"></span></a>
@@ -286,20 +265,7 @@
 						<a href="help.html" class="dropdown-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i> 帮助</a>
 					</li>
 
-							<li><a href="offers.html">曝光台</a></li>
-
-
-						</ul></li>
-					<li class="dropdown head-dpdn"><a href="contact.html"
-						class="dropdown-toggle"><i class="fa fa-map-marker"
-							aria-hidden="true"></i> 定位</a></li>
-					<li class="dropdown head-dpdn"><a href="card.html"
-						class="dropdown-toggle"><i class="fa fa-credit-card-alt"
-							aria-hidden="true"></i> 我的银行卡</a></li>
-					<li class="dropdown head-dpdn"><a href="help.html"
-						class="dropdown-toggle"><i class="fa fa-question-circle"
-							aria-hidden="true"></i> 帮助</a></li>
-				</ul>
+						
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -1128,8 +1094,13 @@
 								<h5>工业制造</h5>
 						</a></li>
 					</ul>
+<<<<<<< HEAD
 					<div class="clearfix"></div>
 					<h3 class="w3ls-title">作品入口</h3>
+=======
+					<div class="clearfix"> </div>
+					<h3 class="w3ls-title" >作品入口</h3>
+>>>>>>> refs/remotes/origin/nw
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="home"
 							aria-labelledby="home-tab">
@@ -2226,12 +2197,22 @@
 									</div>
 								</div>
 							</div>
+<<<<<<< HEAD
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+=======
+						</div> 
+					</div><br>
+					&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
+				</div>  
+			</div>  	
+		</div>  	
+	</div> 
+>>>>>>> refs/remotes/origin/nw
 	<!-- //welcome -->
 	<!-- add-products -->
 	<div class="add-products">
