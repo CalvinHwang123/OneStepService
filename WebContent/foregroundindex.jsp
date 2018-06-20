@@ -1094,13 +1094,8 @@
 								<h5>工业制造</h5>
 						</a></li>
 					</ul>
-<<<<<<< HEAD
-					<div class="clearfix"></div>
-					<h3 class="w3ls-title">作品入口</h3>
-=======
 					<div class="clearfix"> </div>
 					<h3 class="w3ls-title" >作品入口</h3>
->>>>>>> refs/remotes/origin/nw
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="home"
 							aria-labelledby="home-tab">
@@ -2202,6 +2197,7 @@
 					<br>
 					&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
 				</div>
+				<br>&nbsp;&nbsp;&nbsp;<a href=<%=path+"/Portal/workInfoList.action" %> class="w3ls-title">更多</a>
 			</div>
 		</div>
 	</div>
