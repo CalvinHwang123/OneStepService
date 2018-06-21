@@ -98,4 +98,9 @@
 		group by violationsWhy
 	</select>
 	
+	<!-- 指定用户查询信用明细记录 -->
+	<select id="listCreditByName" parameterType="oss.bean.Condition" resultType="oss.bean.Credit">
+		select * from credit where userID = 
+		(select userID from users where userName = #{title})
+	</select>
 </mapper>

@@ -7,6 +7,7 @@ import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.bean.Violations2;
 import oss.bean.Condition;
+import oss.bean.Credit;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
@@ -37,6 +38,9 @@ public interface PortalManageMapper {
 	public List<Violations> listStickViolations(int userType);
 	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
 	public List<Violations2> listViolationsGroupByWhy(int userType);
+	
+	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
+	public List<Credit> listCreditByName(Condition condition);
 	
 	public List<Links> listLinks(Condition condition);
 	public abstract int addLinks(Links links);

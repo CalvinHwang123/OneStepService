@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import oss.bean.Condition;
+import oss.bean.Credit;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.mapper.PortalMapper;
@@ -48,5 +49,11 @@ public class PortalBizImpl  implements PortalBiz{
 	@Override
 	public List<Violations2> listViolationsGroupByWhy(int userType) {
 		return portalManageMapper.listViolationsGroupByWhy(userType);
+	}
+
+	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
+	@Override
+	public List<Credit> listCreditByName(Condition condition) {
+		return portalManageMapper.listCreditByName(condition);
 	}
 }
