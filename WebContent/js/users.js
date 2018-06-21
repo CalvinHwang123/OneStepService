@@ -36,11 +36,11 @@ function Blacklist() {
 			async : true,
 			success : function(msg) {//
 				layer.closeAll();
-				window.location.reload();
 				layer.msg('已加入黑名单!', {
 					icon : 5,
 					time : 3000
 				});
+				window.location.reload();
 			}
 
 		})
@@ -128,13 +128,13 @@ function member_stop(obj, id){
 						layer.closeAll();
 						$(obj).find('i').html('&#xe62f;');
 
-						window.location.reload();
 						$(obj).parents("tr").find(".td-status").find('span')
 								.addClass('layui-btn-disabled').html('已停用');
 						layer.msg('已停用!', {
 							icon : 5,
 							time : 3000
 						});
+						window.location.reload();
 					}
 				})
         });
@@ -156,7 +156,6 @@ function member_stop(obj, id){
 					success : function(msg) {//
 						layer.closeAll();
 
-						window.location.reload();
 
 						$(obj).find('i').html('&#xe62f;');
 
@@ -166,6 +165,7 @@ function member_stop(obj, id){
 							icon : 5,
 							time : 3000
 						});
+						window.location.reload();
 					}
 				})
         });

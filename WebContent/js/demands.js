@@ -36,11 +36,11 @@ function changePageSize(pageSize) {
 					async : true,
 					success : function(msg) {//
 						layer.closeAll();
-						window.location.reload(); 
 						layer.msg('审核通过!', {
 							icon : 5,
 							time : 3000
 						});
+						window.location.reload(); 
 					}
 
 				})
@@ -66,11 +66,11 @@ function changePageSize(pageSize) {
 					async : true,
 					success : function(msg) {//
 						layer.closeAll();
-						window.location.reload(); 
 						layer.msg('已拒绝!', {
 							icon : 5,
 							time : 3000
 						});
+						window.location.reload(); 
 					}
 
 				})
