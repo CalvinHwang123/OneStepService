@@ -49,21 +49,21 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	}
 
 	@Override
-	public int AddLinks(Links links) {
+	public int addLinks(Links links) {
 		System.out.println("AddLinks");
-		return portalManageMapper.AddLinks(links);
+		return portalManageMapper.addLinks(links);
 	}
 
 	@Override
-	public int deleteById(List<Links> linksList) {
+	public int deleteLinksById(List<Links> linksList) {
 		System.out.println("deleteById");
-		return portalManageMapper.deleteById(linksList);
+		return portalManageMapper.deleteLinksById(linksList);
 	}
 
 	@Override
-	public int updateById(Links links) {
+	public int updateLinksById(Links links) {
 		System.out.println("updateById");
-		return portalManageMapper.updateById(links);
+		return portalManageMapper.updateLinksById(links);
 	}
 
 	// 批量删除雇主故事 黄绍鹏 6-14 15：47
@@ -137,5 +137,13 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	
 		return portalManageMapper.AddInfo(information);
 	}
+
+	@Override
+	public List<Links> LinksList() {
+		// TODO Auto-generated method stub
+		return portalManageMapper.LinksList();
+	}
+
+	
 
 }

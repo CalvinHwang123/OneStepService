@@ -5,16 +5,25 @@ public class Dynamics {
 	private String dynamicTitle;// 动态标题
 	private String dynamicContext;// 动态内容
 	private String dynamicTime;// 动态时间
+	private classification  checkClass;//分类ID
 	public Dynamics() {
 		
 	}
-	public Dynamics(Long dynamicId, String dynamicTitle, String dynamicContext, String dynamicTime) {
+
+
+
+	public Dynamics(Long dynamicId, String dynamicTitle, String dynamicContext, String dynamicTime,
+			classification checkClass) {
 		super();
 		this.dynamicId = dynamicId;
 		this.dynamicTitle = dynamicTitle;
 		this.dynamicContext = dynamicContext;
 		this.dynamicTime = dynamicTime;
+		this.checkClass = checkClass;
 	}
+
+
+
 	public Long getDynamicId() {
 		return dynamicId;
 	}
@@ -39,5 +48,18 @@ public class Dynamics {
 	public void setDynamicTime(String dynamicTime) {
 		this.dynamicTime = dynamicTime;
 	}
+
+
+
+	public classification getCheckClass() {
+		return checkClass;
+	}
+
+
+
+	public void setCheckClass(classification checkClass) {
+		this.checkClass = checkClass;
+	}
+
 	
 }

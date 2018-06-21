@@ -168,13 +168,13 @@
 						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
 								<cite>成功案例配置</cite>
 						</a></li>
-						<li><a _href="<%=path%>/PortalManage/linksList.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="PortalManage/linksList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>友情链接配置</cite>
 						</a></li>
-						<li><a _href="<%=path%>/PortalManage/listDyna.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="PortalManage/listDyna.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>行业动态配置</cite>
 						</a></li>
-						<li><a _href="<%=path%>/PortalManage/listInfo.action"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="PortalManage/listInfo.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>最新资讯配置</cite>
 						</a></li>
 					</ul></li>

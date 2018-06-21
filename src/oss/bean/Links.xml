@@ -10,7 +10,7 @@
 		</if>
 	</select>
 <!-- 	增加链接 -->
-		<insert id="AddLinks" parameterType="oss.bean.Links">
+		<insert id="addLinks" parameterType="oss.bean.Links">
 		<selectKey keyProperty="linksid" order="BEFORE" resultType="long">
 			select LINKSSEQ.nextval from dual
 		</selectKey>
@@ -19,7 +19,7 @@
 	</insert>
 	
 <!-- 	删除链接 -->
-	<delete id="deleteById" parameterType="java.util.List">
+	<delete id="deleteLinksById" parameterType="java.util.List">
 		delete from Links where linksid in
 		<foreach collection="list" item="i" open="(" close=")" separator=",">
 			#{i.linksid}
@@ -27,8 +27,14 @@
 	</delete>
 
 <!-- 修改链接 -->
-	<update id="updateById" parameterType="oss.bean.Links">
+	<update id="updateLinksById" parameterType="oss.bean.Links">
 		update links set
 		linksurl=#{linksurl},linksname=#{linksname} where linksid=#{linksid}
 	</update>
+	
+	<!-- 前端链接列表 -->
+	<select id="LinksList" resultType="oss.bean.Links">
+		select * from links where 1 = 1
+	</select>
+	
 </mapper>

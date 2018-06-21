@@ -88,20 +88,20 @@ public class PortalManageHandler {
 	@RequestMapping("/addlinks.action")
 	public @ResponseBody String Addlinks(HttpServletRequest req, @RequestBody Links links) {
 		System.out.println(links.getLinksid());
-		int addlinks = portalManageBizImpl.AddLinks(links);
+		int addlinks = portalManageBizImpl.addLinks(links);
 		return "success";
 	}
 
 	@RequestMapping(value = "/deleteById.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String deleteById(HttpServletRequest req, @RequestBody List<Links> linksList) {
-		int delete = portalManageBizImpl.deleteById(linksList);
+		int delete = portalManageBizImpl.deleteLinksById(linksList);
 		// ModelAndView mav = new ModelAndView("redirect:linksList.action");
 		return "success";
 	}
 
 	@RequestMapping("/updateById.action")
 	public @ResponseBody String updateById(HttpServletRequest req, @RequestBody Links links) {
-		int up = portalManageBizImpl.updateById(links);
+		int up = portalManageBizImpl.updateLinksById(links);
 		return "success";
 	}
 
@@ -217,5 +217,14 @@ public class PortalManageHandler {
 		int addlinks = portalManageBizImpl.AddInfo(information);
 		return "success";
 	}
-
+	
+	//前端资讯列表
+	@RequestMapping("/listLinks.action")
+	public ModelAndView listLinks(HttpServletRequest req) {
+		List<Links> linksList= portalManageBizImpl.LinksList();
+		req.setAttribute("linksList", linksList);
+		ModelAndView mav = new ModelAndView("../foregroundindex");
+		return mav;	
+	}
+	
 }

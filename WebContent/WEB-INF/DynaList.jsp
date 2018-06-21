@@ -47,6 +47,14 @@
 				<input class="layui-input" placeholder="截止日" name="endDate" id="end">
 				<input type="text" name="title" placeholder="请输入动态标题"
 					autocomplete="off" class="layui-input">
+				<div class="layui-input-inline">
+					<select name="action">
+						<option>分类名称</option>
+						<option>add</option>
+						<option>login</option>
+						<option>checklogin</option>
+					</select>
+				</div>
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
 				</button>
@@ -77,6 +85,7 @@
 						<th>动态标题</th>
 						<th>动态内容</th>
 						<th>动态时间</th>
+						<th>分类名称</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -91,13 +100,14 @@
 								</div>
 							</td>
 							<td><c:out value="${status.index+1}"></c:out></td>
-							<td><c:out value="${i.getDynamicTitle()}"></c:out></td>
-							<td><c:out value="${i.getDynamicContext()}"></c:out></td>
-							<td><c:out value="${i.getDynamicTime()}"></c:out></td>
+							<td><c:out value="${i.dynamicTitle}"></c:out></td>
+							<td><c:out value="${i.dynamicContext}"></c:out></td>
+							<td><c:out value="${i.dynamicTime}"></c:out></td>
+							<td><c:out value="${i.checkClass.classificationName}"></c:out></td>
 							<td class="td-manage"><a title="编辑"
-								onclick="openUpdateDyna(this,'${i.getDynamicId()}','${i.getDynamicTitle()}','${i.getDynamicContext()}','${i.getDynamicTime()}')"
+								onclick="openUpdateDyna(this,'${i.dynamicId}','${i.dynamicTitle}','${i.dynamicContext}','${i.dynamicTime}')"
 								href="javascript:;"> <i class="layui-icon">&#xe642;</i>
-							</a> <a title="删除" onclick="member_del(this,'${i.getDynamicId()}')"
+							</a> <a title="删除" onclick="member_del(this,'${i.dynamicId}')"
 								href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 							</a></td>
 						</tr>
@@ -259,7 +269,7 @@
 		var dynamicId;
 		function openUpdateDyna(obj, id,title,con,time) {
 			dynamicId = id;
-			 $("#newDynaTitle").val(title);
+	     $("#newDynaTitle").val(title);
 		 $("#newDynaCon").val(con);
 		 $("#test1").val(time);
 			layer.open({
