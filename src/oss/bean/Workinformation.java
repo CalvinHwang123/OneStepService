@@ -9,13 +9,16 @@ public class Workinformation {
 	private Long worksNum;
 	private Long worksStatusId;
 	private Users userName;
-	
+	private Classification classificationName;
+	private Param parameterName;
+	private String url;
 	public Workinformation() {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
 	public Workinformation(Long worksId, Long userId, String worksName, Long classIficstionId, String worksPrice,
-			Long worksNum, Long worksStatusId) {
+			Long worksNum, Long worksStatusId, Users userName, Classification classificationName, Param parameterName,
+			String url) {
 		super();
 		this.worksId = worksId;
 		this.userId = userId;
@@ -24,6 +27,10 @@ public class Workinformation {
 		this.worksPrice = worksPrice;
 		this.worksNum = worksNum;
 		this.worksStatusId = worksStatusId;
+		this.userName = userName;
+		this.classificationName = classificationName;
+		this.parameterName = parameterName;
+		this.url = url;
 	}
 	public Long getWorksId() {
 		return worksId;
@@ -73,6 +80,23 @@ public class Workinformation {
 	public void setUserName(Users userName) {
 		this.userName = userName;
 	}
-	
+	public Classification getClassificationName() {
+		return classificationName;
+	}
+	public void setClassificationName(Classification classificationName) {
+		this.classificationName = classificationName;
+	}
+	public Param getParameterName() {
+		return parameterName;
+	}
+	public void setParameterName(Param parameterName) {
+		this.parameterName = parameterName;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	
 }

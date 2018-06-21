@@ -37,6 +37,11 @@
 		SELECT * FROM CLASSIFICATION WHERE CLASSIFICATIONPID=0
 	</select>
 	
+	<!--  二级分类菜单数据 袁楠文 2018-6-21 10:12 -->
+	<select id="twoclassMenu" resultType="oss.bean.Classification">
+		SELECT * FROM CLASSIFICATION WHERE CLASSIFICATIONPID！=0
+	</select>
+	
 	<!-- 分类数据增加   袁楠文 2018-6-16 12:33-->
 		<insert id="addclasslistdata" parameterType="oss.bean.Classification">
 		<selectKey keyProperty="classificationId" order="BEFORE" resultType="long">

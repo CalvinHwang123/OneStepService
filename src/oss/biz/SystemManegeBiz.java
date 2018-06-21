@@ -43,4 +43,7 @@ public interface SystemManegeBiz {
 
 	// 服务商列表数据请求 袁楠文 2018-6-16 23:52
 	public List<Classification> seroneclassMenu(Condition condition);
+
+	// 二级分类菜单数据 袁楠文 2018-6-21 10:12
+	public List<Classification> twoclassMenu();
 }
