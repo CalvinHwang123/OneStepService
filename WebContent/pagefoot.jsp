@@ -44,21 +44,21 @@
   					<c:when test="${pageInfo.pageNum <= 2}">  
   						<c:if test="${pageInfo.pageNum != 1}">  
 <!-- 							<a class="num" href="javascript:void(0);" -->
-  								onclick="changePage(${pageInfo.pageNum-1})"><c:out  
+  								<a onclick="changePage(${pageInfo.pageNum-1})"><c:out  
   									value="${pageInfo.pageNum-1}"></c:out> </a>  
   						</c:if>  
   						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>  
   						<c:forEach begin="1" step="1" end="4" var="num">  
   							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">  
 <!-- 								<a class="num" href="javascript:void(0);" -->
-  									onclick="changePage(${pageInfo.pageNum+num})"><c:out  
+  									<a onclick="changePage(${pageInfo.pageNum+num})"><c:out  
   										value="${pageInfo.pageNum+num}"></c:out> </a>  
   							</c:if>  
   						</c:forEach>  
   					</c:when>  
   					<c:otherwise>  
 <!-- 						<a class="num" href="javascript:void(0);" -->
-  							onclick="changePage(${pageInfo.pageNum-1})"><c:out  
+  							<a onclick="changePage(${pageInfo.pageNum-1})"><c:out  
   								value="${pageInfo.pageNum-1}"></c:out> </a>  
 
 						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
