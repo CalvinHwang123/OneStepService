@@ -104,4 +104,12 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		List<Classification> seroneclassMenuList = systemManegeMapper.seroneclassMenu(condition);
 		return seroneclassMenuList;
 	}
+
+	// 二级分类菜单数据 袁楠文 2018-6-21 10:12
+	@Override
+	public List<Classification> twoclassMenu() {
+		// TODO 自动生成的方法存根
+		List<Classification> twoclassMenuList = systemManegeMapper.twoclassMenu();
+		return twoclassMenuList;
+	}
 }
