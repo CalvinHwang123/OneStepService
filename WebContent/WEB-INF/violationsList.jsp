@@ -24,7 +24,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			margin-right: 10px;
 		}
 	</style>
-<title>Insert title here</title>
+<title>曝光台————帝六人网，中国领先的一站式的企业全生命周期服务平台</title>
 </head>
 <body>
 	<div class="x-nav">
@@ -133,7 +133,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="page">
+		<!-- 		分頁页脚 -->
+		<%@ include file="/pagefoot.jsp" %>
+		<%-- <div class="page">
 			<div>
 				共${pageInfo.getPages() }页，每页 <select
 					style="width: 6%; height: 30px; padding: 0 10px;" name="pageSize"
@@ -146,12 +148,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</select> 条
 				<!-- 上一页 -->
 				<c:choose>
-					<%-- 上一页 可点击 --%>
+					上一页 可点击
 					<c:when test="${pageInfo.getPageNum() > 1 }">
 						<a class="prev" href="javaScript:void(0)"
 							onclick="changePage('${pageInfo.getPrePage() }')">上一页</a>
 					</c:when>
-					<%-- 上一页 不可点击 --%>
+					上一页 不可点击
 					<c:otherwise>
 						<a style="opacity: 0.4; cursor: default;"
 							href="javascript:return false;" onclick="return false;">上一页</a>
@@ -178,19 +180,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</c:forEach>
 				<!-- 下一页 -->
 				<c:choose>
-					<%-- 下一页 可点击 --%>
+					下一页 可点击
 					<c:when test="${pageInfo.getPageNum() < pageInfo.getPages() }">
 						<a class="prev" href="javaScript:void(0)"
 							onclick="changePage('${pageInfo.getNextPage() }')">下一页</a>
 					</c:when>
-					<%-- 下一页 可点击 --%>
+					下一页 可点击
 					<c:otherwise>
 						<a style="opacity: 0.4; cursor: default;"
 							href="javascript:return false;" onclick="return false;">下一页</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
-		</div>
+		</div> --%>
 
 	</div>
 
