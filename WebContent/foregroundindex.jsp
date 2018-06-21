@@ -277,6 +277,7 @@
 							<li><a href="offers.html">规则中心</a></li> 
 							<li><a href="offers.html">雇主故事</a></li>
 							<li><a href="Portal/foreViolationsList.action">曝光台</a></li> 
+							<li><a href="Portal/creditQuery.action">信用查询</a></li> 
 						</ul> 
 					</li> 
 					<li class="dropdown head-dpdn">

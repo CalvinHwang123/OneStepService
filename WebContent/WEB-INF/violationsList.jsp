@@ -24,7 +24,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			margin-right: 10px;
 		}
 	</style>
-<title>Insert title here</title>
+<title>曝光台————帝六人网，中国领先的一站式的企业全生命周期服务平台</title>
 </head>
 <body>
 	<div class="x-nav">
