@@ -32,13 +32,13 @@ $(function() {
 			"userPwd" : pwd1,
 			"userType" : userType
 		};
-		if (useracc == null && useracc == "") {
+		if (useracc == null ||useracc == "") {
 			$("#span1").text("请输入账号");
 			$("#span1").css("color", "red");
-		} else if (pwd == null && pwd == "") {
+		} else if (pwd == null || pwd == "") {
 			$("#span2").text("请输入密码");
 			$("#span2").css("color", "red");
-		} else {
+		} else if(useracc!=null||useracc != ""||pwd != null||pwd != ""){
 			$.ajax({
 				url : "BusiManage/addUsers.action",
 				// 数据发送方式
@@ -55,7 +55,7 @@ $(function() {
 		}
 	})
 
-	$("#login").on("click", function() { 
+	$("#login").on("click", function() {
 		var useracc = $(".user").val();
 		var pwd = $(".pwd").val();
 		var pwd1 = $.md5(pwd);
@@ -63,13 +63,13 @@ $(function() {
 			"userAccount" : useracc,
 			"userPwd" : pwd1
 		};
-		if (useracc == null && useracc == "") {
+		if (useracc == null || useracc == "") {
 			$("#span1").text("请输入账号");
 			$("#span1").css("color", "red");
-		} else if (pwd == null && pwd == "") {
+		} else if (pwd == null || pwd == "") {
 			$("#span2").text("请输入密码");
 			$("#span2").css("color", "red");
-		} else {
+		} else if(useracc!=null||useracc != ""||pwd != null||pwd != ""){
 			$.ajax({
 				url : "BusiManage/foreLogin.action",
 				// 数据发送方式
@@ -110,11 +110,12 @@ function regist(result) {
 function login(result) {
 	if (result == "success") {
 		$("#Login").submit();
-	}else if(result=="fail"){
+	} else if (result == "fail") {
 		toastr.error("账号失效");
+		alert("账号失效");
 	} else {
-//		toastr.error("登入失败"); 
-		alert("登入失败");
+		toastr.error("登入失败");
+		 alert("登入失败");	 
 		$("#Login").attr("action", "ForeLogin.jsp")
 		$("#Login").submit();
 	}

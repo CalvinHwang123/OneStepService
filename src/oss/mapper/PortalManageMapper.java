@@ -39,9 +39,9 @@ public interface PortalManageMapper {
 	public List<Violations2> listViolationsGroupByWhy(int userType);
 	
 	public List<Links> listLinks(Condition condition);
-	public abstract int AddLinks(Links links);
-	public abstract int deleteById(List<Links> linksList);
-	public abstract int updateById(Links links);
+	public abstract int addLinks(Links links);
+	public abstract int deleteLinksById(List<Links> linksList);
+	public abstract int updateLinksById(Links links);
 	
 	// 批量删除雇主故事 黄绍鹏 6-14 15：47
 	public abstract int deleteStoryByID(List<UserStory> storyList);
@@ -65,4 +65,6 @@ public interface PortalManageMapper {
 	//增加资讯  wwj  6-15
 	public abstract int AddInfo(Information information);
 	
+	//前端资讯 wwj 6-20
+	public List<Links> LinksList();
 }

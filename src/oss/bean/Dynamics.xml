@@ -3,39 +3,58 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.PortalManageMapper">
 	<!-- 动态列表 -->
-<select id="ListDyna" resultType="oss.bean.Dynamics" parameterType="oss.bean.Condition">
-		select * from dynamics where 1 = 1
-		<if test="startDate != null and endDate != null and startDate !='' and endDate !=''">
+	<select id="ListDyna" resultMap="DynaMap" parameterType="oss.bean.Condition">
+		select
+		A.Dynamicid,A.Dynamictitle,A.Dynamictime,A.Dynamiccontext,B.Classificationid,B.Classificationname,B.Classificationpid
+		from dynamics a,Classification b where
+		A.Classificationid=B.Classificationid
+		<if
+			test="startDate != null and endDate != null and startDate !='' and endDate !=''">
 			and dynamicTime between #{startDate} and #{endDate}
 		</if>
 		<if test="title != null and title !='' ">
-			and  dynamicTitle like concat(concat('%',#{title}),'%')
+			and dynamicTitle like concat(concat('%',#{title}),'%')
 		</if>
-		
 	</select>
-	
-	<!-- 	删除动态 -->
+
+	<resultMap type="oss.bean.Dynamics" id="DynaMap">
+		<id property="dynamicId" column="dynamicId" />
+		<result property="dynamicTitle" column="dynamicTitle" />
+		<result property="dynamicContext" column="dynamicContext" />
+		<result property="dynamicTime" column="dynamicTime" />
+		<association property="checkClass" javaType="oss.bean.classification">
+			<id property="classificationId" column="classificationId" />
+			<result property="classificationName" column="classificationName" />
+			<result property="classificationPid" column="classificationPid" />
+		</association>
+	</resultMap>
+
+	<!-- 删除动态 -->
 	<delete id="deleteDynaById" parameterType="java.util.List">
 		delete from Dynamics where dynamicId in
-		<foreach collection="list" item="i" open="(" close=")" separator=",">
+		<foreach collection="list" item="i" open="(" close=")"
+			separator=",">
 			#{i.dynamicId}
 		</foreach>
 	</delete>
-	
-		<!-- 修改动态 -->
+
+	<!-- 修改动态 -->
 	<update id="updateDynaById" parameterType="oss.bean.Dynamics">
 		update Dynamics set
-		dynamicTitle=#{dynamicTitle},dynamicContext=#{dynamicContext},dynamicTime=#{dynamicTime} where dynamicId=#{dynamicId}
+		dynamicTitle=#{dynamicTitle},dynamicContext=#{dynamicContext},dynamicTime=#{dynamicTime}
+		where dynamicId=#{dynamicId}
 	</update>
-	
-	<!-- 	增加动态 -->
-		<insert id="AddDyna" parameterType="oss.bean.Dynamics">
-		<selectKey keyProperty="dynamicId" order="BEFORE" resultType="long">
+
+	<!-- 增加动态 -->
+	<insert id="AddDyna" parameterType="oss.bean.Dynamics">
+		<selectKey keyProperty="dynamicId" order="BEFORE"
+			resultType="long">
 			select DYNAMICSEQ.nextval from dual
 		</selectKey>
-		insert into Dynamics(dynamicId,dynamicTitle,dynamicContext,dynamicTime)
-		values(#{dynamicId},#{dynamicTitle},#{dynamicContext},#{dynamicTime})	
+		insert into
+		Dynamics(dynamicId,dynamicTitle,dynamicContext,dynamicTime)
+		values(#{dynamicId},#{dynamicTitle},#{dynamicContext},#{dynamicTime})
 	</insert>
-	
+
 </mapper>
 	
