@@ -17,8 +17,7 @@
 
 	<update id="Blacklist" parameterType="long">
 
-		update Users set
-		userStatusID =3 where userID=#{dl}
+
 
 		update Users set userStatusID =3
 		where userID=#{userID}
@@ -36,21 +35,19 @@
 
 	<update id="Disable" parameterType="long">
 
-		update Users set userStatusID
-		=2 where userID=#{dl}
 
-		update Users set userStatusID =2 where
+
+		update Users set userStatusID
+		=2 where
 		userID=#{userID}
 
 	</update>
 
 
-	<select id="listUser" resultType="oss.bean.Users">
-		select * from Users where 1 = 1
-	</select>
 	<!-- 华清修改：启用 -->
 	<update id="enable" parameterType="long">
-		update Users set userStatusID =1 where userID=#{userID}
+		update Users set userStatusID
+		=1 where userID=#{userID}
 	</update>
 	<!-- 华清修改：雇主查询列表 -->
 	<select id="listUser" parameterType="oss.bean.Condition"
@@ -75,13 +72,14 @@
 	</select>
 
 
-	
+
 
 	<!-- 前台登入 -->
 	<select id="ForeLogin" resultType="oss.bean.Users"
 		parameterType="oss.bean.Users">
 		select *
-		from Users where userAccount=#{userAccount} and userPwd=#{userPwd}
+		from Users where userAccount=#{userAccount} and
+		userPwd=#{userPwd}
 	</select>
 
 	<!-- 注册 -->
@@ -111,7 +109,8 @@
 	<update id="userCreditScore" parameterType="oss.bean.Credit">
 
 
-		update Users set userCredit =(select userCredit from Users where
+		update Users set
+		userCredit =(select userCredit from Users where
 		userID=#{userID})-#{creditPoints} where userID=#{userID}
 	</update>
 
@@ -138,9 +137,12 @@
 			select violationsSeq.nextVal from dual
 		</selectKey>
 		insert into violations
-		(violationsID, violationsWhy, violationsResult, userID, violationsTime, stickTime)
-		values (#{violationsID}, #{violationsWhy}, #{violationsResult},
-		#{userID}, #{violationsTime}, '1970-01-01 00:00:00')
+		(violationsID, violationsWhy, violationsResult,
+		userID, violationsTime, stickTime)
+		values (#{violationsID},
+		#{violationsWhy}, #{violationsResult},
+		#{userID}, #{violationsTime},
+		'1970-01-01 00:00:00')
 	</insert>
 
 
