@@ -20,7 +20,7 @@
 <script type="text/javascript" src="./lib/layui/layui.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="./js/xadmin.js"></script>
-<script src="js/users.js"></script>
+ <script type="text/javascript" src="./js/demands.js"></script>
 </head>
 <body>
 	<div class="x-nav">
@@ -32,13 +32,22 @@
 	</div>
 	<div class="x-body">
 		<div class="layui-row">
-			<form class="layui-form layui-col-md12 x-so"  id="searchform" method="post" action="BusiManage/searchUser.action">
-
-				<input type="text" name="demandID" id="demandID" placeholder="请输入需求ID"
+			<form id="pageForm" class="layui-form layui-col-md12 x-so"
+				action="BusiManage/demandList.action">
+				<!-- 隐藏域 每页条数 -->
+				<input type="hidden" id="pageSizeInput" name="pageSize"
+					value="${demandList.getPageSize() }">
+				<!-- 隐藏域 当前页数 -->
+				<input type="hidden" id="currentPageInput" name="pageNum"
+					value="${demandList.getPageNum() }"><input
+					class="layui-input" placeholder="开始日" name="startDate" id="start"
+					value="${condition.startDate }"> <input class="layui-input"
+					placeholder="截止日" name="endDate" id="end"
+					value="${condition.endDate }"> 
+					 <input type="text"
+					name="title" value="${condition.title }" placeholder="请输入需求ID"
 					autocomplete="off" class="layui-input">
-			
-				<button class="layui-btn" type="submit" lay-filter="sreach">
-				
+				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
 				</button>
 			</form>
@@ -51,7 +60,8 @@
 			onclick="x_admin_show('添加用户','./admin-add.html')">
 			<i class="layui-icon"></i>添加
 		</button>
-		<span class="x-right" style="line-height: 40px">共有数据：88 条</span>
+		<span class="x-right" style="line-height: 40px">共有数据：${demandList.getTotal() }
+			条</span>
 		</xblock>
 		<form id="form1" method="post" action="">
 			<table class="layui-table">
@@ -64,10 +74,10 @@
 							</div>
 						</th>
 
-						<th>需求发布方</th>
+						<th>需求ID</th>
+						
 						<th>发布日期</th>
 						<th>截标时间</th>
-						<th>中标者</th>
 						<th>需求状态</th>
 						<th>操作</th>
 				</thead>
@@ -86,25 +96,26 @@
 									</div>
 								</td>
 								<td>${demand.userID }</td>
-							 	<td>${demand.releaseTime }</td> 
-								<td>${demand.asoftTime }</td>
-								<td>${demand.tenderID }</td>
 								
+								<td>${demand.releaseTime }</td>
+								<td>${demand.asoftTime }</td>
+							
+								<td>
 								 <c:if test="${demand.demandstatusid==1 }">
-									<td><span
-										class="  layui-btn layui-btn-normal layui-btn-mini">未审核</span></td>
+									<span
+										class="  layui-btn layui-btn-normal layui-btn-mini">未审核</span>
 								</c:if>
 								<c:if test="${demand.demandstatusid==2 }">
-									<td><span
-										class="  layui-btn layui-btn-normal layui-btn-mini">审核通过</span></td>
+									<span
+										class="  layui-btn layui-btn-normal layui-btn-mini">审核通过</span>
 								</c:if> 
 								
 								<c:if test="${demand.demandstatusid==3 }">
-									<td><span
-										class="  layui-btn layui-btn-normal layui-btn-mini">已拒绝</span></td>
+									<span
+										class="  layui-btn layui-btn-normal layui-btn-mini">已拒绝</span>
 								</c:if> 
 								
-						
+						            </td>
 								<td>
 								<c:if test="${demand.demandstatusid==1 }">
 								<input onclick="examine()" title="${demand.demandID }"
@@ -132,11 +143,13 @@
 									class="Audited  layui-btn layui-btn-primary">
 								</c:if>	
 									
-								<input  id="See" title="${demand.demandID}"
+								<input onclick="openUpdateViolations('${demand.demandID}','${demand.demandTitle}','${demand.demandContent}',
+               			 '${demand.demandRequire}','${demand.userID}')" 
 									style="height: 30px; width: 65px;" value="查看"
 									class="See  layui-btn layui-btn-primary">
 									
-								<input onclick="Blacklist()" title="${demand.demandID}"
+								<input onclick="deduction('${demand.demandID}','${demand.demandTitle}','${demand.demandContent}',
+               			 '${demand.demandRequire}','${demand.userID}')" 
 									style="height: 30px; width: 125px;" value="扣除信用分"
 									class="Blacklist  layui-btn layui-btn-primary">
 								
@@ -149,13 +162,156 @@
 		</form>
 		<div class="page">
 			<div>
-				<a class="prev" href="">&lt;&lt;</a> <a class="num" href="">1</a> <span
-					class="current">2</span> <a class="num" href="">3</a> <a
-					class="num" href="">489</a> <a class="next" href="">&gt;&gt;</a>
+				共${demandList.pages }页，每页 <select
+					style="width: 6%; height: 30px; padding: 0 10px;" name="pageSize"
+					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
+					id="pageSizeSelect">
+					<option value="3" ${demandList.getPageSize() == 3 ? "selected" : ""}>3</option>
+					<option value="5" ${demandList.getPageSize() == 5 ? "selected" : ""}>5</option>
+					<option value="10"
+						${demandList.getPageSize() == 10 ? "selected" : ""}>10</option>
+				</select> 条
+				<!-- 上一页 -->
+				<c:choose>
+					<%-- 上一页 可点击 --%>
+					<c:when test="${demandList.getPageNum() > 1 }">
+						<a class="prev" href="javaScript:void(0)"
+							onclick="changePage('${demandList.getPrePage() }')">上一页</a>
+					</c:when>
+					<%-- 上一页 不可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4; cursor: default;"
+							href="javascript:return false;" onclick="return false;">上一页</a>
+					</c:otherwise>
+				</c:choose>
+				<!-- foreach不支持递减，所以分开写 -->
+				<c:if test="${demandList.getPageNum() - 2 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${demandList.getPageNum() - 2}')">${demandList.getPageNum() - 2}</a>
+				</c:if>
+				<c:if test="${demandList.getPageNum() - 1 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${demandList.getPageNum() - 1}')">${demandList.getPageNum() - 1}</a>
+				</c:if>
+				<!-- 当前页 -->
+				<span class="current">${demandList.getPageNum() }</span>
+				<!-- foreach支持递增 -->
+				<c:forEach begin="1" end="2" var="next" step="1">
+					<c:if
+						test="${demandList.getPageNum() + next le demandList.getPages() }">
+						<a class="prev" href="javaScript:void(0)"
+							onclick="changePage('${demandList.getPageNum() + next}')">${demandList.getPageNum() + next}</a>
+					</c:if>
+				</c:forEach>
+				<!-- 下一页 -->
+				<c:choose>
+					<%-- 下一页 可点击 --%>
+					<c:when test="${demandList.getPageNum() < demandList.getPages() }">
+						<a class="prev" href="javaScript:void(0)"
+							onclick="changePage('${demandList.getNextPage() }')">下一页</a>
+					</c:when>
+					<%-- 下一页 可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4; cursor: default;"
+							href="javascript:return false;" onclick="return false;">下一页</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
 	</div>
+	
+	<!-- 查看详情 -->
+	<div style="display: none;" id="details">
+		<form class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户ID</label>
+				<div class="layui-input-block">
+					<input type="text" name="userID" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="updateUserID">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">标题</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsTime" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="updateViolationsTime">
+				</div>
+			</div>
+			
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">发布内容</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsWhy" class="layui-textarea" lay-verify="required"
+						required autocomplete="off" class="layui-input"
+						id="updateViolationsWhy">
+				</div>
+			</div>
+			
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">具体要求</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsWhy" class="layui-textarea" lay-verify="required"
+						required autocomplete="off" class="layui-input"
+						id="updateViolationsResult">
+				</div>
+			</div>
+			
+			
+			
+		</form>
+	</div>
+	
+	<!-- 扣除信用分 -->
+	<div style="display: none;" id="deducTion">
+		<form class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户ID</label>
+				<div class="layui-input-block">
+					<input type="text" name="userID" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="userID">
+				</div>
+			</div>
+			<br>
+			<select style="height: 30px;width: 50px"  id="creditType">
+		
+			<option value="2">违约</option>
+			</select>
+			<br>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">违规原因</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsWhy" class="layui-textarea" lay-verify="required"
+						required autocomplete="off" class="layui-input"
+						id="creditWhy">
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">扣除分数</label>
+				<div class="layui-input-block">
+					<input type="text" name="violationsResult" lay-verify="required"
+						required autocomplete="off" class="layui-input"
+						id="creditpoints">
+				</div>
+				
+				<div class="layui-form-item">
+				<br>
+				<div class="layui-input-block">
+					<button type="button" class="layui-btn" onclick="deducTion()">立即提交扣除</button>
+					
+				</div>
+			</div>
+			</div>
+			
+			
+			
+		</form>
+	</div>
+	
 	<script>
 		layui.use('laydate', function() {
 			var laydate = layui.laydate;
@@ -171,121 +327,6 @@
 			});
 		});
 	
-		//通过
-
-		function examine() {
-			layer.confirm('确认审核通过吗？', function(index) {
-				var demandID = $(".examine").attr("title");
-				alert(demandID);
-				var newdemandID = {
-					"demandID" : demandID
-				};
-				$.ajax({
-
-					url : "BusiManage/examine.action",
-					type : "post",
-					dataType : "text",
-					contentType : "application/json;charset=utf-8",
-					data : JSON.stringify(newdemandID),
-					async : true,
-					success : function(msg) {//
-						layer.closeAll();
-						window.location.reload(); 
-						layer.msg('审核通过!', {
-							icon : 5,
-							time : 3000
-						});
-					}
-
-				})
-			})
-		}
-		
-		//拒绝通过
-
-		function Audited() {
-			layer.confirm('确认拒绝通过吗？', function(index) {
-				var demandID = $(".Audited").attr("title");
-				alert(demandID);
-				var newdemandID = {
-					"demandID" : demandID
-				};
-				$.ajax({
-
-					url : "BusiManage/Audited.action",
-					type : "post",
-					dataType : "text",
-					contentType : "application/json;charset=utf-8",
-					data : JSON.stringify(newdemandID),
-					async : true,
-					success : function(msg) {//
-						layer.closeAll();
-						window.location.reload(); 
-						layer.msg('已拒绝!', {
-							icon : 5,
-							time : 3000
-						});
-					}
-
-				})
-			})
-		}
-		
-		
-		
-       //搜索 
-       function search() {
-			
-    	      var userAccount=$("#userAccount").val();
-               alert(userAccount);
-				var newuserAccount = {
-					"userAccount" : userAccount
-
-				};
-				$.ajax({
-					url : "BusiManage/searchUser.action",
-					type : "post",
-					dataType : "text",
-					contentType : "application/json;charset=utf-8",
-					data : JSON.stringify(newuserAccount),
-					async : true,
-					success : function(msg) {//
-						layer.closeAll();
-						layer.msg('正在搜索中!', {
-							icon : 5,
-							time : 3000
-						});
-						window.location.reload();
-					}
-				})
-			
-
-		}
-		
-		/*用户-删除*/
-		function member_del(obj, id) {
-			layer.confirm('确认要删除吗？', function(index) {
-				//发异步删除数据
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!', {
-					icon : 1,
-					time : 1000
-				});
-			});
-		}
-
-		function delAll(argument) {
-
-			var data = tableCheck.getData();
-
-			layer.confirm('确认要删除吗？' + data, function(index) {
-				//捉到所有被选中的，发异步进行删除
-				layer.msg('删除成功', {
-					icon : 1
-				});
-				$(".layui-form-checked").not('.header').parents('tr').remove();
-			});
-		}
 	</script>
 	<script>
 		var _hmt = _hmt || [];

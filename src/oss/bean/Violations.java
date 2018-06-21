@@ -6,7 +6,7 @@ public class Violations {
 	private String violationsTime;//违规时间
 	private String violationsWhy;//违规原因
 	private String violationsResult;//违规结果
-//	private Long userID;
+	private Long userID;
 	private String stickTime;//置顶时间
 	private Users users;//用户对象
 	
@@ -25,13 +25,13 @@ public class Violations {
 		return violationsID;
 	}
 
-//	public Long getUserID() {
-//		return userID;
-//	}
-//
-//	public void setUserID(Long userID) {
-//		this.userID = userID;
-//	}
+	public Long getUserID() {
+		return userID;
+	}
+
+	public void setUserID(Long userID) {
+		this.userID = userID;
+	}
 
 	public void setViolationsID(Long violationsID) {
 		this.violationsID = violationsID;
