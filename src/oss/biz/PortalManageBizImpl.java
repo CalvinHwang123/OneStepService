@@ -12,7 +12,6 @@ import oss.bean.Information;
 import oss.bean.Links;
 import oss.bean.UserStory;
 import oss.bean.Violations;
-import oss.bean.Violations2;
 /*
  * 门户管理Biz业务实现类
  */
@@ -155,23 +154,10 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		return portalManageMapper.AddInfo(information);
 	}
 
-
-	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
-	@Override
-	public List<Violations> listViolationsDesc() {
-		return portalManageMapper.listViolationsDesc();
-	}
-
-	// 查询置顶违规记录 by hlq 2018-06-16 22:05
-	@Override
-	public List<Violations> listStickViolations() {
-		return portalManageMapper.listStickViolations();
-	}
-
-	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
-	@Override
-	public List<Violations2> listViolationsGroupByWhy() {
-		return portalManageMapper.listViolationsGroupByWhy();
-	}
-
+//	@Override
+//	public Users Forelogin(Users users) {
+//		
+//		return portalManageMapper.Forelogin(users);
+//	}
+	
 }

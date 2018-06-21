@@ -20,7 +20,7 @@
 <script type="text/javascript" src="./lib/layui/layui.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="./js/xadmin.js"></script>
-<script src="js/users.js"></script>
+ <script type="text/javascript" src="./js/users.js"></script>
 </head>
 <body>
 	<div class="x-nav">
@@ -32,9 +32,15 @@
 	</div>
 	<div class="x-body">
 		<div class="layui-row">
-			<form class="layui-form layui-col-md12 x-so">
-
-				<input type="text" name="username" placeholder="请输入用户名"
+			<form id="pageForm" class="layui-form layui-col-md12 x-so"
+				action="BusiManage/providerList.action">
+				<!-- 隐藏域 每页条数 -->
+				<input type="hidden" id="pageSizeInput" name="pageSize"
+					value="${providerList.getPageSize() }">
+				<!-- 隐藏域 当前页数 -->
+				<input type="hidden" id="currentPageInput" name="pageNum"
+					value="${providerList.getPageNum() }"> <input type="text"
+					name="title" value="${condition.title }" placeholder="请输入用户名"
 					autocomplete="off" class="layui-input">
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
@@ -49,7 +55,8 @@
 			onclick="x_admin_show('添加用户','./admin-add.html')">
 			<i class="layui-icon"></i>添加
 		</button>
-		<span class="x-right" style="line-height: 40px">共有数据：88 条</span>
+		<span class="x-right" style="line-height: 40px">共有数据：${providerList.getTotal() }
+			条</span>
 		</xblock>
 		<form id="form1" method="post" action="">
 			<table class="layui-table">
@@ -62,18 +69,18 @@
 							</div>
 						</th>
 
-						<th>雇主名称</th>
-						<th>雇主账号</th>
+						<th>服务商名称</th>
+						<th>服务商账号</th>
 						<th>余额</th>
 						<th>信用分</th>
-						<th>雇主状态</th>
+						<th>服务商状态</th>
 						<th>操作</th>
 				</thead>
 				<tbody>
 					<tr>
 
 
-						<c:forEach var="user" items="${Userlist.list}">
+						<c:forEach var="user" items="${providerList.list}">
 
 							<tr>
 
@@ -87,19 +94,20 @@
 								<td>${user.userAccount }</td>
 								<td>${user.userBalance }</td>
 								<td>${user.userCredit }</td>
+								<td>
 								<c:if test="${user.userStatusID==1 }">
-									<td><span
-										class="layui-btn layui-btn-normal layui-btn-mini">启用</span></td>
+									<span
+										class="layui-btn layui-btn-normal layui-btn-mini">启用</span>
 								</c:if>
 								<c:if test="${user.userStatusID==2 }">
-									<td><span
-										class="layui-btn layui-btn-normal layui-btn-mini">禁用</span></td>
+									<span
+										class="layui-btn layui-btn-normal layui-btn-mini">禁用</span>
 								</c:if>
 								<c:if test="${user.userStatusID==3 }">
-									<td><span
-										class="layui-btn layui-btn-normal layui-btn-mini">黑名单</span></td>
+									<span
+										class="layui-btn layui-btn-normal layui-btn-mini">黑名单</span>
 								</c:if>
-
+</td>
 								<td><input onclick="Reset()" title="${user.userID }"
 									style="height: 30px; width: 125px;" value="重置"
 									class=" Reset   layui-btn layui-btn-primary"> <a
@@ -110,7 +118,7 @@
 								<c:if test="${user.userStatusID==3 }">
 								<input onclick="cancelBlacklist()" title="${user.userID }"
 									style="height: 30px; width: 125px;" value="取消黑名单"
-									class="Blacklist  layui-btn layui-btn-primary">
+									class="cancelBlacklist  layui-btn layui-btn-primary">
 								
 								</c:if>
 								 <c:if test="${user.userStatusID==1 }">
@@ -133,9 +141,60 @@
 		</form>
 		<div class="page">
 			<div>
-				<a class="prev" href="">&lt;&lt;</a> <a class="num" href="">1</a> <span
-					class="current">2</span> <a class="num" href="">3</a> <a
-					class="num" href="">489</a> <a class="next" href="">&gt;&gt;</a>
+				共${providerList.pages }页，每页 <select
+					style="width: 6%; height: 30px; padding: 0 10px;" name="pageSize"
+					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
+					id="pageSizeSelect">
+					<option value="3" ${providerList.getPageSize() == 3 ? "selected" : ""}>3</option>
+					<option value="5" ${providerList.getPageSize() == 5 ? "selected" : ""}>5</option>
+					<option value="10"
+						${providerList.getPageSize() == 10 ? "selected" : ""}>10</option>
+				</select> 条
+				<!-- 上一页 -->
+				<c:choose>
+					<%-- 上一页 可点击 --%>
+					<c:when test="${providerList.getPageNum() > 1 }">
+						<a class="prev" href="javaScript:void(0)"
+							onclick="changePage('${providerList.getPrePage() }')">上一页</a>
+					</c:when>
+					<%-- 上一页 不可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4; cursor: default;"
+							href="javascript:return false;" onclick="return false;">上一页</a>
+					</c:otherwise>
+				</c:choose>
+				<!-- foreach不支持递减，所以分开写 -->
+				<c:if test="${providerList.getPageNum() - 2 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${providerList.getPageNum() - 2}')">${providerList.getPageNum() - 2}</a>
+				</c:if>
+				<c:if test="${providerList.getPageNum() - 1 ge 1 }">
+					<a class="prev" href="javaScript:void(0)"
+						onclick="changePage('${providerList.getPageNum() - 1}')">${providerList.getPageNum() - 1}</a>
+				</c:if>
+				<!-- 当前页 -->
+				<span class="current">${providerList.getPageNum() }</span>
+				<!-- foreach支持递增 -->
+				<c:forEach begin="1" end="2" var="next" step="1">
+					<c:if
+						test="${providerList.getPageNum() + next le providerList.getPages() }">
+						<a class="prev" href="javaScript:void(0)"
+							onclick="changePage('${providerList.getPageNum() + next}')">${providerList.getPageNum() + next}</a>
+					</c:if>
+				</c:forEach>
+				<!-- 下一页 -->
+				<c:choose>
+					<%-- 下一页 可点击 --%>
+					<c:when test="${providerList.getPageNum() < providerList.getPages() }">
+						<a class="prev" href="javaScript:void(0)"
+							onclick="changePage('${providerList.getNextPage() }')">下一页</a>
+					</c:when>
+					<%-- 下一页 可点击 --%>
+					<c:otherwise>
+						<a style="opacity: 0.4; cursor: default;"
+							href="javascript:return false;" onclick="return false;">下一页</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
@@ -154,207 +213,7 @@
 				elem : '#end' //指定元素
 			});
 		});
-		//加入黑名单
-
-		function Blacklist() {
-			layer.confirm('确认要加入黑名单吗？', function(index) {
-				var userID = $(".Blacklist").attr("title");
-				var newBlacklist = {
-					"userID" : userID
-				};
-				$.ajax({
-
-					url : "BusiManage/Blacklist.action",
-					type : "post",
-					dataType : "text",
-					contentType : "application/json;charset=utf-8",
-					data : JSON.stringify(newBlacklist),
-					async : true,
-					success : function(msg) {//
-						layer.closeAll();
-						window.location.reload(); 
-						layer.msg('已加入黑名单!', {
-							icon : 5,
-							time : 3000
-						});
-					}
-
-				})
-			})
-		}
-		
-		
-		//取消黑名单
-
-		function cancelBlacklist() {
-			layer.confirm('确认要取消黑名单吗？', function(index) {
-				var userID = $(".Blacklist").attr("title");
-				var newBlacklist = {
-					"userID" : userID	
-				};
-				$.ajax({
-
-					url : "BusiManage/cancelBlacklist.action",
-					type : "post",
-					dataType : "text",
-					contentType : "application/json;charset=utf-8",
-					data : JSON.stringify(newBlacklist),
-					async : true,
-					success : function(msg) {//
-						layer.closeAll();
-						layer.msg('取消成功，账号为启用状态!', {
-							icon : 5,
-							time : 3000
-						});
-						window.location.reload();
-					}
-
-				})
-			})
-		}
-		//重置密码
-
-		function Reset() {
-			layer.confirm('确认要重置吗？', function(index) {
-				var userID = $(".Reset").attr("title");
-
-				var newStory = {
-					"userID" : userID
-
-				};
-				$.ajax({
-					url : "BusiManage/updatepow.action",
-					type : "post",
-					dataType : "text",
-					contentType : "application/json;charset=utf-8",
-					data : JSON.stringify(newStory),
-					async : true,
-					success : function(msg) {//
-						layer.closeAll();
-						layer.msg('重置密码成功!', {
-							icon : 5,
-							time : 3000
-						});
-						window.location.reload();
-					}
-				})
-			})
-
-		}
-
-		/*用户-停用*/
-		//1是启用 2是禁用 3是黑名单
-		function member_stop(obj, id) {
-			layer.confirm('确认要停用吗？', function(index) {
-				if ($(obj).attr('title') == '1') {
-
-					var newStory = {
-						"userID" : id
-					};
-
-					$
-							.ajax({
-								url : "BusiManage/Disable.action",
-								type : "post",
-								dataType : "text",
-								contentType : "application/json;charset=utf-8",
-								data : JSON.stringify(newStory),
-								async : true,
-								success : function(msg) {//
-									layer.closeAll();
-									$(obj).find('i').html('&#xe62f;');
-
-									window.location.reload();
-									$(obj).parents("tr").find(".td-status")
-											.find('span').addClass(
-													'layui-btn-disabled').html(
-													'已停用');
-									layer.msg('已停用!', {
-										icon : 5,
-										time : 3000
-									});
-								}
-							})
-
-					//发异步把用户状态进行更改
-
-				}
-
-				if ($(obj).attr('title') == '2') {
-
-					var newStory = {
-						"userID" : id
-					};
-
-					$
-							.ajax({
-								url : "BusiManage/enable.action",
-								type : "post",
-								dataType : "text",
-								contentType : "application/json;charset=utf-8",
-								data : JSON.stringify(newStory),
-								async : true,
-								success : function(msg) {//
-									layer.closeAll();
-
-									window.location.reload();
-
-									$(obj).find('i').html('&#xe62f;');
-
-									$(obj).parents("tr").find(".td-status")
-											.find('span').addClass(
-													'layui-btn-disabled').html(
-													'已启用');
-									layer.msg('已启用!', {
-										icon : 5,
-										time : 3000
-									});
-								}
-							})
-					//发异步把用户状态进行更改
-
-				}
-
-				if ($(obj).attr('title') == '3') {
-
-					$(obj).parents("tr").find(".td-status").find('span')
-							.removeClass('layui-btn-disabled').html(
-									'当前账号为黑名单状态');
-					layer.msg('当前账号为黑名单状态!', {
-						icon : 5,
-						time : 3000
-					});
-
-				}
-
-			});
-
-		}
-
-		/*用户-删除*/
-		function member_del(obj, id) {
-			layer.confirm('确认要删除吗？', function(index) {
-				//发异步删除数据
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!', {
-					icon : 1,
-					time : 1000
-				});
-			});
-		}
-
-		function delAll(argument) {
-
-			var data = tableCheck.getData();
-
-			layer.confirm('确认要删除吗？' + data, function(index) {
-				//捉到所有被选中的，发异步进行删除
-				layer.msg('删除成功', {
-					icon : 1
-				});
-				$(".layui-form-checked").not('.header').parents('tr').remove();
-			});
-		}
+	
 	</script>
 	<script>
 		var _hmt = _hmt || [];

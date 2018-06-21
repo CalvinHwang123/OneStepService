@@ -77,7 +77,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<th>违规时间</th>
 					<th>违规原因</th>
 					<th>违规结果</th>
-					<th>用户ID</th>
+					<th>用户名</th>
 					<th>操作</th>
 			</thead>
 			<tbody>
@@ -101,11 +101,17 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<td><c:out value="${violation.violationsTime}"></c:out></td>
 						<td><c:out value="${violation.violationsWhy}"></c:out></td>
 						<td><c:out value="${violation.violationsResult}"></c:out></td>
-						<td><c:out value="${violation.userID}"></c:out></td>
+						<td><c:out value="${violation.users.userName}"></c:out>
+						<a title="查看"  onclick="openViewUser('${violation.users.userName}','${violation.users.userAccount}','${violation.users.userIdentity}'
+						,'${violation.users.userPhone}','${violation.users.userEmail}','${violation.users.userBalance}','${violation.users.userIntroduction}'
+						,'${violation.users.userAddress}','${violation.users.userStatusID}','${violation.users.userCredit}','${violation.users.userType}')" href="javascript:;">
+                		<i class="layui-icon">&#xe63c;</i>
+              			</a>
+						</td>
 						<td class="td-manage">
 							<!-- 置顶与取消置顶 --> <c:choose>
 								<c:when test="${violation.stickTime eq '1970-01-01 00:00:00' }">
-									<a onclick="stickViolations(this,${violation.violationsID})"
+									<a onclick="s78tickViolations(this,${violation.violationsID})"
 										href="javascript:;" title="置顶"> <i class="layui-icon">&#xe62f;</i>
 									</a>
 								</c:when>
@@ -116,7 +122,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								</c:otherwise>
 							</c:choose> <a title="修改"
 							onclick="openUpdateViolations('${violation.violationsID}','${violation.violationsTime}','${violation.violationsWhy}',
-               			 '${violation.violationsResult}','${violation.userID}')"
+               			 '${violation.violationsResult}','${violation.users.userName}')"
 							href="javascript:;"> <i class="layui-icon">&#xe642;</i>
 						</a> <a title="删除"
 							onclick="violationDelete(this,${violation.violationsID})"
@@ -227,11 +233,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<div style="display: none;" id="violationsUpdateLayer">
 		<form class="layui-form">
 			<div class="layui-form-item">
-				<label class="layui-form-label">用户ID</label>
+				<label class="layui-form-label">用户名</label>
 				<div class="layui-input-block">
-					<input type="text" name="userID" lay-verify="required"
+					<input type="text" name="userName" lay-verify="required"
 						autocomplete="off" class="layui-input" disabled="disabled"
-						id="updateUserID">
+						id="updateUserName">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -261,7 +267,107 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<div class="layui-input-block">
 					<button type="button" class="layui-btn"
 						onclick="updateViolations()">立即提交</button>
-					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					<!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- 查看用户 -->
+	<div style="display: none;" id="userViewLayer">
+		<form class="layui-form">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户名</label>
+				<div class="layui-input-block">
+					<input type="text" name="userID" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserName">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户账号</label>
+				<div class="layui-input-block">
+					<input type="text" name="userAccount" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserAccount">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">身份证</label>
+				<div class="layui-input-block">
+					<input type="text" name="userIdentity" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserIdentity">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">电话</label>
+				<div class="layui-input-block">
+					<input type="text" name="userPhone" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserPhone">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">电子邮件</label>
+				<div class="layui-input-block">
+					<input type="text" name="userEmail" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserEmail">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户余额</label>
+				<div class="layui-input-block">
+					<input type="text" name="userBalance" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserBalance">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户简介</label>
+				<div class="layui-input-block">
+					<input type="text" name="userIntroduction" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserIntroduction">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户地址</label>
+				<div class="layui-input-block">
+					<input type="text" name="userAddress" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserAddress">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户状态</label>
+				<div class="layui-input-block">
+					<input type="text" name="userStatusID" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserStatusID">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">信用分</label>
+				<div class="layui-input-block">
+					<input type="text" name="userCredit" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserCredit">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户类型</label>
+				<div class="layui-input-block">
+					<input type="text" name="userType" lay-verify="required"
+						autocomplete="off" class="layui-input" disabled="disabled"
+						id="viewUserType">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button type="button" class="layui-btn"
+						onclick="layer.closeAll()">关闭</button>
 				</div>
 			</div>
 		</form>

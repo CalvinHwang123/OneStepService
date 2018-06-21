@@ -6,15 +6,31 @@ public class Violations {
 	private String violationsTime;//违规时间
 	private String violationsWhy;//违规原因
 	private String violationsResult;//违规结果
-	private Long userID;//雇主ID
+	private Long userID;
 	private String stickTime;//置顶时间
+	private Users users;//用户对象
 	
-	private Integer whyCount;
 	public Violations() {
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	public Long getViolationsID() {
 		return violationsID;
+	}
+
+	public Long getUserID() {
+		return userID;
+	}
+
+	public void setUserID(Long userID) {
+		this.userID = userID;
 	}
 
 	public void setViolationsID(Long violationsID) {
@@ -45,14 +61,6 @@ public class Violations {
 		this.violationsResult = violationsResult;
 	}
 
-	public Long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(Long userID) {
-		this.userID = userID;
-	}
-
 	public String getStickTime() {
 		return stickTime;
 	}
@@ -61,18 +69,4 @@ public class Violations {
 		this.stickTime = stickTime;
 	}
 
-	public Integer getWhyCount() {
-		return whyCount;
-	}
-
-	public void setWhyCount(Integer whyCount) {
-		this.whyCount = whyCount;
-	}
-
-	@Override
-	public String toString() {
-		return "Violations [violationsID=" + violationsID + ", violationsTime=" + violationsTime + ", violationsWhy="
-				+ violationsWhy + ", violationsResult=" + violationsResult + ", userID=" + userID + ", stickTime="
-				+ stickTime + "]";
-	}
 }

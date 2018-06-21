@@ -107,13 +107,13 @@ function addViolations(){
 }
 
 //打开修改违规记录弹出层
-function openUpdateViolations(id,time,why,result,userid){
+function openUpdateViolations(id,time,why,result,userName){
 	violationsID = id;
 	// 自动填写原记录
 	$("#updateViolationsTime").val(time);
 	$("#updateViolationsWhy").val(why);
 	$("#updateViolationsResult").val(result);
-	$("#updateUserID").val(userid);
+	$("#updateUserName").val(userName);
 	layer.open({
 	      type: 1,
 	      title:"修改违规记录",
@@ -133,9 +133,9 @@ function updateViolations(){
 	}
 	  layer.confirm('确认要提交吗？',function(index){
 		  var violationsTime=$("#updateViolationsTime").val();
-		  var userID=$("#updateUserID").val();
+		  var userName=$("#updateUserName").val();
 		  var updateViolations={"violationsWhy":violationsWhy, "violationsResult":violationsResult, 
-				  "violationsID":violationsID, "userID":userID, "violationsTime":violationsTime};
+				  "violationsID":violationsID, "userName":userName, "violationsTime":violationsTime};
 		  $.ajax({
      			url: $("base").attr("href") + "PortalManage/violationsUpdate.action",
      			type:"post",
@@ -189,4 +189,28 @@ function stickViolations(obj,id){
         	});
     	});
     }
+}
+
+//打开查看用户弹出层
+function openViewUser(userName,userAccount,userIdentity,userPhone,userEmail
+		,userBalance,userIntroduction,userAddress,userStatusID,userCredit,userType){
+	// 自动填写用户信息
+	$("#viewUserName").val(userName);
+	$("#viewUserAccount").val(userAccount);
+	$("#viewUserIdentity").val(userIdentity);
+	$("#viewUserPhone").val(userPhone);
+	$("#viewUserEmail").val(userEmail);
+	$("#viewUserBalance").val(userBalance);
+	$("#viewUserIntroduction").val(userIntroduction);
+	$("#viewUserAddress").val(userAddress);
+	$("#viewUserStatusID").val(userStatusID);
+	$("#viewUserCredit").val(userCredit);
+	$("#viewUserType").val(userType);
+	layer.open({
+	      type: 1,
+	      title:"查看用户",
+	      area: ['600px', '360px'],
+	      shadeClose: false, //点击遮罩关闭
+	      content: $('#userViewLayer')
+	    });
 }

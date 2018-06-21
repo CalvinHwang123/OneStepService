@@ -5,7 +5,6 @@ import java.util.List;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
-import oss.bean.Violations2;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
@@ -36,15 +35,6 @@ public interface PortalManageBiz {
 	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21:04
 	public boolean stickUpdateViolationsByID(Violations violations);
 	
-	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
-	public List<Violations> listViolationsDesc();
-
-	// 查询置顶违规记录 by hlq 2018-06-16 22:05
-	public List<Violations> listStickViolations();
-
-	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
-	public List<Violations2> listViolationsGroupByWhy();
-
 	public List<Links> listLinks(Condition condition);
 
 	public abstract int AddLinks(Links links);
