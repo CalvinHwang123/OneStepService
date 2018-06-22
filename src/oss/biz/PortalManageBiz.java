@@ -10,7 +10,11 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+
 import oss.bean.SuccessCase;
+
+import oss.bean.Rulee;
+
 
 /*
  * 门户管理Biz业务接口
@@ -20,8 +24,20 @@ public interface PortalManageBiz {
 	// 雇主故事列表 黄绍鹏6-13 22：20
 	public List<UserStory> userStoryList(Condition condition);
 
+
 	// 雇主故事byID by hsp 6-20 13:24
 	public UserStory userStory(UserStory userStory);
+
+	// 华清修改：规则中心列表
+	public List<Rulee> ruleCenterList(Condition condition);
+
+	// 华清修改：规则中心新增规则
+	public int addRulee(Rulee rulee);
+	// 华清修改：删除规则
+	public abstract int deleteRulee(List<Rulee> rulee);
+	//修改规则
+	public int updateRulee(Rulee rulee);
+
 
 	// 修改雇主故事
 	public int updateStory(UserStory userStory);
@@ -78,6 +94,7 @@ public interface PortalManageBiz {
 
 	// 增加资讯 wwj 6-15
 	public abstract int AddInfo(Information information);
+
 	
 	//前端资讯 wwj 6-20
 		public List<Links> LinksList();
@@ -96,5 +113,7 @@ public interface PortalManageBiz {
 
 	// 增加成功案例 by hsp 6-21 11:24
 	public abstract int addSuccessCases(SuccessCase successCase);
+
+
 
 }
