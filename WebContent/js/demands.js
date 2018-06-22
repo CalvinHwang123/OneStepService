@@ -115,19 +115,19 @@ function changePageSize(pageSize) {
 		//扣除信用分
 		function deducTion(){
 			var creditWhy=$("#creditWhy").val();
-			var creditpoints=$("#creditpoints").val();
+			var creditPoints=$("#creditPoints").val();
 			var creditType=$("#creditType").val();
-			if (creditType.length == 0 ||creditWhy.length == 0 || creditpoints.length == 0) {
+			if (creditType.length == 0 ||creditWhy.length == 0 || creditPoints.length == 0) {
 				layer.msg('请先填写完整!',{icon:1,time:1000});
 				return;
 			}
 			  layer.confirm('确认要提交吗？',function(index){
 				
 				  var userID=$("#userID").val();
-				  var updateViolations={"creditWhy":creditWhy,"creditType":creditType, "creditpoints":creditpoints, 
+				  var updateViolations={"creditWhy":creditWhy,"creditType":creditType, "creditPoints":creditPoints, 
 						   "userID":userID };
 				  alert(creditWhy);
-				  alert(creditpoints);
+				  alert(creditPoints);
 				  alert(userID);
 				  alert(creditType);
 				  $.ajax({

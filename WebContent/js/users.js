@@ -37,10 +37,7 @@ function Blacklist() {
 			success : function(msg) {//
 				layer.closeAll();
 				
-				layer.msg('已加入黑名单!', {
-					icon : 5,
-					time : 3000
-				});
+				layer.alert('已加入黑名单!', {icon : 1,});
 				
 				window.location.reload();
 			}

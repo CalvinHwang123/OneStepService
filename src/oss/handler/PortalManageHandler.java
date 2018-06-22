@@ -20,7 +20,11 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+
 import oss.bean.SuccessCase;
+
+import oss.bean.Rulee;
+
 import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.biz.PortalManageBiz;
@@ -160,6 +164,41 @@ public class PortalManageHandler {
 		return mav;
 	}
 
+	// 华清修改 规则中心配置
+	@RequestMapping("/ruleCenterList.action")
+	public ModelAndView ruleCenterList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Rulee> ruleCenterList = portalManageBizImpl.ruleCenterList(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo pageInfo = new PageInfo<>(ruleCenterList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("background/RuleCenter");
+		return mav;
+	}
+
+	// 华清修改：增加新规则
+	@RequestMapping("/addRulee.action")
+	public @ResponseBody String addRulee(HttpServletRequest req, @RequestBody Rulee rulee) {
+		rulee.setRuleTime(DateUtil.getCurrentDate());
+		rulee.setStickTime(DateUtil.getCurrentDate());
+		System.out.println(rulee.getRuleTime());
+		portalManageBizImpl.addRulee(rulee);
+		return "success";
+	}
+
+	// 华清修改：修改规则
+	@RequestMapping("/updateRulee.action")
+	public @ResponseBody String updateRulee(HttpServletRequest req, @RequestBody Rulee rulee) {
+		portalManageBizImpl.updateRulee(rulee);
+		return "success";
+	}
+
 	// 修改雇主故事列表 黄绍鹏6-16 10:43
 	@RequestMapping("/updateStory.action")
 	public @ResponseBody String updateStory(HttpServletRequest req, @RequestBody UserStory userStory) {
@@ -171,6 +210,14 @@ public class PortalManageHandler {
 	@RequestMapping("/deleteStory.action")
 	public @ResponseBody String deleteStory(HttpServletRequest req, @RequestBody List<UserStory> storyList) {
 		portalManageBizImpl.deleteUserStorys(storyList);
+		return "success";
+	}
+
+	// 华清修改：批量删除规则
+	@RequestMapping("/deleteRulee.action")
+	public @ResponseBody String deleteRulee(HttpServletRequest req, @RequestBody List<Rulee> rulee) {
+		System.out.println("删除");
+		portalManageBizImpl.deleteRulee(rulee);
 		return "success";
 	}
 
@@ -255,16 +302,16 @@ public class PortalManageHandler {
 		int addlinks = portalManageBizImpl.AddInfo(information);
 		return "success";
 	}
-	
-	//前端资讯列表
+
+	// 前端资讯列表
 	@RequestMapping("/listLinks.action")
 	public ModelAndView listLinks(HttpServletRequest req) {
-		List<Links> linksList= portalManageBizImpl.LinksList();
+		List<Links> linksList = portalManageBizImpl.LinksList();
 		req.setAttribute("linksList", linksList);
 		ModelAndView mav = new ModelAndView("../foregroundindex");
-		return mav;	
+		return mav;
 	}
-	
+
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStory.action")
 	public ModelAndView userStory(HttpServletRequest req, UserStory userStory) {
