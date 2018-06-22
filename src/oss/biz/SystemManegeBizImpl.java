@@ -11,6 +11,7 @@ import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Powers;
+import oss.bean.Role;
 import oss.mapper.SystemManegeMapper;
 
 /*
@@ -26,6 +27,27 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 	public List<Powers> powerList() {
 		// TODO Auto-generated method stub
 		return systemManegeMapper.listPower();
+	}
+
+	// jhx 获取角色列表 6.21
+	@Override
+	public List<Role> roleList() {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.listRole();
+	}
+
+	// jhx 获取所有一级动态菜单 6.21
+	@Override
+	public List<Menu> findAllOneMenu() {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.allOneMenu();
+	}
+
+	// jhx 获取所有二级动态菜单 6.21
+	@Override
+	public List<Menu> findAllTwoMenu() {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.allTwoMenu();
 	}
 
 	// jhx 获取一级动态菜单 6.19

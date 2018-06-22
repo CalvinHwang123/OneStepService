@@ -15,4 +15,13 @@ and a.POWERID=b.POWERID and b.MENUID=c.MENUID
 )
 	</select>
 	
+	<select id="allOneMenu"  resultType="oss.bean.Menu" >
+		select * from MENU where MENUPID=0
+
+	</select>
+	<select id="allTwoMenu"  resultType="oss.bean.Menu" >
+		select * from MENU where MENUPID!=0
+
+	</select>
+	
 </mapper>

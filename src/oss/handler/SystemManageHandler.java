@@ -21,6 +21,7 @@ import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Powers;
+import oss.bean.Role;
 import oss.biz.SystemManegeBiz;
 
 /*
@@ -45,7 +46,6 @@ public class SystemManageHandler {
 		System.out.println("登陆员工为" + emp);
 		if (emp != null && emp.getEmpPwd().equals(empPwd)) {
 			req.getSession().setAttribute("empss", emp);
-			// req.setAttribute("emp", emp);
 			System.out.println("登录成功");
 			mav = new ModelAndView("redirect:menu.action");
 
@@ -61,17 +61,40 @@ public class SystemManageHandler {
 	// jhx 登录成功后跳转查找对应菜单
 	@RequestMapping("/menu.action")
 	public ModelAndView menuList(HttpServletRequest req) {
-		// System.out.println(emp.getEmpName());
+
 		Emps emp = (Emps) req.getSession().getAttribute("empss");
 		Long empID = emp.getEmpID();
 		System.out.println("员工ID为======" + empID);
 		List<Menu> oneMenuList = systemManegeBizImpl.oneMenuList(empID);
 		System.out.println("一级菜单为=====" + oneMenuList);
 		List<Menu> twoMenuList = systemManegeBizImpl.twoMenuList(empID);
-		System.out.println("二级菜单为=====" + oneMenuList);
+		System.out.println("二级菜单为=====" + twoMenuList);
 		req.setAttribute("oneMenuList", oneMenuList);
 		req.setAttribute("twoMenuList", twoMenuList);
 		ModelAndView mav = new ModelAndView("background/index");
+		return mav;
+	}
+
+	// jhx 获取角色列表及权限列表 6-21
+	@RequestMapping("/roleList.action")
+	public ModelAndView roleList(HttpServletRequest req) {
+		// Emps emp = (Emps) req.getSession().getAttribute("empss");
+		// Long empID = emp.getEmpID();
+		Long empID = (long) 1;
+		System.out.println("员工ID为======" + empID);
+		List<Menu> allOneMenu = systemManegeBizImpl.findAllOneMenu();
+		System.out.println("所有一级菜单为=====" + allOneMenu);
+		List<Menu> allTwoMenu = systemManegeBizImpl.findAllTwoMenu();
+		System.out.println("所有二级菜单为=====" + allTwoMenu);
+		List<Menu> twoMenuList = systemManegeBizImpl.twoMenuList(empID);
+		System.out.println("二级菜单为=====" + twoMenuList);
+
+		List<Role> roleList = systemManegeBizImpl.roleList();
+		System.out.println("powerList===" + roleList);
+		req.setAttribute("allOneMenu", allOneMenu);
+		req.setAttribute("allTwoMenu", allTwoMenu);
+		req.setAttribute("roleList", roleList);
+		ModelAndView mav = new ModelAndView("background/power");
 		return mav;
 	}
 
