@@ -17,15 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Credit;
-
+import oss.bean.Dynamics;
+import oss.bean.Links;
 import oss.bean.Logs;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Works;
 import oss.bean.demands;
 import oss.biz.BusiManageBiz;
+import oss.biz.SystemManegeBiz;
 import oss.util.DateUtil;
 
 /*
@@ -38,7 +42,8 @@ public class BusiManageHandler {
 
 	@Resource
 	private BusiManageBiz busiManageBizImpl;
-
+	@Resource
+	private SystemManegeBiz systemManegeBizImpl;
 	// 华清修改：查询雇主信息
 	@RequestMapping("/UserList.action")
 	public ModelAndView UserList(HttpServletRequest req, 
@@ -250,8 +255,32 @@ public class BusiManageHandler {
 		busiManageBizImpl.userCreditScore(credit);
 	    busiManageBizImpl.creditCreditScore(credit);
 		busiManageBizImpl.violaTionCreditScore(violations);
-		    return "扣除成功";
-		
+		    return "扣除成功";	
 	}
+	
+	// 作品管理列表 王伟杰 6-22
+	@RequestMapping("/listWorks.action")
+	public ModelAndView listWorks(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
+		PageHelper.startPage(pageNum, pageSize);
+		List<Works> listWorks = busiManageBizImpl.listWorks(condition);
+		PageInfo pageInfo = new PageInfo<>(listWorks, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
+		List<Classification> classlist = systemManegeBizImpl.oneclassMenu();
+		req.setAttribute("classlist", classlist);
+		req.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("WorksList");
+		return mav;
+	}
+	//修改状态
+	@RequestMapping("/updateWorksById.action")
+	public @ResponseBody String updateWorksById(HttpServletRequest req, @RequestBody Works works) {
+		int up = busiManageBizImpl.updateWorksById(works);
+		return "success";
+	}
+
 }
 

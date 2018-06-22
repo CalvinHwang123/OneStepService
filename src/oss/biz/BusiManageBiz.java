@@ -6,6 +6,7 @@ import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Works;
 import oss.bean.demands;
 
 /*
@@ -60,6 +61,12 @@ public interface BusiManageBiz {
 
 		// 华清修改：违规表违规
 		public int violaTionCreditScore(Violations violations);
+		
+		// 作品管理列表 wwj
+		public List<Works> listWorks(Condition condition);
+
+		// 作品管理修改状态 wwj
+		public abstract int updateWorksById(Works works);
 
 
 }

@@ -48,11 +48,13 @@
 				<input type="text" name="title" placeholder="请输入动态标题"
 					autocomplete="off" class="layui-input">
 				<div class="layui-input-inline">
-					<select name="action">
-						<option>分类名称</option>
-						<option>add</option>
-						<option>login</option>
-						<option>checklogin</option>
+					<select name="classPid">
+						<option value="0"></option>
+						<c:forEach var="i" items="${classlist}">
+							<option value="${i.classificationId}"><c:out
+									value="${i.classificationName}">
+								</c:out></option>
+						</c:forEach>
 					</select>
 				</div>
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
@@ -205,6 +207,19 @@
 				</div>
 			</div>
 			<div class="layui-form-item">
+				<label class="layui-form-label">分类名称</label>
+				<div class="layui-input-inline">
+					<select name="classificationId" id="updateclass">
+						<option value="0"></option>
+						<c:forEach var="i" items="${classlist}">
+							<option value="${i.classificationId}"><c:out
+									value="${i.classificationName}">
+								</c:out></option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
 				<div class="layui-input-block">
 					<button class="layui-btn" type="button" onclick="UpdateDyna()">修改</button>
 					<button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -235,6 +250,19 @@
 				<div class="layui-input-block">
 					<input type="datetime" name="linksname" placeholder="请输入時間"
 						class="layui-input" id="test2">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">分类名称</label>
+				<div class="layui-input-inline">
+					<select name="action" id="addclass">
+						<option value="0"></option>
+						<c:forEach var="i" items="${classlist}">
+							<option value="${i.classificationId}"><c:out
+									value="${i.classificationName}">
+								</c:out></option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -290,15 +318,16 @@
       // 修改
 		function UpdateDyna() {//修改链接
 			layer.confirm('确认要提交吗？', function(index) {
-
 				var DynaTitle = $("#newDynaTitle").val();
 				var DynaCon = $("#newDynaCon").val();
 				var DynaTime = $("#test1").val();
+				var classificationId=$("#updateclass").val();
 				var newDyna = {
 					"dynamicTitle" : DynaTitle,
 					"dynamicContext" : DynaCon,
 					"dynamicTime" : DynaTime,
-					"dynamicId" : dynamicId
+					"dynamicId" : dynamicId,
+					"classificationId":classificationId
 				};
 				$.ajax({
 					url : "PortalManage/updateDynaById.action",
@@ -321,11 +350,13 @@
 				var DynaTitle = $("#newDynaTitle1").val();
 				var DynaCon = $("#newDynaCon1").val();
 				var DynaTime = $("#test2").val();
+				var classificationId=$("#addclass").val();
 				var newDyna = {
 					"dynamicTitle" : DynaTitle,
 					"dynamicContext" : DynaCon,
 					"dynamicTime" : DynaTime,
-					"dynamicId" : dynamicId
+					"dynamicId" : dynamicId,
+					"classificationId":classificationId
 				};
 				$.ajax({
 					url : "PortalManage/addDyna.action",
