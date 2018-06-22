@@ -4,8 +4,10 @@ import java.util.List;
 import oss.annotation.MyRepository;
 import oss.bean.Condition;
 import oss.bean.Credit;
+import oss.bean.Links;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Works;
 import oss.bean.demands;
 
 /*
@@ -14,15 +16,14 @@ import oss.bean.demands;
 @MyRepository
 public interface BusiManageMapper {
 
-	
-		//前台登入  wwj  6-17
-		public abstract Users ForeLogin(Users users);
-	
-		//前台注册  王伟杰  6-17
-		public abstract int AddUsers(Users users);
-		
-		//唯一性验证   wwj  6-17
-		public abstract List<Users> SelectName(Users users);
+	// 前台登入 wwj 6-17
+	public abstract Users ForeLogin(Users users);
+
+	// 前台注册 王伟杰 6-17
+	public abstract int AddUsers(Users users);
+
+	// 唯一性验证 wwj 6-17
+	public abstract List<Users> SelectName(Users users);
 
 	// 华清修改：查询雇主列表信息
 	public List<Users> listUser(Condition condition);
@@ -63,5 +64,9 @@ public interface BusiManageMapper {
 	// 华清修改：违规表违规
 	public int violaTionCreditScore(Violations violations);
 
+	// 作品管理列表 wwj
+	public List<Works> listWorks(Condition condition);
 
+	// 作品管理修改状态 wwj
+	public abstract int updateWorksById(Works works);
 }

@@ -10,6 +10,7 @@ import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Works;
 import oss.bean.demands;
 import oss.mapper.BusiManageMapper;
 
@@ -117,5 +118,17 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public List<Users> SelectName(Users users) {
 
 		return busiManageMapper.SelectName(users);
+	}
+
+	@Override
+	public List<Works> listWorks(Condition condition) {
+		
+		return busiManageMapper.listWorks(condition);
+	}
+
+	@Override
+	public int updateWorksById(Works works) {
+		
+		return busiManageMapper.updateWorksById(works);
 	}
 }

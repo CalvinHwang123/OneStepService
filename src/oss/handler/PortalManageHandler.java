@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
@@ -24,6 +25,7 @@ import oss.bean.SuccessCase;
 import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.biz.PortalManageBiz;
+import oss.biz.SystemManegeBiz;
 /*
  * 后端门户管理Handler
  */
@@ -35,7 +37,8 @@ public class PortalManageHandler {
 
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
-
+	@Resource
+	private SystemManegeBiz systemManegeBizImpl;
 	// 后端违规列表请求 by hlq 2018-06-14
 	@RequestMapping("/violationsList.action")
 	public ModelAndView violationsList(HttpServletRequest req,
@@ -194,6 +197,9 @@ public class PortalManageHandler {
 		PageInfo pageInfo = new PageInfo<>(ListDyna, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
+		List<Classification> classlist = systemManegeBizImpl.oneclassMenu();
+		req.setAttribute("classlist", classlist);
+		req.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("DynaList");
 		return mav;
 	}
