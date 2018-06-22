@@ -101,6 +101,11 @@
 	<!-- 指定用户查询信用明细记录 -->
 	<select id="listCreditByName" parameterType="oss.bean.Condition" resultType="oss.bean.Credit">
 		select * from credit where userID = 
-		(select userID from users where userName = #{title})
+		(select userID from users where userName like '%${title}%')
+	</select>
+	
+	<!-- 指定用户查询信用明细记录 -->
+	<select id="listSuggestUserByKey" parameterType="oss.bean.Users" resultType="java.lang.String">
+		select userName from users where userName like '%${userName}%'
 	</select>
 </mapper>

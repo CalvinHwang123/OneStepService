@@ -20,6 +20,7 @@ import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.UserStory;
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Violations2;
 import oss.bean.Workinformation;
@@ -114,7 +115,6 @@ public class PortalHandler {
 		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, 10);
 		return pageInfo;
 	}
-
 		
 	// 前端信用查询请求 hlq 2018-06-21 11:53
 	@RequestMapping("/creditQuery")
@@ -122,9 +122,11 @@ public class PortalHandler {
 		@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
 		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
 		System.out.println("portalBizImpl=" + portalBizImpl);
-		if (condition != null && condition.getTitle().equals("")) {
+		System.out.println("condition=" + condition.getTitle());
+		if (null != condition.getTitle()) {
 			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 			PageHelper.startPage(pageNum, pageSize);
+//			condition.setTitle("吴华清");
 			List<Credit> creditList = portalBizImpl.listCreditByName(condition);
 			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
 			PageInfo<Credit> pageInfo = new PageInfo<>(creditList, pageSize);
@@ -133,6 +135,13 @@ public class PortalHandler {
 			request.setAttribute("condition", condition);
 		}
 		return new ModelAndView("creditQuery");
+	}
+	
+	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
+	@RequestMapping(value = "/creditQuerySuggest.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody List<String> creditQuerySuggest(@RequestBody Users users) {
+		List<String> userNameList = portalBizImpl.listSuggestUserByKey(users);
+		return userNameList;
 	}
 	
 	// 前端 作品 数据 袁楠文 2018-6-19 22:45

@@ -9,12 +9,12 @@ public class Credit {
 	public Credit() {
 		super();
 	}
-	public Credit(Long creditID, Long userID, Long creditType, Long creditpoints, String creditWhy) {
+	public Credit(Long creditID, Long userID, Long creditType, Long creditPoints, String creditWhy) {
 		super();
 		this.creditID = creditID;
 		this.userID = userID;
 		this.creditType = creditType;
-		this.creditPoints = creditpoints;
+		this.creditPoints = creditPoints;
 		this.creditWhy = creditWhy;
 	}
 	public Long getCreditID() {
@@ -35,11 +35,11 @@ public class Credit {
 	public void setCreditType(Long creditType) {
 		this.creditType = creditType;
 	}
-	public Long getCreditpoints() {
+	public Long getCreditPoints() {
 		return creditPoints;
 	}
-	public void setCreditpoints(Long creditpoints) {
-		this.creditPoints = creditpoints;
+	public void setCreditPoints(Long creditPoints) {
+		this.creditPoints = creditPoints;
 	}
 	public String getCreditWhy() {
 		return creditWhy;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import oss.bean.Condition;
 import oss.bean.Credit;
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.mapper.PortalMapper;
@@ -55,5 +56,11 @@ public class PortalBizImpl  implements PortalBiz{
 	@Override
 	public List<Credit> listCreditByName(Condition condition) {
 		return portalManageMapper.listCreditByName(condition);
+	}
+
+	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
+	@Override
+	public List<String> listSuggestUserByKey(Users users) {
+		return portalManageMapper.listSuggestUserByKey(users);
 	}
 }
