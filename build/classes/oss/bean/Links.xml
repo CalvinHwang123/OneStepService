@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalManageMapper">
+<!-- 链接列表 -->
+	<select id="listLinks" resultType="oss.bean.Links" parameterType="oss.bean.Condition">
+		select * from links where 1 = 1
+		<if test="title != null and title !=''" >
+			and  linksname like concat(concat('%',#{title}),'%')
+		</if>
+	</select>
+<!-- 	增加链接 -->
+		<insert id="addLinks" parameterType="oss.bean.Links">
+		<selectKey keyProperty="linksid" order="BEFORE" resultType="long">
+			select LINKSSEQ.nextval from dual
+		</selectKey>
+		insert into links(linksid,linksname,linksurl)
+		values(#{linksid},#{linksname},#{linksurl})	
+	</insert>
+	
+<!-- 	删除链接 -->
+	<delete id="deleteLinksById" parameterType="java.util.List">
+		delete from Links where linksid in
+		<foreach collection="list" item="i" open="(" close=")" separator=",">
+			#{i.linksid}
+		</foreach>
+	</delete>
+
+<!-- 修改链接 -->
+	<update id="updateLinksById" parameterType="oss.bean.Links">
+		update links set
+		linksurl=#{linksurl},linksname=#{linksname} where linksid=#{linksid}
+	</update>
+	
+	<!-- 前端链接列表 -->
+	<select id="LinksList" resultType="oss.bean.Links">
+		select * from links where 1 = 1
+	</select>
+	
+</mapper>

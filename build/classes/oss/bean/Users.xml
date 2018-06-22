@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.BusiManageMapper">
+
+
+
+	<!-- 华清修改：重置密码 -->
+	<update id="updatePow" parameterType="long">
+		update Users set userPwd
+		=123456 where userID=#{userID}
+
+	</update>
+
+
+	<!-- 华清修改：加入黑名单 -->
+
+	<update id="Blacklist" parameterType="long">
+
+
+
+		update Users set userStatusID =3
+		where userID=#{userID}
+
+	</update>
+
+
+
+	<!-- 华清修改：取消黑名单 -->
+	<update id="cancelBlacklist" parameterType="long">
+		update Users set
+		userStatusID =1 where userID=#{userID}
+	</update>
+	<!-- 华清修改：禁用 -->
+
+	<update id="Disable" parameterType="long">
+
+
+
+		update Users set userStatusID
+		=2 where
+		userID=#{userID}
+
+	</update>
+
+
+	<!-- 华清修改：启用 -->
+	<update id="enable" parameterType="long">
+		update Users set userStatusID
+		=1 where userID=#{userID}
+	</update>
+	<!-- 华清修改：雇主查询列表 -->
+	<select id="listUser" parameterType="oss.bean.Condition"
+		resultType="oss.bean.Users">
+		select * from Users where userType=1
+
+		<if test="title != null and title != ''">
+			and userAccount like '%${title}%'
+		</if>
+
+	</select>
+	<!-- 华清修改：服务商查询列表 -->
+	<select id="providerList" parameterType="oss.bean.Condition"
+		resultType="oss.bean.Users">
+		select * from Users where userType=2
+
+		<if test="title != null and title != ''">
+			and userAccount like '%${title}%'
+		</if>
+
+
+	</select>
+
+
+
+
+	<!-- 前台登入 -->
+	<select id="ForeLogin" resultType="oss.bean.Users"
+		parameterType="oss.bean.Users">
+		select *
+		from Users where userAccount=#{userAccount} and
+		userPwd=#{userPwd}
+	</select>
+
+	<!-- 注册 -->
+	<insert id="AddUsers" parameterType="oss.bean.Users">
+		<selectKey keyProperty="userID" order="BEFORE"
+			resultType="long">
+			select UsersSEQ.nextval from dual
+		</selectKey>
+		insert into
+		USERS(userID,userAccount,userPwd,userType)
+		values(#{userID},#{userAccount},#{userPwd},#{userType})
+	</insert>
+
+	<!-- 用户唯一性 -->
+	<select id="SelectName" resultType="oss.bean.Users"
+		parameterType="oss.bean.Users">
+		select * from Users where userAccount=#{userAccount}
+	</select>
+
+
+
+
+
+
+
+	<!-- 华清修改：用户表扣除用户信用分 -->
+	<update id="userCreditScore" parameterType="oss.bean.Credit">
+
+
+		update Users set
+		userCredit =(select userCredit from Users where
+		userID=#{userID})-#{creditPoints} where userID=#{userID}
+	</update>
+
+
+
+	<!-- 华清修改：明细表信用变动成功 -->
+	<insert id="creditCreditScore" parameterType="oss.bean.Credit">
+		<selectKey keyProperty="creditID" order="BEFORE"
+			resultType="java.lang.Long">
+			select userStorySeq.nextval from dual
+		</selectKey>
+		insert into credit(creditID,userID,creditType,creditPoints,creditWhy)
+		values(#{creditID},#{userID},#{creditType},#{creditpoints},#{creditWhy})
+	</insert>
+
+
+	<!-- 华清修改：违规表插入 -->
+
+
+	<insert id="violaTionCreditScore"
+		parameterType="oss.bean.Violations">
+		<selectKey keyProperty="violationsID" order="BEFORE"
+			resultType="long">
+			select violationsSeq.nextVal from dual
+		</selectKey>
+		insert into violations
+		(violationsID, violationsWhy, violationsResult,
+		userID, violationsTime, stickTime)
+		values (#{violationsID},
+		#{violationsWhy}, #{violationsResult},
+		#{userID}, #{violationsTime},
+		'1970-01-01 00:00:00')
+	</insert>
+
+
+</mapper>
+
+

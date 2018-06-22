@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalManageMapper">
+	<!-- 资讯列表 -->
+	<select id="ListInfo" resultType="oss.bean.Information" parameterType="oss.bean.Condition">
+		select * from information where 1 = 1
+		<if test="startDate != null and endDate != null and startDate !='' and endDate !='' ">
+			and informationTime between #{startDate} and #{endDate}
+		</if>
+		<if test="title != null and title !='' ">
+			and  informationTitle like concat(concat('%',#{title}),'%')
+		</if>
+	</select>
+	<!-- 删除资讯 -->
+	<delete id="deleteInfoById" parameterType="java.util.List">
+		delete from information where informationId in 
+		<foreach collection="list" item="i" open="(" close=")" separator=",">
+			#{i.informationId}
+		</foreach>
+	</delete>
+
+	<!-- 修改资讯 -->
+	<update id="updateInfoById" parameterType="oss.bean.Information">
+		update Information set
+		informationTitle=#{informationTitle},informationContext=#{informationContext},informationTime=#{informationTime}
+		where informationId=#{informationId}
+	</update>
+
+	<!-- 增加资讯 -->
+	<insert id="AddInfo" parameterType="oss.bean.Information">
+		<selectKey keyProperty="informationId" order="BEFORE"
+			resultType="long">
+			select INFORMATIONSEQ.nextval from dual
+		</selectKey>
+		insert into
+		Information(informationId,informationTitle,informationContext,informationTime)
+		values(#{informationId},#{informationTitle},#{informationContext},#{informationTime})
+	</insert>
+
+
+</mapper>
+	

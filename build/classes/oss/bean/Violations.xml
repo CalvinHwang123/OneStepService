@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalManageMapper">
+<!-- by hlq 2018-06-14 -->
+	<insert id="insertViolations" parameterType="oss.bean.Violations">
+		<selectKey keyProperty="violationsID" order="BEFORE" resultType="long">
+			select violationsSeq.nextVal from dual
+		</selectKey>
+		insert into violations
+		(violationsID, violationsWhy, violationsResult, userID, violationsTime, stickTime)
+		values (#{violationsID}, #{violationsWhy}, #{violationsResult}, #{userID}, #{violationsTime}, '1970-01-01 00:00:00')
+	</insert>
+	
+	<delete id="deleteViolationsByID" parameterType="java.util.List">
+		delete from violations where violationsID in 
+		<foreach collection="list" item="violations" open="(" close=")" separator=",">
+			#{violations.violationsID}
+		</foreach>
+	</delete>
+	
+	<update id="updateViolationsByID" parameterType="oss.bean.Violations">
+		update violations set violationsWhy = #{violationsWhy}, violationsResult = #{violationsResult}
+		where violationsID = #{violationsID}
+	</update>
+	
+	<!-- 置顶与取消置顶违规记录 -->
+	<update id="stickUpdateViolationsByID" parameterType="oss.bean.Violations">
+		update violations set stickTime = #{stickTime}
+		where violationsID = #{violationsID}
+	</update>
+
+	<resultMap type="oss.bean.Violations" id="violationsMap">
+		<id column="violationsID" property="violationsID" />
+		<result column="violationsTime" property="violationsTime" />
+		<result column="violationsWhy" property="violationsWhy" />
+		<result column="violationsResult" property="violationsResult" />
+		<result column="stickTime" property="stickTime" />
+		<association property="users" javaType="oss.bean.Users">
+			<id column="userID" property="userID" />
+			<result column="userName" property="userName" />
+			<result column="userAccount" property="userAccount" />
+			<result column="userPwd" property="userPwd" />
+			<result column="userIdentity" property="userIdentity" />
+			<result column="userPhone" property="userPhone" />
+			<result column="userEmail" property="userEmail" />
+			<result column="userBalance" property="userBalance" />
+			<result column="userIntroduction" property="userIntroduction" />
+			<result column="userAddress" property="userAddress" />
+			<result column="userStatusID" property="userStatusID" />
+			<result column="userCredit" property="userCredit" />
+			<result column="userType" property="userType" />
+		</association>
+	</resultMap>
+	
+	<!-- 置顶时间倒序排序优先，未置顶违规时间倒序排序次之 -->
+	<select id="listViolations" parameterType="oss.bean.Condition" resultMap="violationsMap">
+  		select v.violationsID as violationsID, v.violationsTime as violationsTime, v.violationsWhy as violationsWhy, v.violationsResult as violationsResult, v.stickTime as stickTime, u.userID as userID,
+ 		u.userName as userName, u.userAccount as userAccount, u.userPwd as userPwd, u.userIdentity as userIdentity, u.userPhone as userPhone, u.userEmail as userEmail, 
+ 		u.userBalance as userBalance, u.userIntroduction as userIntroduction, u.userAddress as userAddress, u.userStatusID as userStatusID, u.userCredit as userCredit, u.userType as userType
+		from violations v, users u where v.userID = u.userID  
+		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+			and v.violationsTime between '${startDate} 00:00:00' and '${endDate} 23:59:59'
+		</if>
+		<if test="title != null and title != ''">
+			and u.userName like '%${title}%'
+		</if>
+		order by v.stickTime desc, v.violationsTime desc
+	</select>
+	
+	<!-- 按违规时间倒序查询违规记录 -->
+	<select id="listViolationsDesc" parameterType="int" resultMap="violationsMap">
+		select v.violationsID as violationsID, v.violationsTime as violationsTime, v.violationsWhy as violationsWhy, v.violationsResult as violationsResult, v.stickTime as stickTime, u.userID as userID,
+ 		u.userName as userName, u.userAccount as userAccount, u.userPwd as userPwd, u.userIdentity as userIdentity, u.userPhone as userPhone, u.userEmail as userEmail, 
+ 		u.userBalance as userBalance, u.userIntroduction as userIntroduction, u.userAddress as userAddress, u.userStatusID as userStatusID, u.userCredit as userCredit, u.userType as userType
+		from violations v, users u where v.userID = u.userID and u.userType = #{userType} 
+		order by violationsTime desc
+	</select>
+	
+	<!-- 查询置顶违规记录 -->
+	<select id="listStickViolations" parameterType="int"  resultMap="violationsMap">
+		select v.violationsID as violationsID, v.violationsTime as violationsTime, v.violationsWhy as violationsWhy, v.violationsResult as violationsResult, v.stickTime as stickTime, u.userID as userID,
+ 		u.userName as userName, u.userAccount as userAccount, u.userPwd as userPwd, u.userIdentity as userIdentity, u.userPhone as userPhone, u.userEmail as userEmail, 
+ 		u.userBalance as userBalance, u.userIntroduction as userIntroduction, u.userAddress as userAddress, u.userStatusID as userStatusID, u.userCredit as userCredit, u.userType as userType
+		from violations v, users u where v.userID = u.userID  and u.userType = #{userType}   
+		and stickTime != '1970-01-01 00:00:00' 
+		order by stickTime desc
+	</select>
+	
+	<resultMap type="oss.bean.Violations2" id="violationsGroupByWhyMap">
+		<result column="violationsWhy" property="violationsWhy"/>
+		<result column="whyCount" property="whyCount"/>
+	</resultMap>
+	<!-- 按违规原因分组查询违规列表 -->
+	<select id="listViolationsGroupByWhy" parameterType="int" resultMap="violationsGroupByWhyMap" >
+		select violationsWhy, count(violationsWhy) as whyCount 
+		from violations v, users u where v.userID = u.userID and u.userType = #{userType} 
+		group by violationsWhy
+	</select>
+	
+</mapper>

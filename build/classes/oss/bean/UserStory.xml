@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="oss.mapper.PortalManageMapper">
+	<select id="storyList" resultType="oss.bean.UserStory" parameterType="oss.bean.Condition">
+		select * from UserStory where 1 = 1
+		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+			and storyTime between #{startDate} and #{endDate}
+		</if>
+		<if test="title != null and title != ''">
+			and  storyTitle like concat(concat('%',#{title}),'%')
+		</if>
+	</select>
+	
+	<select id="selectStoryByID" resultType="oss.bean.UserStory" parameterType="oss.bean.UserStory">
+		select * from UserStory where 1 = 1 and storyID=#{storyID}
+	</select>
+	
+	
+	
+	<update id="updateStory" parameterType="oss.bean.UserStory">
+	    update UserStory set storyTitle=#{storyTitle},storyContext=#{storyContext} 
+	    where storyID=#{storyID}
+	</update>
+	
+	<delete id="deleteStoryByID" parameterType="java.util.List">
+		delete from UserStory where storyID in 
+		<foreach collection="list" item="story" open="(" close=")" separator=",">
+			#{story.storyID}
+		</foreach>
+	</delete>
+	
+	<insert id="insertStory" parameterType="oss.bean.UserStory">
+		<selectKey keyProperty="storyID" order="BEFORE" resultType="java.lang.Long" >
+			select userStorySeq.nextval  from dual 
+		</selectKey>
+		insert into UserStory (storyID,storyTitle,userID,storyContext,storyTime,stickTime,imageURL) values 
+		(#{storyID},#{storyTitle},#{userID},#{storyContext},#{storyTime},#{stickTime},#{imageURL})
+	</insert>
+</mapper>
