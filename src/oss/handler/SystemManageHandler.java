@@ -166,69 +166,74 @@ public class SystemManageHandler {
 		return classification;
 	}
 
-	//	批量删除数据 袁楠文 2018-6-19 14:10
+	// 批量删除数据 袁楠文 2018-6-19 14:10
 	@RequestMapping("/delbatchclass")
-	public @ResponseBody String delbatchclass(HttpServletRequest req, @RequestBody List<Classification> batchclasslist) {
-		int j=0;
+	public @ResponseBody String delbatchclass(HttpServletRequest req,
+			@RequestBody List<Classification> batchclasslist) {
+		int j = 0;
 		for (int i = 0; i < batchclasslist.size(); i++) {
-			int delclassnumber=systemManegeBizImpl.delclasslistdata(batchclasslist.get(i).getClassificationId());
-			if (delclassnumber==1) {
+			int delclassnumber = systemManegeBizImpl.delclasslistdata(batchclasslist.get(i).getClassificationId());
+			if (delclassnumber == 1) {
 				j++;
 				continue;
-			}else {
+			} else {
 				flg = "error";
 				break;
 			}
 		}
-		if (j==batchclasslist.size()) {
-			flg="success";
+		if (j == batchclasslist.size()) {
+			flg = "success";
 		}
 		return flg;
 	}
+
 	// 分类列表数据删除 袁楠文 2018-6-15 11:11
 	@RequestMapping("/delclasslistdata")
-	public @ResponseBody String delclasslistdata(HttpServletRequest request,@RequestParam(value = "classificationId", required = true, defaultValue = "empty") Long classificationId) {
-		String classtype=request.getParameter("classtype");
+	public @ResponseBody String delclasslistdata(HttpServletRequest request,
+			@RequestParam(value = "classificationId", required = true, defaultValue = "empty") Long classificationId) {
+		String classtype = request.getParameter("classtype");
 		if (classtype.equals("服务商")) {
-		Condition condition = new Condition();
-		condition.setClassPid(classificationId.intValue());
-		List<Classification> classlist = systemManegeBizImpl.seekclasslist(condition);
-		System.out.println("二级分类数量:"+classlist.size());
-		int j=0;
-		if (classlist.size()!=0) {
-			for (int i = 0; i < classlist.size(); i++) {
-				int delclassnumber=systemManegeBizImpl.delclasslistdata(classlist.get(i).getClassificationId());
-				if (delclassnumber==1) {
-					j++;
-					continue;
-				}else {
-					flg = "error";
-					break;
-				}	
-			}
-			if (!flg.equals("error")) {	
-				System.out.println(j);
-				if (j==classlist.size()) {
+			Condition condition = new Condition();
+			condition.setClassPid(classificationId.intValue());
+			List<Classification> classlist = systemManegeBizImpl.seekclasslist(condition);
+			System.out.println("二级分类数量:" + classlist.size());
+			int j = 0;
+			if (classlist.size() != 0) {
+				for (int i = 0; i < classlist.size(); i++) {
+					int delclassnumber = systemManegeBizImpl.delclasslistdata(classlist.get(i).getClassificationId());
+					if (delclassnumber == 1) {
+						j++;
+						continue;
+					} else {
+						flg = "error";
+						break;
+					}
+				}
+				if (!flg.equals("error")) {
+					System.out.println(j);
+					if (j == classlist.size()) {
+						System.out.println("二级分类删除完成");
+						int deloneclassnumber = systemManegeBizImpl.delclasslistdata(classificationId);
+						if (deloneclassnumber == 1) {
+							flg = "success";
+						}
+					}
+				}
+			} else {
+				System.out.println("没有二级分类");
+				if (j == classlist.size()) {
 					System.out.println("二级分类删除完成");
-					int deloneclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
-					if (deloneclassnumber==1) {
+					int deloneclassnumber = systemManegeBizImpl.delclasslistdata(classificationId);
+					if (deloneclassnumber == 1) {
 						flg = "success";
 					}
 				}
 			}
-		}else {
-			System.out.println("没有二级分类");
-				if (j==classlist.size()) {
-					System.out.println("二级分类删除完成");
-					int deloneclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
-					if (deloneclassnumber==1) {
-						flg = "success";
-					}
+		} else {
+			int delclassnumber = systemManegeBizImpl.delclasslistdata(classificationId);
+			if (delclassnumber == 1) {
+				flg = "success";
 			}
-		}
-		}else {
-			int delclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
-			if (delclassnumber==1) {flg = "success";}	
 		}
 		System.out.println(flg);
 		return flg;
