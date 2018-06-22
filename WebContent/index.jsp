@@ -86,7 +86,7 @@
 										<cite>参数配置</cite>
 
 								</a></li>
-								<li><a _href="xxx.html"> <i class="iconfont">&#xe6a7;</i>
+								<li><a _href=<%=path+"/SystemManage/roleList.action" %>> <i class="iconfont">&#xe6a7;</i>
 										<cite>权限配置</cite>
 
 								</a></li>
