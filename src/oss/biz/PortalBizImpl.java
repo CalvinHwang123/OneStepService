@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import oss.bean.Condition;
+import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.mapper.PortalMapper;
@@ -49,4 +50,5 @@ public class PortalBizImpl  implements PortalBiz{
 	public List<Violations2> listViolationsGroupByWhy(int userType) {
 		return portalManageMapper.listViolationsGroupByWhy(userType);
 	}
+
 }

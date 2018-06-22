@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
+import oss.bean.SuccessCase;
 import oss.bean.UserStory;
 import oss.bean.Workinformation;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -167,5 +168,28 @@ public class PortalHandler {
 		ModelAndView classification = new ModelAndView("worksindex");
 		return classification;*/
 		return null;
+	}
+
+	// 查询成功案例列表 by hsp 6-20 22:26
+	@RequestMapping("/successCaseList.action")
+	public ModelAndView successCaseList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<SuccessCase> successCaseList = portalManageBizImpl.successCaseList(condition);
+		PageInfo pageInfo = new PageInfo<>(successCaseList, pageSize);
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("foreground/successcase");
+		return mav;
+	}
+
+	// 单个成功案例 by hsp 6-21 11:24
+	@RequestMapping("/successCase.action")
+	public ModelAndView successCase(HttpServletRequest req, SuccessCase successCase) {
+		successCase = portalManageBizImpl.successCase(successCase);
+		req.setAttribute("successCase", successCase);
+		ModelAndView mav = new ModelAndView("foreground/singleSuccessCase");
+		return mav;
 	}
 }

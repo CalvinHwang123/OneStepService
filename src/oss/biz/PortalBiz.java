@@ -3,6 +3,7 @@ package oss.biz;
 import java.util.List;
 
 import oss.bean.Condition;
+import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.bean.Violations2;
@@ -18,4 +19,7 @@ public interface PortalBiz {
 	List<Violations> listViolationsDesc(int userType);
 	List<Violations2> listViolationsGroupByWhy(int userType);
 	List<Violations> listStickViolations(int userType);
+	
+	
+	
 }

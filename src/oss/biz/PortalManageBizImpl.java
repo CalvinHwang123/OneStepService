@@ -10,8 +10,10 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.SuccessCase;
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Violations2;
 /*
  * 门户管理Biz业务实现类
  */
@@ -26,6 +28,12 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	@Override
 	public List<UserStory> userStoryList(Condition condition) {
 		return portalManageMapper.storyList(condition);
+	}
+
+	// 雇主故事byID by hsp 6-20 13:24
+	@Override
+	public UserStory userStory(UserStory userStory) {
+		return portalManageMapper.selectStoryByID(userStory);
 	}
 
 	@Override
@@ -87,13 +95,13 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	public boolean insertViolations(Violations violations) {
 		return portalManageMapper.insertViolations(violations) > 0;
 	}
-	
+
 	// 违规记录修改 By Hlq 2018-06-15 13:51
 	@Override
 	public boolean updateViolationsByID(Violations violations) {
 		return portalManageMapper.updateViolationsByID(violations) > 0;
 	}
-	
+
 	// 违规记录置顶与取消置顶 By Hlq 2018-06-16 21:05
 	@Override
 	public boolean stickUpdateViolationsByID(Violations violations) {
@@ -141,22 +149,55 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		// TODO Auto-generated method stub
 		return portalManageMapper.updateInfoById(information);
 	}
-//增加动态   wwj 6-15
+
+	// 增加动态 wwj 6-15
 	@Override
 	public int AddDyna(Dynamics dynamics) {
-		
+
 		return portalManageMapper.AddDyna(dynamics);
 	}
-//增加资讯   wwj 6-15
+
+	// 增加资讯 wwj 6-15
 	@Override
 	public int AddInfo(Information information) {
-	
 		return portalManageMapper.AddInfo(information);
 	}
 
+	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
 	@Override
 	public List<Links> LinksList() {
 		// TODO Auto-generated method stub
 		return portalManageMapper.LinksList();
+	}
+
+	// 查询成功案例列表 by hsp 6-20 22:26
+	@Override
+	public List<SuccessCase> successCaseList(Condition condition) {
+		return portalManageMapper.successCaseList(condition);
+	}
+
+	//单个成功案例 by hsp 6-21 11:24
+	@Override
+	public SuccessCase successCase(SuccessCase successCase) {
+		return portalManageMapper.selectCaseByID(successCase);
+	}
+
+	//修改成功案例 by hsp 6-21 11:24
+	@Override
+	public int updateSuccessCase(SuccessCase successCase) {
+		int i = portalManageMapper.updateSuccessCase(successCase);
+		return i;
+	}
+
+	// 批量删除成功案例 by hsp 6-21 11:24
+	@Override
+	public int deleteSuccessCases(List<SuccessCase> successCaseList) {
+		return portalManageMapper.deleteSuccessCaseByID(successCaseList);
+	}
+
+	// 增加成功案例 by hsp 6-21 11:24
+	@Override
+	public int addSuccessCases(SuccessCase successCase) {
+		return portalManageMapper.insertSuccessCase(successCase);
 	}
 }

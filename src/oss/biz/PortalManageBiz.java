@@ -5,20 +5,23 @@ import java.util.List;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Violations2;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.SuccessCase;
 
 /*
  * 门户管理Biz业务接口
  */
 public interface PortalManageBiz {
 
-	//雇主故事列表 黄绍鹏6-13  22：20
+	// 雇主故事列表 黄绍鹏6-13 22：20
 	public List<UserStory> userStoryList(Condition condition);
-	
-	//修改雇主故事
+
+	// 雇主故事byID by hsp 6-20 13:24
+	public UserStory userStory(UserStory userStory);
 
 	// 修改雇主故事
 	public int updateStory(UserStory userStory);
@@ -28,13 +31,16 @@ public interface PortalManageBiz {
 
 	// 违规记录删除 by hlq 2018-06-14 21:59
 	public boolean violationsDelete(List<Violations> violationsList);
+
 	// 新增违规记录 by hlq 2018-06-15 11:25
 	public boolean insertViolations(Violations violations);
+
 	// 根据id修改违规记录 by hlq 2018-06-15 13:49
 	public boolean updateViolationsByID(Violations violations);
+
 	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21:04
 	public boolean stickUpdateViolationsByID(Violations violations);
-	
+
 	public List<Links> listLinks(Condition condition);
 
 	public abstract int addLinks(Links links);
@@ -75,4 +81,20 @@ public interface PortalManageBiz {
 	
 	//前端资讯 wwj 6-20
 		public List<Links> LinksList();
+
+	// 查询成功案例列表 by hsp 6-20 22:26
+	public abstract List<SuccessCase> successCaseList(Condition condition);
+
+	// 单个成功案例 by hsp 6-21 11:24
+	public abstract SuccessCase successCase(SuccessCase successCase);
+
+	// 修改成功案例 by hsp 6-21 11:24
+	public abstract int updateSuccessCase(SuccessCase successCase);
+
+	// 批量删除成功案例 by hsp 6-21 11:24
+	public abstract int deleteSuccessCases(List<SuccessCase> successCaseList);
+
+	// 增加成功案例 by hsp 6-21 11:24
+	public abstract int addSuccessCases(SuccessCase successCase);
+
 }

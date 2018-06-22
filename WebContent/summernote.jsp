@@ -83,11 +83,12 @@
 				contentType : false,
 				success : function(data) {
 					alert(data.path);
-					$('.summernote').summernote('insertImage', data.path);
+					for (var i = 0; i < $('.summernote').length; i++) {
+						$('.summernote').eq(i).summernote('insertImage', data.path);
+					}
 					console.log(data.path);
 				},
 				error : function(data) {
-
 					alert("上传图片失败" + data);
 				}
 			})

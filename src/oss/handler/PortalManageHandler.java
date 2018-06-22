@@ -5,8 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +20,8 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.SuccessCase;
 import oss.bean.UserStory;
-import oss.bean.Users;
 import oss.bean.Violations;
 import oss.biz.PortalManageBiz;
 /*
@@ -40,10 +38,9 @@ public class PortalManageHandler {
 
 	// 后端违规列表请求 by hlq 2018-06-14
 	@RequestMapping("/violationsList.action")
-	public ModelAndView violationsList(HttpServletRequest req, 
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
-		Condition condition) {
+	public ModelAndView violationsList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
@@ -56,7 +53,7 @@ public class PortalManageHandler {
 		ModelAndView mav = new ModelAndView("violationsList");
 		return mav;
 	}
-	
+
 	// 违规记录删除 by hlq 2018-06-14 21:58 返回json
 	@RequestMapping(value = "/violationsDelete.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String violationsDelete(@RequestBody List<Violations> violationsList) {
@@ -68,7 +65,7 @@ public class PortalManageHandler {
 			return "删除失败";
 		}
 	}
-	
+
 	// 违规记录新增 by hlq 2018-06-15 11:36 返回json
 	@RequestMapping(value = "/violationsInsert.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String violationsInsert(@RequestBody Violations violations) {
@@ -80,7 +77,7 @@ public class PortalManageHandler {
 			return "新增失败";
 		}
 	}
-	
+
 	// 违规记录修改 by hlq 2018-06-15 11:36 返回json
 	@RequestMapping(value = "/violationsUpdate.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String violationsUpdate(@RequestBody Violations violations) {
@@ -92,7 +89,7 @@ public class PortalManageHandler {
 			return "修改失败";
 		}
 	}
-	
+
 	// 违规记录置顶 by hlq 2018-06-16 21:01 返回json
 	@RequestMapping(value = "/violationsStickTimeUpdate.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String violationsStickTimeUpdate(@RequestBody Violations violations) {
@@ -109,7 +106,7 @@ public class PortalManageHandler {
 			return "操作失败";
 		}
 	}
-	
+
 	private Links links;
 
 	@RequestMapping("/linksList.action")
@@ -268,4 +265,59 @@ public class PortalManageHandler {
 		return mav;	
 	}
 	
+	// 获取雇主故事列表 黄绍鹏6-19 10:23
+	@RequestMapping("/userStory.action")
+	public ModelAndView userStory(HttpServletRequest req, UserStory userStory) {
+		UserStory story = portalManageBizImpl.userStory(userStory);
+		req.setAttribute("story", story);
+		ModelAndView mav = new ModelAndView("foreground/singleUserStory");
+		return mav;
+	}
+
+	// 查询成功案例列表 by hsp 6-20 22:26
+	@RequestMapping("/successCaseList.action")
+	public ModelAndView successCaseList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<SuccessCase> successCaseList = portalManageBizImpl.successCaseList(condition);
+		PageInfo pageInfo = new PageInfo<>(successCaseList, pageSize);
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("background/successcase");
+		return mav;
+	}
+
+	// 修改成功案例 by hsp 6-21 11:24
+	@RequestMapping("/updateSuccessCase.action")
+	public @ResponseBody String updateSuccessCase(HttpServletRequest req, @RequestBody SuccessCase successCase) {
+		portalManageBizImpl.updateSuccessCase(successCase);
+		return "success";
+	}
+
+	// 批量删除成功案例 by hsp 6-21 11:24
+	@RequestMapping("/deleteSuccessCase.action")
+	public @ResponseBody String deleteSuccessCase(HttpServletRequest req,
+			@RequestBody List<SuccessCase> successCaseList) {
+		portalManageBizImpl.deleteSuccessCases(successCaseList);
+		return "success";
+	}
+
+	// 增加成功案例 by hsp 6-21 11:24
+	@RequestMapping("/addSuccessCase.action")
+	public @ResponseBody String addSuccessCase(HttpServletRequest req, @RequestBody SuccessCase successCase) {
+		successCase.setSuccessCaseTime(DateUtil.getCurrentDate());
+		successCase.setStickTime(DateUtil.getCurrentDate());
+		portalManageBizImpl.addSuccessCases(successCase);
+		return "success";
+	}
+
+	// 单个成功案例 by hsp 6-21 11:24
+	@RequestMapping("/successCase.action")
+	public ModelAndView successCase(HttpServletRequest req, SuccessCase successCase) {
+		successCase = portalManageBizImpl.successCase(successCase);
+		req.setAttribute("successCase", successCase);
+		ModelAndView mav = new ModelAndView("foreground/singleSuccessCase");
+		return mav;
+	}
 }

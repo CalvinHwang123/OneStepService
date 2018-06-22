@@ -156,7 +156,7 @@
 						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i>
 								<cite>规则中心配置</cite>
 						</a></li>
-						<li><a _href="admin-rule.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href="PortalManage/successCaseList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>成功案例配置</cite>
 						</a></li>
 						<li><a _href="PortalManage/linksList.action"> <i class="iconfont">&#xe6a7;</i>
