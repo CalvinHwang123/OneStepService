@@ -8,6 +8,7 @@ import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Powers;
+import oss.bean.Role;
 
 /*
  * 系统管理Mapper接口
@@ -17,7 +18,15 @@ public interface SystemManegeMapper {
 	// jhx 获取权限列表 2018-6-14
 	public List<Powers> listPower();
 
-	// jhx 获取一二级动态菜单 6.19
+	// jhx 获取所有角色列表 6.21
+	public List<Role> listRole();
+
+	// jhx 获取所有一二级动态菜单 6.21
+	public List<Menu> allOneMenu();
+
+	public List<Menu> allTwoMenu();
+
+	// jhx 根据员工ID获取一二级动态菜单 6.19
 	public List<Menu> oneMenuList(Long empID);
 
 	public List<Menu> twoMenuList(Long empID);

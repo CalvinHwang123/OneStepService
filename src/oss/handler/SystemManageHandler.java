@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +20,7 @@ import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Powers;
+import oss.bean.Role;
 import oss.biz.SystemManegeBiz;
 
 /*
@@ -45,7 +45,6 @@ public class SystemManageHandler {
 		System.out.println("登陆员工为" + emp);
 		if (emp != null && emp.getEmpPwd().equals(empPwd)) {
 			req.getSession().setAttribute("empss", emp);
-			// req.setAttribute("emp", emp);
 			System.out.println("登录成功");
 			mav = new ModelAndView("redirect:menu.action");
 
@@ -61,22 +60,44 @@ public class SystemManageHandler {
 	// jhx 登录成功后跳转查找对应菜单
 	@RequestMapping("/menu.action")
 	public ModelAndView menuList(HttpServletRequest req) {
-		// System.out.println(emp.getEmpName());
+
 		Emps emp = (Emps) req.getSession().getAttribute("empss");
 		Long empID = emp.getEmpID();
 		System.out.println("员工ID为======" + empID);
 		List<Menu> oneMenuList = systemManegeBizImpl.oneMenuList(empID);
 		System.out.println("一级菜单为=====" + oneMenuList);
 		List<Menu> twoMenuList = systemManegeBizImpl.twoMenuList(empID);
-		System.out.println("二级菜单为=====" + oneMenuList);
+		System.out.println("二级菜单为=====" + twoMenuList);
 		req.setAttribute("oneMenuList", oneMenuList);
 		req.setAttribute("twoMenuList", twoMenuList);
 		ModelAndView mav = new ModelAndView("background/index");
 		return mav;
 	}
 
-	// jhx 获取权限列表 2018-6-14 9:00
-	@Test
+	// jhx 获取角色列表及权限列表 6-21
+	@RequestMapping("/roleList.action")
+	public ModelAndView roleList(HttpServletRequest req) {
+		// Emps emp = (Emps) req.getSession().getAttribute("empss");
+		// Long empID = emp.getEmpID();
+		Long empID = (long) 1;
+		System.out.println("员工ID为======" + empID);
+		List<Menu> allOneMenu = systemManegeBizImpl.findAllOneMenu();
+		System.out.println("所有一级菜单为=====" + allOneMenu);
+		List<Menu> allTwoMenu = systemManegeBizImpl.findAllTwoMenu();
+		System.out.println("所有二级菜单为=====" + allTwoMenu);
+		List<Menu> twoMenuList = systemManegeBizImpl.twoMenuList(empID);
+		System.out.println("二级菜单为=====" + twoMenuList);
+
+		List<Role> roleList = systemManegeBizImpl.roleList();
+		System.out.println("powerList===" + roleList);
+		req.setAttribute("allOneMenu", allOneMenu);
+		req.setAttribute("allTwoMenu", allTwoMenu);
+		req.setAttribute("roleList", roleList);
+		ModelAndView mav = new ModelAndView("background/power");
+		return mav;
+	}
+
+	// jhx 获取权限列表 6.22
 	@RequestMapping("/powerList.action")
 	public List<Powers> powerList(HttpServletRequest req) {
 		List<Powers> powerList = systemManegeBizImpl.powerList();
@@ -143,69 +164,74 @@ public class SystemManageHandler {
 		return classification;
 	}
 
-	//	批量删除数据 袁楠文 2018-6-19 14:10
+	// 批量删除数据 袁楠文 2018-6-19 14:10
 	@RequestMapping("/delbatchclass")
-	public @ResponseBody String delbatchclass(HttpServletRequest req, @RequestBody List<Classification> batchclasslist) {
-		int j=0;
+	public @ResponseBody String delbatchclass(HttpServletRequest req,
+			@RequestBody List<Classification> batchclasslist) {
+		int j = 0;
 		for (int i = 0; i < batchclasslist.size(); i++) {
-			int delclassnumber=systemManegeBizImpl.delclasslistdata(batchclasslist.get(i).getClassificationId());
-			if (delclassnumber==1) {
+			int delclassnumber = systemManegeBizImpl.delclasslistdata(batchclasslist.get(i).getClassificationId());
+			if (delclassnumber == 1) {
 				j++;
 				continue;
-			}else {
+			} else {
 				flg = "error";
 				break;
 			}
 		}
-		if (j==batchclasslist.size()) {
-			flg="success";
+		if (j == batchclasslist.size()) {
+			flg = "success";
 		}
 		return flg;
 	}
+
 	// 分类列表数据删除 袁楠文 2018-6-15 11:11
 	@RequestMapping("/delclasslistdata")
-	public @ResponseBody String delclasslistdata(HttpServletRequest request,@RequestParam(value = "classificationId", required = true, defaultValue = "empty") Long classificationId) {
-		String classtype=request.getParameter("classtype");
+	public @ResponseBody String delclasslistdata(HttpServletRequest request,
+			@RequestParam(value = "classificationId", required = true, defaultValue = "empty") Long classificationId) {
+		String classtype = request.getParameter("classtype");
 		if (classtype.equals("服务商")) {
-		Condition condition = new Condition();
-		condition.setClassPid(classificationId.intValue());
-		List<Classification> classlist = systemManegeBizImpl.seekclasslist(condition);
-		System.out.println("二级分类数量:"+classlist.size());
-		int j=0;
-		if (classlist.size()!=0) {
-			for (int i = 0; i < classlist.size(); i++) {
-				int delclassnumber=systemManegeBizImpl.delclasslistdata(classlist.get(i).getClassificationId());
-				if (delclassnumber==1) {
-					j++;
-					continue;
-				}else {
-					flg = "error";
-					break;
-				}	
-			}
-			if (!flg.equals("error")) {	
-				System.out.println(j);
-				if (j==classlist.size()) {
+			Condition condition = new Condition();
+			condition.setClassPid(classificationId.intValue());
+			List<Classification> classlist = systemManegeBizImpl.seekclasslist(condition);
+			System.out.println("二级分类数量:" + classlist.size());
+			int j = 0;
+			if (classlist.size() != 0) {
+				for (int i = 0; i < classlist.size(); i++) {
+					int delclassnumber = systemManegeBizImpl.delclasslistdata(classlist.get(i).getClassificationId());
+					if (delclassnumber == 1) {
+						j++;
+						continue;
+					} else {
+						flg = "error";
+						break;
+					}
+				}
+				if (!flg.equals("error")) {
+					System.out.println(j);
+					if (j == classlist.size()) {
+						System.out.println("二级分类删除完成");
+						int deloneclassnumber = systemManegeBizImpl.delclasslistdata(classificationId);
+						if (deloneclassnumber == 1) {
+							flg = "success";
+						}
+					}
+				}
+			} else {
+				System.out.println("没有二级分类");
+				if (j == classlist.size()) {
 					System.out.println("二级分类删除完成");
-					int deloneclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
-					if (deloneclassnumber==1) {
+					int deloneclassnumber = systemManegeBizImpl.delclasslistdata(classificationId);
+					if (deloneclassnumber == 1) {
 						flg = "success";
 					}
 				}
 			}
-		}else {
-			System.out.println("没有二级分类");
-				if (j==classlist.size()) {
-					System.out.println("二级分类删除完成");
-					int deloneclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
-					if (deloneclassnumber==1) {
-						flg = "success";
-					}
+		} else {
+			int delclassnumber = systemManegeBizImpl.delclasslistdata(classificationId);
+			if (delclassnumber == 1) {
+				flg = "success";
 			}
-		}
-		}else {
-			int delclassnumber= systemManegeBizImpl.delclasslistdata(classificationId);
-			if (delclassnumber==1) {flg = "success";}	
 		}
 		System.out.println(flg);
 		return flg;

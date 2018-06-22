@@ -7,6 +7,7 @@ import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Powers;
+import oss.bean.Role;
 
 /*
  * 系统管理Biz业务接口
@@ -14,6 +15,14 @@ import oss.bean.Powers;
 public interface SystemManegeBiz {
 	// jhx 获取权限列表 2018-6-13 9:00
 	public List<Powers> powerList();
+
+	// jhx 获取角色列表 6.21
+	public List<Role> roleList();
+
+	// jhx 获取所有一二级动态菜单 6.21
+	public List<Menu> findAllOneMenu();
+
+	public List<Menu> findAllTwoMenu();
 
 	// jhx 获取一二级动态菜单 6.19
 	public List<Menu> oneMenuList(Long empID);
