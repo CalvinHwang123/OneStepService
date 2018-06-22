@@ -10,6 +10,7 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.Rulee;
 /*
  * 后端门户管理Mapper接口
  */
@@ -17,9 +18,14 @@ import oss.bean.Links;
 public interface PortalManageMapper {
 	//雇主故事列表 黄绍鹏6-13  22：20
 	public List<UserStory> storyList(Condition condition);
-	
+	//华清修改：规则中心列表
+	public List<Rulee> ruleCenterList(Condition condition);
+	//华清修改：规则中心新增规则
+		public int addRulee(Rulee rulee);
 	//修改雇主故事 黄绍鹏6-13  23：10
 	public int updateStory(UserStory userStory);
+	//修改规则
+	public int updateRulee(Rulee rulee);
 	
 	// by hlq 2018-06-14
 	public List<Violations> listViolations(Condition condition);
@@ -45,6 +51,9 @@ public interface PortalManageMapper {
 	
 	// 批量删除雇主故事 黄绍鹏 6-14 15：47
 	public abstract int deleteStoryByID(List<UserStory> storyList);
+	
+	// 华清修改：删除规则
+    public abstract int deleteRulee(List<Rulee> rulee);
 	
 	// 增加雇主故事  黄绍鹏 6-14 21：32
 	public int insertStory(UserStory userStory);

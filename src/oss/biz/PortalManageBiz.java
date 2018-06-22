@@ -9,16 +9,25 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.Rulee;
 
 /*
  * 门户管理Biz业务接口
  */
 public interface PortalManageBiz {
 
-	//雇主故事列表 黄绍鹏6-13  22：20
+	// 雇主故事列表 黄绍鹏6-13 22：20
 	public List<UserStory> userStoryList(Condition condition);
-	
-	//修改雇主故事
+
+	// 华清修改：规则中心列表
+	public List<Rulee> ruleCenterList(Condition condition);
+
+	// 华清修改：规则中心新增规则
+	public int addRulee(Rulee rulee);
+	// 华清修改：删除规则
+	public abstract int deleteRulee(List<Rulee> rulee);
+	//修改规则
+	public int updateRulee(Rulee rulee);
 
 	// 修改雇主故事
 	public int updateStory(UserStory userStory);
@@ -28,13 +37,16 @@ public interface PortalManageBiz {
 
 	// 违规记录删除 by hlq 2018-06-14 21:59
 	public boolean violationsDelete(List<Violations> violationsList);
+
 	// 新增违规记录 by hlq 2018-06-15 11:25
 	public boolean insertViolations(Violations violations);
+
 	// 根据id修改违规记录 by hlq 2018-06-15 13:49
 	public boolean updateViolationsByID(Violations violations);
+
 	// 根据id置顶与取消置顶违规记录 by hlq 2018-06-16 21:04
 	public boolean stickUpdateViolationsByID(Violations violations);
-	
+
 	public List<Links> listLinks(Condition condition);
 
 	public abstract int AddLinks(Links links);
@@ -72,6 +84,5 @@ public interface PortalManageBiz {
 
 	// 增加资讯 wwj 6-15
 	public abstract int AddInfo(Information information);
-	
 
 }

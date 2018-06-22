@@ -295,7 +295,7 @@
 				<div class="layui-input-block">
 					<input type="text" name="violationsResult" lay-verify="required"
 						required autocomplete="off" class="layui-input"
-						id="creditpoints">
+						id="creditPoints">
 				</div>
 				
 				<div class="layui-form-item">

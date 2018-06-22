@@ -239,13 +239,14 @@ public class BusiManageHandler {
 	public @ResponseBody String violationsInsert(@RequestBody Credit credit,Users users,Violations violations) {
 
 		violations.setViolationsTime(DateUtil.getCurrentDate());
+		violations.setStickTime(DateUtil.getCurrentDate());
 		violations.setViolationsWhy(credit.getCreditWhy());
 		violations.setUserID(credit.getUserID());
-		violations.setViolationsResult("扣除信用分:"+credit.getCreditpoints());
+		violations.setViolationsResult("扣除信用分:"+credit.getCreditPoints());
 		System.out.println("走到了");
-//		System.out.println(credit.getUserID());
-//		System.out.println(credit.getCreditpoints());
-		users.setUserID(credit.getUserID());
+	System.out.println(credit.getUserID());
+	System.out.println(credit.getCreditPoints());
+		
 		busiManageBizImpl.userCreditScore(credit);
 	    busiManageBizImpl.creditCreditScore(credit);
 		busiManageBizImpl.violaTionCreditScore(violations);

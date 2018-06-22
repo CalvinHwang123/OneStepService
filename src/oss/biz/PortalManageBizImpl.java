@@ -10,6 +10,7 @@ import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.Rulee;
 import oss.bean.UserStory;
 import oss.bean.Violations;
 /*
@@ -153,6 +154,31 @@ public class PortalManageBizImpl implements PortalManageBiz {
 	
 		return portalManageMapper.AddInfo(information);
 	}
+
+	@Override
+	public List<Rulee> ruleCenterList(Condition condition) {
+		// TODO Auto-generated method stub
+		return portalManageMapper.ruleCenterList(condition);
+	}
+
+	@Override
+	public int addRulee(Rulee rulee) {
+		// TODO Auto-generated method stub
+		return portalManageMapper.addRulee(rulee);
+	}
+
+	@Override
+	public int updateRulee(Rulee rulee) {
+		// TODO Auto-generated method stub
+		return portalManageMapper.updateRulee(rulee);
+	}
+//  华清修改：违规记录删除
+	
+	@Override
+	public int deleteRulee(List<Rulee> rulee) {
+		return portalManageMapper.deleteRulee(rulee);
+	}
+	
 
 //	@Override
 //	public Users Forelogin(Users users) {
