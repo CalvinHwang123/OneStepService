@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import oss.bean.Condition;
+import oss.bean.UserStory;
 import oss.bean.Violations;
 import oss.mapper.PortalMapper;
 
@@ -23,5 +24,6 @@ public class PortalBizImpl  implements PortalBiz{
 	public List<Violations> violationsList(Condition condition) {
 		return null;
 	}
+
 
 }

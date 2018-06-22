@@ -19,7 +19,12 @@
 </head>
 <body>
 		<div class="page">
-			<div>
+			<c:choose>
+				<c:when test="${pageInfo.getPages() == 0}">
+				<blockquote class="layui-elem-quote layui-quote-nm">尊敬的用户，当前列表没有数据~~~</blockquote>
+				</c:when>
+				<c:otherwise>
+					<div>
   				共${pageInfo.getPages()}页，每页 <select  
 					style="width: 6%; height: 30px;" name="pageSize"
 					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
@@ -43,21 +48,21 @@
   				<c:choose>  
   					<c:when test="${pageInfo.pageNum <= 2}">  
   						<c:if test="${pageInfo.pageNum != 1}">  
-<!-- 							<a class="num" href="javascript:void(0);" -->
+							<a class="num" href="javascript:void(0);"
   								onclick="changePage(${pageInfo.pageNum-1})"><c:out  
   									value="${pageInfo.pageNum-1}"></c:out> </a>  
   						</c:if>  
   						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>  
   						<c:forEach begin="1" step="1" end="4" var="num">  
   							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">  
-<!-- 								<a class="num" href="javascript:void(0);" -->
+								<a class="num" href="javascript:void(0);"
   									onclick="changePage(${pageInfo.pageNum+num})"><c:out  
   										value="${pageInfo.pageNum+num}"></c:out> </a>  
   							</c:if>  
   						</c:forEach>  
   					</c:when>  
   					<c:otherwise>  
-<!-- 						<a class="num" href="javascript:void(0);" -->
+						<a class="num" href="javascript:void(0);"
   							onclick="changePage(${pageInfo.pageNum-1})"><c:out  
   								value="${pageInfo.pageNum-1}"></c:out> </a>  
 
@@ -81,6 +86,12 @@
   					</c:otherwise>  
   				</c:choose>  
 			</div>
+				
+				
+				
+				
+				</c:otherwise>
+			</c:choose>
 		</div>
 		
 		

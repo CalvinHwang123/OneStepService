@@ -232,7 +232,8 @@
     	function updateStory(){
     		layer.confirm('确认要提交修改吗？',function(index){
   			  var storyTitle=$("#updateStoryTitle").val();
-  			  var storyContext=$("#updateStoryContext").val();
+//   			  var storyContext=$("#updateStoryContext").val();
+  			  var storyContext=$('.summernote').eq(1).summernote('code');
   			  var storyID=updateA.attr("storyID");
   			  var updateStory={"storyID":storyID,"storyTitle":storyTitle,"storyContext":storyContext};
   			  console.log($('.summernote').eq(1).summernote('code'));
@@ -322,8 +323,8 @@
 
       function delAll (argument) {
          var deleteIDs = tableCheck.getData();
-         if (deleteIDs.length == 0) {
-        	 layer.msg('请选择要删除的雇主故事!',{icon:1,time:500});
+         if (deleteIDs.length == 2) {
+        	 layer.msg('请选择要删除的雇主故事!',{icon:2,time:1000});
         	 return;
 		 }
         layer.confirm('确认要删除吗？',function(index){

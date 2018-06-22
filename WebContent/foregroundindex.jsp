@@ -174,7 +174,7 @@
 							<li><a href="login.html">我的钱包</a></li>
 							<li><a href="BusiManage/usersExit.action">退出</a></li>
 						</ul></li>
-					<c:if test="${forelogin.userType eq ''}">
+					<c:if test="${forelogin.userType == ''}">
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 								class="caret"></span></a>
@@ -197,7 +197,7 @@
 								<li><a href="offers.html">服务商中心</a></li>
 							</ul></li>
 					</c:if>
-						<c:if test="${forelogin.userType eq 1}">
+						<c:if test="${forelogin.userType == 1}">
 							<li class="dropdown head-dpdn"><a href="#"
 								class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 									class="caret"></span></a>
@@ -274,6 +274,7 @@
 							<li><a href="offers.html">规则中心</a></li>
 							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
 							<li><a href="PortalManage/foreViol.action">曝光台</a></li> 
+							<li><a href="Portal/successCaseList.action">成功案例</a></li> 
 						</ul> 
 					</li> 
 					<li class="dropdown head-dpdn">
@@ -285,21 +286,6 @@
 					<li class="dropdown head-dpdn">
 						<a href="help.html" class="dropdown-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i> 帮助</a>
 					</li>
-
-							<li><a href="offers.html">曝光台</a></li>
-
-
-						</ul></li>
-					<li class="dropdown head-dpdn"><a href="contact.html"
-						class="dropdown-toggle"><i class="fa fa-map-marker"
-							aria-hidden="true"></i> 定位</a></li>
-					<li class="dropdown head-dpdn"><a href="card.html"
-						class="dropdown-toggle"><i class="fa fa-credit-card-alt"
-							aria-hidden="true"></i> 我的银行卡</a></li>
-					<li class="dropdown head-dpdn"><a href="help.html"
-						class="dropdown-toggle"><i class="fa fa-question-circle"
-							aria-hidden="true"></i> 帮助</a></li>
-				</ul>
 			</div>
 			<div class="clearfix"></div>
 		</div>

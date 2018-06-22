@@ -10,8 +10,13 @@
 		<if test="title != null and title != ''">
 			and  storyTitle like concat(concat('%',#{title}),'%')
 		</if>
-		
 	</select>
+	
+	<select id="selectStoryByID" resultType="oss.bean.UserStory" parameterType="oss.bean.UserStory">
+		select * from UserStory where 1 = 1 and storyID=#{storyID}
+	</select>
+	
+	
 	
 	<update id="updateStory" parameterType="oss.bean.UserStory">
 	    update UserStory set storyTitle=#{storyTitle},storyContext=#{storyContext} 

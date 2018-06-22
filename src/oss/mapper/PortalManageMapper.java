@@ -2,15 +2,16 @@ package oss.mapper;
 
 
 import java.util.List;
+
 import oss.annotation.MyRepository;
-import oss.bean.UserStory;
-import oss.bean.Users;
-import oss.bean.Violations;
-import oss.bean.Violations2;
 import oss.bean.Condition;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
+import oss.bean.SuccessCase;
+import oss.bean.UserStory;
+import oss.bean.Violations;
+import oss.bean.Violations2;
 /*
  * 后端门户管理Mapper接口
  */
@@ -49,6 +50,10 @@ public interface PortalManageMapper {
 	
 	// 增加雇主故事  黄绍鹏 6-14 21：32
 	public int insertStory(UserStory userStory);
+	
+	//单个雇主故事 黄绍鹏6-20  13：18
+	public UserStory selectStoryByID(UserStory userStory);
+	
 	//动态列表   王伟杰6-13
 	public List<Dynamics> ListDyna(Condition condition);
 	//删除动态   王伟杰6-13
@@ -66,4 +71,18 @@ public interface PortalManageMapper {
 	//增加资讯  wwj  6-15
 	public abstract int AddInfo(Information information);
 	
+	//查询成功案例列表  by hsp 6-20 22:26
+	public List<SuccessCase> successCaseList(Condition condition);
+	
+	//修改成功案例 by hsp 6-21 11:24
+	public int updateSuccessCase(SuccessCase successCase);
+		
+	// 批量删除成功案例 by hsp 6-21 11:24
+	public abstract int deleteSuccessCaseByID(List<SuccessCase> successCaseList);
+		
+	// 增加成功案例 by hsp 6-21 11:24
+	public int insertSuccessCase(SuccessCase successCase);
+		
+	//单个成功案例 by hsp 6-21 11:24
+	public SuccessCase selectCaseByID(SuccessCase successCase);
 }
