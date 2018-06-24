@@ -187,9 +187,12 @@ public class PortalHandler {
 	// 单个成功案例 by hsp 6-21 11:24
 	@RequestMapping("/successCase.action")
 	public ModelAndView successCase(HttpServletRequest req, SuccessCase successCase) {
-		successCase = portalManageBizImpl.successCase(successCase);
-		req.setAttribute("successCase", successCase);
-		ModelAndView mav = new ModelAndView("foreground/singleSuccessCase");
+		SuccessCase singleCase = portalManageBizImpl.successCase(successCase);
+		req.setAttribute("singleCase", singleCase);
+		System.out.println(singleCase.getSuccessCaseTitle());
+		System.out.println(singleCase.getSuccessCaseTime());
+		System.out.println(singleCase.getSuccessCaseContext());
+		ModelAndView mav = new ModelAndView("foreground/singlesuccesscase");
 		return mav;
 	}
 }
