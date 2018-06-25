@@ -1,4 +1,5 @@
 package oss.handler;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -60,7 +61,7 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/userStory");
 		return mav;
 	}
-	
+
 	// 前端曝光台请求 by hlq 2018-06-16 13:36
 	@RequestMapping("/foreViolationsList.action")
 	public ModelAndView foreViolationsList(HttpServletRequest req,
@@ -129,45 +130,43 @@ public class PortalHandler {
 	// 前端 作品 数据 袁楠文 2018-6-19 22:45
 	@RequestMapping("/workInfoList")
 	public ModelAndView workInfoList(HttpServletRequest request,
-		@RequestParam(value = "pageSize", required = true, defaultValue = "12")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-		
+			@RequestParam(value = "pageSize", required = true, defaultValue = "12") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
 		PageHelper.startPage(pageNum, pageSize);
 		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
-		
+
 		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
 		List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		
+
 		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		request.setAttribute("twoclassmenulist", twoclassmenulist);
+
+		String worksPrice = condition.getBeWorksPrice() + "-" + condition.getEndWorksPrice();
+		request.setAttribute("worksPrice", worksPrice);
+
+		request.setAttribute("beWorksPrice", condition.getBeWorksPrice());
+		request.setAttribute("endWorksPrice", condition.getEndWorksPrice());
+		request.setAttribute("classPid", condition.getClassPid());
+		request.setAttribute("checkbox", condition.getStartDate());
+		request.setAttribute("looktitle", condition.getTitle());
+		request.setAttribute("condition", condition);
 		ModelAndView classification = new ModelAndView("worksindex");
 		return classification;
 	}
-	
-	// 前端 作品 按价格分类 袁楠文 2018-6-21 11:09
-	@RequestMapping("/classpricevaluelook")
-	public ModelAndView classpricevaluelook(HttpServletRequest request,
-		@RequestParam(value = "pageSize", required = true, defaultValue = "12")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-			String classpricevalue=request.getParameter("classpricevalue");
-			
-		System.out.println(classpricevalue.split("-")[0]+"-"+classpricevalue.split("-")[1]);
+	// 前端 作品 详情数据 袁楠文 2018-6-23 21:45
+	@RequestMapping("/worksIntroduction")
+	public ModelAndView worksIntroduction(HttpServletRequest request
+			,@RequestParam(value = "worksId", required = true, defaultValue = "empty") Long worksId) {
+		System.out.println("进入-"+worksId+"-详情");
 		
-		/*PageHelper.startPage(pageNum, pageSize);
-		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
+		List<Workinformation> workinfolist = portalBizImpl.worksIntroduction(worksId);
+		request.setAttribute("worksIntroduction", workinfolist);
 		
-		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
-		List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		
-		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("oneclassmenulist", oneclassmenulist);
-		request.setAttribute("twoclassmenulist", twoclassmenulist);
-		ModelAndView classification = new ModelAndView("worksindex");
-		return classification;*/
-		return null;
+		ModelAndView worksIntroduction = new ModelAndView("worksIntroduction");
+		return worksIntroduction;
 	}
 
 	// 查询成功案例列表 by hsp 6-20 22:26

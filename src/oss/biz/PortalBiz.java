@@ -19,7 +19,8 @@ public interface PortalBiz {
 	List<Violations> listViolationsDesc(int userType);
 	List<Violations2> listViolationsGroupByWhy(int userType);
 	List<Violations> listStickViolations(int userType);
-	
-	
+
+	//前端 作品 详情数据 袁楠文 2018-6-23 21:45
+	List<Workinformation> worksIntroduction(Long worksId);
 	
 }
