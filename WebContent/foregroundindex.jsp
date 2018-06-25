@@ -250,11 +250,9 @@
 						class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-<<<<<<< HEAD
 							<li><a href="offers.html">规则中心</a></li>
 							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
 							<li><a href="PortalManage/foreViol.action">曝光台</a></li> 
-=======
 							<li><a href="offers.html">我的订单</a></li> 
 							<li><a href="offers.html">我的足迹</a></li>
 							<li><a href="offers.html">我的收藏</a></li> 
@@ -279,9 +277,6 @@
 							<li><a href="offers.html">规则中心</a></li> 
 							<li><a href="offers.html">雇主故事</a></li>
 							<li><a href="Portal/foreViolationsList.action">曝光台</a></li> 
-							
-							
->>>>>>> refs/heads/hlq
 						</ul> 
 					</li> 
 					<li class="dropdown head-dpdn">

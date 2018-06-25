@@ -1,4 +1,5 @@
 package oss.handler;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -59,103 +60,101 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/userStory");
 		return mav;
 	}
-	
+
 	// 前端曝光台请求 by hlq 2018-06-16 13:36
-		@RequestMapping("/foreViolationsList.action")
-		public ModelAndView foreViolationsList(HttpServletRequest req, 
-				@RequestParam(value = "pageSize", required = true, defaultValue = "10") int pageSize, 
+	@RequestMapping("/foreViolationsList.action")
+	public ModelAndView foreViolationsList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "10") int pageSize,
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
-			// 雇主违规列表
-			PageHelper.startPage(pageNum, pageSize);
-			List<Violations> violationsList = portalBizImpl.listViolationsDesc(1);
-			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-			PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
-			System.out.println(pageInfo.getTotal());
-			req.setAttribute("pageInfo", pageInfo);
-			// 服务商违规列表
-			PageHelper.startPage(pageNum, pageSize);
-			List<Violations> violationsList2 = portalBizImpl.listViolationsDesc(2);
-			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-			PageInfo<Violations> pageInfo2 = new PageInfo<>(violationsList2, pageSize);
-			System.out.println(pageInfo2.getTotal());
-			req.setAttribute("pageInfo2", pageInfo2);
-			// 雇主处罚原因列表
-			List<Violations2> map = portalBizImpl.listViolationsGroupByWhy(1);
-			System.out.println("map 长度：" + map.size());
-			String vioWhyList =  new Gson().toJson(map);
-			req.setAttribute("vioWhyList", vioWhyList);
-			// 服务商处罚原因列表
-			List<Violations2> map2 = portalBizImpl.listViolationsGroupByWhy(2);
-			System.out.println("map 长度：" + map2.size());
-			String vioWhyList2 =  new Gson().toJson(map2);
-			req.setAttribute("vioWhyList2", vioWhyList2);
-			
-			List<Violations> stickList = portalBizImpl.listStickViolations(1);
-			System.out.println("stickList 长度：" + stickList.size());
-			req.setAttribute("stickList", stickList);
-			
-			List<Violations> stickList2 = portalBizImpl.listStickViolations(2);
-			System.out.println("stickList2 长度：" + stickList2.size());
-			req.setAttribute("stickList2", stickList2);
-			
-			ModelAndView mav = new ModelAndView("foreViolations");
-			return mav;
-		}
-		
-		// 前端ajax请求所有处罚翻页 by hlq 2018-06-17 12:02 返回json
-		@RequestMapping(value = "/foreViolationsPage.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-		public @ResponseBody PageInfo<Violations> foreViolationsPage(@RequestBody Violations pageNum) {
-			// 每页默认为10条数据
-			PageHelper.startPage(pageNum.getViolationsID().intValue(), 10);
-			// 获取用户类型
-			int userType = pageNum.getUsers().getUserType().intValue();
-			List<Violations> violationsList = portalBizImpl.listViolationsDesc(userType);
-			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-			PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, 10);
-			return pageInfo;
-		}
+		// 雇主违规列表
+		PageHelper.startPage(pageNum, pageSize);
+		List<Violations> violationsList = portalBizImpl.listViolationsDesc(1);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
+		// 服务商违规列表
+		PageHelper.startPage(pageNum, pageSize);
+		List<Violations> violationsList2 = portalBizImpl.listViolationsDesc(2);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo2 = new PageInfo<>(violationsList2, pageSize);
+		System.out.println(pageInfo2.getTotal());
+		req.setAttribute("pageInfo2", pageInfo2);
+		// 雇主处罚原因列表
+		List<Violations2> map = portalBizImpl.listViolationsGroupByWhy(1);
+		System.out.println("map 长度：" + map.size());
+		String vioWhyList = new Gson().toJson(map);
+		req.setAttribute("vioWhyList", vioWhyList);
+		// 服务商处罚原因列表
+		List<Violations2> map2 = portalBizImpl.listViolationsGroupByWhy(2);
+		System.out.println("map 长度：" + map2.size());
+		String vioWhyList2 = new Gson().toJson(map2);
+		req.setAttribute("vioWhyList2", vioWhyList2);
+
+		List<Violations> stickList = portalBizImpl.listStickViolations(1);
+		System.out.println("stickList 长度：" + stickList.size());
+		req.setAttribute("stickList", stickList);
+
+		List<Violations> stickList2 = portalBizImpl.listStickViolations(2);
+		System.out.println("stickList2 长度：" + stickList2.size());
+		req.setAttribute("stickList2", stickList2);
+
+		ModelAndView mav = new ModelAndView("foreViolations");
+		return mav;
+	}
+
+	// 前端ajax请求所有处罚翻页 by hlq 2018-06-17 12:02 返回json
+	@RequestMapping(value = "/foreViolationsPage.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody PageInfo<Violations> foreViolationsPage(@RequestBody Violations pageNum) {
+		// 每页默认为10条数据
+		PageHelper.startPage(pageNum.getViolationsID().intValue(), 10);
+		// 获取用户类型
+		int userType = pageNum.getUsers().getUserType().intValue();
+		List<Violations> violationsList = portalBizImpl.listViolationsDesc(userType);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo<Violations> pageInfo = new PageInfo<>(violationsList, 10);
+		return pageInfo;
+	}
 
 	// 前端 作品 数据 袁楠文 2018-6-19 22:45
 	@RequestMapping("/workInfoList")
 	public ModelAndView workInfoList(HttpServletRequest request,
-		@RequestParam(value = "pageSize", required = true, defaultValue = "12")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-		
+			@RequestParam(value = "pageSize", required = true, defaultValue = "12") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
 		PageHelper.startPage(pageNum, pageSize);
 		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
-		
+
 		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
 		List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		
+
 		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		request.setAttribute("twoclassmenulist", twoclassmenulist);
+
+		String worksPrice = condition.getBeWorksPrice() + "-" + condition.getEndWorksPrice();
+		request.setAttribute("worksPrice", worksPrice);
+
+		request.setAttribute("beWorksPrice", condition.getBeWorksPrice());
+		request.setAttribute("endWorksPrice", condition.getEndWorksPrice());
+		request.setAttribute("classPid", condition.getClassPid());
+		request.setAttribute("checkbox", condition.getStartDate());
+		request.setAttribute("looktitle", condition.getTitle());
+		request.setAttribute("condition", condition);
 		ModelAndView classification = new ModelAndView("worksindex");
 		return classification;
 	}
-	
-	// 前端 作品 按价格分类 袁楠文 2018-6-21 11:09
-	@RequestMapping("/classpricevaluelook")
-	public ModelAndView classpricevaluelook(HttpServletRequest request,
-		@RequestParam(value = "pageSize", required = true, defaultValue = "12")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-			String classpricevalue=request.getParameter("classpricevalue");
-			
-		System.out.println(classpricevalue.split("-")[0]+"-"+classpricevalue.split("-")[1]);
+	// 前端 作品 详情数据 袁楠文 2018-6-23 21:45
+	@RequestMapping("/worksIntroduction")
+	public ModelAndView worksIntroduction(HttpServletRequest request
+			,@RequestParam(value = "worksId", required = true, defaultValue = "empty") Long worksId) {
+		System.out.println("进入-"+worksId+"-详情");
 		
-		/*PageHelper.startPage(pageNum, pageSize);
-		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
+		List<Workinformation> workinfolist = portalBizImpl.worksIntroduction(worksId);
+		request.setAttribute("worksIntroduction", workinfolist);
 		
-		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
-		List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		
-		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("oneclassmenulist", oneclassmenulist);
-		request.setAttribute("twoclassmenulist", twoclassmenulist);
-		ModelAndView classification = new ModelAndView("worksindex");
-		return classification;*/
-		return null;
+		ModelAndView worksIntroduction = new ModelAndView("worksIntroduction");
+		return worksIntroduction;
 	}
 }

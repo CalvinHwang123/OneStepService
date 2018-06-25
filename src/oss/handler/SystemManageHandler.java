@@ -123,6 +123,7 @@ public class SystemManageHandler {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("listsize", classlist.size());
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
+		request.setAttribute("condition", condition);
 		ModelAndView classification = new ModelAndView("classification");
 		return classification;
 	}
@@ -139,6 +140,7 @@ public class SystemManageHandler {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("listsize", seroneclassmenulist.size());
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
+		request.setAttribute("condition", condition);
 		ModelAndView classification = new ModelAndView("Serviceprovidertype");
 		return classification;
 	}

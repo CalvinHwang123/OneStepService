@@ -49,4 +49,12 @@ public class PortalBizImpl  implements PortalBiz{
 	public List<Violations2> listViolationsGroupByWhy(int userType) {
 		return portalManageMapper.listViolationsGroupByWhy(userType);
 	}
+
+	//前端 作品 详情数据 袁楠文 2018-6-23 21:45
+	@Override
+	public List<Workinformation> worksIntroduction(Long worksId) {
+		// TODO 自动生成的方法存根
+		List<Workinformation> workinfolist=portalMapper.worksIntroduction(worksId);
+		return workinfolist;
+	}
 }
