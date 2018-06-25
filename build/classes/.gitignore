@@ -1,1 +1,6 @@
+/CensorWords.txt
+/applicationContext.xml
+/log4j.properties
 /oss/
+/com/
+/springmvc.xml
