@@ -4,6 +4,8 @@ import java.util.List;
 
 import oss.bean.Condition;
 import oss.bean.UserStory;
+import oss.bean.Credit;
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.bean.Violations2;
@@ -23,4 +25,9 @@ public interface PortalBiz {
 	//前端 作品 详情数据 袁楠文 2018-6-23 21:45
 	List<Workinformation> worksIntroduction(Long worksId);
 	
+	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
+	public List<String> listSuggestUserByKey(Users users);
+	
+	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
+	public List<Credit> listCreditByName(Condition condition);
 }

@@ -3,10 +3,8 @@ package oss.mapper;
 import java.util.List;
 
 import oss.annotation.MyRepository;
-import oss.bean.UserStory;
-import oss.bean.Violations;
-import oss.bean.Violations2;
 import oss.bean.Condition;
+import oss.bean.Credit;
 import oss.bean.Dynamics;
 import oss.bean.Information;
 import oss.bean.Links;
@@ -15,6 +13,10 @@ import oss.bean.SuccessCase;
 
 import oss.bean.Rulee;
 
+import oss.bean.UserStory;
+import oss.bean.Users;
+import oss.bean.Violations;
+import oss.bean.Violations2;
 /*
  * 后端门户管理Mapper接口
  */
@@ -58,7 +60,12 @@ public interface PortalManageMapper {
 
 	// 按违规原因分组查询违规列表 by hlq 2018-06-16 22:05
 	public List<Violations2> listViolationsGroupByWhy(int userType);
-
+	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
+	public List<String> listSuggestUserByKey(Users users);
+	
+	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
+	public List<Credit> listCreditByName(Condition condition);
+	
 	public List<Links> listLinks(Condition condition);
 
 	public abstract int addLinks(Links links);

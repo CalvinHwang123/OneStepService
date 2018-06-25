@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import oss.bean.Condition;
 import oss.bean.UserStory;
+import oss.bean.Credit;
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.mapper.PortalMapper;
@@ -57,5 +59,17 @@ public class PortalBizImpl  implements PortalBiz{
 		// TODO 自动生成的方法存根
 		List<Workinformation> workinfolist=portalMapper.worksIntroduction(worksId);
 		return workinfolist;
+	}
+	
+	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
+	@Override
+	public List<Credit> listCreditByName(Condition condition) {
+		return portalManageMapper.listCreditByName(condition);
+	}
+
+	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
+	@Override
+	public List<String> listSuggestUserByKey(Users users) {
+		return portalManageMapper.listSuggestUserByKey(users);
 	}
 }

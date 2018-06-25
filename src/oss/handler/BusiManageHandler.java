@@ -252,6 +252,9 @@ public class BusiManageHandler {
 	System.out.println(credit.getUserID());
 	System.out.println(credit.getCreditPoints());
 		
+//		System.out.println(credit.getUserID());
+//		System.out.println(credit.getCreditPoints());
+		users.setUserID(credit.getUserID());
 		busiManageBizImpl.userCreditScore(credit);
 	    busiManageBizImpl.creditCreditScore(credit);
 		busiManageBizImpl.violaTionCreditScore(violations);
