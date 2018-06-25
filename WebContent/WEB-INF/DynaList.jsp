@@ -43,10 +43,10 @@
 					value="${pageInfo.getPageNum()}"> <input type="hidden"
 					id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}"> <input
-					class="layui-input" placeholder="开始日" name="startDate" id="start">
-				<input class="layui-input" placeholder="截止日" name="endDate" id="end">
+					class="layui-input" placeholder="开始日" name="startDate" id="start" value="${condition.startDate}">
+				<input class="layui-input" placeholder="截止日" name="endDate" id="end" value="${condition.endDate}">
 				<input type="text" name="title" placeholder="请输入动态标题"
-					autocomplete="off" class="layui-input">
+					autocomplete="off" class="layui-input"  value="${condition.title}">
 				<div class="layui-input-inline">
 					<select name="classPid">
 						<option value="0"></option>

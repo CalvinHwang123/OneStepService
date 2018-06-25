@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +9,6 @@
 <meta name='renderer' content='webkit' />
 <meta http-equiv='Cache-Control' content='no-transform ' />
 <title>我的订单-雇主中心</title>
-<link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
-	type='image/x-icon' />
 <script type='text/javascript'>
 window.ZBJInfo = {
 baseURI: "zbj.com", 
@@ -37,16 +28,16 @@ bbj: true
 <meta name="referrer" content="always">
 <script type="text/javascript">
     window.__bees__rates__ = {
-    "default": 0.3,
+     "default": 0.3,
         "path": {
-          "/index": 0.2
-        },
-        "regexp": [{
-          pattern: "\\/tingfu$",
-          value: 0.5
+           "/index": 0.2
+         },
+         "regexp": [{
+           pattern: "\\/tingfu$",
+           value: 0.5
         }]
-    }
-</script>
+     }
+ </script> 
 <script type="text/javascript"
 	src="//as.zbjimg.com/rake-component/fe-common/utopia-bees-core/0.0.9/index.js"></script>
 <script id="seajsnode"
@@ -72,6 +63,7 @@ bbj: true
 	src="//as.zbjimg.com/rake-component/fe-common/utopia-arale-seajs-config/index.js"></script>
 </head>
 <body>
+<%@ include file="/head.jsp"%>	
 	<script>/*<![CDATA[*/
 utopia.arrived({uid:'utopia_widget_1', js:[], entry:function(){$(function(){var n=function(n,e){function a(n){return"&#"+n.charCodeAt()+";"}function r(n,e,a){try{return a?n[e].apply(n,a):n[e]}catch(r){return r}}var t=("headerBanner"in n?n:this).headerBanner,e=e||[];if(t){e.push("\n<a class='header-top-banner' target='_blank'");var i=encodeURI(r(t,"url"));null!=i&&e.push(" href='",String(i).replace(/[&<']/g,a),"'"),e.push(" data-linkid='10157953'>\n<span class='top-banner-box'>\n<img");var i=encodeURI(r(t,"imgPath"));null!=i&&e.push(" src='",String(i).replace(/[&<']/g,a),"'"),e.push("/>\n</span>\n</a>\n")}return e.join("")};$.ajax({url:"/ajax/getHeaderBanner",type:"get",success:function(e){e&&($("body").prepend(n({headerBanner:e})),$(".header-top-banner").animate({"max-height":"100px"},800))}})})}});
 //]]></script>
@@ -108,21 +100,15 @@ gLocalizedCityName: gGetCookie('local_city_name')
 					<div class='hover-title J_local-box'>
 						<div class='location-icon '>
 							<span class='t1' id='headerTopCityName'> </span>
-					
+					</div>
+					</div>
 					<div class='hover-panel'></div></li>
 
 			</ul>
 			<div class='header-top-right'></div>
 			<script>seajs.use(["//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/header-top-v1/header-top-v1_f550d0f.js"]);</script>
-			<div id='rightToolbarContainer'>
-				<script>
-window.rightToolbarData = {"menu":[{"title":"收藏","icon":"//tianpeng.zbjimg.com/tianpeng/task/收藏.png/origine/95268bb0-bd6c-466e-8f5f-e992d67187e6","iconHover":"//tianpeng.zbjimg.com/tianpeng/task/收藏2.png/origine/393068e7-1b84-455f-83a9-edbc4fcefc50","url":"http://i.zbj.com/collection-provider"},{"title":"咨询","icon":"//tianpeng.zbjimg.com/tianpeng/task/顾问1.png/origine/1696c6c6-eb29-4bc7-9eab-5d6067fb9ca9","iconHover":"//tianpeng.zbjimg.com/tianpeng/task/顾问2.png/origine/ada01d84-928b-45bc-85c9-301984fc75ec","url":"http://wen.zbj.com/"},{"title":"客服","icon":"//tianpeng.zbjimg.com/tianpeng/task/客服.png/origine/9deec122-d01d-4773-ad99-1dc8bfef5364","iconHover":"//tianpeng.zbjimg.com/tianpeng/task/客服2.png/origine/37d23391-b1d1-4f6a-95fa-8dd24b231c55","url":"http://help.zbj.com/main/service"},{"title":"反馈","icon":"//tianpeng.zbjimg.com/tianpeng/task/建议.png/origine/ccdae971-b3a9-40b9-abd1-a09701c4cd61","iconHover":"//tianpeng.zbjimg.com/tianpeng/task/建议2.png/origine/ef7a342a-ae5e-4340-8521-9b58788ab22c","url":"http://uenps.zbj.com/pcGroups?tid=19"}],"topBtnIcon":"//tianpeng.zbjimg.com/tianpeng/task/猜你喜欢-80x210.png/origine/aede9968-6c02-432b-822f-d7563f3cd638","topBtnUrl":"https://jinshi.zbj.com/special/hot?kw=微信小程序","btnIsOnline0":"1","btnIsOnline1":"1","btnIsOnline2":"1","btnIsOnline3":"1","btnIsOnline4":"1","btnIsOnline5":"1","btnIsOnline6":"1","btnIsOnline7":"1"};
-</script>
 			</div>
-			<script>seajs.use(["//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/right-toolbar-v1/right-toolbar-v1_70e7733.js"]);</script>
-
-
-			
+			<script>seajs.use(["//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/right-toolbar-v1/right-toolbar-v1_70e7733.js"]);</script>	
 			</div>
 			<script>/*<![CDATA[*/
 utopia.arrived({uid:'utopia_widget_2', js:["widget/components/tip/tip.js"], entry:function(e){!function(){function a(){var e=$(".check-balance-yjf"),a="//u."+ZBJInfo.baseURI+"/pay/getUserYJFBalance?jsonpcallback=jQuery17103550033176820633_1497780555665&_=1497780653149";$.ajax({url:a,type:"get",dataType:"jsonp",jsonp:"jsonpcallback",success:function(a){1===a.state?(e.siblings("label").html(" <a href='//u."+ZBJInfo.baseURI+"/pay/showfinance' target='_blank'>￥"+a.amount+"</a>"),e.attr("queried",!0)):-1===a.state&&(e.siblings("label").text("没有开通易极付"),e.attr("queried",!0)),e.remove()},error:function(){e.remove(),e.siblings("label").text("未查到数据")}})}window.ZBJInfo.baseURI||"zbj.com",(new Date).getTime();seajs.use("fe-module/utopia-module-task-pub",function(e){e&&e.taskPub&&$(".employer-nav-pub-task").off("click").on("click",function(a){var t=$(this).data("linkid");a.preventDefault(),e.taskPub.init({pubTaskTag:t})})});var t=e("widget/components/tip/tip"),n={$cur:$(".check-balance"),data:{},bind:function(){this.$cur.on("click",function(){"false"===$(this).attr("has-wallet")&&t.tips("error","您还未开通猪八戒账户，请先开户")})},ajaxApi:function(){var e=this,a="//u."+ZBJInfo.baseURI+"/pay/getBalance";$.ajax({url:a,type:"get",dataType:"jsonp",jsonp:"jsonpcallback",success:function(a){var t=e.$cur;1===a.state?(t.attr("href","https://wallet."+ZBJInfo.baseURI+"/enterprise-web/my/home.htm"),t.attr("has-wallet",!0)):-1===a.state&&(t.attr("has-wallet",!1),t.attr("href","//u."+ZBJInfo.baseURI+"/pay/index"))},error:function(e){console.log(e)}})}};n.ajaxApi(),n.bind(),$(".check-balance-yjf").on("click",function(e){e.preventDefault(),$(this).attr("queried")||a()}),$(".employer-nav-search-btn").on("click",function(){var e=$(".employer-nav-search-form").data("link"),a=$.trim($(".employer-nav-search-input").val()),t=$(".employer-nav-search-input").attr("placeholder");window.open(a?e+a:e+t)}),seajs.use(["fe-employer/utopia-module-skey-res"],function(e){e.searchCompent.init({serviceFr:{linkid:"searchbox-gzzx-commend-",fr:"gzzx_top_search_Recommend"},hotKeyFr:{linkid:"searchbox-gzzx-searchtip-",fr:"gzzx_top_search_Hot"},recFr:{linkid:"searchbox-gzzx-hotword-",fr:"gzzx_top_search_HotWord"}})})}()}});
@@ -274,7 +260,6 @@ utopia.arrived({uid:'utopia_widget_5', js:[], entry:function(){var t=function(t,
 						<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 							id='utopia_widget_6'>
 
-
 							<ul>
 
 								<li class='nav-item item-curr'><a href='./order'>所有订单</a></li>
@@ -286,8 +271,6 @@ utopia.arrived({uid:'utopia_widget_5', js:[], entry:function(){var t=function(t,
 								<li class='nav-item '><a href='./order?state=3'>待确认付款</a></li>
 
 								<li class='nav-item '><a href='./order?state=4'>待评价</a></li>
-
-
 								<div class='nav-bottom-line'></div>
 							</ul>
 						</div>
@@ -528,27 +511,7 @@ ZBJInfo.count = 0
 
 						</div>
 						<div class='cover hide'></div>
-						<div class='myd-warp'>
-							<h2>满意度小调查</h2>
-							<dl>
-								<dt>您对服务商反馈项目进度的频率满意吗？</dt>
-								<dd class='clearfix satisfyLevelChoose'>
-									<span class='active'>A. 非常满意</span> <span>B. 满意</span> <span>C.
-										一般</span> <span>D. 差劲</span>
-								</dd>
-							</dl>
-							<dl>
-								<dt>您希望服务商多久更新一次进度？</dt>
-								<dd class='clearfix frequencyChoose'>
-									<span class='active'>A. 每天</span> <span>B. 3天</span> <span>C.
-										每周</span> <span>D. 无所谓</span>
-								</dd>
-							</dl>
-							<p>
-								<button class='mydSubtn' data-linkid='10171380'>提交</button>
-							</p>
-							<a class='icon-close'></a>
-						</div>
+				
 						<script>
 utopia.arrived({uid:'utopia_widget_8', js:["@fe-common/utopia-lazyload","widget/components/tip/tip.js"], entry:'widget/order/order/order.js'});
 </script>
@@ -600,9 +563,7 @@ utopia.arrived({uid:'utopia_widget_15', js:["widget/components/log/log.js"], ent
 //]]></script>
 
 			<div class='redpack-rec-mask hide' id='utopia_widget_16'></div>
-			<script>/*<![CDATA[*/
-utopia.arrived({uid:'utopia_widget_16', js:["widget/components/dialog-tips/dialog-tips.js","widget/components/log/log.js","fe-common/utopia-cookie@0.0.1"], entry:function(e){var i=e("widget/components/dialog-tips/dialog-tips"),n=function(e,i){function n(e,i){return String(e).replace(i||/&(?!#\d+;|#x[\da-f]+;|[a-z]+;)|[<"]/gi,function(e){return"&#"+e.charCodeAt()+";"})}var t=("brandName"in e?e:this).brandName,o=("providerId"in e?e:this).providerId,s=("baseURI"in e?e:this).baseURI,r=("timeStye"in e?e:this).timeStye,a=("enoughMoney"in e?e:this).enoughMoney,c=("couponType"in e?e:this).couponType,d=("discount"in e?e:this).discount,p=("couponPrice"in e?e:this).couponPrice,i=i||[];return i.push("<div class='redpack-get-dialog hide'>\n<p class='r-tips'>恭喜您获得老用户专享红包</p>\n"),0==c||2==c?i.push("\n<p class='r-price'><span>￥</span>",n(p,/[&<]/g),"</p>\n"):i.push("\n<p class='r-price'>",n(d,/[&<]/g),"<label>折</label></p>\n"),i.push("\n<div>\n"),0==c&&i.push("\n<p class='r-rule'>满",n(a,/[&<]/g),"可用</p>\n"),i.push("\n<p class='r-use-time'>",n(r,/[&<]/g),"</p>\n</div>\n<button class='r-get-btn' data-linkid='10183189'>立即领取</button>\n"),"null"!=t&&i.push("\n<p class='r-provider'>本红包由<a href='//shop.",n(encodeURI(s),/[&<']/g),"/",n(encodeURI(o),/[&<']/g),"/?fr=gzzx-rpshop-name' target='_blank'>",n(t,/[&<]/g),"</a>提供</p>\n"),i.push("\n<i class='icon-error2 r-close' data-linkid='10183188'></i>\n</div>"),i.join("")},t=function(e,i){function n(e,i){return String(e).replace(i||/&(?!#\d+;|#x[\da-f]+;|[a-z]+;)|[<"]/gi,function(e){return"&#"+e.charCodeAt()+";"})}function t(e,i,n){try{return n?e[i].apply(e,n):e[i]}catch(t){return t}}Object.keys||(Object.keys=function(e){var i=[];for(var n in e)i.push(n);return i});var o=("brandName"in e?e:this).brandName,s=("list"in e?e:this).list,r=("baseURI"in e?e:this).baseURI,a=("serverTips"in e?e:this).serverTips,i=i||[];i.push("<div class='redpack-rec hide'>\n<div class='redpack-tit'><i></i>恭喜，红包领取成功！</div>\n<div class='redpack-list'>\n<p class='redpack-list-tips'>您可以使用该红包购买以下服务</p>\n<div class='redpack-list-cont'>\n<ul class='clearfix'>\n");for(var c=s,d=0,p=(c=c instanceof Array?c:"object"==typeof c?Object.keys(c):Array(c)).length-1;p>=d;d++){var u=c[d];i.push("\n<li>\n<a href='",n(encodeURI(t(u,"link")),/[&<']/g),"?fr=rpsuccess-service' target='_blank' data-linkid='10183192'>\n<img");var l=encodeURI(t(u,"imgUrl"));null!=l&&i.push(" src='",n(l,/[&<']/g),"'");var l=t(u,"title");null!=l&&i.push(" alt='",n(l,/[&<']/g),"'");var l=t(u,"imgUrl");null!=l&&i.push(" data-original='",n(l,/[&<']/g),"'"),i.push("\nonerror='this.src=&#39;//bgl.zbjimg.com/bgl%2Fbjclound%2Fnotfound.png%2Forigine%2Fe4113d89-c34d-4df8-b6a6-0620e4d3f9b9?imageMogr2/auto-orient/strip/quality/90&#39;;this.onerror=null'/>\n</a>\n<h2><a");var l=encodeURI(t(u,"link"));null!=l&&i.push(" href='",n(l,/[&<']/g),"'"),i.push(" target='_blank' data-linkid='10183192'>",n(t(u,"title"),/[&<]/g),"</a></h2>\n<p class='s-price'>￥",n(t(u,"price"),/[&<]/g),"\n"),t(u,"unit")&&i.push("/",n(t(u,"unit"),/[&<]/g)),i.push("\n</p>\n<a href='",n(encodeURI(t(u,"link")),/[&<']/g),"?fr=rpsuccess-service' target='_blank' class='s-get' data-linkid='10183192'>限时抢购</a>\n<p class='s-tips'>",n(a,/[&<]/g),"</p>\n</li>\n")}return i.push("\n</ul>\n</div>\n"),"null"!=o&&i.push("\n<p class='redpack-provider'>本红包由<a href='//shop.",n(encodeURI(r),/[&<']/g),"/",n(encodeURI(t(t(s,0),"pubUserId")),/[&<']/g),"/?fr=gzzx-rpshop-name' target='_blank'>",n(o,/[&<]/g),"</a>提供</p>\n"),i.push("\n</div>\n<i class='icon-error2 redpack-rec-close' data-linkid='10183191'></i>\n</div>"),i.join("")},o=e("widget/components/log/log"),s=e("fe-common/utopia-cookie@0.0.1"),r=$(".user-base-info").attr("show-dialog"),a=$(".new-user-dialog").data("newshow"),c=$(".new-user-dialog").data("isindex"),d={_commonFn:{_$:function(e){return this["_"+e]||(this["_"+e]=$(this[e])),this["_"+e]},isIE8:function(){return"Microsoft Internet Explorer"==navigator.appName&&"8."==navigator.appVersion.match(/8./i)?!0:void 0}},_eventFn:{bindEvent:function(){var e=[[,,this.$redpackClose,"redpackCloseFn"],[,,this.$rClose,"rCloseFn"],[,,this.$rGetBtn,"rGetFn"]];$(e).each(function(e,i){$(i[0]||this.$body).on(i[1]||"click",i[2],this[i[3]]())}.bind(this))},redpackCloseFn:function(){var e=this;return function(){e.closeRedpackDialog()}},rCloseFn:function(){var e=this;return function(){e.closeRedpckRecDialog()}},rGetFn:function(){var e=this;return function(){e.receiveCoupon()}}},_operateFn:{judgeCouponShow:function(){var e=this;return this._isIndex&&this._isNewShow?!1:this._isNewShow||"true"!==this._isShowComDialog||this.cookie.get("hasShowDialog")?void(this._isIndex?this.getCouponShowState():this.getEmployerRegisterMsg().always(function(i){i.success&&i.data||e.getCouponShowState()})):!1},getCouponShowState:function(){var e=this;$.ajax({url:"/redpocket/checkLatestOrder",method:"get",cache:!1,success:function(i){if(i.success&&i.data&&i.data.status&&i.data.couponList&&i.data.couponList.length){var n=i.data.couponList[0],t="";n.timeStye=e.timeFarmat(n.endTimeMillis),n.baseURI=window.ZBJInfo.baseURI,e.couponId=n.couponId,e.providerId=n.providerId,e.couponType=n.couponType,e.brandName=n.brandName,0==n.couponType&&(t="满"+n.couponPrice+"可用"),1==n.couponType&&(t=n.discount+"折"),2==n.couponType&&(t="直接抵扣"+n.couponPrice+"元"),e.serverTips=t,e.renderCouponDialog(n)}},error:function(e){alert(e)}})},timeFarmat:function(e){var i=new Date(e),n=i.getFullYear(),t=i.getMonth()+1,o=i.getDate();return n+"年"+("0"+t).slice(-2)+"月"+("0"+o).slice(-2)+"日前可用"},renderCouponDialog:function(e){this._$("$body").append(this.$redpackTpl(e)),this.getCounponCb()},renderCouponRecDialog:function(e){this._$("$body").append(this.$redpackRecTpl(e)),this.receiveSucessCb()},getCounponCb:function(){this.$linkLog.sendLog({linkid:10183187}),this._$("$redpackMask").fadeIn(this.$fadeTime),this._$("$rGetDialog").fadeIn(this.$fadeTime)},closeRedpackDialog:function(){this._$("$redpackMask").fadeOut(this.$fadeTime),this._$("$redpackRec").fadeOut(this.$fadeTime)},receiveSucessCb:function(){this.$linkLog.sendLog({linkid:10183190}),this._$("$rGetDialog").fadeOut(this.$fadeTime),this._$("$redpackRec").fadeIn(this.$fadeTime),this.updateState()},closeRedpckRecDialog:function(){$(".tips-container").remove(),this._$("$rGetDialog").fadeOut(this.$fadeTime),this._$("$redpackMask").fadeOut(this.$fadeTime),this.updateState()},receiveCoupon:function(){var e=this;this.isReceiveIng||(this.isReceiveIng=!0,$.ajax({url:"/receiveCoupon",method:"get",cache:!1,data:{couponId:this.couponId,firstPage:location.href,pmCode:"fugou"},success:function(i){0==i.resultCode?e.getCouponRecSer():e.$dialogTips.tipsObj._init({currObj:e.$rGetBtn,isFixed:!0,showTime:5e3,isPageCenter:!1,isUseHadStyle:!0,tipsType:1,tplHtml:i.resultMsg}),e.isReceiveIng=!1},error:function(i){e.isReceiveIng=!1,alert(i)}}))},getCouponRecSer:function(){var e=this;$.ajax({url:"/redpocket/search",method:"get",cache:!1,data:{providerId:this.providerId},success:function(i){i&&i.length?e.renderCouponRecDialog({list:e.dataFilter(i),serverTips:e.serverTips,brandName:e.brandName,baseURI:window.ZBJInfo.baseURI}):(e.$dialogTips.tipsObj._init({currObj:e.$rGetBtn,isFixed:!0,showTime:5e3,isPageCenter:!1,isUseHadStyle:!0,tipsType:1,tplHtml:"领取成功"}),setTimeout(function(){e.closeRedpckRecDialog()},2e3))},error:function(e){alert(e)}})},getEmployerRegisterMsg:function(){return $.ajax({url:"/employerRegisterMsg",method:"get"})},dataFilter:function(e){return $.each(e,function(e,i){i.link="//shop."+ZBJInfo.baseURI+"/"+i.pubUserId+"/sid-"+i.id+".html",i.price=parseFloat(i.price).toFixed(2),i.imgUrl=-1==i.coverPic.indexOf("http")?ZBJInfo.qiniuUploadTokenUrl+"/resource/redirect?key="+i.coverPic:i.coverPic}),e},updateState:function(){$.ajax({url:"/redpocket/updatePopupStatus",method:"get",success:function(){},error:function(){}})}},_init:function(e){var d={$body:"body",$linkLog:o,$dialogTips:i,$redpackTpl:n,$redpackRecTpl:t,$redpackMask:".redpack-rec-mask",$redpackRec:".redpack-rec",$redpackClose:".redpack-rec-close",$fadeTime:300,$rClose:".r-close",$rGetBtn:".r-get-btn",$rGetDialog:".redpack-get-dialog",_isIndex:c,_isNewShow:a,_isShowComDialog:r,cookie:s,couponId:null,providerId:null,couponType:null,serverTips:"",brandName:"",isReceiveIng:!1};$.extend(this,d,e,this._eventFn,this._operateFn,this._commonFn),this.bindEvent(),this.judgeCouponShow()}};d._init()}});
-//]]></script>
+
 
 			<script>seajs.use(["//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_c450da5.js"]);</script>
 			<script>/*<![CDATA[*/

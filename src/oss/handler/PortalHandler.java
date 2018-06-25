@@ -126,7 +126,7 @@ public class PortalHandler {
 		System.out.println("stickList2 长度：" + stickList2.size());
 		req.setAttribute("stickList2", stickList2);
 
-		ModelAndView mav = new ModelAndView("foreViolations");
+		ModelAndView mav = new ModelAndView("foreground/foreViolations");
 		return mav;
 	}
 
@@ -162,9 +162,7 @@ public class PortalHandler {
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("condition", condition);
 		}
-
-			
-		return new ModelAndView("creditQuery");
+		return new ModelAndView("foreground/creditQuery");
 	}
 
 	
