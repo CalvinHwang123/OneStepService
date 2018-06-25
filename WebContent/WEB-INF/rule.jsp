@@ -78,7 +78,7 @@
 				.use([ "//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/header-top-v1/header-top-v1_f550d0f.js" ]);
 	</script>
 
-
+ <%@include file="/head.jsp" %>
 	<div class='el-header' id='utopia_widget_1'>
 		<div class='content'>
 			<a class='logo' href='/'><img
@@ -114,6 +114,7 @@
 					});
 					//]]>
 				</script>
+				
 			</div>
 		</div>
 	</div>
@@ -306,7 +307,7 @@
 		seajs
 				.use([ "//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_c450da5.js" ]);
 	</script>
-
+ <%@include file="/end.jsp" %>
 </body>
 
 </html>
