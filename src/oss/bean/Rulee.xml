@@ -13,6 +13,24 @@
 		
 	</select>
 	
+	<!-- <select id="conTentList"   resultType="String" >
+		select ruleContext from Rulee where ruleID=#{ruleID}
+		
+	</select> -->
+	
+	<select id="conTentList" resultType="oss.bean.Rulee" parameterType="oss.bean.Rulee">
+		
+		select * from Rulee where ruleID=#{ruleID}
+	</select>
+	
+	<select id="ruleList"  parameterType="oss.bean.Rulee" resultType="oss.bean.Rulee" >
+		select * from Rulee where 1 = 1
+		
+	</select>
+	
+	
+	
+	
 	  <update id="updateRulee" parameterType="oss.bean.Rulee">
 	    update Rulee set ruleTitle=#{ruleTitle},ruleContext=#{ruleContext} 
 	    where ruleID=#{ruleID}

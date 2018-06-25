@@ -110,9 +110,9 @@
 						class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="offers.html">规则中心</a></li>
+							<li><a href="Portal/ruleList.action">规则中心</a></li>
 							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
-							<li><a href="PortalManage/foreViol.action">曝光台</a></li>
+							<li><a href="Portal/foreViolationsList.action">曝光台</a></li>
 							<li><a href="Portal/successCaseList.action">成功案例</a></li> 
 							<li><a href="Portal/creditQuery.action">信用查询</a></li> 
 						</ul></li>
