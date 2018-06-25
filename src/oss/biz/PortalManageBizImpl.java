@@ -229,4 +229,18 @@ public class PortalManageBizImpl implements PortalManageBiz {
 		return portalManageMapper.deleteRulee(rulee);
 	}
 
+	@Override
+	public List<Rulee> ruleList() {
+		// TODO Auto-generated method stub
+		return portalManageMapper.ruleList();
+	}
+	// 华清修改：前端规则中心内容列表
+	
+	@Override
+	public Rulee conTentList(Rulee rulee) {
+		// TODO Auto-generated method stub
+		return portalManageMapper.conTentList(rulee);
+	}
+
+	
 }

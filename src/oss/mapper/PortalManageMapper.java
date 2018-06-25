@@ -28,6 +28,12 @@ public interface PortalManageMapper {
 	// 华清修改：规则中心列表
 	public List<Rulee> ruleCenterList(Condition condition);
 
+	// 华清修改：前端规则中心列表
+	public List<Rulee> ruleList();
+
+	// 华清修改：前端规则中心内容列表
+	public Rulee conTentList(Rulee rulee);
+
 	// 华清修改：规则中心新增规则
 	public int addRulee(Rulee rulee);
 
