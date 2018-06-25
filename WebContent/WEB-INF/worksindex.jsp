@@ -992,17 +992,22 @@
 	<div class="container">
 		<div class="col-md-9 product-w3ls-right">
 			<!-- breadcrumbs -->
-			<ol class="breadcrumb breadcrumb1">
+			<ol class="breadcrumb breadcrumb1" id="breadcrumb1">
 				<li><a href=<%=path + "/foregroundindex.jsp"%>>首页</a></li>
 				<li class="active"><a href=<%=path + "/Portal/workInfoList.action"%>>作品</a></li>
+				
 			</ol>
 			<!-- 搜索框 -->
 			&nbsp;&nbsp;&nbsp;
 			<div class="header-search">
-				<form action="Portal/workInfoList.action" method="post">
-					<input name="endDate" placeholder="按作品名搜索" required="" type="search">
-					<button type="submit" class="btn btn-default"
-						aria-label="Left Align">
+				<form action=<%=path + "/Portal/workInfoList.action"%> id="workslook" method="post">
+					<input type="hidden" id="beWorksPrice" name="beWorksPrice" value=171120 title="${beWorksPrice}"/>
+					<input type="hidden" id="endWorksPrice" name="endWorksPrice" value=171120 title="${endWorksPrice}"/>
+					<input type="hidden" id="classPid" name="classPid" value=171120 title="${classPid}"/>
+					<input type="hidden" id="startDate" name="startDate" value="" title="${checkbox}"/>
+					
+					<input id="classname" name="title" placeholder="按作品名搜索" required="" type="search" title="${looktitle}">
+					<button id="classnamelook" type="submit" class="btn btn-default" aria-label="Left Align">
 						<i class="fa fa-search" aria-hidden="true"> </i>
 					</button>
 				</form>
@@ -1019,7 +1024,7 @@
 								20%<br>Off
 							</h6>
 						</div> -->
-							<a href="single.html"><img src="images/bg.png"
+							<a href=<%=path + "/Portal/worksIntroduction.action?worksId="%>+${i.worksId}><img src=<%=path%>+${i.url}
 								class="img-responsive" alt="img"></a>
 							<div class="agile-product-text">
 								<h5>
@@ -1071,6 +1076,7 @@
 		</div>
 		<!-- 右部div -->
 		<!-- 左部div -->
+		<form action=<%=path + "/Portal/classpricevaluelook.action"%> method="post">
 		<div class="col-md-3 rsidebar">
 			<div class="rsidebar-top">
 				<div class="slider-left">
@@ -1078,14 +1084,14 @@
 					<div class="row row1 scroll-pane jspScrollable"
 						style="overflow: hidden; padding: 0px; width: 223px;" tabindex="0">
 						<div class="jspContainer" style="width: 223px; height: 160px;">
-							<div class="jspPane"style="padding: 0px; width: 246px; top: 0px;">
-								<label class="checkbox" value="0-10000" ><input name="checkbox"type="radio">
+							<div id="jspPane" class="jspPane"style="padding: 0px; width: 246px; top: 0px;" title="${worksPrice}">
+								<label class="checkbox"><input class="racheckbox" name="checkbox" type="radio" value="0-10000" >
 								<i></i>￥0 - ￥10000 </label>
-								<label class="checkbox" value="10000-30000" ><inputname="checkbox" type="radio">
+								<label class="checkbox"><input class="racheckbox"  name="checkbox" type="radio" value="10000-30000">
 								<i></i>￥10000 - ￥30000 </label>
-								<label class="checkbox" value="30000-80000" ><inputname="checkbox" type="radio">
+								<label class="checkbox" ><input class="racheckbox" name="checkbox" type="radio" value="30000-80000" >
 								<i></i>￥30000 - ￥80000 </label>
-								<label class="checkbox" value="80000-1000000" ><inputname="checkbox" type="radio">
+								<label class="checkbox"><input class="racheckbox" name="checkbox" type="radio"  value="80000-1000000" >
 								<i></i>More</label>
 							</div>
 						</div>
@@ -1095,12 +1101,12 @@
 					<h4>按类型分类</h4>
 					<ul class="faq">
 					<c:forEach var="i" items="${oneclassmenulist}">
-						<li class="item1"><a href="#"><c:out value="${i.classificationName}"></c:out><span
+						<li class="item1"><a ><c:out value="${i.classificationName}"></c:out><span
 								class="glyphicon glyphicon-menu-down"></span></a>
 							<ul style="display: none;">
 							<c:forEach var="j" items="${twoclassmenulist}">
 							<c:if test="${j.classificationPid==i.classificationId}">
-								<li class="subitem1"><a href="#"><c:out value="${j.classificationName}"></c:out></a></li>
+								<li ><a class="twoclassname" value="${j.classificationId}" title="${j.classificationName}"><c:out value="${j.classificationName}"></c:out></a></li>
 							</c:if>
 							</c:forEach>
 							</ul></li>
@@ -1133,7 +1139,7 @@
 					</script>
 					<!-- script for tabs -->
 				</div>
-				<div class="sidebar-row">
+				<!-- <div class="sidebar-row">
 					<h4>按好评率分类</h4>
 					<div class="row row1 scroll-pane jspScrollable"
 						style="overflow: hidden; padding: 0px; width: 223px;" tabindex="0">
@@ -1155,9 +1161,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
-			<div class="related-row">
+			<!-- <div class="related-row">
 				<h4>YOU MAY ALSO LIKE</h4>
 				<div class="galry-like">
 					<a href="single.html"><img src="images/e1.png"
@@ -1167,8 +1173,9 @@
 					</h4>
 					<h5>$100</h5>
 				</div>
-			</div>
+			</div> -->
 		</div>
+		</form>
 		<!-- 左部div -->
 		<div class="clearfix"></div>
 		<!-- 分页 -->
@@ -1234,7 +1241,9 @@
 				</c:choose>
 			</div>
 		</div>
-		<!-- 分页 -->
+	</div>
+	
+			<!-- 分页 -->
 		<script type="text/javascript">
 //更改当前页
 function changePage(pageNum) {
@@ -1254,7 +1263,6 @@ function changePageSize(pageSize) {
 
 </script>
 
-	</div>
 	<!-- product -->
 	<!-- footer -->
 	<div class="footer">

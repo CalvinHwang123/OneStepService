@@ -6,7 +6,8 @@
 
 </head>
 <body>
-		<%@ include file="/head.jsp"%>	
+
+	<%@ include file="/head.jsp"%>	
 	<!-- banner -->
 	<div class="banner">
 		<div id="kb" class="carousel kb_elastic animate_text kb_wrapper"

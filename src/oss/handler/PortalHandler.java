@@ -1,4 +1,5 @@
 package oss.handler;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,23 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
+import oss.bean.Rulee;
 import oss.bean.SuccessCase;
+import oss.bean.Credit;
 import oss.bean.UserStory;
-import oss.bean.Workinformation;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-
+import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Violations2;
+import oss.bean.Workinformation;
 import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
@@ -43,6 +46,30 @@ public class PortalHandler {
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
 
+	// 前端规则中心页面跳转
+	@RequestMapping("/ruleList.action")
+	public ModelAndView ruleList(HttpServletRequest req) {
+
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+
+		List<Rulee> ruleList = portalManageBizImpl.ruleList();
+		// // 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		//
+		req.setAttribute("ruleList", ruleList);
+
+		ModelAndView mav = new ModelAndView("rule");
+		return mav;
+	}
+	// 前端规则内容页面跳转
+
+	@RequestMapping("/conTentList.action")
+	public ModelAndView userStory(HttpServletRequest req, Rulee rulee) {
+		Rulee rule = portalManageBizImpl.conTentList(rulee);
+		req.setAttribute("rule", rule);
+		ModelAndView mav = new ModelAndView("conTent");
+		return mav;
+	}
+
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStoryList.action")
 	public ModelAndView userStoryList(HttpServletRequest req,
@@ -60,7 +87,7 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/userStory");
 		return mav;
 	}
-	
+
 	// 前端曝光台请求 by hlq 2018-06-16 13:36
 	@RequestMapping("/foreViolationsList.action")
 	public ModelAndView foreViolationsList(HttpServletRequest req,
@@ -102,7 +129,7 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreViolations");
 		return mav;
 	}
-		
+
 	// 前端ajax请求所有处罚翻页 by hlq 2018-06-17 12:02 返回json
 	@RequestMapping(value = "/foreViolationsPage.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody PageInfo<Violations> foreViolationsPage(@RequestBody Violations pageNum) {
@@ -116,58 +143,107 @@ public class PortalHandler {
 		return pageInfo;
 	}
 
-		
 	// 前端信用查询请求 hlq 2018-06-21 11:53
 	@RequestMapping("/creditQuery")
 	public ModelAndView creditQuery(HttpServletRequest request,
+
 		@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
 		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-		
+		System.out.println("portalBizImpl=" + portalBizImpl);
+		System.out.println("condition=" + condition.getTitle());
+		if (null != condition.getTitle()) {
+			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+			PageHelper.startPage(pageNum, pageSize);
+//			condition.setTitle("吴华清");
+			List<Credit> creditList = portalBizImpl.listCreditByName(condition);
+			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+			PageInfo<Credit> pageInfo = new PageInfo<>(creditList, pageSize);
+			System.out.println(pageInfo.getTotal());
+			request.setAttribute("pageInfo", pageInfo);
+			request.setAttribute("condition", condition);
+		}
+
+			
 		return new ModelAndView("creditQuery");
 	}
+
 	
+	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
+	@RequestMapping(value = "/creditQuerySuggest.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody List<String> creditQuerySuggest(@RequestBody Users users) {
+		List<String> userNameList = portalBizImpl.listSuggestUserByKey(users);
+		return userNameList;
+	}
+
+
 	// 前端 作品 数据 袁楠文 2018-6-19 22:45
 	@RequestMapping("/workInfoList")
 	public ModelAndView workInfoList(HttpServletRequest request,
-		@RequestParam(value = "pageSize", required = true, defaultValue = "12")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-		
+			@RequestParam(value = "pageSize", required = true, defaultValue = "12") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
 		PageHelper.startPage(pageNum, pageSize);
 		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
-		
+
 		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
 		List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		
+
 		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		request.setAttribute("twoclassmenulist", twoclassmenulist);
+
+		String worksPrice = condition.getBeWorksPrice() + "-" + condition.getEndWorksPrice();
+		request.setAttribute("worksPrice", worksPrice);
+
+		request.setAttribute("beWorksPrice", condition.getBeWorksPrice());
+		request.setAttribute("endWorksPrice", condition.getEndWorksPrice());
+		request.setAttribute("classPid", condition.getClassPid());
+		request.setAttribute("checkbox", condition.getStartDate());
+		request.setAttribute("looktitle", condition.getTitle());
+		request.setAttribute("condition", condition);
 		ModelAndView classification = new ModelAndView("worksindex");
 		return classification;
 	}
-	
+
+	// 前端 作品 详情数据 袁楠文 2018-6-23 21:45
+	@RequestMapping("/worksIntroduction")
+	public ModelAndView worksIntroduction(HttpServletRequest request
+			,@RequestParam(value = "worksId", required = true, defaultValue = "empty") Long worksId) {
+		System.out.println("进入-"+worksId+"-详情");
+		
+		List<Workinformation> workinfolist = portalBizImpl.worksIntroduction(worksId);
+		request.setAttribute("worksIntroduction", workinfolist);
+		
+		ModelAndView worksIntroduction = new ModelAndView("worksIntroduction");
+		return worksIntroduction;
+	}
+
+
 	// 前端 作品 按价格分类 袁楠文 2018-6-21 11:09
 	@RequestMapping("/classpricevaluelook")
 	public ModelAndView classpricevaluelook(HttpServletRequest request,
-		@RequestParam(value = "pageSize", required = true, defaultValue = "12")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
-			String classpricevalue=request.getParameter("classpricevalue");
-			
-		System.out.println(classpricevalue.split("-")[0]+"-"+classpricevalue.split("-")[1]);
-		
-		/*PageHelper.startPage(pageNum, pageSize);
-		List<Workinformation> workinfolist = portalBizImpl.workInfoList(condition);
-		
-		List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
-		List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		
-		PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
-		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("oneclassmenulist", oneclassmenulist);
-		request.setAttribute("twoclassmenulist", twoclassmenulist);
-		ModelAndView classification = new ModelAndView("worksindex");
-		return classification;*/
+			@RequestParam(value = "pageSize", required = true, defaultValue = "12") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		String classpricevalue = request.getParameter("classpricevalue");
+
+		System.out.println(classpricevalue.split("-")[0] + "-" + classpricevalue.split("-")[1]);
+
+		/*
+		 * PageHelper.startPage(pageNum, pageSize); List<Workinformation> workinfolist =
+		 * portalBizImpl.workInfoList(condition);
+		 * 
+		 * List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
+		 * List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
+		 * 
+		 * PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
+		 * request.setAttribute("pageInfo", pageInfo);
+		 * request.setAttribute("oneclassmenulist", oneclassmenulist);
+		 * request.setAttribute("twoclassmenulist", twoclassmenulist); ModelAndView
+		 * classification = new ModelAndView("worksindex"); return classification;
+		 */
 		return null;
+
 	}
 
 	// 查询成功案例列表 by hsp 6-20 22:26
@@ -187,9 +263,12 @@ public class PortalHandler {
 	// 单个成功案例 by hsp 6-21 11:24
 	@RequestMapping("/successCase.action")
 	public ModelAndView successCase(HttpServletRequest req, SuccessCase successCase) {
-		successCase = portalManageBizImpl.successCase(successCase);
-		req.setAttribute("successCase", successCase);
-		ModelAndView mav = new ModelAndView("foreground/singleSuccessCase");
+		SuccessCase singleCase = portalManageBizImpl.successCase(successCase);
+		req.setAttribute("singleCase", singleCase);
+		System.out.println(singleCase.getSuccessCaseTitle());
+		System.out.println(singleCase.getSuccessCaseTime());
+		System.out.println(singleCase.getSuccessCaseContext());
+		ModelAndView mav = new ModelAndView("foreground/singlesuccesscase");
 		return mav;
 	}
 }

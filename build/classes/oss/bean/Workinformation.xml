@@ -7,10 +7,23 @@
 		SELECT a.WORKSID,a.USERID,a.WORKSNAME,a.CLASSIFICATIONID,a.WORKSPRICE,a.WORKSNUM,a.WORKSSTATUSID ,b.USERNAME,c.CLASSIFICATIONNAME,d.PARAMETERNAME
 		FROM WORKS a,USERS b,CLASSIFICATION c,PARAM d
 		WHERE a.USERID=b.USERID and a.CLASSIFICATIONID=c.CLASSIFICATIONID and a.WORKSSTATUSID=d.PARAMETERID 
-		<if test="endDate != null and endDate !='' ">
-			and  WORKSNAME like concat(concat('%',#{endDate}),'%')
+		<if test="beWorksPrice != null and beWorksPrice!=171120 and endWorksPrice != null and endWorksPrice != 171120 and beWorksPrice !='' and endWorksPrice !='' ">
+			and a.WORKSPRICE between #{beWorksPrice} and #{endWorksPrice}
+		</if>
+		<if test="title != null and title !='' ">
+			and  a.WORKSNAME like concat(concat('%',#{title}),'%')
+		</if>
+		<if test="classPid != null and classPid !='' and classPid!=171120">
+			and  a.CLASSIFICATIONID = #{classPid}
 		</if>
 	</select>
+	
+<!-- 前端 作品 详情数据 袁楠文 2018-6-23 21:45 -->
+	<select id="worksIntroduction" resultType="oss.bean.Workinformation" parameterType="long" resultMap="workinfolist">
+		SELECT a.WORKSID,a.USERID,a.WORKSNAME,a.CLASSIFICATIONID,a.WORKSPRICE,a.WORKSNUM,a.WORKSSTATUSID ,b.USERNAME,c.CLASSIFICATIONNAME,d.PARAMETERNAME
+		FROM WORKS a,USERS b,CLASSIFICATION c,PARAM d
+		WHERE a.USERID=b.USERID and a.CLASSIFICATIONID=c.CLASSIFICATIONID and a.WORKSSTATUSID=d.PARAMETERID and a.WORKSID=#{worksId}
+	</select>	
 	
 	<resultMap type="oss.bean.Workinformation" id="workinfolist">
 	<id property="worksId" column="WORKSID"/>
@@ -33,4 +46,5 @@
 	<result property="parameterName" column="PARAMETERNAME"/>
 	</association>
 	</resultMap>
+	
 </mapper>
