@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<base href="<%=basePath%>">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>规则中心</title>
+
+
 <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
 	type='image/x-icon' />
 
@@ -78,18 +76,19 @@
 				.use([ "//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/header-top-v1/header-top-v1_f550d0f.js" ]);
 	</script>
 
- <%@include file="/head.jsp" %>
+
+	<%@include file="/head.jsp"%>
+
 	<div class='el-header' id='utopia_widget_1'>
 		<div class='content'>
-			<a class='logo' href='/'><img
-				src='img/标题.gif' /></a>
+
 			<div class='el-selector-container'>
 				<div class='el-selector' id='utopia_widget_2'>
-					
+
 					<div class='el-selector-content'>
 						<input id='el-content' class='el-content' placeholder='请输入规则关键词搜索' />
 						<button type='button' id='el-content-btn'>搜索</button>
-						
+
 					</div>
 				</div>
 				<script>
@@ -114,20 +113,11 @@
 					});
 					//]]>
 				</script>
-				
+
 			</div>
 		</div>
 	</div>
-	<div class='el-nav'>
-		<div class='content'>
 
-
-
-			<a class='active' >规则中心</a> 
-
-
-		</div>
-	</div>
 	<script>
 		utopia.arrived({
 			uid : 'utopia_widget_1',
@@ -236,7 +226,8 @@
 				<c:forEach var="rule" items="${ruleList}">
 					<div class='bd'>
 						<ul>
-							<li><a href="Portal/conTentList.action?ruleID=${rule.ruleID}">${rule.ruleTitle }</a></li>
+							<li><a
+								href="Portal/conTentList.action?ruleID=${rule.ruleID}">${rule.ruleTitle }</a></li>
 
 
 
@@ -262,7 +253,8 @@
 				<c:forEach var="rule" items="${ruleList}">
 					<div class='bd'>
 						<ul>
-							<li><a href="Portal/conTentList.action?ruleID=${rule.ruleID}">${rule.ruleTitle }</a></li>
+							<li><a
+								href="Portal/conTentList.action?ruleID=${rule.ruleID}">${rule.ruleTitle }</a></li>
 
 
 
@@ -279,13 +271,14 @@
 
 			<div class='index-news  icon-news3'>
 				<div class='hd'>
-					 <span class='title'><em class='icon'></em><span>热门规则</span></span>
+					<span class='title'><em class='icon'></em><span>热门规则</span></span>
 					<a href='/rules-27?cid=30'><span>更多</span></a>
 				</div>
 				<c:forEach var="rule" items="${ruleList}">
 					<div class='bd'>
 						<ul>
-							<li><a href="Portal/conTentList.action?ruleID=${rule.ruleID}">${rule.ruleTitle }</a></li>
+							<li><a
+								href="Portal/conTentList.action?ruleID=${rule.ruleID}">${rule.ruleTitle }</a></li>
 
 
 
@@ -307,7 +300,9 @@
 		seajs
 				.use([ "//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_c450da5.js" ]);
 	</script>
- <%@include file="/end.jsp" %>
+
+	<%@include file="/end.jsp"%>
+
 </body>
 
 </html>

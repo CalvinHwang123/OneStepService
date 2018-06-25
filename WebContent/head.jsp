@@ -282,6 +282,7 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		<!-- //header-two -->
 		<div class="header-three">
 			<!-- header-three -->
@@ -301,6 +302,28 @@
 										<ul class="is-hidden">
 											<li class="go-back"><a href="#">All Electronics</a></li>
 											<!-- <li class="has-children">
+=======
+	</div>
+	<!-- //header-two -->
+	<div class="header-three">
+		<!-- header-three -->
+		<div class="container">
+			<div class="menu1">
+				<div class="cd-dropdown-wrapper">
+					<a class="cd-dropdown-trigger" href="#0"> 服务</a>
+					<nav class="cd-dropdown"> <a href="#0" class="cd-close">Close</a>
+					<ul class="cd-dropdown-content">
+						<li><a href="offers.html">Today's Offers</a></li>
+						<li class="has-children"><a href="#">按专业找人</a>
+							<ul class="cd-secondary-dropdown is-hidden">
+								<li class="go-back"><a href="#">Menu</a></li>
+								<li class="see-all"><a href="products.html">All
+										Electronics</a></li>
+								<li class="has-children"><a href="#">知识产权服务</a>
+									<ul class="is-hidden">
+										<li class="go-back"><a href="#">All Electronics</a></li>
+										<!-- <li class="has-children">
+>>>>>>> refs/remotes/origin/wwwhhhqqq
 													<a href="#0">SmartPhones</a> 
 													<ul class="is-hidden"> 
 														<li class="go-back"><a href="#"> </a></li>
