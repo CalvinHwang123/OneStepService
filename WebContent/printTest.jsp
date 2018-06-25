@@ -48,12 +48,6 @@
 </body>
 
 <script type="text/javascript" src="<%=path%>/js/jquery-3.3.1.js"></script>
-<script type="text/javascript">
-	function printerInit(printNode) {
-		var LODOP = getLodop();
-		LODOP.PRINT_INIT("test套打");
-		LODOP.ADD_PRINT_HTM(10, 55, "100%", "100%", printNode.innerHTML);
-		LODOP.PREVIEW();
-	};
-</script>
+<!-- 打印需要引入打印的js脚本 -->
+<script type="text/javascript" src="<%=path%>/js/print.js"></script>
 </html>
