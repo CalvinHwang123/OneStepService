@@ -54,7 +54,7 @@ body {
 						<td><c:out value="${role.roleID}"></c:out></td>
 						<td><c:out value="${role.roleName}"></c:out></td>
 						<td> 
-                
+                <button class="btn btn-info btn-sm  modifyRoleBtn rightSize" type="button" data-id="${role.roleID}" ><i class="fa fa-paste"></i> 修改</button>
                 <button class="btn btn-primary btn-sm grantAuthorityBtn rightSize" type="button" data-id="${role.roleID}" ><i class="fa fa-external-link"></i> 授权</button>
             </td>
 						</tr>
