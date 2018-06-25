@@ -13,9 +13,6 @@
 <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
 	type='image/x-icon' />
 
-
-
-
 <script type='text/javascript'>
 	window.ZBJInfo = {
 		baseURI : "zbj.com",
