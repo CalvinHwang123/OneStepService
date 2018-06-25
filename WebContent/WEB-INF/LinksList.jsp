@@ -41,7 +41,7 @@
 				<input type="hidden" id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}"> <input type="text"
 					name="title" placeholder="请输入链接地址" autocomplete="off"
-					class="layui-input">
+					class="layui-input" value="${condition.title}">
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
 				</button>
