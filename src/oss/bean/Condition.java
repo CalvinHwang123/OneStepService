@@ -10,6 +10,8 @@ public class Condition {
 	private String endDate;// 截至日期
 	private String title;// 标题
 	private int classPid;// 上级id
+	private int beWorksPrice;// 起始价格
+	private int endWorksPrice;// 结束价格
 	
 	public Condition() {
 	}
@@ -46,5 +48,20 @@ public class Condition {
 		this.classPid = classPid;
 	}
 
-	
+	public int getBeWorksPrice() {
+		return beWorksPrice;
+	}
+
+	public void setBeWorksPrice(int beWorksPrice) {
+		this.beWorksPrice = beWorksPrice;
+	}
+
+	public int getEndWorksPrice() {
+		return endWorksPrice;
+	}
+
+	public void setEndWorksPrice(int endWorksPrice) {
+		this.endWorksPrice = endWorksPrice;
+	}
+
 }

@@ -130,9 +130,7 @@
 <script src="portal/js/bootstrap.js"></script>
 </head>
 <body>
-		<%@ include file="/head.jsp"%>	
-<!-- 			<div class="clearfix"></div> -->
-		
+	<%@ include file="/head.jsp"%>	
 	<!-- banner -->
 	<div class="banner">
 		<div id="kb" class="carousel kb_elastic animate_text kb_wrapper"

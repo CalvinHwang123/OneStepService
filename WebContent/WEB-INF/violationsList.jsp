@@ -111,7 +111,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<td class="td-manage">
 							<!-- 置顶与取消置顶 --> <c:choose>
 								<c:when test="${violation.stickTime eq '1970-01-01 00:00:00' }">
-									<a onclick="s78tickViolations(this,${violation.violationsID})"
+									<a onclick="stickViolations(this,${violation.violationsID})"
 										href="javascript:;" title="置顶"> <i class="layui-icon">&#xe62f;</i>
 									</a>
 								</c:when>
