@@ -12,6 +12,120 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>规则中心</title>
+
+<script type="application/x-javascript">
+	
+	
+		
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
+</script>
+<!-- Custom Theme files -->
+<link href="portal/css/bootstrap.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="portal/css/style.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="portal/css/menu.css" rel="stylesheet" type="text/css"
+	media="all" />
+<!-- menu style -->
+<link href="portal/css/ken-burns.css" rel="stylesheet" type="text/css"
+	media="all" />
+<!-- banner slider -->
+<link href="portal/css/animate.min.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="portal/css/owl.carousel.css" rel="stylesheet"
+	type="text/css" media="all">
+<!-- carousel slider -->
+<!-- //Custom Theme files -->
+<!-- font-awesome icons -->
+<link href="portal/css/font-awesome.css" rel="stylesheet">
+<!-- //font-awesome icons -->
+<!-- js -->
+<script src="portal/js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- web-fonts -->
+<link
+	href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lovers+Quarrel'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Offside'
+	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Tangerine:400,700'
+	rel='stylesheet' type='text/css'>
+<!-- web-fonts -->
+<script src="portal/js/owl.carousel.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#owl-demo").owlCarousel({
+			autoPlay : 3000, //Set AutoPlay to 3 seconds 
+			items : 4,
+			itemsDesktop : [ 640, 5 ],
+			itemsDesktopSmall : [ 480, 2 ],
+			navigation : true
+
+		});
+	});
+</script>
+<script src="portal/js/jquery-scrolltofixed-min.js"
+	type="text/javascript"></script>
+<script>
+	$(document).ready(function() {
+
+		// Dock the header to the top of the window when scrolled past the banner. This is the default behaviour.
+
+		$('.header-two').scrollToFixed();
+		// previous summary up the page.
+
+		var summaries = $('.summary');
+		summaries.each(function(i) {
+			var summary = $(summaries[i]);
+			var next = summaries[i + 1];
+
+			summary.scrollToFixed({
+				marginTop : $('.header-two').outerHeight(true) + 10,
+				zIndex : 999
+			});
+		});
+	});
+</script>
+<!-- start-smooth-scrolling -->
+<script type="text/javascript" src="portal/js/move-top.js"></script>
+<script type="text/javascript" src="portal/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+	});
+</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var defaults = {
+			containerID : 'toTop', // fading element id
+			containerHoverID : 'toTopHover', // fading element hover id
+			scrollSpeed : 1200,
+			easingType : 'linear'
+		};
+
+		$().UItoTop({
+			easingType : 'easeOutQuart'
+		});
+
+	});
+</script>
+<!-- //smooth-scrolling-of-move-up -->
+<script src="portal/js/bootstrap.js"></script>
 <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
 	type='image/x-icon' />
 
@@ -78,11 +192,10 @@
 				.use([ "//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/header-top-v1/header-top-v1_f550d0f.js" ]);
 	</script>
 
-
+<%@include file="/head.jsp"%>
 	<div class='el-header' id='utopia_widget_1'>
 		<div class='content'>
-			<a class='logo' href='/'><img
-				src='img/标题.gif' /></a>
+			
 			<div class='el-selector-container'>
 				<div class='el-selector' id='utopia_widget_2'>
 					
@@ -117,16 +230,7 @@
 			</div>
 		</div>
 	</div>
-	<div class='el-nav'>
-		<div class='content'>
-
-
-
-			<a class='active' >规则中心</a> 
-
-
-		</div>
-	</div>
+	
 	<script>
 		utopia.arrived({
 			uid : 'utopia_widget_1',
@@ -306,7 +410,90 @@
 		seajs
 				.use([ "//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_c450da5.js" ]);
 	</script>
+	
+	
+	<script src="portal/js/minicart.js"></script>
+	<script>
+		w3ls.render();
 
+		w3ls.cart.on('w3sb_checkout', function(evt) {
+			var items, len, i;
+
+			if (this.subtotal() > 0) {
+				items = this.items();
+
+				for (i = 0, len = items.length; i < len; i++) {
+					items[i].set('shipping', 0);
+					items[i].set('shipping2', 0);
+				}
+			}
+		});
+	</script>
+	<!-- //cart-js -->
+	<!-- countdown.js -->
+	<script src="portal/js/jquery.knob.js"></script>
+	<script src="portal/js/jquery.throttle.js"></script>
+	<script src="portal/js/jquery.classycountdown.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#countdown1').ClassyCountdown({
+				end : '1388268325',
+				now : '1387999995',
+				labels : true,
+				style : {
+					element : "",
+					textResponsive : .5,
+					days : {
+						gauge : {
+							thickness : .10,
+							bgColor : "rgba(0,0,0,0)",
+							fgColor : "#1abc9c",
+							lineCap : 'round'
+						},
+						textCSS : 'font-weight:300; color:#fff;'
+					},
+					hours : {
+						gauge : {
+							thickness : .10,
+							bgColor : "rgba(0,0,0,0)",
+							fgColor : "#05BEF6",
+							lineCap : 'round'
+						},
+						textCSS : ' font-weight:300; color:#fff;'
+					},
+					minutes : {
+						gauge : {
+							thickness : .10,
+							bgColor : "rgba(0,0,0,0)",
+							fgColor : "#8e44ad",
+							lineCap : 'round'
+						},
+						textCSS : ' font-weight:300; color:#fff;'
+					},
+					seconds : {
+						gauge : {
+							thickness : .10,
+							bgColor : "rgba(0,0,0,0)",
+							fgColor : "#f39c12",
+							lineCap : 'round'
+						},
+						textCSS : ' font-weight:300; color:#fff;'
+					}
+
+				},
+				onEndCallback : function() {
+					console.log("Time out!");
+				}
+			});
+		});
+	</script>
+	<!-- //countdown.js -->
+	<!-- menu js aim -->
+	<script src="portal/js/jquery.menu-aim.js">
+		
+	</script>
+	<script src="portal/js/main.js"></script>
+<%@include file="/end.jsp"%>
 </body>
 
 </html>
