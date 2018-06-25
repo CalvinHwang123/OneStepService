@@ -38,7 +38,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<!-- 分页代码 -->
 				
 				<div id="oneclasscontrller" class="layui-input-inline" title=<%=basepath %>>
-					<select  name="classPid">
+					<select  name="classPid" value="${condition.endDate}">
 					<option value=171120>服务商类型名称</option>
 				<c:forEach var="i" items="${oneclassmenulist}">
 						<option value="${i.classificationId}"><c:out value="${i.classificationName}"></c:out></option>
@@ -91,72 +91,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</c:forEach>
 			</tbody>
 		</table>
-		<!-- 分页 -->
-		<div class="page">
-			<div>
-				共${pageInfo.getPages() }页，每页 <select
-					style="width: 6%; height: 30px;" name="pageSize"
-					onchange="changePageSize($('#pageSizeSelect option:selected').val())"
-					id="pageSizeSelect">
-					<option value="5" ${pageInfo.getPageSize() == 5 ? "selected" : ""}>5</option>
-					<option value="10"
-						${pageInfo.getPageSize() == 10 ? "selected" : ""}>10</option>
-					<option value="20"
-						${pageInfo.getPageSize() == 20 ? "selected" : ""}>20</option>
-				</select> 条
-				<c:choose>
-					<c:when test="${!pageInfo.hasPreviousPage}">
-						<span class="prev">上一页</span>
-					</c:when>
-					<c:otherwise>
-						<a class="prev" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.getPrePage()})">上一页</a>
-					</c:otherwise>
-				</c:choose>
-
-				<c:choose>
-					<c:when test="${pageInfo.pageNum <= 2}">
-						<c:if test="${pageInfo.pageNum != 1}">
-							<a class="num" href="javascript:void(0);"
-								onclick="changePage(${pageInfo.pageNum-1})"><c:out
-									value="${pageInfo.pageNum-1}"></c:out> </a>
-						</c:if>
-						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
-						<c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num> 0}">
-								<a class="num" href="javascript:void(0);"
-									onclick="changePage(${pageInfo.pageNum+num})"><c:out
-										value="${pageInfo.pageNum+num}"></c:out> </a>
-							</c:if>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<a class="num" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.pageNum-1})"><c:out
-								value="${pageInfo.pageNum-1}"></c:out> </a>
-
-						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
-						<c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
-								<a class="num" href="javascript:void(0);"
-									onclick="changePage(${pageInfo.pageNum+num})"><c:out
-										value="${pageInfo.pageNum+num}"></c:out> </a>
-							</c:if>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-				<c:choose>
-					<c:when test="${!pageInfo.hasNextPage}">
-						<span class="next">下一页</span>
-					</c:when>
-					<c:otherwise>
-						<a class="next" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.getNextPage()})">下一页</a>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</div>
-	</div>
+<!-- 分页 -->
+	<%@ include file="/pagefoot.jsp"%>
 <!-- 分页 -->
 	</div>
 	<!-- addmodal -->
