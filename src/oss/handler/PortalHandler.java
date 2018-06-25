@@ -200,7 +200,7 @@ public class PortalHandler {
 		request.setAttribute("checkbox", condition.getStartDate());
 		request.setAttribute("looktitle", condition.getTitle());
 		request.setAttribute("condition", condition);
-		ModelAndView classification = new ModelAndView("worksindex");
+		ModelAndView classification = new ModelAndView("/foreground/worksindex");
 		return classification;
 	}
 
@@ -213,7 +213,7 @@ public class PortalHandler {
 		List<Workinformation> workinfolist = portalBizImpl.worksIntroduction(worksId);
 		request.setAttribute("worksIntroduction", workinfolist);
 		
-		ModelAndView worksIntroduction = new ModelAndView("worksIntroduction");
+		ModelAndView worksIntroduction = new ModelAndView("/foreground/worksIntroduction");
 		return worksIntroduction;
 	}
 

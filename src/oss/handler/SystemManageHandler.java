@@ -145,7 +145,7 @@ public class SystemManageHandler {
 		request.setAttribute("listsize", classlist.size());
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		request.setAttribute("condition", condition);
-		ModelAndView classification = new ModelAndView("classification");
+		ModelAndView classification = new ModelAndView("/background/classification");
 		return classification;
 	}
 
@@ -162,7 +162,7 @@ public class SystemManageHandler {
 		request.setAttribute("listsize", seroneclassmenulist.size());
 		request.setAttribute("oneclassmenulist", oneclassmenulist);
 		request.setAttribute("condition", condition);
-		ModelAndView classification = new ModelAndView("Serviceprovidertype");
+		ModelAndView classification = new ModelAndView("/background/Serviceprovidertype");
 		return classification;
 	}
 
