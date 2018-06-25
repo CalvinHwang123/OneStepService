@@ -19,7 +19,7 @@
 <style type="text/css">
 .bgt-logo-wrap {
 	text-align: center;
-	padding: 80px 0 38px;
+	padding: 50px 0 38px;
 }
 
 .bgt-logo-wrap img {
@@ -36,13 +36,14 @@
 ul {
 	text-decoration: none;
 }
+
 </style>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/json2.js"></script>
 <title>信用查询————帝六人网，中国领先的一站式的企业全生命周期服务平台</title>
 </head>
 <body>
-	<%@ include file="/head.jsp"%>
+	<%-- <%@ include file="/head.jsp"%> --%>
 	<div class="header-search">
 		<form id="pageForm" action="Portal/creditQuery.action" method="post">
 			<!-- 隐藏域 每页条数 -->
@@ -69,14 +70,20 @@ ul {
 			</div>
 		</c:when>
 		<c:otherwise>
-			<table class="layui-table">
+			
+			<!-- 服务商信息 -->
+			<div style="height: 100px;">
+				服务商个人信息
+			</div>
+		
+			<table style="width: 90%; margin: 0 auto; text-align: center;" class="layui-table">
 				<thead>
 					<tr>
 						<th>序号</th>
 						<!-- <th>用户名</th> -->
-						<th>信用类型</th>
 						<th>信用变动原因</th>
-						<th>信用分</th>
+						<th>操作</th>
+						<th>结果</th>
 				</thead>
 				<tbody>
 					<c:forEach items="${pageInfo.list}" var="credit" begin="0"
@@ -84,9 +91,23 @@ ul {
 						<tr>
 							<td><c:out value="${s.index+1}"></c:out></td>
 							<%-- <td><c:out value="${credit.userID}"></c:out></td> --%>
-							<td><c:out value="${credit.creditType}"></c:out></td>
 							<td><c:out value="${credit.creditWhy}"></c:out></td>
-							<td><c:out value="${credit.creditPoints}"></c:out></td>
+							<td>
+									<c:if test="${credit.creditType eq 1 }">
+										<c:out value="加分"></c:out>
+									</c:if>
+									<c:if test="${credit.creditType eq 2 }">
+										<c:out value="加分"></c:out>
+									</c:if>
+							</td>
+							<td>
+									<c:if test="${credit.creditType eq 1 }">
+										<c:out value="信用分 +${credit.creditPoints}分"></c:out>
+									</c:if>
+									<c:if test="${credit.creditType eq 2 }">
+										<c:out value="信用分 +${credit.creditPoints}分"></c:out>
+									</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -94,6 +115,8 @@ ul {
 			<%@ include file="/pagefoot.jsp"%>
 		</c:otherwise>
 	</c:choose>
+	
+	<%-- <%@ include file="/end.jsp"%> --%>
 
 	<script type="text/javascript">
 		// 更改当前页
@@ -112,42 +135,69 @@ ul {
 			$("#pageForm").submit();
 		};
 
+
 		$(function() {
-			$("#input_search")
+
+			var flag = true;
+			$('#input_search').on('compositionstart', function() {
+				flag = false;
+			})
+			$('#input_search').on('compositionend', function() {
+				flag = true;
+			})
+
+			/* $("#input_search")
 					.on(
 							'input propertychange',
 							function() {
-								var searchKey = $.trim($(this).val());
-								if (searchKey.length > 0) {
-									$
-											.ajax({
-												url : $("base").attr("href")
-														+ "Portal/creditQuerySuggest.action",
-												type : "post",
-												dataType : "text",
-												contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
-												data : JSON.stringify({
-													"userName" : searchKey
-												}),
-												async : true,
-												success : function(msg) {
-													var userNameListArr = JSON
-															.parse(msg);
-													$("#search_suggest").append(
-															"<ul></ul>");
-													for (var i = 0; i < userNameListArr.length; ++i) {
-														$("#search_suggest ul")
-																.append(
-																		"<li><a href='javascript:void(0)' onclick='submitSearch(this)'>"
-																				+ userNameListArr[i]
-																				+ "</a></li>");
-													}
+
+								setTimeout(
+										function() {
+											if (flag) {
+
+												var searchKey = $.trim($(this)
+														.val());
+												if (searchKey.length > 0) {
+													$
+															.ajax({
+																url : $("base")
+																		.attr(
+																				"href")
+																		+ "Portal/creditQuerySuggest.action",
+																type : "post",
+																dataType : "text",
+																contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
+																data : JSON
+																		.stringify({
+																			"userName" : searchKey
+																		}),
+																async : true,
+																success : function(
+																		msg) {
+																	var userNameListArr = JSON
+																			.parse(msg);
+																	$(
+																			"#search_suggest")
+																			.append(
+																					"<ul></ul>");
+																	for (var i = 0; i < userNameListArr.length; ++i) {
+																		$("#search_suggest ul")
+																				.append(
+																						"<li><a href='javascript:void(0)' onclick='submitSearch(this)'>"
+																								+ userNameListArr[i]
+																								+ "</a></li>");
+																	} 
+																}
+															});
+												} else {
+													$("#search_suggest").html(
+															"");
 												}
-											});
-								} else {
-									$("#search_suggest").html("");
-								}
-							});
+
+											}
+										}, 0)
+
+							}); */
 		});
 
 		function submitSearch(node) {
