@@ -216,7 +216,7 @@ public class BusiManageHandler {
 	}
 
 	// 退出
-
+	@RequestMapping("/usersExit.action")
 	public ModelAndView usersExit(HttpServletRequest request, Users users) {
 		 HttpSession session=request.getSession(false);         
          //从session移除

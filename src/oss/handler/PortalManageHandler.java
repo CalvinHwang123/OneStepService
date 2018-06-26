@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +42,8 @@ import oss.util.DateUtil;
 @Controller
 @RequestMapping("/PortalManage")
 public class PortalManageHandler {
-
+	private HttpSession session;
+	
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
 	@Resource
@@ -317,11 +319,15 @@ public class PortalManageHandler {
 	// by hsp 6-26 11:31请求前端主页面
 	@RequestMapping("/foreIndex.action")
 	public ModelAndView foreIndex(HttpServletRequest req) {
+		session=req.getSession();
 		List<Links> linksList = portalManageBizImpl.LinksList();
 		Map<String, List<Map<Long, String>>> firstClassMap = facilitatorBizImpl.listClassMap();
 		String classJson = new Gson().toJson(firstClassMap);
-		req.setAttribute("classJson", classJson);
-		req.setAttribute("linksList", linksList);
+//		req.setAttribute("classJson", classJson);
+//		req.setAttribute("linksList", linksList);
+		session.setAttribute("classJson", classJson);
+		session.setAttribute("firstClassMap", firstClassMap);
+		session.setAttribute("linksList", linksList);
 		ModelAndView mav = new ModelAndView("../foregroundindex");
 		return mav;
 	}

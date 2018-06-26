@@ -17,8 +17,10 @@
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 </script>
 <!-- Custom Theme files -->
 <link href="portal/css/bootstrap.css" rel="stylesheet" type="text/css"
@@ -130,7 +132,7 @@
 <script src="portal/js/bootstrap.js"></script>
 </head>
 <body>
-	<input type="hidden" id="loginUser"  value="${sessionScope.forelogin}"/>
+	<input type="hidden" id="loginUser" value="${sessionScope.forelogin}" />
 	<!-- header -->
 	<div class="header">
 		<div class="w3ls-header">
@@ -170,7 +172,7 @@
 								<li><a href="BusiManage/usersExit.action">退出</a></li>
 							</ul>
 					</c:if>
-					
+
 					<c:if test="${forelogin.userType ==1}">
 
 						<li class="dropdown head-dpdn"><a href="#"
@@ -278,165 +280,28 @@
 			<div class="container">
 				<div class="menu1">
 					<div class="cd-dropdown-wrapper">
-						<a class="cd-dropdown-trigger" href="#0"> 服务</a>
+						<a class="cd-dropdown-trigger" href="#0">按行业找作品</a>
 						<nav class="cd-dropdown"> <a href="#0" class="cd-close">Close</a>
 						<ul class="cd-dropdown-content">
 							<li><a href="offers.html">Today's Offers</a></li>
-							<li class="has-children"><a href="#">按专业找人</a>
-								<ul class="cd-secondary-dropdown is-hidden">
-									<li class="go-back"><a href="#">Menu</a></li>
-									<li class="see-all"><a href="products.html">All
-											Electronics</a></li>
-									<li class="has-children"><a href="#">知识产权服务</a>
-										<ul class="is-hidden">
-											<li class="go-back"><a href="#">All Electronics</a></li>
-											<!-- <li class="has-children">
-													<a href="#0">SmartPhones</a> 
-													<ul class="is-hidden"> 
-														<li class="go-back"><a href="#"> </a></li>
-														<li><a href="products.html">Android</a></li>
-														<li><a href="products.html">Windows</a></li>
-														<li><a href="products.html">Black berry</a></li>
-													</ul>
-												</li> -->
-											<li><a href="products.html">商标注册</a></li>
-											<li><a href="products.html">商标购买</a></li>
-											<li><a href="products.html">商标维权</a></li>
-											<li><a href="products.html">专利申请</a></li>
-											<li><a href="products.html">版权登记</a></li>
-											<li><a href="products.html">国际专利</a></li>
-										</ul></li>
-									<li class="has-children"><a href="#">品牌设计</a>
-										<ul class="is-hidden">
-											<li class="go-back"><a href="#">logo设计 </a></li>
-											<li><a href="products.html">vi设计</a></li>
-											<li><a href="products.html">广告设计</a></li>
-											<li><a href="products.html">宣传品设计</a></li>
-											<li><a href="products.html">包装设计</a></li>
-											<li><a href="products.html">品牌策划</a></li>
-										</ul></li>
-									<li class="has-children"><a href="#">游戏</a>
-										<ul class="is-hidden">
-											<li class="go-back"><a href="#">棋牌游戏</a></li>
-											<li><a href="products.html">游戏开发</a></li>
-											<li><a href="products.html">微信H5游戏</a></li>
-											<li><a href="products.html">APP游戏</a></li>
-											<li><a href="products.html">游戏资质办理</a></li>
-											<li><a href="products.html">游戏UI设计</a></li>
-											<li class="has-children"><a href="#">Computer</a>
-												<ul class="is-hidden">
-													<li class="go-back"><a href="#"> </a></li>
-													<li><a href="products.html">Laptop </a></li>
-													<li><a href="products.html">Gaming PC</a></li>
-													<li><a href="products.html">Monitors</a></li>
-													<li><a href="products.html">Networking</a></li>
-													<li><a href="products.html">Printers & Supplies</a></li>
-													<li><a href="products.html">Accessories</a></li>
-												</ul></li>
-										</ul></li>
-								</ul> <!-- .cd-secondary-dropdown --></li>
-							<!-- .has-children -->
-							<li class="has-children"><a href="#">行业动态</a> <!-- 							<ul class="cd-secondary-dropdown is-hidden"> -->
-								<!-- 								<li class="go-back"><a href="#">Menu</a></li> --> <!-- 								<li class="see-all"><a href="products1.html">All -->
-								<!-- 										Fashion Stores</a></li> --> <!-- 								<li class="has-children"><a href="#">GIRLS' CLOTHING</a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Fashion Stores</a></li> -->
-								<!-- 										<li><a href="products1.html">Ethnic wear </a></li> -->
-								<!-- 										<li><a href="products1.html">Maternity wear</a></li> -->
-								<!-- 										<li><a href="products1.html">inner & nightwear </a></li> -->
-								<!-- 										<li><a href="products1.html">casual wear </a></li> -->
-								<!-- 										<li><a href="products1.html">formal wear</a></li> -->
-								<!-- 										<li><a href="products1.html">Sports wear</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="#">BOYS' CLOTHING</a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Fashion Stores</a></li> -->
-								<!-- 										<li><a href="products1.html">Jeans</a></li> --> <!-- 										<li><a href="products1.html">Casual wear</a></li> -->
-								<!-- 										<li><a href="products1.html">Shorts</a></li> -->
-								<!-- 										<li><a href="products1.html">T-Shirts & Polos</a></li> -->
-								<!-- 										<li><a href="products1.html">Trousers & Chinos</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="#">JACKETS</a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Fashion Stores</a></li> -->
-								<!-- 										<li><a href="products1.html">Blazers</a></li> -->
-								<!-- 										<li><a href="products1.html">Bomber jackets</a></li> -->
-								<!-- 										<li><a href="products1.html">Denim Jackets</a></li> -->
-								<!-- 										<li><a href="products1.html">Duffle Coats</a></li> -->
-								<!-- 										<li><a href="products1.html">Leather Jackets</a></li> -->
-								<!-- 										<li><a href="products1.html">Parkas</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="#">ACCESSORIES </a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Fashion Stores</a></li> -->
-								<!-- 										<li><a href="products1.html">Watches </a></li> -->
-								<!-- 										<li><a href="products1.html">Eyewear </a></li> -->
-								<!-- 										<li><a href="products1.html">Jewellery </a></li> -->
-								<!-- 										<li class="has-children"><a href="#">Footwear </a> -->
-								<!-- 											<ul class="is-hidden"> --> <!-- 												<li class="go-back"><a href="#"> </a></li> -->
-								<!-- 												<li><a href="products1.html">Ethnic</a></li> -->
-								<!-- 												<li><a href="products1.html">Casual wear</a></li> -->
-								<!-- 												<li><a href="products1.html">Sports Shoes</a></li> -->
-								<!-- 												<li><a href="products1.html">Boots</a></li> -->
-								<!-- 											</ul></li> --> <!-- 										<li><a href="products1.html">Stoles & Scarves</a></li> -->
-								<!-- 										<li><a href="products1.html">Handbags</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="#">BEAUTY</a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Fashion Stores</a></li> -->
-								<!-- 										<li><a href="products1.html">Perfumes & Deos</a></li> -->
-								<!-- 										<li><a href="products1.html">Lipsticks & Nail Polish</a></li> -->
-								<!-- 										<li><a href="products1.html">Beauty Gift Hampers</a></li> -->
-								<!-- 										<li><a href="products1.html">Personal Grooming</a></li> -->
-								<!-- 										<li><a href="products1.html">Travel bags</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="products1.html">PERSONAL -->
-								<!-- 										CARE</a> --> <!-- 									<ul class="is-hidden"> -->
-								<!-- 										<li class="go-back"><a href="#">All Fashion Stores</a></li> -->
-								<!-- 										<li><a href="products1.html">Face Care</a></li> -->
-								<!-- 										<li><a href="products1.html">Nail Care</a></li> -->
-								<!-- 										<li><a href="products1.html">Hair Care</a></li> -->
-								<!-- 										<li><a href="products1.html">Body Care</a></li> -->
-								<!-- 										<li><a href="products1.html">Bath & Spa</a></li> -->
-								<!-- 									</ul></li> --> <!-- 							</ul> .cd-secondary-dropdown -->
-							</li>
-							<!-- .has-children -->
-							<li class="has-children"><a href="products2.html">行业资讯</a> <!-- 							<ul class="cd-secondary-dropdown is-hidden"> -->
-								<!-- 								<li class="go-back"><a href="#">Menu</a></li> --> <!-- 								<li class="see-all"><a href="products2.html">All Kids -->
-								<!-- 										Fashions</a></li> --> <!-- 								<li class="has-children"><a href="products2.html">KIDS -->
-								<!-- 										CLOTHING</a> --> <!-- 									<ul class="is-hidden"> -->
-								<!-- 										<li class="go-back"><a href="#">All Kids Fashions</a></li> -->
-								<!-- 										<li><a href="products2.html">Ethnic wear </a></li> -->
-								<!-- 										<li><a href="products2.html">inner & Sleepwear </a></li> -->
-								<!-- 										<li><a href="products2.html">Dresses & Frocks </a></li> -->
-								<!-- 										<li><a href="products2.html">Winter wear</a></li> -->
-								<!-- 										<li><a href="products2.html">Diaper & Accessories</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="#">KIDS FASHION</a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Kids Fashions</a></li> -->
-								<!-- 										<li><a href="products2.html">Footwear</a></li> -->
-								<!-- 										<li><a href="products2.html">Sunglasses </a></li> -->
-								<!-- 										<li><a href="products2.html">School & Stationery</a></li> -->
-								<!-- 										<li><a href="products2.html">Jewellery</a></li> -->
-								<!-- 										<li><a href="products2.html">Hair bands & Clips</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li class="has-children"><a href="#">Baby Care</a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Kids Fashions</a></li> -->
-								<!-- 										<li><a href="products2.html">Lotions, Oil & Powder </a></li> -->
-								<!-- 										<li><a href="products2.html">Soaps, Shampoo </a></li> -->
-								<!-- 										<li><a href="products2.html">Bath Towels</a></li> -->
-								<!-- 										<li class="has-children"><a href="#">Feeding</a> -->
-								<!-- 											<ul class="is-hidden"> --> <!-- 												<li class="go-back"><a href="#"> </a></li> -->
-								<!-- 												<li><a href="products2.html">Baby Food </a></li> -->
-								<!-- 												<li><a href="products2.html">Bottle Feeding </a></li> -->
-								<!-- 												<li><a href="products2.html">Breast Feeding</a></li> -->
-								<!-- 											</ul></li> --> <!-- 										<li><a href="products2.html">Toddlers' Rooms</a></li> -->
-								<!-- 									</ul> .cd-secondary-dropdown</li> --> <!-- 								.has-children -->
-								<!-- 								<li class="has-children"><a href="#">TOYS & GAMES </a> -->
-								<!-- 									<ul class="is-hidden"> --> <!-- 										<li class="go-back"><a href="#">All Kids Fashions</a></li> -->
-								<!-- 										<li><a href="products2.html">Art & Crafts</a></li> -->
-								<!-- 										<li><a href="products2.html">Educational Toys </a></li> -->
-								<!-- 										<li><a href="products2.html">Baby Toys</a></li> -->
-								<!-- 										<li><a href="products2.html">Outdoor Play </a></li> -->
-								<!-- 										<li><a href="products2.html">Musical Instruments</a></li> -->
-								<!-- 									</ul></li> --> <!-- 								<li> --> <!-- 									<ul class="is-hidden"> -->
-								<!-- 										<li class="go-back"><a href="#">All Kids Fashions</a></li> -->
-								<!-- 										<li><a href="products2.html">Toy Tips & Trends</a></li> -->
-								<!-- 										<li><a href="products2.html">Preschool Toys</a></li> -->
-								<!-- 										<li><a href="products2.html">Musical Instruments</a></li> -->
-								<!-- 										<li><a href="products2.html">Bikes & Ride-Ons</a></li> -->
-								<!-- 										<li><a href="products2.html">Video Games</a></li> -->
-								<!-- 										<li><a href="products2.html">PC & Digital Gaming</a></li> -->
-								<!-- 									</ul> --> <!-- 								</li> --> <!-- 							</ul> -->
-								<!-- .cd-secondary-dropdown --></li>
+
+							<c:forEach items="${firstClassMap}" var="one" varStatus="s">
+								<li class="has-children"><a href="#"><c:out
+											value="${one.key}"></c:out></a>
+									<ul class="cd-secondary-dropdown is-hidden"
+										style="padding-bottom: 1em;">
+										<li class="has-children">
+											<ul class="is-hidden">
+												<c:forEach items="${one.value}" var="secondMap">
+													<c:forEach items="${secondMap}" var="second">
+														<li><a href="products.html"><c:out
+																	value="${second.value}"></c:out></a></li>
+													</c:forEach>
+												</c:forEach>
+											</ul>
+										</li>
+									</ul></li>
+							</c:forEach>
 						</ul>
 						<!-- .cd-dropdown-content --> </nav>
 						<!-- .cd-dropdown -->
@@ -572,20 +437,20 @@
 						</ul>
 					</div>
 				</div>
-				<form action="BusiManage/releaseDemand.action" method="post" class="form-inline" id="formRelease">
+				<form action="BusiManage/releaseDemand.action" method="post"
+					class="form-inline" id="formRelease">
 					<div class="modal-body" style="width: 900px; height: 420px;">
 						<div style="width: 100%; height: 12%; text-align: center;">
 							<div class="form-group">
-								<label for="name">请选择行业：</label> 
-								 <select name="first_classification" id="first_classification" class="form-control"
-									style="width: 200px;">
-                      				  <option value="">请选择一级分类</option>
-                   				 </select>
-								<label for="name">请选择服务类型：</label> 
-                  			     <select name="classificationID" id="second_classification" class="form-control"
-									style="width: 200px;">
-                                      <option value="">请选择二级分类</option>
-                   			     </select>
+								<label for="name">请选择行业：</label> <select
+									name="first_classification" id="first_classification"
+									class="form-control" style="width: 200px;">
+									<option value="">请选择一级分类</option>
+								</select> <label for="name">请选择服务类型：</label> <select
+									name="classificationID" id="second_classification"
+									class="form-control" style="width: 200px;">
+									<option value="">请选择二级分类</option>
+								</select>
 							</div>
 						</div>
 						<div style="width: 100%; height: 88%; background-color: #f7f7f7;">
@@ -608,8 +473,8 @@
 									style="width: 100%; margin-bottom: 1.3em;">
 									<label for="asoftTime">截标日期：</label> <input id="datetimeStart"
 										class="form-control" placeholder="请选择截标日期" value=""
-										style="width: 25%;" name="asoftTime" >
-										<label id="stopBidDaysLabel">(1天-30天)</label>
+										style="width: 25%;" name="asoftTime"> <label
+										id="stopBidDaysLabel">(1天-30天)</label>
 								</div>
 								<br>
 								<div class="form-group"
@@ -624,14 +489,15 @@
 					<div class="modal-footer" style="text-align: center;">
 						<button type="submit" class="btn btn-primary"
 							onclick="releaseDemand()" id="releaseSubmit">立 即 发 布</button>
-						<button type="reset" class="btn btn-default" >重 置</button>	
-						<button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+						<button type="reset" class="btn btn-default">重 置</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关
+							闭</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-<!-- 	行业和服务分类脚本 -->
+	<!-- 	行业和服务分类脚本 -->
 	<script type="text/javascript">
         $(function(){
             //页面加载完毕后开始执行的事件
@@ -656,9 +522,9 @@
             });
         });
     </script>
-  <!-- 	//行业和服务分类脚本 -->  
-    
-    <!-- 	发布需求模态框和日期选择控件脚本 -->
+	<!-- 	//行业和服务分类脚本 -->
+
+	<!-- 	发布需求模态框和日期选择控件脚本 -->
 	<script>
 		$(function() {
 			$("#btnclick").click(function() {
@@ -786,7 +652,7 @@
             .validateField('datetimeStart');  
     });  ;
 	</script>
-	 <!-- 	发布需求模态框和日期选择控件脚本 -->
+	<!-- 	发布需求模态框和日期选择控件脚本 -->
 	<!-- 发布需求modal/	 -->
 	<!-- Resource jQuery -->
 	<!-- //menu js aim -->
