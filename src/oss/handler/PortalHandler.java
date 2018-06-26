@@ -28,6 +28,7 @@ import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Violations2;
 import oss.bean.Workinformation;
+
 import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
@@ -71,6 +72,16 @@ public class PortalHandler {
 		return mav;
 	}
 
+	// 华清修改：前端需求详情
+
+	@RequestMapping("/demandDetailsList.action")
+	public ModelAndView demandDetailsList(HttpServletRequest req, Demands demands) {
+		Demands dem = portalBizImpl.demandDetailsList(demands);
+		req.setAttribute("dem", dem);
+		ModelAndView mav = new ModelAndView("demandDetails");
+		return mav;
+	}
+
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStoryList.action")
 	public ModelAndView userStoryList(HttpServletRequest req,
@@ -86,6 +97,24 @@ public class PortalHandler {
 		req.setAttribute("pageInfo", pageInfo);
 		req.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("foreground/userStory");
+		return mav;
+	}
+
+	// 吴华清修改：获取前端需求大厅列表
+	@RequestMapping("/beforeDemandsList.action")
+	public ModelAndView beforeDemandsList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Demands> demandsList = portalBizImpl.beforeDemandsList(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo pageInfo = new PageInfo<>(demandsList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("demands");
 		return mav;
 	}
 
@@ -148,14 +177,14 @@ public class PortalHandler {
 	@RequestMapping("/creditQuery")
 	public ModelAndView creditQuery(HttpServletRequest request,
 
-		@RequestParam(value = "pageSize", required = true, defaultValue = "5")int pageSize,
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1")int pageNum,Condition condition) {
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		System.out.println("portalBizImpl=" + portalBizImpl);
 		System.out.println("condition=" + condition.getTitle());
 		if (null != condition.getTitle()) {
 			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 			PageHelper.startPage(pageNum, pageSize);
-//			condition.setTitle("吴华清");
+			// condition.setTitle("吴华清");
 			List<Credit> creditList = portalBizImpl.listCreditByName(condition);
 			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
 			PageInfo<Credit> pageInfo = new PageInfo<>(creditList, pageSize);
@@ -166,14 +195,12 @@ public class PortalHandler {
 		return new ModelAndView("foreground/creditQuery");
 	}
 
-	
 	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
 	@RequestMapping(value = "/creditQuerySuggest.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody List<String> creditQuerySuggest(@RequestBody Users users) {
 		List<String> userNameList = portalBizImpl.listSuggestUserByKey(users);
 		return userNameList;
 	}
-
 
 	// 前端 作品 数据 袁楠文 2018-6-19 22:45
 	@RequestMapping("/workInfoList")
@@ -207,17 +234,16 @@ public class PortalHandler {
 
 	// 前端 作品 详情数据 袁楠文 2018-6-23 21:45
 	@RequestMapping("/worksIntroduction")
-	public ModelAndView worksIntroduction(HttpServletRequest request
-			,@RequestParam(value = "worksId", required = true, defaultValue = "empty") Long worksId) {
-		System.out.println("进入-"+worksId+"-详情");
-		
+	public ModelAndView worksIntroduction(HttpServletRequest request,
+			@RequestParam(value = "worksId", required = true, defaultValue = "empty") Long worksId) {
+		System.out.println("进入-" + worksId + "-详情");
+
 		List<Workinformation> workinfolist = portalBizImpl.worksIntroduction(worksId);
 		request.setAttribute("worksIntroduction", workinfolist);
-		
+
 		ModelAndView worksIntroduction = new ModelAndView("/foreground/worksIntroduction");
 		return worksIntroduction;
 	}
-
 
 	// 前端 作品 按价格分类 袁楠文 2018-6-21 11:09
 	@RequestMapping("/classpricevaluelook")

@@ -80,14 +80,7 @@
 		<div class='content'>
 
 			<div class='el-selector-container'>
-				<div class='el-selector' id='utopia_widget_2'>
-
-					<div class='el-selector-content'>
-						<input id='el-content' class='el-content' placeholder='请输入规则关键词搜索' />
-						<button type='button' id='el-content-btn'>搜索</button>
-
-					</div>
-				</div>
+				
 				<script>
 					/*<![CDATA[*/
 					utopia.arrived({
@@ -218,7 +211,7 @@
 			<div class='index-news  icon-news1'>
 				<div class='hd'>
 					<span class='title'><em class='icon'></em><span>规则公示</span></span>
-					<a href='/rules-27?cid=29'><span>更多</span></a>
+					<!-- <a href='/rules-27?cid=29'><span>更多</span></a> -->
 				</div>
 				<c:forEach var="rule" items="${ruleList}">
 					<div class='bd'>
@@ -244,7 +237,7 @@
 			<div class='index-news index-news-max icon-news2'>
 				<div class='hd'>
 					<span class='title'><em class='icon'></em><span>最新更新</span></span>
-					<a href='/rules-27?cid=31'><span>更多</span></a>
+					<!-- <a href='/rules-27?cid=31'><span>更多</span></a> -->
 				</div>
 
 				<c:forEach var="rule" items="${ruleList}">
@@ -269,7 +262,7 @@
 			<div class='index-news  icon-news3'>
 				<div class='hd'>
 					<span class='title'><em class='icon'></em><span>热门规则</span></span>
-					<a href='/rules-27?cid=30'><span>更多</span></a>
+					<!-- <a href='/rules-27?cid=30'><span>更多</span></a> -->
 				</div>
 				<c:forEach var="rule" items="${ruleList}">
 					<div class='bd'>

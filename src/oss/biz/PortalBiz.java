@@ -9,6 +9,7 @@ import oss.bean.Demands;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
+
 import oss.bean.Violations2;
 
 /*
@@ -20,17 +21,24 @@ public interface PortalBiz {
 
 	// 前端违规列表 hlq 2018-6-19 10:26
 	List<Violations> listViolationsDesc(int userType);
+
 	List<Violations2> listViolationsGroupByWhy(int userType);
+
 	List<Violations> listStickViolations(int userType);
 
-	//前端 作品 详情数据 袁楠文 2018-6-23 21:45
+	// 前端 作品 详情数据 袁楠文 2018-6-23 21:45
 	List<Workinformation> worksIntroduction(Long worksId);
-	
+
 	// 根据搜索关键词列出搜索建议 by hlq 2018-06-22 9:41
 	public List<String> listSuggestUserByKey(Users users);
-	
+
 	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
 	public List<Credit> listCreditByName(Condition condition);
-	
+
+	// 华清修改 前端需求大厅列表
+	public List<Demands> beforeDemandsList(Condition condition);
+
+	// 华清修改：前端需求详情
+	public Demands demandDetailsList(Demands demands);
 
 }
