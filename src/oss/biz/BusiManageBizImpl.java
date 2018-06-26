@@ -122,13 +122,13 @@ public class BusiManageBizImpl implements BusiManageBiz {
 
 	@Override
 	public List<Works> listWorks(Condition condition) {
-		
+
 		return busiManageMapper.listWorks(condition);
 	}
 
 	@Override
 	public int updateWorksById(Works works) {
-		
+
 		return busiManageMapper.updateWorksById(works);
 	}
 
@@ -138,4 +138,15 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		return busiManageMapper.insertDemand(demands);
 	}
 
+	// wwj 个人信息修改
+	@Override
+	public Users updateUsersByAcc(Users users) {
+		busiManageMapper.updateUsersByAcc(users);		
+		return busiManageMapper.SelectUsersByAcc(users) ;
+	}
+	// wwj 个人信息查詢
+	@Override
+	public Users SelectUsersByAcc(Users users) {
+		return busiManageMapper.SelectUsersByAcc(users);
+	}
 }

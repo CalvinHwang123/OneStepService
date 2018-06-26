@@ -72,4 +72,11 @@ public interface BusiManageMapper {
 	
 	//by hsp 发布需求 	6-26 10:20
 	public int insertDemand(Demands demands);
+
+	//个人信息修改  wwj
+	public abstract int updateUsersByAcc(Users users);
+	
+	//个人信息查詢  wwj
+		public abstract Users SelectUsersByAcc(Users users);
+
 }
