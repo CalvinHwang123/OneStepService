@@ -1,6 +1,7 @@
 package oss.handler;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
@@ -28,6 +30,7 @@ import oss.bean.Rulee;
 
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.biz.FacilitatorBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
 /*
@@ -43,6 +46,8 @@ public class PortalManageHandler {
 	private PortalManageBiz portalManageBizImpl;
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
+	@Resource
+	private FacilitatorBiz facilitatorBizImpl;
 	// 后端违规列表请求 by hlq 2018-06-14
 	@RequestMapping("/violationsList.action")
 	public ModelAndView violationsList(HttpServletRequest req,
@@ -313,6 +318,9 @@ public class PortalManageHandler {
 	@RequestMapping("/listLinks.action")
 	public ModelAndView listLinks(HttpServletRequest req) {
 		List<Links> linksList = portalManageBizImpl.LinksList();
+		Map<String, List<Map<Long, String>>> firstClassMap = facilitatorBizImpl.listClassMap();
+		String classJson = new Gson().toJson(firstClassMap);
+		req.setAttribute("classJson", classJson);
 		req.setAttribute("linksList", linksList);
 		ModelAndView mav = new ModelAndView("../foregroundindex");
 		return mav;
