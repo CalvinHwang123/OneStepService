@@ -27,7 +27,7 @@ import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
-import oss.bean.demands;
+import oss.bean.Demands;
 import oss.biz.BusiManageBiz;
 import oss.biz.SystemManegeBiz;
 import oss.util.DateUtil;
@@ -92,7 +92,7 @@ public class BusiManageHandler {
 				
 					// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 					PageHelper.startPage(pageNum, pageSize);
-					List<demands> demandList = busiManageBizImpl.demandList(condition);
+					List<Demands> demandList = busiManageBizImpl.demandList(condition);
 					// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
 					PageInfo pageInfo = new PageInfo<>(demandList, pageSize);
 					System.out.println(pageInfo.getTotal());
@@ -164,7 +164,7 @@ public class BusiManageHandler {
 	// 华清修改：雇主服务商管理需求审核通过
 
 	@RequestMapping("/examine.action")
-	public @ResponseBody String examine(HttpServletRequest req, @RequestBody demands demands) {
+	public @ResponseBody String examine(HttpServletRequest req, @RequestBody Demands demands) {
 		System.out.println("审核通过");
 		busiManageBizImpl.examine(demands.getDemandID());
 		return "success";
@@ -173,7 +173,7 @@ public class BusiManageHandler {
 	// 华清修改：雇主服务商管理需求审核不通过
 
 	@RequestMapping("/Audited.action")
-	public @ResponseBody String Audited(HttpServletRequest req, @RequestBody demands demands) {
+	public @ResponseBody String Audited(HttpServletRequest req, @RequestBody Demands demands) {
 		System.out.println("审核不通过");
 		busiManageBizImpl.Audited(demands.getDemandID());
 		return "success";
@@ -285,5 +285,19 @@ public class BusiManageHandler {
 		return "success";
 	}
 
+	
+	//by hsp 雇主发布需求 	6-26 10:20
+	@RequestMapping("/releaseDemand.action")
+	public ModelAndView releaseDemand(HttpServletRequest req, Demands demands) {
+		
+//		busiManageBizImpl.releaseDemand(demands);
+		System.out.println("需求标题："+demands.getDemandTitle());
+		System.out.println("需求内容："+demands.getDemandContent());
+		System.out.println("需求预算："+demands.getDemandPrice());
+		System.out.println("截止时间："+demands.getAsoftTime());
+		
+		ModelAndView mav = new ModelAndView("foreground/successcase");
+		return mav;
+	}
 }
 

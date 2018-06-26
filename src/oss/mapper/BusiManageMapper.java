@@ -8,7 +8,7 @@ import oss.bean.Links;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
-import oss.bean.demands;
+import oss.bean.Demands;
 
 /*
  * 业务管理Mapper接口
@@ -47,7 +47,7 @@ public interface BusiManageMapper {
 	public int enable(long lo);
 
 	// 华清修改：查询需求列表
-	public List<demands> demandList(Condition condition);
+	public List<Demands> demandList(Condition condition);
 
 	// 华清修改：审核通过
 	public int examine(long examine);
@@ -69,4 +69,7 @@ public interface BusiManageMapper {
 
 	// 作品管理修改状态 wwj
 	public abstract int updateWorksById(Works works);
+	
+	//by hsp 发布需求 	6-26 10:20
+	public int insertDemand(Demands demands);
 }

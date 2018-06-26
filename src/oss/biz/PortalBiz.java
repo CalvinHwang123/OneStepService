@@ -5,6 +5,7 @@ import java.util.List;
 import oss.bean.Condition;
 import oss.bean.UserStory;
 import oss.bean.Credit;
+import oss.bean.Demands;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
@@ -30,4 +31,6 @@ public interface PortalBiz {
 	
 	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
 	public List<Credit> listCreditByName(Condition condition);
+	
+
 }

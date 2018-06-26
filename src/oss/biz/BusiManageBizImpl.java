@@ -11,7 +11,7 @@ import oss.bean.Credit;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
-import oss.bean.demands;
+import oss.bean.Demands;
 import oss.mapper.BusiManageMapper;
 
 /*
@@ -65,7 +65,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	}
 
 	@Override
-	public List<demands> demandList(Condition condition) {
+	public List<Demands> demandList(Condition condition) {
 		// TODO Auto-generated method stub
 		return busiManageMapper.demandList(condition);
 	}
@@ -131,4 +131,11 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		
 		return busiManageMapper.updateWorksById(works);
 	}
+
+	//by hsp 雇主发布需求 	6-26 10:20
+	@Override
+	public int releaseDemand(Demands demands) {
+		return busiManageMapper.insertDemand(demands);
+	}
+
 }

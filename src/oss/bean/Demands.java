@@ -1,6 +1,6 @@
 package oss.bean;
 
-public class demands {
+public class Demands {
 	private Long demandID;// 需求ID	
 	private Long classificationID;// 分类表ID
 	private Long userID;// 雇主ID
@@ -12,10 +12,13 @@ public class demands {
 	private String releaseTime;// 发布时间
 	private String asoftTime;// 截止时间
 	private Long tenderID;// 投标者ID
-	public demands() {
+	//by hsp 6-26 9:07
+	private Long demandPrice;//新增需求预算
+	
+	public Demands() {
 		super();
 	}
-	public demands(Long demandID, Long classificationID, Long userID, Long demandstatusid, String demandTitle,
+	public Demands(Long demandID, Long classificationID, Long userID, Long demandstatusid, String demandTitle,
 			String demandContent, String demandRequire, String userPhone, String releaseTime, String asoftTime,
 			Long tenderID) {
 		super();
@@ -96,6 +99,12 @@ public class demands {
 	}
 	public void setTenderID(Long tenderID) {
 		this.tenderID = tenderID;
+	}
+	public Long getDemandPrice() {
+		return demandPrice;
+	}
+	public void setDemandPrice(Long demandPrice) {
+		this.demandPrice = demandPrice;
 	}
 	
 	

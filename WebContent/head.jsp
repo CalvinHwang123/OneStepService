@@ -16,9 +16,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 <!-- Custom Theme files -->
@@ -41,6 +63,12 @@
 <!-- font-awesome icons -->
 <link href="portal/css/font-awesome.css" rel="stylesheet">
 <!-- //font-awesome icons -->
+<!-- datetimepicker -->
+<link href="portal/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<!-- bootstrapValidator -->
+<link href="portal/css/bootstrapValidator.css" rel="stylesheet">
+<!-- bootstrapValidator -->
 <!-- js -->
 <script src="portal/js/jquery-2.2.3.min.js"></script>
 <!-- //js -->
@@ -264,20 +292,12 @@
 					</form>
 				</div>
 				<div class="header-cart">
-					<div class="my-account">
-						<a href="contact.html"><i class="fa fa-map-marker"
-							aria-hidden="true"></i> CONTACT US</a>
-					</div>
-					<div class="cart">
-						<form action="#" method="post" class="last">
-							<input type="hidden" name="cmd" value="_cart" /> <input
-								type="hidden" name="display" value="1" />
-							<button class="w3view-cart" type="submit" name="submit" value="">
-								<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-							</button>
-						</form>
-					</div>
-					<div class="clearfix"></div>
+					<button class="w3view-cart" type="button" name="" value=""
+						style="border-radius: 0; margin: 4px 150px 0 0; color: white; background-color: #f44336; height: 50px; width: 80px; padding: 0; -moz-transition: 0.5s all;"
+						id="btnclick">
+						<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+						发布需求
+					</button>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -555,6 +575,218 @@
 		
 	</script>
 	<script src="portal/js/main.js"></script>
+	<script src="portal/js/bootstrap-datetimepicker.js"></script>
+	<script src="portal/js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="portal/js/bootstrapValidator.js"></script>
+	<!-- 发布需求modal	 -->
+	<div class="modal fade" id="NoPermissionModal">
+		<div class="modal-dialog" style="display: inline-block; width: auto;">
+			<div class="modal-content">
+				<div class="modal-header"
+					style="background: url(portal/images/bg.png) #08bce4 no-repeat; background-size: cover; border-radius: 6px 6px 0px 0px;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">免费发布需求</h4>
+					<div>
+						<ul class="list-inline">
+							<li class="active"><span>发布需求</span> <i
+								class="glyphicon glyphicon-arrow-right" aria-hidden="true"></i>
+							</li>
+							<li><span>为您匹配服务商</span> <i
+								class="glyphicon glyphicon-arrow-right" aria-hidden="true"></i>
+							</li>
+							<li><span>服务商完成工作</span> <i
+								class="glyphicon glyphicon-arrow-right" aria-hidden="true"></i>
+							</li>
+							<li><span>验收满意付款</span></li>
+						</ul>
+					</div>
+				</div>
+				<form action="BusiManage/releaseDemand.action" method="post" class="form-inline" id="formRelease">
+					<div class="modal-body" style="width: 900px; height: 420px;">
+						<div style="width: 100%; height: 12%; text-align: center;">
+							<div class="form-group">
+								<label for="name">请选择行业：</label> <select class="form-control"
+									style="width: 200px;">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select> <label for="name">请选择服务类型：</label> <select class="form-control"
+									style="width: 200px;">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</div>
+						</div>
+						<div style="width: 100%; height: 88%; background-color: #f7f7f7;">
+							<div class="login-body" style="width: 100%; height: 100%;">
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="demandTitle">需求标题：</label> <input type="text"
+										name="demandTitle" class="form-control" placeholder="请输入需求标题"
+										style="width: 80%;">
+								</div>
+								<br>
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="name">需求内容：</label>
+									<textarea class="form-control" rows="3" style="width: 80%;"
+										name="demandContent" placeholder="请输入需求内容"></textarea>
+								</div>
+								<br>
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="asoftTime">截标日期：</label> <input id="datetimeStart"
+										class="form-control" placeholder="请选择截标日期" value=""
+										style="width: 25%;" name="asoftTime" >
+										<label id="stopBidDaysLabel">(1天-30天)</label>
+								</div>
+								<br>
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="worksPrice">需求预算：</label> <input type="text"
+										name="demandPrice" class="form-control" placeholder="请输入预算"
+										style="width: 25%;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="text-align: center;">
+						<button type="submit" class="btn btn-primary"
+							onclick="releaseDemand()" id="releaseSubmit">立 即 发 布</button>
+						<button type="reset" class="btn btn-default" >重 置</button>	
+						<button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function() {
+			$("#btnclick").click(function() {
+				$('#NoPermissionModal').modal({
+					show : true,
+					backdrop : 'static'
+					
+					
+				});
+			});
+			
+			$("#formRelease").bootstrapValidator({  
+				  message:'This value is not valid',
+//	            定义未通过验证的状态图标
+	            feedbackIcons: {/*输入框不同状态，显示图片的样式*/
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+//	            字段验证
+	            fields:{
+//	                用户名
+	                demandTitle:{
+	                    message:'用户名非法',
+	                    validators:{
+//	                        非空
+	                        notEmpty:{
+	                            message:'需求标题不能为空'
+	                        },
+//	                        限制字符串长度
+	                        stringLength:{
+	                            min:2,
+	                            max:20,
+	                            message:'标题长度必须位于2到20之间'
+	                        },
+	                    }
+	                },
+	                
+	                demandContent:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请填写需求内容' 
+	                		 },
+	                	 }
+	                },
+	                
+	                
+	                asoftTime:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请选择截标日期' 
+	                		 },
+	                	 }
+	                },
+	                
+	                
+	                demandPrice:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请填写需求预算' 
+	                		 },
+//                    基于正则表达是的验证
+                   			 regexp:{
+                       			 regexp:/^[1-9]\d*$/,
+                      		     message:'请输入正确的预算'
+                    		},
+                    		stringLength:{
+	                            min:1,
+	                            max:8,
+	                            message:'需求预算在1-99999999之间'
+	                        },
+	                	 }
+	                }
+	
+	            }
+		    });  
+		});
+		
+		function releaseDemand(){
+		}
+		
+		//用户选择截标日期之后，显示距离截标的剩余时间
+		function gotoDate(){
+			if ($("#datetimeStart").val() == "") {
+				$("#stopBidDaysLabel").text("(1-30天)");
+			}else{
+				//相差的毫秒数
+				var ts = (new Date($("#datetimeStart").val()).getTime() - new Date().getTime())/1000;
+				var dd = parseInt(ts/60/60/24,10);//计算剩余的天数
+				var hh = parseInt(ts/60/60%24,10);//计算剩余的小时数
+				var mm = parseInt(ts/60%60,10);//计算剩余的分钟数
+				var ss = parseInt(ts%60,10);//计算剩余的秒数
+				//最後剩余时间
+				var remainingTime= dd + "天"+hh + "时" +mm + "分"+ss + "秒";
+				$("#stopBidDaysLabel").text("距离截标剩余时间："+remainingTime);
+			}
+		}		
+		
+		
+		$('#datetimeStart').datetimepicker({
+			format: 'yyyy-mm-dd hh:00:00',  //显示格式可为yyyymm/yyyy-mm-dd/yyyy.mm.dd  
+		    weekStart: 1,//0-周日,6-周六 。默认为0  
+		    autoclose: true,    
+		    startView: 2, //打开时显示的视图。0-'hour' 1-'day' 2-'month' 3-'year' 4-'decade'   
+		    minView: 1,//最小时间视图。默认0-'hour'  
+		//  maxView: 4, <span style="white-space:pre;"> </span>//最大时间视图。默认4-'decade'  
+		//  todayBtn:true, <span style="white-space:pre;">  </span>//true时"今天"按钮仅仅将视图转到当天的日期。如果是'linked'，当天日期将会被选中。   
+		//  todayHighlight:true,<span style="white-space:pre;"> </span>//默认值: false,如果为true, 高亮当前日期。  
+		    startDate: new Date((new Date()/1000+86400)*1000),//日期只能从今天开始选择 
+		    endDate:  new Date((new Date()/1000+86400*30)*1000),//日期范围最多15天
+		    forceParse: false,//当输入非格式化日期时，强制格式化。默认true  
+		    bootcssVer:3,//显示向左向右的箭头  
+		    language: 'zh-CN', //语言
+		    onSelect: gotoDate
+		}).on('changeDate',gotoDate).on('hide',function(e) {  
+            $('#formRelease').data('bootstrapValidator')  
+            .updateStatus('datetimeStart', 'NOT_VALIDATED',null)  
+            .validateField('datetimeStart');  
+    });  ;
+	</script>
+	<!-- 发布需求modal/	 -->
 	<!-- Resource jQuery -->
 	<!-- //menu js aim -->
 	<!-- Bootstrap core JavaScript
