@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import oss.bean.Condition;
 import oss.bean.UserStory;
 import oss.bean.Credit;
+import oss.bean.Demands;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
 import oss.mapper.PortalMapper;
 import oss.bean.Violations2;
+import oss.mapper.BusiManageMapper;
 import oss.mapper.PortalManageMapper;
 
 /*
@@ -26,7 +28,9 @@ public class PortalBizImpl  implements PortalBiz{
 	private PortalManageMapper portalManageMapper;
 	@Resource
 	private PortalMapper portalMapper;
-
+	@Resource
+	private BusiManageMapper BusiManageMapper;
+	
 	// 按违规时间倒序查询违规记录 by hlq 2018-06-16 22:05
 	@Override
 	public List<Violations> listViolationsDesc(int userType) {
@@ -72,4 +76,6 @@ public class PortalBizImpl  implements PortalBiz{
 	public List<String> listSuggestUserByKey(Users users) {
 		return portalManageMapper.listSuggestUserByKey(users);
 	}
+
+
 }
