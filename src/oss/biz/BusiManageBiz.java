@@ -62,12 +62,18 @@ public interface BusiManageBiz {
 	// 华清修改：违规表违规
 	public int violaTionCreditScore(Violations violations);
 
-	// 作品管理列表 wwj
-	public List<Works> listWorks(Condition condition);
-
 	// 作品管理修改状态 wwj
 	public abstract int updateWorksById(Works works);
 
-	//by hsp 雇主发布需求 	6-26 10:20
+	// 个人信息修改 wwj
+	public abstract Users updateUsersByAcc(Users users);
+
+	// 作品管理列表 wwj
+	public List<Works> listWorks(Condition condition);
+
+	// 个人信息查詢 wwj
+	public abstract Users SelectUsersByAcc(Users users);
+
+	// by hsp 雇主发布需求 6-26 10:20
 	public int releaseDemand(Demands demands);
 }
