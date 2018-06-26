@@ -196,14 +196,13 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dt>
 
 							<dd>
-								<a class='J_menuItem J_accountLink' href='javascript:;'
-									data-linkid='10132981' target='_blank'>我的账户</a>
+								<a class='J_menuItem ' href='BusiManage/selectUsersByAcc.action'
+									 >我的账户</a>
 
 							</dd>
 
 							<dd>
-								<a class='J_menuItem ' href='/coupon' data-linkid='10132982'
-									target='_self'>我的优惠券</a>
+								<a class='J_menuItem ' href='BusiManage/traingList.action' >我的交易</a>
 
 							</dd>
 
@@ -564,7 +563,7 @@ utopia.arrived({uid:'utopia_widget_15', js:["widget/components/log/log.js"], ent
 
 			<div class='redpack-rec-mask hide' id='utopia_widget_16'></div>
 
-
+<%@include file="end.jsp"%>
 			<script>seajs.use(["//as.zbjimg.com/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_c450da5.js"]);</script>
 			<script>/*<![CDATA[*/
 

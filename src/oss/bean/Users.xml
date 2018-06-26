@@ -19,7 +19,8 @@
 
 
 
-		update Users set userStatusID =3
+		update Users set
+		userStatusID =3
 		where userID=#{userID}
 
 	</update>
@@ -84,8 +85,7 @@
 
 	<!-- 注册 -->
 	<insert id="AddUsers" parameterType="oss.bean.Users">
-		<selectKey keyProperty="userID" order="BEFORE"
-			resultType="long">
+		<selectKey keyProperty="userID" order="BEFORE" resultType="long">
 			select UsersSEQ.nextval from dual
 		</selectKey>
 		insert into
@@ -118,8 +118,7 @@
 
 	<!-- 华清修改：明细表信用变动成功 -->
 	<insert id="creditCreditScore" parameterType="oss.bean.Credit">
-		<selectKey keyProperty="creditID" order="BEFORE"
-			resultType="java.lang.Long">
+		<selectKey keyProperty="creditID" order="BEFORE" resultType="java.lang.Long">
 			select userStorySeq.nextval from dual
 		</selectKey>
 		insert into credit(creditID,userID,creditType,creditPoints,creditWhy)
@@ -130,17 +129,33 @@
 	<!-- 华清修改：违规表插入 -->
 
 
-	<insert id="violaTionCreditScore"
-		parameterType="oss.bean.Violations">
+	<insert id="violaTionCreditScore" parameterType="oss.bean.Violations">
 		<selectKey keyProperty="violationsID" order="BEFORE"
 			resultType="long">
 			select violationsSeq.nextVal from dual
 		</selectKey>
 		insert into violations
-		(violationsID, violationsWhy, violationsResult,userID, violationsTime, stickTime)
-		values (#{violationsID},#{violationsWhy}, #{violationsResult},#{userID}, #{violationsTime},#{stickTime})
+		(violationsID, violationsWhy,
+		violationsResult,userID, violationsTime, stickTime)
+		values
+		(#{violationsID},#{violationsWhy}, #{violationsResult},#{userID},
+		#{violationsTime},#{stickTime})
 	</insert>
 
+
+<!-- 個人信息 -->
+<select id="SelectUsersByAcc" resultType="oss.bean.Users"
+		parameterType="oss.bean.Users">
+		select * from Users where userAccount=#{userAccount}
+	</select>
+
+
+	<!-- 个人信息修改 -->
+	<update id="updateUsersByAcc"  parameterType="oss.bean.Users" >
+		update Users set
+		userName=#{userName},userIdentity=#{userIdentity},userPhone=#{userPhone},userEmail=#{userEmail},userIntroduction=#{userIntroduction},userAddress=#{userAddress}
+		where userAccount=#{userAccount}
+	</update>
 
 </mapper>
 

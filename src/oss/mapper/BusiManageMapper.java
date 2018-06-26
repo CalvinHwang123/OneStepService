@@ -69,4 +69,10 @@ public interface BusiManageMapper {
 
 	// 作品管理修改状态 wwj
 	public abstract int updateWorksById(Works works);
+	
+	//个人信息修改  wwj
+	public abstract int updateUsersByAcc(Users users);
+	
+	//个人信息查詢  wwj
+		public abstract Users SelectUsersByAcc(Users users);
 }

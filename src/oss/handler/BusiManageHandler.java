@@ -228,9 +228,8 @@ public class BusiManageHandler {
 	}
 	// 退出
 	@RequestMapping("/usersExit.action")
-	public ModelAndView usersExit(HttpServletRequest request, Users user) {
-		 HttpSession session=request.getSession(false);
-	            
+	public ModelAndView usersExit(HttpServletRequest request, Users users) {
+		 HttpSession session=request.getSession(false);         
          //从session移除
          session.removeAttribute("forelogin");
 		ModelAndView mav = new ModelAndView("../ForeLogin");
@@ -284,6 +283,36 @@ public class BusiManageHandler {
 		int up = busiManageBizImpl.updateWorksById(works);
 		return "success";
 	}
+	
+	// 个人中心修改
+	@RequestMapping("/usersInfo.action")
+	public ModelAndView usersInfo(HttpServletRequest request, Users users) {
+		Users usersList=busiManageBizImpl.updateUsersByAcc(users);
+		request.setAttribute("usersList", usersList);
+		ModelAndView mav = new ModelAndView("PersonInfo");
+		return mav;		
+	}
+	
+	// 个人中心查詢
+	@RequestMapping("/selectUsersByAcc.action")
+	public ModelAndView SelectUsersByAcc(HttpServletRequest request, Users users) {
+		 HttpSession session=request.getSession();        
+		Users users2=(Users) session.getAttribute("forelogin");
+		String userAcc=users2.getUserAccount();
+		users.setUserAccount(userAcc);
+		Users usersList=busiManageBizImpl.SelectUsersByAcc(users);
+		request.setAttribute("usersList", usersList);
+		ModelAndView mav = new ModelAndView("PersonInfo");
+		return mav;		
+	}
 
+	// 个人中心修改
+	@RequestMapping("/traingList.action")
+	public ModelAndView TraingList(HttpServletRequest request, Users users) {
+	
+		ModelAndView mav = new ModelAndView("TraingList");
+		return mav;		
+	}
+	
 }
 
