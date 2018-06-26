@@ -8,6 +8,7 @@ import oss.bean.Credit;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
+import oss.bean.demands;
 import oss.bean.Violations2;
 
 /*
@@ -30,4 +31,8 @@ public interface PortalBiz {
 	
 	// 根据用户名查询信用明细 hlq 2018-06-21 14:13
 	public List<Credit> listCreditByName(Condition condition);
+	//华清修改 前端需求大厅列表
+		public List<demands> beforeDemandsList(Condition condition);
+		// 华清修改：前端需求详情
+				public demands demandDetailsList(demands demands);
 }

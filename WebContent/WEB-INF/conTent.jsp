@@ -74,6 +74,7 @@
 
 
 	<%@include file="/head.jsp"%>
+	<div>
 	<div class='content padding-spacing footer-spacing'>
 		<div class='fl'>
 			<div class='el-left-nav' id='utopia_widget_3'>
@@ -83,73 +84,25 @@
 				</div>
 				<div class='list'>
 
-
-					<!-- <dl class='' data-id='29' data-parentId='27'>
-
-						<dt class='noSub'>
-							<a href='/rules-27?cid=29'><span>规则公示</span></a>
-						</dt>
-
-						<dd></dd>
-					</dl>
-
-					<dl class='' data-id='30' data-parentId='27'>
-
-						<dt class='noSub'>
-							<a href='/rules-27?cid=30'><span>热门规则</span></a>
-						</dt>
-
-						<dd></dd>
-					</dl>
-
-					<dl class='' data-id='31' data-parentId='27'>
-
-						<dt class='noSub active'>
-							<a href='/rules-27?cid=31'><span>最新更新</span></a>
-						</dt>
-
-						<dd></dd>
-					</dl>
- -->
-
 				</div>
 
 			</div>
-			<script>
-				/*<![CDATA[*/
-				utopia.arrived({
-					uid : 'utopia_widget_3',
-					js : [],
-					entry : function() {
-						$(".el-left-nav dl dt").on(
-								"click",
-								function() {
-									var a = $(this).parent();
-									$(this).hasClass("noSub")
-											|| (a.hasClass("expand") ? a
-													.removeClass("expand") : a
-													.addClass("expand"))
-								}), $(".el-left-nav dl dd li").each(
-								function() {
-									$(this).hasClass("active")
-											&& $(this).parents("dl").addClass(
-													"expand")
-								})
-					}
-				});
-				//]]>
-			</script>
+			
 		</div>
+		
 		<div class='fr el-contents-container'>
+			
 			<div class='el-contentShow' id='utopia_widget_4'>
-				<div class='title'>
+				<div  style="height: 30px"   class='title'>
 					<span>【规则公示】《<c:out value="${rule.ruleTitle}"></c:out>》新增公示公告
 					</span>
 				</div>
+				<br>
 				<div class='subTitle'>
 					<em class='icon icon-clocks'></em><span class=''>发布时间：<c:out
 							value="${rule.ruleTime}"></c:out></span>
 				</div>
+				
 				<div class='contents'>
 					<p>尊敬的帝六人用户朋友：</p>
 					<p>
@@ -206,7 +159,10 @@
 			</div>
 
 
+</div>
+</div>
+<div class='cls'></div>
 
-			<%@include file="/end.jsp"%>
+			 <%@include file="/end.jsp"%> 
 </body>
 </html>

@@ -27,6 +27,7 @@ import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Violations2;
 import oss.bean.Workinformation;
+import oss.bean.demands;
 import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
@@ -69,6 +70,16 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("conTent");
 		return mav;
 	}
+	
+	// 华清修改：前端需求详情
+
+		@RequestMapping("/demandDetailsList.action")
+		public ModelAndView demandDetailsList(HttpServletRequest req, demands demands) {
+			demands dem = portalBizImpl.demandDetailsList(demands);
+			req.setAttribute("dem", dem);
+			ModelAndView mav = new ModelAndView("demandDetails");
+			return mav;
+		}
 
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStoryList.action")
@@ -87,6 +98,25 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/userStory");
 		return mav;
 	}
+	
+	
+	// 吴华清修改：获取前端需求大厅列表 
+		@RequestMapping("/beforeDemandsList.action")
+		public ModelAndView beforeDemandsList(HttpServletRequest req,
+				@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+			System.out.println("portalManageBizImpl=" + portalManageBizImpl);
+			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+			PageHelper.startPage(pageNum, pageSize);
+			List<demands> demandsList = portalBizImpl.beforeDemandsList(condition);
+			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+			PageInfo pageInfo = new PageInfo<>(demandsList, pageSize);
+			System.out.println(pageInfo.getTotal());
+			req.setAttribute("pageInfo", pageInfo);
+			req.setAttribute("condition", condition);
+			ModelAndView mav = new ModelAndView("demands");
+			return mav;
+		}
 
 	// 前端曝光台请求 by hlq 2018-06-16 13:36
 	@RequestMapping("/foreViolationsList.action")

@@ -13,6 +13,7 @@ import oss.bean.Credit;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
+import oss.bean.demands;
 import oss.mapper.PortalMapper;
 import oss.bean.Violations2;
 import oss.mapper.PortalManageMapper;
@@ -72,4 +73,20 @@ public class PortalBizImpl  implements PortalBiz{
 	public List<String> listSuggestUserByKey(Users users) {
 		return portalManageMapper.listSuggestUserByKey(users);
 	}
+
+
+
+	@Override
+	public List<demands> beforeDemandsList(Condition condition) {
+		// TODO Auto-generated method stub
+		return portalMapper.beforeDemandsList(condition);
+	}
+
+	@Override
+	public demands demandDetailsList(demands demands) {
+		// TODO Auto-generated method stub
+		return portalMapper.demandDetailsList(demands);
+	}
+
+	
 }
