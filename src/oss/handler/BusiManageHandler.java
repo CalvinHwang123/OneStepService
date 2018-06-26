@@ -44,12 +44,12 @@ public class BusiManageHandler {
 	private BusiManageBiz busiManageBizImpl;
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
+
 	// 华清修改：查询雇主信息
 	@RequestMapping("/UserList.action")
-	public ModelAndView UserList(HttpServletRequest req, 
-			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
-		@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
-		Condition condition) {
+	public ModelAndView UserList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		System.out.println("BusiManageBiz=" + busiManageBizImpl);
 		System.out.println("走到了走到了");
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
@@ -63,52 +63,46 @@ public class BusiManageHandler {
 		ModelAndView mav = new ModelAndView("Employer");
 		return mav;
 	}
+
 	// 华清修改：查询服务商信息
-		@RequestMapping("/providerList.action")
-		public ModelAndView providerlist(HttpServletRequest req, 
-				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
-			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
-			Condition condition) {
-			System.out.println("BusiManageBiz=" + busiManageBizImpl);
-		
-			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
-			PageHelper.startPage(pageNum, pageSize);
-			List<Users> providerList = busiManageBizImpl.providerList(condition);
-			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-			PageInfo pageInfo = new PageInfo<>(providerList, pageSize);
-			System.out.println(pageInfo.getTotal());
-			req.setAttribute("providerList", pageInfo);
-			ModelAndView mav = new ModelAndView("provider");
-			return mav;
-		}
-		
-		// 华清修改：查询需求管理信息
-				@RequestMapping("/demandList.action")
-				public ModelAndView demandList(HttpServletRequest req, 
-						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize, 
-					@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, 
-					Condition condition) {
-					System.out.println("BusiManageBiz=" + busiManageBizImpl);
-				
-					// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
-					PageHelper.startPage(pageNum, pageSize);
-					List<Demands> demandList = busiManageBizImpl.demandList(condition);
-					// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-					PageInfo pageInfo = new PageInfo<>(demandList, pageSize);
-					System.out.println(pageInfo.getTotal());
-					req.setAttribute("demandList", pageInfo);
-					ModelAndView mav = new ModelAndView("demandManagement");
-					return mav;
+	@RequestMapping("/providerList.action")
+	public ModelAndView providerlist(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		System.out.println("BusiManageBiz=" + busiManageBizImpl);
 
-				}
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Users> providerList = busiManageBizImpl.providerList(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo pageInfo = new PageInfo<>(providerList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("providerList", pageInfo);
+		ModelAndView mav = new ModelAndView("provider");
+		return mav;
+	}
 
+	// 华清修改：查询需求管理信息
+	@RequestMapping("/demandList.action")
+	public ModelAndView demandList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		System.out.println("BusiManageBiz=" + busiManageBizImpl);
 
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Demands> demandList = busiManageBizImpl.demandList(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo pageInfo = new PageInfo<>(demandList, pageSize);
+		System.out.println(pageInfo.getTotal());
+		req.setAttribute("demandList", pageInfo);
+		ModelAndView mav = new ModelAndView("demandManagement");
+		return mav;
 
-
+	}
 
 	// 重置密码
 	// 修改密码
-
 
 	// 华清修改：雇主服务商管理重置密码
 	@RequestMapping("/updatePow.action")
@@ -118,7 +112,6 @@ public class BusiManageHandler {
 		busiManageBizImpl.updatePow(users.getUserID());
 		return "success";
 	}
-
 
 	// 华清修改：雇主服务商管理加入黑名单
 
@@ -131,14 +124,14 @@ public class BusiManageHandler {
 
 	// 华清修改：雇主服务商管理取消黑名单
 
-		@RequestMapping("/cancelBlacklist.action")
-		public @ResponseBody String cancelBlacklist(HttpServletRequest req, @RequestBody Users users) {
-			System.out.println("取消黑名单");
-			busiManageBizImpl.cancelBlacklist(users.getUserID());
-			return "success";
-		}
+	@RequestMapping("/cancelBlacklist.action")
+	public @ResponseBody String cancelBlacklist(HttpServletRequest req, @RequestBody Users users) {
+		System.out.println("取消黑名单");
+		busiManageBizImpl.cancelBlacklist(users.getUserID());
+		return "success";
+	}
 
-		// 华清修改：雇主服务商管理禁用
+	// 华清修改：雇主服务商管理禁用
 
 	// 禁用
 	@RequestMapping("/Disable.action")
@@ -148,9 +141,7 @@ public class BusiManageHandler {
 		return "success";
 	}
 
-
 	// 华清修改：雇主服务商管理启用
-
 
 	@RequestMapping("/enable.action")
 	public @ResponseBody String enable(HttpServletRequest req, @RequestBody Users users) {
@@ -158,8 +149,6 @@ public class BusiManageHandler {
 		busiManageBizImpl.enable(users.getUserID());
 		return "success";
 	}
-
-	
 
 	// 华清修改：雇主服务商管理需求审核通过
 
@@ -179,7 +168,6 @@ public class BusiManageHandler {
 		return "success";
 	}
 
-
 	// 前台登入
 	@RequestMapping("/foreLogin.action")
 	public @ResponseBody String ForeLogin(HttpServletRequest request, @RequestBody Users users) {
@@ -187,16 +175,16 @@ public class BusiManageHandler {
 		String flag = "error";
 		Users forelogin = busiManageBizImpl.ForeLogin(users);
 
-			if (forelogin!=null) {
-					if(forelogin.getUserStatusID()==2) {
-						flag="fail";		
-					}else {						
+		if (forelogin != null) {
+			if (forelogin.getUserStatusID() == 2) {
+				flag = "fail";
+			} else {
 				flag = "success";
 				request.getSession().setAttribute("forelogin", forelogin);
-					}
-			} else {
-				flag = "error";		
 			}
+		} else {
+			flag = "error";
+		}
 		return flag;
 	}
 
@@ -226,41 +214,40 @@ public class BusiManageHandler {
 		}
 		return flag;
 	}
+
 	// 退出
 	@RequestMapping("/usersExit.action")
 	public ModelAndView usersExit(HttpServletRequest request, Users user) {
-		 HttpSession session=request.getSession(false);
-	            
-         //从session移除
-         session.removeAttribute("forelogin");
+		HttpSession session = request.getSession(false);
+
+		// 从session移除
+		session.removeAttribute("forelogin");
 		ModelAndView mav = new ModelAndView("../ForeLogin");
-		return mav;		
+		return mav;
 	}
 
-
-
-//华清修改：需求管理扣除信用分
+	// 华清修改：需求管理扣除信用分
 	@RequestMapping(value = "/deducTion.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String violationsInsert(@RequestBody Credit credit,Users users,Violations violations) {
+	public @ResponseBody String violationsInsert(@RequestBody Credit credit, Users users, Violations violations) {
 
 		violations.setViolationsTime(DateUtil.getCurrentDate());
 		violations.setStickTime(DateUtil.getCurrentDate());
 		violations.setViolationsWhy(credit.getCreditWhy());
 		violations.setUserID(credit.getUserID());
-		violations.setViolationsResult("扣除信用分:"+credit.getCreditPoints());
+		violations.setViolationsResult("扣除信用分:" + credit.getCreditPoints());
 		System.out.println("走到了");
-	System.out.println(credit.getUserID());
-	System.out.println(credit.getCreditPoints());
-		
-//		System.out.println(credit.getUserID());
-//		System.out.println(credit.getCreditPoints());
+		System.out.println(credit.getUserID());
+		System.out.println(credit.getCreditPoints());
+
+		// System.out.println(credit.getUserID());
+		// System.out.println(credit.getCreditPoints());
 		users.setUserID(credit.getUserID());
 		busiManageBizImpl.userCreditScore(credit);
-	    busiManageBizImpl.creditCreditScore(credit);
+		busiManageBizImpl.creditCreditScore(credit);
 		busiManageBizImpl.violaTionCreditScore(violations);
-		    return "扣除成功";	
+		return "扣除成功";
 	}
-	
+
 	// 作品管理列表 王伟杰 6-22
 	@RequestMapping("/listWorks.action")
 	public ModelAndView listWorks(HttpServletRequest req,
@@ -278,26 +265,26 @@ public class BusiManageHandler {
 		ModelAndView mav = new ModelAndView("WorksList");
 		return mav;
 	}
-	//修改状态
+
+	// 修改状态
 	@RequestMapping("/updateWorksById.action")
 	public @ResponseBody String updateWorksById(HttpServletRequest req, @RequestBody Works works) {
 		int up = busiManageBizImpl.updateWorksById(works);
 		return "success";
 	}
 
-	
-	//by hsp 雇主发布需求 	6-26 10:20
+	// by hsp 雇主发布需求 6-26 10:20
 	@RequestMapping("/releaseDemand.action")
 	public ModelAndView releaseDemand(HttpServletRequest req, Demands demands) {
-		
-//		busiManageBizImpl.releaseDemand(demands);
-		System.out.println("需求标题："+demands.getDemandTitle());
-		System.out.println("需求内容："+demands.getDemandContent());
-		System.out.println("需求预算："+demands.getDemandPrice());
-		System.out.println("截止时间："+demands.getAsoftTime());
-		
+
+		// busiManageBizImpl.releaseDemand(demands);
+		System.out.println("需求标题：" + demands.getDemandTitle());
+		System.out.println("需求内容：" + demands.getDemandContent());
+		System.out.println("需求预算：" + demands.getDemandPrice());
+		System.out.println("截止时间：" + demands.getAsoftTime());
+		System.out.println("服务类型ID：" + demands.getClassificationID());
+
 		ModelAndView mav = new ModelAndView("foreground/successcase");
 		return mav;
 	}
 }
-

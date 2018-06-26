@@ -915,7 +915,7 @@
 		<div class="container">
 			<h3 class="w3ls-title w3ls-title1">登录到您的帐户</h3>
 			<div class="login-body">
-				<form action="foregroundindex.jsp" method="post" id="Login">
+				<form action="PortalManage/foreIndex.action" method="post" id="Login">
 					<input type="text" class="user" name="userAccount"
 						placeholder="userAccount" required=""> <span id="span2"></span>
 					<input type="password" name="userPwd" class="pwd"

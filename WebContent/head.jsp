@@ -153,9 +153,7 @@
 <script src="portal/js/bootstrap.js"></script>
 </head>
 <body>
-	<script>
-		$('#myModal88').modal('show');
-	</script>
+	<input type="hidden" id="loginUser"  value="${sessionScope.forelogin}"/>
 	<!-- header -->
 	<div class="header">
 		<div class="w3ls-header">
@@ -579,7 +577,7 @@
 	<script src="portal/js/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script src="portal/js/bootstrapValidator.js"></script>
 	<!-- 发布需求modal	 -->
-	<div class="modal fade" id="NoPermissionModal">
+	<div class="modal fade" id="NoPermissionModal" tabindex="-1">
 		<div class="modal-dialog" style="display: inline-block; width: auto;">
 			<div class="modal-content">
 				<div class="modal-header"
@@ -606,21 +604,16 @@
 					<div class="modal-body" style="width: 900px; height: 420px;">
 						<div style="width: 100%; height: 12%; text-align: center;">
 							<div class="form-group">
-								<label for="name">请选择行业：</label> <select class="form-control"
+								<label for="name">请选择行业：</label> 
+								 <select name="first_classification" id="first_classification" class="form-control"
 									style="width: 200px;">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select> <label for="name">请选择服务类型：</label> <select class="form-control"
+                      				  <option value="">请选择一级分类</option>
+                   				 </select>
+								<label for="name">请选择服务类型：</label> 
+                  			     <select name="classificationID" id="second_classification" class="form-control"
 									style="width: 200px;">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
+                                      <option value="">请选择二级分类</option>
+                   			     </select>
 							</div>
 						</div>
 						<div style="width: 100%; height: 88%; background-color: #f7f7f7;">
@@ -666,6 +659,34 @@
 			</div>
 		</div>
 	</div>
+<!-- 	行业和服务分类脚本 -->
+	<script type="text/javascript">
+        $(function(){
+            //页面加载完毕后开始执行的事件
+            var class_json = '${classJson}';
+            var class_obj=eval('('+class_json+')');
+            for (var key in class_obj)
+            {
+                $("#first_classification").append("<option value="+key+">"+key+"</option>");
+            }
+            $("#first_classification").change(function(){
+                var now_province=$(this).val();
+                $("#second_classification").html('<option value="">请选择二级分类</option>');
+                for(var k in class_obj[now_province])
+                {
+                    var now_city=class_obj[now_province][k];
+                    
+                    for (var m in now_city) {
+                    	/* alert(now_city[m]); */
+                    	$("#second_classification").append('<option value='+m+'>'+now_city[m]+'</option>');
+                    }
+                }
+            });
+        });
+    </script>
+  <!-- 	//行业和服务分类脚本 -->  
+    
+    <!-- 	发布需求模态框和日期选择控件脚本 -->
 	<script>
 		$(function() {
 			$("#btnclick").click(function() {
@@ -703,7 +724,6 @@
 	                        },
 	                    }
 	                },
-	                
 	                demandContent:{
 	                	 validators:{
 	                		 notEmpty:{
@@ -711,8 +731,6 @@
 	                		 },
 	                	 }
 	                },
-	                
-	                
 	                asoftTime:{
 	                	 validators:{
 	                		 notEmpty:{
@@ -720,8 +738,6 @@
 	                		 },
 	                	 }
 	                },
-	                
-	                
 	                demandPrice:{
 	                	 validators:{
 	                		 notEmpty:{
@@ -738,13 +754,27 @@
 	                            message:'需求预算在1-99999999之间'
 	                        },
 	                	 }
-	                }
+	                },
+	                classificationID:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请选择服务类型' 
+	                		 },
+	                	 }
+	                },
 	
 	            }
 		    });  
 		});
 		
 		function releaseDemand(){
+			alert($("#loginUser").val());
+			if ($("#loginUser").val() == "") {
+				alert("未登录");				
+			}else{
+				alert("已登录");
+			}
+			return;
 		}
 		
 		//用户选择截标日期之后，显示距离截标的剩余时间
@@ -763,8 +793,6 @@
 				$("#stopBidDaysLabel").text("距离截标剩余时间："+remainingTime);
 			}
 		}		
-		
-		
 		$('#datetimeStart').datetimepicker({
 			format: 'yyyy-mm-dd hh:00:00',  //显示格式可为yyyymm/yyyy-mm-dd/yyyy.mm.dd  
 		    weekStart: 1,//0-周日,6-周六 。默认为0  
@@ -786,6 +814,7 @@
             .validateField('datetimeStart');  
     });  ;
 	</script>
+	 <!-- 	发布需求模态框和日期选择控件脚本 -->
 	<!-- 发布需求modal/	 -->
 	<!-- Resource jQuery -->
 	<!-- //menu js aim -->

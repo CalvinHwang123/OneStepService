@@ -314,9 +314,9 @@ public class PortalManageHandler {
 		return "success";
 	}
 
-	// 前端资讯列表
-	@RequestMapping("/listLinks.action")
-	public ModelAndView listLinks(HttpServletRequest req) {
+	// by hsp 6-26 11:31请求前端主页面
+	@RequestMapping("/foreIndex.action")
+	public ModelAndView foreIndex(HttpServletRequest req) {
 		List<Links> linksList = portalManageBizImpl.LinksList();
 		Map<String, List<Map<Long, String>>> firstClassMap = facilitatorBizImpl.listClassMap();
 		String classJson = new Gson().toJson(firstClassMap);
