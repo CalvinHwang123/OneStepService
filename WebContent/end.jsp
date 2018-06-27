@@ -28,12 +28,12 @@
 				<div class="col-md-8 address-right">
 					<h3>友情鏈接</h3>
 					<c:forEach var="i" items="${linksList}" varStatus="status">
-						<div class="col-md-4 footer-grids">
+						<div class="col-md-3 footer-grids">
 							<ul>
 								<li><a href="https://${i.getLinksurl()}">${i.getLinksname()}</a></li>
 							</ul>
 						</div>
-						<c:if test="status %3 ==0">
+						<c:if test="status %4 ==0">
 							<div class="clearfix"></div>
 						</c:if>
 					</c:forEach>

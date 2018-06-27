@@ -8,6 +8,7 @@ import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
 import oss.bean.Demands;
+import oss.bean.Trading;
 
 /*
  * 业务管理Biz业务接口
@@ -76,4 +77,7 @@ public interface BusiManageBiz {
 
 	// by hsp 雇主发布需求 6-26 10:20
 	public int releaseDemand(Demands demands);
+	
+	// 作品管理列表 wwj
+			public List<Trading> tradingList(Condition condition);
 }

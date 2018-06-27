@@ -23,6 +23,7 @@ import oss.bean.Credit;
 import oss.bean.Dynamics;
 import oss.bean.Links;
 import oss.bean.Logs;
+import oss.bean.Trading;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
@@ -293,11 +294,18 @@ public class BusiManageHandler {
 		ModelAndView mav = new ModelAndView("PersonInfo");
 		return mav;		
 	}
-	// 个人中心修改
-		@RequestMapping("/traingList.action")
-		public ModelAndView TraingList(HttpServletRequest request, Users users) {
-		
-			ModelAndView mav = new ModelAndView("TraingList");
+	// 交易明细
+		@RequestMapping("/tradingList.action")
+		public ModelAndView TradingList(HttpServletRequest request,
+				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+			PageHelper.startPage(pageNum, pageSize);
+			List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
+			PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+			System.out.println(pageInfo.getTotal());
+			request.setAttribute("pageInfo", pageInfo);	
+			request.setAttribute("condition", condition);
+			ModelAndView mav = new ModelAndView("TradingList");
 			return mav;		
 		}
 

@@ -56,6 +56,7 @@
 <!-- bootstrapValidator -->
 <!-- js -->
 <script src="portal/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="portal/js/md5.js"></script>
 <!-- //js -->
 <!-- web-fonts -->
 <link

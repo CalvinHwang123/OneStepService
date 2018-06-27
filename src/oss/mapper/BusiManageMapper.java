@@ -5,6 +5,7 @@ import oss.annotation.MyRepository;
 import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Links;
+import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
@@ -78,5 +79,10 @@ public interface BusiManageMapper {
 	
 	//个人信息查詢  wwj
 		public abstract Users SelectUsersByAcc(Users users);
+		
+		//交易明细
+	// 作品管理列表 wwj
+		public List<Trading> tradingList(Condition condition);
+
 
 }
