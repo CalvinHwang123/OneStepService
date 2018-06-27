@@ -161,9 +161,6 @@
 							<ul class="dropdown-menu">
 								<li><a href="ForeLogin.jsp">登录 </a></li>
 								<li><a href="ForeSign.jsp">注册</a></li>
-								<li><a href="Person.jsp">我的命令</a></li>
-								<li><a href="login.html">我的钱包</a></li>
-								<li><a href="BusiManage/usersExit.action">退出</a></li>
 							</ul>
 					</c:if>
 					<c:if test="${forelogin.userName != null}">
@@ -174,8 +171,7 @@
 
 							<ul class="dropdown-menu">
 								<li><a href="login.html">${forelogin.userName}</a></li>
-								<li><a href="Person.jsp">我的命令</a></li>
-								<li><a href="login.html">我的钱包</a></li>
+							
 								<li><a href="BusiManage/usersExit.action">退出</a></li>
 							</ul>
 					</c:if>
@@ -186,7 +182,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="offers.html">我的订单</a></li>
+								<li><a href="Person.jsp">雇主中心</a></li>
 								<li><a href="offers.html">我的足迹</a></li>
 								<li><a href="offers.html">我的收藏</a></li>
 								<li><a href="offers.html">真经</a></li>
@@ -211,7 +207,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="offers.html">我的订单</a></li>
+								<li><a href="Person.jsp">雇主中心</a></li>
 								<li><a href="offers.html">我的足迹</a></li>
 								<li><a href="offers.html">我的收藏</a></li>
 								<li><a href="offers.html">真经</a></li>

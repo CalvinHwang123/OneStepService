@@ -18,7 +18,14 @@
 			</div>
 			<div class='order-bg'>
 				<div class='options'>
-					<section id="getintouch" class="flipInX animated">
+					
+					</div>
+					<div class="container">
+						<div class="form-front"
+							style="position: relative; top: 0px; left: 0px; z-index: 1;">
+							<form class="contact" action="BusiManage/usersInfo.action"
+								method="post" id="form">
+				<section id="getintouch" class="flipInX animated">
 					<div class="container" style="border-bottom: 0;">
 						<h1>
 							<span>我的账号</span>
@@ -27,13 +34,7 @@
 							<!-- t_6266cpsw78， -->
 							填写真实的资料更方便大家了解你，以下信息将显示在<a href="#">个人资料页</a>。 <br>(请不要在资料里面留电话，QQ，网址，邮箱等联系方式信息，会导致您的资料无法通过审核)
 						</p>
-					</div>
-					<div class="container">
-						<div class="form-front"
-							style="position: relative; top: 0px; left: 0px; z-index: 1;">
-							<form class="contact" action="BusiManage/usersInfo.action"
-								method="post" id="form">
-
+                      </div>
 								<div class="row clearfix">
 									<div class="lbl">
 										<label for="name"> 用户名:<span>${forelogin.userAccount}</span></label>
@@ -120,6 +121,8 @@
 											value="Send Message" type="submit">
 									</div>
 								</div>
+								</section>
+								
 							</form>
 						</div>
 						<div class="form-back"

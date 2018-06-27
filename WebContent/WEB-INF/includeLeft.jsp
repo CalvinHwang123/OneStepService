@@ -110,125 +110,86 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 
 		<div class='sub'>
 		<div class="menu">
-			<dl>
-				<dt>
-					<i class=" menu-icon1 menu-icon "></i>交易管理
-				</dt>
+				<dl>
+							<dt>
+								<i class=' menu-icon1 menu-icon '></i>交易管理
+							</dt>
 
-				<dd>
-					<a class="J_menuItem " href="/order" data-linkid="10132975"
-						target="_self">我的订单</a>
+							<dd>
+								<a class='J_menuItem ' href='/order' data-linkid='10132975'
+									target='_self'>我的订单</a>
 
-					<div>
+							</dd>
 
-						<a href="/getAboutOrder?type=1" data-linkid="10178981" class="">我的知识产权</a>
+							<dd>
+								<a class='J_menuItem ' href='/comment/tobe'
+									data-linkid='10132976' target='_self'>我的评价</a>
 
-						<a href="/getAboutOrder?type=2" data-linkid="10178982" class="">我的财税订单</a>
+							</dd>
 
-						<a href="/getAboutOrder?type=3" data-linkid="10178983" class="">我的科技服务</a>
+							<dd>
+								<a class='J_menuItem ' href='/bill' data-linkid='10132977'
+									target='_self'>我的发票</a>
 
-						<a href="/getAboutOrder?type=4" data-linkid="10178984" class="">我的八戒云</a>
+							</dd>
 
-						<a href="/proprietaryorder" data-linkid="10185242" class="">我的自营订单</a>
+						</dl>
 
-						<a href="/pakageorder" data-linkid="10185243" class="">我的套餐订单</a>
+						<dl>
+							<dt>
+								<i class=' menu-icon2 menu-icon '></i>我的服务商库
+							</dt>
 
+							<dd>
+								<a class='J_menuItem ' href='/collection-provider'
+									data-linkid='10132978'
+									data-extra-path='/collection-service,/collection-task'
+									target='_self'>我收藏的</a>
+
+							</dd>
+
+							<dd>
+								<a class='J_menuItem ' href='/worked' data-linkid='10132979'
+									target='_self'>我合作过的</a>
+
+							</dd>
+
+						</dl>
+
+						<dl>
+							<dt>
+								<i class=' menu-icon3 menu-icon '></i>账户管理
+							</dt>
+
+							<dd>
+								<a class='J_menuItem ' href='BusiManage/selectUsersByAcc.action'
+									 >我的信息</a>
+
+							</dd>
+
+							<dd>
+								<a class='J_menuItem ' href='BusiManage/tradingList.action' >我的交易</a>
+
+							</dd>
+
+							<dd>
+								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
+									data-linkid='10157962' target='_blank'>我的信用</a>
+
+							</dd>
+								<dd>
+								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
+									data-linkid='10157962' target='_blank'>我的余额</a>
+
+							</dd>
+								<dd>
+								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
+									data-linkid='10157962' target='_blank'>修改密码</a>
+
+							</dd>
+
+						</dl>
 					</div>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem " href="/comment/tobe" data-linkid="10132976"
-						target="_self">我的评价</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem " href="/bill" data-linkid="10132977"
-						target="_self">我的发票</a>
-
-				</dd>
-
-			</dl>
-
-			<dl>
-				<dt>
-					<i class=" menu-icon2 menu-icon "></i>我的服务商库
-				</dt>
-
-				<dd>
-					<a class="J_menuItem " href="/collection-provider"
-						data-linkid="10132978"
-						data-extra-path="/collection-service,/collection-task"
-						target="_self">我收藏的</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem " href="/worked" data-linkid="10132979"
-						target="_self">我合作过的</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem " href="//www.zbj.com/footprint/index"
-						data-linkid="10132980" target="_blank">我的足迹</a>
-
-				</dd>
-
-			</dl>
-
-			<dl>
-				<dt>
-					<i class=" menu-icon3 menu-icon "></i>账户管理
-				</dt>
-
-				<dd>
-					<a class="J_menuItem " href="BusiManage/selectUsersByAcc.action">我的账户</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem " href="BusiManage/tradingList.action">我的交易</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem " href="//club.zbj.com/zbRecord"
-						data-linkid="10157962" target="_blank">我的积分</a>
-
-				</dd>
-
-			</dl>
-
-			<dl>
-				<dt>
-					<i class=" menu-icon4 menu-icon "></i>客户服务
-				</dt>
-
-				<dd>
-					<a class="J_menuItem " href="/refundlist" data-linkid="10132984"
-						target="_self">退款管理</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem "
-						href="/tradereportlist?type=2&amp;direction=2&amp;page=1"
-						data-linkid="10132985" data-extra-path="/tradereportlist"
-						target="_self">维权管理</a>
-
-				</dd>
-
-				<dd>
-					<a class="J_menuItem "
-						href="/commenreportlist?type=1&amp;direction=2&amp;page=1"
-						data-linkid="10132986" data-extra-path="/commenreportlist"
-						target="_self">举报管理</a>
-				</dd>
-
-			</dl>
-		</div>
 	</div>
 	<script>/*<![CDATA[*/
 utopia.arrived({uid:'utopia_widget_4', js:[], entry:function(){var e=window.location.pathname;$(".J_menuItem").each(function(a,t){var n=$(t).attr("href"),o=$(t).data("extra-path");return"/"===e?!1:e.indexOf(n)>-1||(o&&o.indexOf(e))>-1?($(t).addClass("cur"),!1):void 0}),$.ajax({url:"//u."+ZBJInfo.baseURI+"/pay/getBalance",type:"get",dataType:"jsonp",jsonp:"jsonpcallback",success:function(e){var a=$(".J_accountLink");1===e.state?a.attr("href","https://wallet."+ZBJInfo.baseURI+"/enterprise-web/my/home.htm"):-1===e.state&&a.attr("href","//u."+ZBJInfo.baseURI+"/pay/index")},error:function(){$(".J_accountLink").attr("href","//u."+ZBJInfo.baseURI+"/pay/index")}}),$(".sub .J-s-ipt").on("keyup",function(e){var a=$(this).val();if(a&&13===e.keyCode){var t="//baike."+ZBJInfo.baseURI+"/list?fr=gzzxsousuolan&kw="+a;window.open(t)}});var a=setInterval(function(){if($("#moduleRightSidebar .hover-icon-menu5").length){clearInterval(a);var e=['<a class="item-ctx hover-icon-baike" href="//baike.zbj.com" target="_blank" data-linkid="10175383">','<div class="ctx-def">百科</div>','<div class="ctx-hover"></div>','<span class="ctx-hover-txt">免费科学估价</span>',"</a>"].join("");$("#moduleRightSidebar .hover-icon-menu5").before(e)}},200)}});

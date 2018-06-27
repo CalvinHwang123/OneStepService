@@ -130,22 +130,6 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 								<a class='J_menuItem ' href='/order' data-linkid='10132975'
 									target='_self'>我的订单</a>
 
-								<div>
-
-									<a href='/getAboutOrder?type=1' data-linkid='10178981' class=''>我的知识产权</a>
-
-									<a href='/getAboutOrder?type=2' data-linkid='10178982' class=''>我的财税订单</a>
-
-									<a href='/getAboutOrder?type=3' data-linkid='10178983' class=''>我的科技服务</a>
-
-									<a href='/getAboutOrder?type=4' data-linkid='10178984' class=''>我的八戒云</a>
-
-									<a href='/proprietaryorder' data-linkid='10185242' class=''>我的自营订单</a>
-
-									<a href='/pakageorder' data-linkid='10185243' class=''>我的套餐订单</a>
-
-								</div>
-
 							</dd>
 
 							<dd>
@@ -181,12 +165,6 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 
 							</dd>
 
-							<dd>
-								<a class='J_menuItem ' href='//www.zbj.com/footprint/index'
-									data-linkid='10132980' target='_blank'>我的足迹</a>
-
-							</dd>
-
 						</dl>
 
 						<dl>
@@ -196,7 +174,7 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 
 							<dd>
 								<a class='J_menuItem ' href='BusiManage/selectUsersByAcc.action'
-									 >我的账户</a>
+									 >我的信息</a>
 
 							</dd>
 
@@ -207,36 +185,18 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 
 							<dd>
 								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
-									data-linkid='10157962' target='_blank'>我的积分</a>
+									data-linkid='10157962' target='_blank'>我的信用</a>
 
 							</dd>
-
-						</dl>
-
-						<dl>
-							<dt>
-								<i class=' menu-icon4 menu-icon '></i>客户服务
-							</dt>
-
-							<dd>
-								<a class='J_menuItem ' href='/refundlist' data-linkid='10132984'
-									target='_self'>退款管理</a>
+								<dd>
+								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
+									data-linkid='10157962' target='_blank'>我的余额</a>
 
 							</dd>
+								<dd>
+								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
+									data-linkid='10157962' target='_blank'>修改密码</a>
 
-							<dd>
-								<a class='J_menuItem '
-									href='/tradereportlist?type=2&#38;direction=2&#38;page=1'
-									data-linkid='10132985' data-extra-path='/tradereportlist'
-									target='_self'>维权管理</a>
-
-							</dd>
-
-							<dd>
-								<a class='J_menuItem '
-									href='/commenreportlist?type=1&#38;direction=2&#38;page=1'
-									data-linkid='10132986' data-extra-path='/commenreportlist'
-									target='_self'>举报管理</a>
 							</dd>
 
 						</dl>
@@ -348,11 +308,6 @@ ZBJInfo.count = 0
 						<script
 							src='https://sstj.zbj.com/service/recommend/component/config'></script>
 
-						<input type='hidden' class='has-company' value='' /> <input
-							type='hidden' class='has-industry' value='' /> <input
-							type='hidden' name='categoryList'
-							value='logo设计,网站建设,小程序,包装设计,营销,APP开发,游戏' /> <input type='hidden'
-							name='orderLength' value='1' />
 						<div class='order-bg'>
 							<div class='options'>
 								<ul>
@@ -480,8 +435,6 @@ ZBJInfo.count = 0
 												<div class='content'>交易关闭</div>
 												<div class='content-time'>2018-06-09</div>
 											</div>
-
-
 										</div>
 									</div>
 

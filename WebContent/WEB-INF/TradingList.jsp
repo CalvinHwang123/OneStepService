@@ -8,7 +8,7 @@
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
-	<div class="col-md-10 column">
+
 		<div class='order-wrap'>
 			<form id="pageForm" action="BusiManage/tradingList.action">
 				<div class='top-nav-wrap order-top-nav J-state' data-state='0'
@@ -137,7 +137,6 @@
 	</div>
 	</div>
 	</div>
-	</div>
 
 	
 	<script type="text/javascript">
@@ -157,5 +156,6 @@ function changePageSize(pageSize) {
 	$("#pageForm").submit();
 };
 </script>
+<%@include file="/end.jsp"%>
 </body>
 </html>
