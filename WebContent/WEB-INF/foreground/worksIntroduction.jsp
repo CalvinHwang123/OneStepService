@@ -34,17 +34,6 @@
 			<div class="col-md-6 single-top-right">
 				<h3 class="item_name">${i.worksName}</h3>
 				<p>处理时间: 作品项目将在1-2个工作日内发货.</p>
-				<!-- <div class="single-rating">
-					<ul>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li class="rating">20 reviews</li>
-						<li><a href="#">Add your review</a></li>
-					</ul>
-				</div> -->
 				<div class="single-price">
 					<ul>
 						<li>￥${i.worksPrice}</li>
