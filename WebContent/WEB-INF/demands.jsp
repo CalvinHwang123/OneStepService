@@ -1921,12 +1921,12 @@
 							<td><span class="text">6天 后截止</span></td>
 						</tr> -->
 
-							<c:if test="${dem.demandstatusid ==3}">
+							<c:if test="${dem.demandstatusid ==2}">
 								<tr>
 									<td>
 
 										<p>                                          
-											<em class="list-task-reward">&yen;￥${dem.demandPrice}</em><a
+											<em class="list-task-reward">&yen;${dem.demandPrice}</em><a
 												class="list-task-title" title="${dem.demandTitle }"
 												href="Portal/demandDetailsList.action?demandID=${dem.demandID}"
 												target="_blank" data-zbjlog="{obj:'main'}">${dem.demandTitle }</a>
