@@ -78,6 +78,9 @@ public interface BusiManageBiz {
 	// by hsp 雇主发布需求 6-26 10:20
 	public int releaseDemand(Demands demands);
 	
-	// 作品管理列表 wwj
-			public List<Trading> tradingList(Condition condition);
+	// 交易明细
+	public List<Trading> tradingList(Condition condition);
+	
+	// 信用明细
+		public List<Credit> creditList(Users users);
 }

@@ -70,19 +70,19 @@ public interface BusiManageMapper {
 
 	// 作品管理修改状态 wwj
 	public abstract int updateWorksById(Works works);
-	
-	//by hsp 发布需求 	6-26 10:20
+
+	// by hsp 发布需求 6-26 10:20
 	public int insertDemand(Demands demands);
 
-	//个人信息修改  wwj
+	// 个人信息修改 wwj
 	public abstract int updateUsersByAcc(Users users);
-	
-	//个人信息查詢  wwj
-		public abstract Users SelectUsersByAcc(Users users);
-		
-		//交易明细
-	// 作品管理列表 wwj
-		public List<Trading> tradingList(Condition condition);
 
+	// 个人信息查詢 wwj
+	public abstract Users SelectUsersByAcc(Users users);
 
+	// 交易明细
+	public List<Trading> tradingList(Condition condition);
+
+	// 信用明细
+	public List<Credit> creditList(Users users);
 }

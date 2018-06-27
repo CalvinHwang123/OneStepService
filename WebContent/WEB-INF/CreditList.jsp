@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>雇主中心-交易明细</title>
+<title>雇主中心-信用明细</title>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
@@ -22,36 +22,22 @@
 						id="currentPageInput" name="pageNum"
 						value="${pageInfo.getPageNum()}">
 
-					<div class="form-group" style="width: 20%;">
-						<label class="sr-only" for="name">开始时间</label> <input type="date"
-							class="form-control" id="name" placeholder="请输入" name="startDate" value="${condition.startDate}">
-					</div>
-
-					<div class="form-group" style="width: 20%;">
-						<label class="sr-only" for="name">-截止时间</label> <input type="date"
-							class="form-control" id="name" placeholder="请输入" name="endDate" value="${condition.endDate}">
-					</div>
-					<div class="glyphicon glyphicon-search" >
-						<input type="submit"  >
-					</div>
 				</div>
 				<div class='order-top-banner' id='utopia_widget_7'>
-					<div class='top-banner-tips'>1</div>
-					<div class='top-banner-cont'>2</div>
+					<div class='top-banner-tips'></div>
+					<div class='top-banner-cont'></div>
 				</div>
 				<div class='order-bg'>
 					<div class='options'>
-						<div class="table-responsive">
-
+						<div class="table-responsive">						
 							<table class="table table-hover">
-								<caption>我的交易明细</caption>
+								<caption>我的信用</caption>
 								<thead>
 									<tr>
 										<th>序列</th>
-										<th>交易金额</th>
-										<th>交易类型</th>
-										<th>需求</th>
-										<th>时间</th>
+										<th>信用类型</th>
+										<th>信用分</th>
+										<th>信用变动原因</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,10 +45,9 @@
 										varStatus="status">
 										<tr>
 											<td><c:out value="${status.index+1}"></c:out></td>
-											<td><c:out value="${i.amount}"></c:out></td>
-											<td><c:out value="${i.amountType}"></c:out></td>
-											<td><c:out value="${i.demandId}"></c:out></td>
-											<td><c:out value="${i.tradingTime}"></c:out></td>
+											<td><c:out value="${i.creditType}"></c:out></td>
+											<td><c:out value="${i.creditPoints}"></c:out></td>
+											<td><c:out value="${i.creditWhy}"></c:out></td>
 										</tr>
 									</c:forEach>
 								</tbody>

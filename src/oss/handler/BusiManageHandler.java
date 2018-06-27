@@ -193,6 +193,9 @@ public class BusiManageHandler {
 	@RequestMapping("/addUsers.action")
 	public @ResponseBody String AddUsers(HttpServletRequest req, @RequestBody Users users) {
 		String flag = "error";
+		users.setUserBalance(0l);
+		users.setUserCredit(100l);
+		users.setUserStatusID(1l);
 		int regist = busiManageBizImpl.AddUsers(users);
 		if (regist == 1) {
 			flag = "success";
@@ -298,7 +301,11 @@ public class BusiManageHandler {
 		@RequestMapping("/tradingList.action")
 		public ModelAndView TradingList(HttpServletRequest request,
 				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
-				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+			 HttpSession session=request.getSession();        
+				Users users2=(Users) session.getAttribute("forelogin");
+				String userAcc=users2.getUserAccount();			
+				condition.setTitle(userAcc);
 			PageHelper.startPage(pageNum, pageSize);
 			List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
 			PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
@@ -324,4 +331,23 @@ public class BusiManageHandler {
 		ModelAndView mav = new ModelAndView("foreground/successcase");
 		return mav;
 	}
+	
+	// 信用明细
+		@RequestMapping("/creditList.action")
+		public ModelAndView creditList(HttpServletRequest request,
+				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Users users) {
+			 HttpSession session=request.getSession();        
+			Users users2=(Users) session.getAttribute("forelogin");
+			String userAcc=users2.getUserAccount();
+			users.setUserAccount(userAcc);
+			PageHelper.startPage(pageNum, pageSize);
+			List<Credit> listCredit = busiManageBizImpl.creditList(users);
+			PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
+			System.out.println(pageInfo.getTotal());
+			request.setAttribute("pageInfo", pageInfo);	
+			ModelAndView mav = new ModelAndView("CreditList");
+			return mav;		
+		}
+	
 }

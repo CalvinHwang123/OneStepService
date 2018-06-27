@@ -6,17 +6,11 @@ public class Credit {
 	private Long creditType;//信用类型
 	private Long creditPoints;//信用分
 	private String creditWhy;//信用变动原因
+	private Users checkUsers;
 	public Credit() {
 		super();
 	}
-	public Credit(Long creditID, Long userID, Long creditType, Long creditPoints, String creditWhy) {
-		super();
-		this.creditID = creditID;
-		this.userID = userID;
-		this.creditType = creditType;
-		this.creditPoints = creditPoints;
-		this.creditWhy = creditWhy;
-	}
+	
 	public Long getCreditID() {
 		return creditID;
 	}
@@ -46,6 +40,14 @@ public class Credit {
 	}
 	public void setCreditWhy(String creditWhy) {
 		this.creditWhy = creditWhy;
+	}
+
+	public Users getCheckusers() {
+		return checkUsers;
+	}
+
+	public void setCheckusers(Users checkUsers) {
+		this.checkUsers = checkUsers;
 	}
 	
 	

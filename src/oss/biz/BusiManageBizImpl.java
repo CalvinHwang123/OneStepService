@@ -155,7 +155,13 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	// 交易明细
 	@Override
 	public List<Trading> tradingList(Condition condition) {
-		// TODO Auto-generated method stub
+		
 		return busiManageMapper.tradingList(condition);
+	}
+	// 信用明细
+	@Override
+	public List<Credit> creditList(Users users) {
+	
+		return busiManageMapper.creditList(users);
 	}
 }

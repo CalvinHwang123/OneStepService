@@ -89,8 +89,8 @@
 			select UsersSEQ.nextval from dual
 		</selectKey>
 		insert into
-		USERS(userID,userAccount,userPwd,userType)
-		values(#{userID},#{userAccount},#{userPwd},#{userType})
+		USERS(userID,userAccount,userPwd,userType,userBalance,userCredit,userStatusID)
+		values(#{userID},#{userAccount},#{userPwd},#{userType},#{userBalance},#{userCredit},#{userStatusID})
 	</insert>
 
 	<!-- 用户唯一性 -->
