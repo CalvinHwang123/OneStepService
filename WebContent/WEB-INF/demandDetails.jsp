@@ -45,11 +45,6 @@ ueAgentURL: "ue.zhubajie.la"
 </script>
 
 
-
-
-
-
-
 <script>/*<![CDATA[*/(function(j){var h=j.sdkUrl,a=j.name,d=this,g=d.document,f=null,e=null;d.AGENT20170621=a;d[a]=d[a]||function(i){return function(){(d[a]._agenti=d[a]._agenti||[]).push([i,arguments])}};var b=["track","trackSignup","userIdentify"];for(var c=0;c<b.length;c++){d[a][b[c]]=d[a].call(null,b[c])}if(!d[a].lt){f=g.createElement("script"),e=g.getElementsByTagName("script")[0];f.async=true;f.src=h;e.parentNode.insertBefore(f,e);d[a].lt=1*new Date();d[a].para=j}})({sdkUrl:location.protocol+"//"+  "//v2.web.ue.zhubajie.la"+"/api/v1/agent/info/" + "42D1FSGHDG9G22F4G6FRF1HRF6FDS42N/HF9NHWGRRG826WN4NDFDN2N4N926NHG4",sendLimit:10,showLog:true,name: "PcUnloginDemand",autoTrack:true,apiHost:location.protocol+"//"+  "//v2.web.ue.zhubajie.la",appToken: "HF9NHWGRRG826WN4NDFDN2N4N926NHG4" });//]]></script>
 
 <script>/*<![CDATA[*/
