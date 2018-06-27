@@ -8,9 +8,9 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>规则中心-规则中心</title>
-<link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
+<!-- <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
 	type='image/x-icon' />
-
+ -->
 
 
 
