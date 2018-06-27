@@ -12,6 +12,7 @@ import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
 import oss.bean.Demands;
+import oss.bean.Trading;
 import oss.mapper.BusiManageMapper;
 
 /*
@@ -132,7 +133,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		return busiManageMapper.updateWorksById(works);
 	}
 
-	//by hsp 雇主发布需求 	6-26 10:20
+	// by hsp 雇主发布需求 6-26 10:20
 	@Override
 	public int releaseDemand(Demands demands) {
 		return busiManageMapper.insertDemand(demands);
@@ -141,12 +142,20 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	// wwj 个人信息修改
 	@Override
 	public Users updateUsersByAcc(Users users) {
-		busiManageMapper.updateUsersByAcc(users);		
-		return busiManageMapper.SelectUsersByAcc(users) ;
+		busiManageMapper.updateUsersByAcc(users);
+		return busiManageMapper.SelectUsersByAcc(users);
 	}
+
 	// wwj 个人信息查詢
 	@Override
 	public Users SelectUsersByAcc(Users users) {
 		return busiManageMapper.SelectUsersByAcc(users);
+	}
+
+	// 交易明细
+	@Override
+	public List<Trading> tradingList(Condition condition) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.tradingList(condition);
 	}
 }

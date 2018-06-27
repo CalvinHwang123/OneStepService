@@ -202,7 +202,7 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dd>
 
 							<dd>
-								<a class='J_menuItem ' href='BusiManage/traingList.action' >我的交易</a>
+								<a class='J_menuItem ' href='BusiManage/tradingList.action' >我的交易</a>
 
 							</dd>
 
@@ -248,8 +248,6 @@ utopia.arrived({uid:'utopia_widget_4', js:[], entry:function(){var e=window.loca
 //]]></script>
 
 				<div class='main clearfix'>
-
-
 					<div class='order-notice-cent hide' id='utopia_widget_5'></div>
 					<script>/*<![CDATA[*/
 utopia.arrived({uid:'utopia_widget_5', js:[], entry:function(){var t=function(t,e){function i(t){return"&#"+t.charCodeAt()+";"}function n(t,e,i){try{return i?t[e].apply(t,i):t[e]}catch(n){return n}}Object.keys||(Object.keys=function(t){var e=[];for(var i in t)e.push(i);return e});var r=("list"in t?t:this).list,e=e||[];e.push("<dl>\n<dt></dt>\n<dd>\n<div>\n");for(var o=r,d=0,c=(o=o instanceof Array?o:"object"==typeof o?Object.keys(o):Array(o)).length-1;c>=d;d++){var a=o[d];if(e.push("\n"),n(a,"title")){e.push("\n<p><a");var s=encodeURI(n(a,"url"));null!=s&&e.push(" href='",String(s).replace(/[&<']/g,i),"'"),e.push(" target='_blank' data-linkid='10178007'>",String(n(a,"title")).replace(/[&<]/g,i),"</a></p>\n")}e.push("\n")}return e.push("\n</div>\n</dd>\n</dl>"),e.join("")},e={getNoticeAjax:function(){return $.ajax({url:"/ajax/getRecomd",method:"get",data:{data:{shardid:81,top:100,industryId:-1}}})},renderPage:function(){var t=this;this.getNoticeAjax().always(function(e){e.success&&e.data&&e.data.length>0?($(t.orderNoticeCent).html(t.tpl({list:e.data})).removeClass("hide"),e.data.length>1&&t.noticeScroll()):t.orderNoticeCent.remove()})},noticeScroll:function(){var t=this;this.timer=setInterval(function(){$(t.orderNoticeDiv).stop().animate({top:"-50px"},t.scrollTime,function(){$(t.orderNoticeDiv).append($(t.orderNoticeP).eq(0)).css("top","0px")})},this.animateTime)},bindEvent:function(){$(this.body).on("mouseover",this.orderNoticeP,function(){this.timer&&clearInterval(this.timer)}.bind(this)),$(this.body).on("mouseout",this.orderNoticeP,function(){this.noticeScroll()}.bind(this))},init:function(){var e={orderNoticeCent:".order-notice-cent",tpl:t,orderNoticeDiv:".order-notice-cent dd div",orderNoticeP:".order-notice-cent dd div p",timer:null,body:"body",animateTime:4e3,scrollTime:500};$.extend(this,e),this.renderPage(),this.bindEvent()}};e.init()}});
