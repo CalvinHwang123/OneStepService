@@ -4,7 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="portal/js/jquery-2.2.3.min.js"></script>
 
+<script src="portal/js/jquery-scrolltofixed-min.js"
+	type="text/javascript"></script>
+<script src="portal/js/login.js" type="text/javascript"></script>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>	

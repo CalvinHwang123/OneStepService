@@ -184,8 +184,7 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dd>
 
 							<dd>
-								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
-									data-linkid='10157962' target='_blank'>我的信用</a>
+								<a class='J_menuItem ' href='BusiManage/creditList.action'>我的信用</a>
 
 							</dd>
 								<dd>
