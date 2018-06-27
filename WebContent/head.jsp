@@ -18,8 +18,14 @@
 <script type="application/x-javascript">
 	
 	
+	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
 
 </script>
 <!-- Custom Theme files -->
@@ -239,9 +245,13 @@
 					<li class="dropdown head-dpdn"><a href="card.html"
 						class="dropdown-toggle"><i class="fa fa-credit-card-alt"
 							aria-hidden="true"></i> 我的银行卡</a></li>
-					<li class="dropdown head-dpdn"><a href="help.html"
-						class="dropdown-toggle"><i class="fa fa-question-circle"
-							aria-hidden="true"></i> 帮助</a></li>
+					<li class="dropdown head-dpdn"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"> <i
+							class="fa fa-question-circle" aria-hidden="true"></i>帮助 <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="Portal/ruleList.action">规则中心</a></li>
+						</ul></li>
 				</ul>
 			</div>
 			<div class="clearfix"></div>
@@ -257,7 +267,7 @@
 				</div>
 				<div class="header-search">
 					<form action="#" method="post">
-						<input type="search" name="Search" placeholder="搜索" required="">
+						<input type="search" name="Search" placeholder="搜索需求" required="">
 						<button type="submit" class="btn btn-default"
 							aria-label="Left Align">
 							<i class="fa fa-search" aria-hidden="true"> </i>
@@ -281,11 +291,11 @@
 			<div class="container">
 				<div class="menu1">
 					<div class="cd-dropdown-wrapper">
-						<a class="cd-dropdown-trigger" href="#0">按行业找作品</a>
+						<a class="cd-dropdown-trigger" href="#0">购买作品</a>
 						<nav class="cd-dropdown"> <a href="#0" class="cd-close">Close</a>
 						<ul class="cd-dropdown-content">
-							<li><a href="offers.html">Today's Offers</a></li>
-
+							<li><a href="Portal/workInfoList.action"
+								style="color: orange;">作品大厅</a></li>
 							<c:forEach items="${firstClassMap}" var="one" varStatus="s">
 								<li class="has-children"><a href="#"><c:out
 											value="${one.key}"></c:out></a>
@@ -309,10 +319,15 @@
 					</div>
 					<!-- .cd-dropdown-wrapper -->
 				</div>
+
+				<div class="menu1">
+					<a class="normalMenu" href="Portal/beforeDemandsList.action">需求大厅</a>
+				</div>
+
 				<div class="move-text">
 					<div class="marquee">
-						<a href="offers.html"> 今日红包优惠卡入口 <span> </span> <span>
-						</span></a>
+						<a href="offers.html"> 今日红包优惠卡入口 </a>| <a href="offers.html">
+							今日红包优惠卡入口 </a>|
 					</div>
 					<script type="text/javascript"
 						src="portal/js/jquery.marquee.min.js"></script>
@@ -440,6 +455,8 @@
 				</div>
 				<form action="BusiManage/releaseDemand.action" method="post"
 					class="form-inline" id="formRelease">
+					<input type="hidden" value="${sessionScope.forelogin.userID}"
+						name="userID" />
 					<div class="modal-body" style="width: 900px; height: 420px;">
 						<div style="width: 100%; height: 12%; text-align: center;">
 							<div class="form-group">
@@ -488,8 +505,8 @@
 						</div>
 					</div>
 					<div class="modal-footer" style="text-align: center;">
-						<button type="submit" class="btn btn-primary"
-							onclick="releaseDemand()" id="releaseSubmit">立 即 发 布</button>
+						<button type="button" class="btn btn-primary" id="releaseSubmit">立
+							即 发 布</button>
 						<button type="reset" class="btn btn-default">重 置</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">关
 							闭</button>
@@ -525,6 +542,29 @@
     </script>
 	<!-- 	//行业和服务分类脚本 -->
 
+	<!-- 	modal判断做敏感操作时，用户未登录的跳转登录界面modal -->
+	<div class="modal fade" id="redirectLoginModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">您还未登录！</h4>
+				</div>
+				<div class="modal-body">是否跳转到登录界面？</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						onclick="window.location.href = 'ForeLogin.jsp'">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 	<!-- 	发布需求模态框和日期选择控件脚本 -->
 	<script>
 		$(function() {
@@ -532,8 +572,6 @@
 				$('#NoPermissionModal').modal({
 					show : true,
 					backdrop : 'static'
-					
-					
 				});
 			});
 			
@@ -604,16 +642,17 @@
 	
 	            }
 		    });  
+			
+			$("#releaseSubmit").click(releaseDemand);
+			
 		});
 		
 		function releaseDemand(){
-			alert($("#loginUser").val());
 			if ($("#loginUser").val() == "") {
-				alert("未登录");				
+				$('#redirectLoginModal').modal("show");
 			}else{
-				alert("已登录");
+				document.getElementById("formRelease").submit();
 			}
-			return;
 		}
 		
 		//用户选择截标日期之后，显示距离截标的剩余时间

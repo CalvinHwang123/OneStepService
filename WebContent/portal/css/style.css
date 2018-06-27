@@ -307,12 +307,12 @@ ul.cd-dropdown-content li {
 /*-- //header-three --*/
 .menu1 {
 	float: left;
-	width: 21%;
+	width: auto;
 }
 
 .move-text {
 	float: right;
-	width: 70%;
+	width: 50%;
 	padding: 1em;
 }
 
@@ -597,8 +597,8 @@ h3.w3ls-title {
 /*-- //welcome --*/
 /*-- add-products --*/
 .w3ls-add-grids {
-  	background: url(../images/img1.jpg)no-repeat 0px 0px;
-    background-size: cover;
+	background: url(../images/img1.jpg) no-repeat 0px 0px;
+	background-size: cover;
 	width: 30%;
 	min-height: 250px;
 	float: left;
@@ -716,48 +716,72 @@ h4.clrchg {
 50%
 {
 left
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 20
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 20
 px
-;
 
-  
+
+;
 }
 100%
 {
 left
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 375
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 375
 px
-;
 
-  
+
+;
 }
 }
 @
@@ -768,48 +792,72 @@ keyframes criss-cross-left { 0% {
 50%
 {
 left
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 20
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 20
 px
-;
 
-  
+
+;
 }
 100%
 {
 left
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 375
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 375
 px
-;
 
-  
+
+;
 }
 }
 @
@@ -820,48 +868,72 @@ px
 50%
 {
 right
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 20
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 20
 px
-;
 
-  
+
+;
 }
 100%
 {
 right
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 375
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 375
 px
-;
 
-  
+
+;
 }
 }
 @
@@ -872,48 +944,72 @@ keyframes criss-cross-right { 0% {
 50%
 {
 right
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 20
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 20
 px
-;
 
-  
+
+;
 }
 100%
 {
 right
+
+
 :
+
  
+
 50%;
 width
+
+
 :
+
  
+
 375
 px
-;
 
-    
+
+;
 height
+
+
 :
+
  
+
 375
 px
-;
 
-  
+
+;
 }
 }
 .wthree-btn:before, .wthree-btn:after {
@@ -4640,39 +4736,52 @@ p.sbmincart-empty-text {
 }
 
 .info-img {
-    float: left;
-    width: 220px;
-    height: 160px;
-    margin: 0 30px 20px 0;
-    vertical-align: middle;
-    border: 0;
-    box-sizing: border-box;
+	float: left;
+	width: 220px;
+	height: 160px;
+	margin: 0 30px 20px 0;
+	vertical-align: middle;
+	border: 0;
+	box-sizing: border-box;
 }
 
 .content-wrap {
-    position: relative;
-    overflow: hidden;
-    height: 125px;
+	position: relative;
+	overflow: hidden;
+	height: 125px;
 }
 
 .info-title {
-    font-size: 20px;
-    margin: 15px 0 0;
-    padding: 0;
+	font-size: 20px;
+	margin: 15px 0 0;
+	padding: 0;
 }
 
 .text-overflow {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .body-wrap .info-title a {
-    color: #333;
+	color: #333;
 }
 
 .info-content {
-    margin: 10px 0;
-    line-height: 25px;
-    color: #666;
+	margin: 10px 0;
+	line-height: 25px;
+	color: #666;
+}
+
+.normalMenu {
+	display: block;
+	position: relative;
+	padding: 0 36px 0 20px;
+	color: #fff;
+	font-family: 'Offside', cursive;
+	font-size: 1.3em;
+	line-height: 50px;
+	outline: none;
+	text-decoration: none;
+	cursor: pointer;
 }

@@ -305,14 +305,14 @@ public class BusiManageHandler {
 	// by hsp 雇主发布需求 6-26 10:20
 	@RequestMapping("/releaseDemand.action")
 	public ModelAndView releaseDemand(HttpServletRequest req, Demands demands) {
-
+		demands.setReleaseTime(DateUtil.getCurrentDate());
 		// busiManageBizImpl.releaseDemand(demands);
 		System.out.println("需求标题：" + demands.getDemandTitle());
 		System.out.println("需求内容：" + demands.getDemandContent());
 		System.out.println("需求预算：" + demands.getDemandPrice());
 		System.out.println("截止时间：" + demands.getAsoftTime());
 		System.out.println("服务类型ID：" + demands.getClassificationID());
-
+		System.out.println("雇主ID："+demands.getUserID());
 		ModelAndView mav = new ModelAndView("foreground/successcase");
 		return mav;
 	}
