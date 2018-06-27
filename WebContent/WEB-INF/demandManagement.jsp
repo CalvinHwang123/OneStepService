@@ -112,7 +112,7 @@
 								
 								<c:if test="${demand.demandstatusid==3 }">
 									<span
-										class="  layui-btn layui-btn-normal layui-btn-mini">已拒绝</span>
+										class="  layui-btn layui-btn-normal layui-btn-mini">拒绝通过</span>
 								</c:if> 
 								
 						            </td>

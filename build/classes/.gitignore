@@ -1,6 +1,10 @@
 /CensorWords.txt
 /applicationContext.xml
 /com/
+<<<<<<< HEAD
 /log4j.properties
 /oss/
 /springmvc.xml
+=======
+/SensitiveWord.txt
+>>>>>>> refs/heads/sp

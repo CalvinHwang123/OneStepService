@@ -14,6 +14,7 @@ public class Demands {
 	private Long tenderID;// 投标者ID
 	//by hsp 6-26 9:07
 	private Long demandPrice;//新增需求预算
+	private Long tenderNumber;//可投标数
 	
 	public Demands() {
 		super();
@@ -106,8 +107,10 @@ public class Demands {
 	public void setDemandPrice(Long demandPrice) {
 		this.demandPrice = demandPrice;
 	}
-	
-	
-	
-	
+	public Long getTenderNumber() {
+		return tenderNumber;
+	}
+	public void setTenderNumber(Long tenderNumber) {
+		this.tenderNumber = tenderNumber;
+	}
 }
