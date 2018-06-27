@@ -112,7 +112,7 @@
 				</dt>
 
 				<dd>
-					<a class='J_menuItem J_accountLink' href='javascript:;'
+					<a class='J_menuItem J_accountLink' href='BusiManage/Individualcenter.action'
 						data-linkid='10132981' target='_blank'>我的账户</a>
 
 				</dd>

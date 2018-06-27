@@ -282,18 +282,30 @@ public class BusiManageHandler {
 		return mav;		
 	}
 	
-	// 个人中心查詢
-	@RequestMapping("/selectUsersByAcc.action")
-	public ModelAndView SelectUsersByAcc(HttpServletRequest request, Users users) {
+	// 服务商个人中心查詢
+	@RequestMapping("/Individualcenter.action")
+	public ModelAndView Individualcenter(HttpServletRequest request, Users users) {
 		 HttpSession session=request.getSession();        
 		Users users2=(Users) session.getAttribute("forelogin");
 		String userAcc=users2.getUserAccount();
 		users.setUserAccount(userAcc);
 		Users usersList=busiManageBizImpl.SelectUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("PersonInfo");
+		ModelAndView mav = new ModelAndView("/foreground/myOrder");
 		return mav;		
 	}
+	// 个人中心查詢
+		@RequestMapping("/selectUsersByAcc.action")
+		public ModelAndView SelectUsersByAcc(HttpServletRequest request, Users users) {
+			 HttpSession session=request.getSession();        
+			Users users2=(Users) session.getAttribute("forelogin");
+			String userAcc=users2.getUserAccount();
+			users.setUserAccount(userAcc);
+			Users usersList=busiManageBizImpl.SelectUsersByAcc(users);
+			request.setAttribute("usersList", usersList);
+			ModelAndView mav = new ModelAndView("PersonInfo");
+			return mav;		
+		}
 	// 交易明细
 		@RequestMapping("/tradingList.action")
 		public ModelAndView TradingList(HttpServletRequest request,
