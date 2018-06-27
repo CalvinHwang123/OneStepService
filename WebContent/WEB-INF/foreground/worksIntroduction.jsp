@@ -4,8 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<%@ include file="/head.jsp"%>
+<head>
+<title>作品</title>
+</head>
 <body>
+	<%@ include file="/head.jsp"%>
 	<!--导航栏-->
 	<div class="container">
 		<ol class="breadcrumb breadcrumb1">
@@ -34,17 +37,6 @@
 			<div class="col-md-6 single-top-right">
 				<h3 class="item_name">${i.worksName}</h3>
 				<p>处理时间: 作品项目将在1-2个工作日内发货.</p>
-				<!-- <div class="single-rating">
-					<ul>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-						<li class="rating">20 reviews</li>
-						<li><a href="#">Add your review</a></li>
-					</ul>
-				</div> -->
 				<div class="single-price">
 					<ul>
 						<li>￥${i.worksPrice}</li>
