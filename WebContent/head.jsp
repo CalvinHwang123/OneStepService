@@ -61,9 +61,9 @@
 <link href='https://fonts.googleapis.com/css?family=Tangerine:400,700'
 	rel='stylesheet' type='text/css'>
 <!-- web-fonts -->
+<script src="portal/js/jquery-2.2.3.min.js"></script>
 <script src="portal/js/owl.carousel.js"></script>
 
-<script src="portal/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="portal/js/md5.js"></script>
 <link rel="stylesheet" href="portal/css/jigsaw.css">
 <script src="portal/js/jquery-scrolltofixed-min.js"
