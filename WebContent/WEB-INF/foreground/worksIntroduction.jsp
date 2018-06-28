@@ -51,9 +51,10 @@
 						name="add" value="1" type="hidden"> <input
 						name="w3ls_item" value="${i.worksName}" type="hidden"> <input
 						name="amount" value="${i.worksPrice}" type="hidden">
-					<button type="submit" class="w3ls-cart">
+					<button type="button" class="w3ls-cart" onclick="purchaseWorks('${i.worksId}','${i.userId}', '${i.worksPrice }')">
 						<i class="fa fa-cart-plus" ></i> 购买
 					</button>
+					
 				</form>
 			</div>
 			</c:forEach>
@@ -154,6 +155,39 @@
 		});
 		</script>
 		<!--底部 -->
+		
+		<!-- 购买作品，修改成交量 -->
+		<script type="text/javascript">
+			function purchaseWorks(worksId, userId, worksPrice) {
+				// 是否登录
+				if ("${sessionScope.forelogin}" == ""
+						|| "${sessionScope.forelogin}" == null) {
+					$('#redirectLoginModal').modal("show");
+				} else {
+					// 是否是自己的作品
+					if (userId == "${sessionScope.forelogin.userID}") {
+						alert("您不能购买自己的作品");
+						return;
+					}
+					// 余额是否充足
+					if (worksPrice > parseInt("${sessionScope.forelogin.userBalance}")) {
+						alert("余额不足，当前余额为：${sessionScope.forelogin.userBalance}");
+						return;
+					}
+					$.ajax({
+			  			url: $("base").attr("href") + "Portal/purchaseWorks.action",
+			  			type:"post",
+			  			dataType:"text",
+			  			contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
+			  			data:JSON.stringify({"worksId": worksId}),
+			  			async:true,
+			  			success:function(msg){
+			  				alert(msg);
+			  			}
+			  		});
+				}
+			}
+		</script>
 </body>
 </html>
 	

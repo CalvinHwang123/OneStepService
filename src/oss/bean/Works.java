@@ -2,7 +2,7 @@ package oss.bean;
 
 public class Works {
 	private Long worksId;
-	private Long usersId;
+	private Long userId;
 	private Long classificationId;
 	private String worksName;
 	private String worksPrice;
@@ -11,16 +11,17 @@ public class Works {
 	private String url;
 	private Classification checkClass;
 	private Users checkUser;
+	private String worksContext;// 添加了clob类型的作品内容字段 hlq 2018-06-27
 
 	public Works() {
 
 	}
 
-	public Works(Long worksId, Long usersId, Long classificationId, String worksName, String worksPrice, Long worksNum,
-			Long worksStatusId, String url, Classification checkClass, Users checkUser) {
+	public Works(Long worksId, Long userId, Long classificationId, String worksName, String worksPrice, Long worksNum,
+			Long worksStatusId, String url, Classification checkClass, Users checkUser, String worksContext) {
 		super();
 		this.worksId = worksId;
-		this.usersId = usersId;
+		this.userId = userId;
 		this.classificationId = classificationId;
 		this.worksName = worksName;
 		this.worksPrice = worksPrice;
@@ -29,6 +30,7 @@ public class Works {
 		this.url = url;
 		this.checkClass = checkClass;
 		this.checkUser = checkUser;
+		this.worksContext = worksContext;
 	}
 
 	public Long getWorksId() {
@@ -39,12 +41,12 @@ public class Works {
 		this.worksId = worksId;
 	}
 
-	public Long getUsersId() {
-		return usersId;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUsersId(Long usersId) {
-		this.usersId = usersId;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public Long getClassificationId() {
@@ -109,6 +111,14 @@ public class Works {
 
 	public void setCheckUser(Users checkUser) {
 		this.checkUser = checkUser;
+	}
+
+	public String getWorksContext() {
+		return worksContext;
+	}
+
+	public void setWorksContext(String worksContext) {
+		this.worksContext = worksContext;
 	}
 
 }

@@ -84,5 +84,8 @@ public interface BusiManageMapper {
 	// 作品管理列表 wwj
 		public List<Trading> tradingList(Condition condition);
 
-
+	// 插入作品表记录 hlq 2018-06-27 21:39
+	public int insertWorks(Works works);
+	// 作品修改成交量 hlq 2018-06-27 21:39
+	public abstract int updateWorksNumById(Works works);
 }

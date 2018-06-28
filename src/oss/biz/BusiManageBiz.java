@@ -79,5 +79,10 @@ public interface BusiManageBiz {
 	public int releaseDemand(Demands demands);
 	
 	// 作品管理列表 wwj
-			public List<Trading> tradingList(Condition condition);
+	public List<Trading> tradingList(Condition condition);
+	
+	// 发布作品 hlq 2018-06-27 20:22
+	public boolean publishWorks(Works works);
+	// 修改成交量
+	public boolean updateWorksNumById(Works works);
 }

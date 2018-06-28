@@ -158,4 +158,16 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		// TODO Auto-generated method stub
 		return busiManageMapper.tradingList(condition);
 	}
+
+	// 发布作品 hlq 2018-06-27 20:23
+	@Override
+	public boolean publishWorks(Works works) {
+		return busiManageMapper.insertWorks(works) > 0;
+	}
+
+	// 修改作品成交量 hlq 2018-06-27 20:23
+	@Override
+	public boolean updateWorksNumById(Works works) {
+		return busiManageMapper.updateWorksNumById(works) > 0;
+	}
 }
