@@ -1,6 +1,9 @@
 package oss.handler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,8 +23,8 @@ import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
-import oss.bean.Powers;
 import oss.bean.Role;
+import oss.bean.RolePower;
 import oss.biz.SystemManegeBiz;
 
 /*
@@ -50,7 +54,7 @@ public class SystemManageHandler {
 
 		} else {
 			System.out.println("登陆失败");
-			mav = new ModelAndView("userStory");
+			mav = new ModelAndView("empLoginFail");
 		}
 
 		return mav;
@@ -74,35 +78,118 @@ public class SystemManageHandler {
 		return mav;
 	}
 
-	// jhx 获取角色列表及权限列表 6-21
+	// jhx 获取角色列表 6-21
 	@RequestMapping("/roleList.action")
 	public ModelAndView roleList(HttpServletRequest req) {
-		// Emps emp = (Emps) req.getSession().getAttribute("empss");
-		// Long empID = emp.getEmpID();
-		Long empID = (long) 1;
-		System.out.println("员工ID为======" + empID);
-		List<Menu> allOneMenu = systemManegeBizImpl.findAllOneMenu();
-		System.out.println("所有一级菜单为=====" + allOneMenu);
-		List<Menu> allTwoMenu = systemManegeBizImpl.findAllTwoMenu();
-		System.out.println("所有二级菜单为=====" + allTwoMenu);
-		List<Menu> twoMenuList = systemManegeBizImpl.twoMenuList(empID);
-		System.out.println("二级菜单为=====" + twoMenuList);
 
 		List<Role> roleList = systemManegeBizImpl.roleList();
 		System.out.println("powerList===" + roleList);
-		req.setAttribute("allOneMenu", allOneMenu);
-		req.setAttribute("allTwoMenu", allTwoMenu);
 		req.setAttribute("roleList", roleList);
 		ModelAndView mav = new ModelAndView("background/power");
 		return mav;
 	}
 
-	// jhx 获取权限列表 6.22
-	@RequestMapping("/powerList.action")
-	public List<Powers> powerList(HttpServletRequest req) {
-		List<Powers> powerList = systemManegeBizImpl.powerList();
-		System.out.println("powerList===" + powerList);
-		return powerList;
+	// jhx 获取一二级菜单及根据角色获取已拥有权限（二级菜单） 6.22
+	@RequestMapping(value = "/allMenu.action", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody Map<String, List<Menu>> allMenu(@RequestBody Long roleID) {
+
+		// System.out.println("=========角色ID==" + roleID);
+		List<Menu> allOneMenu = systemManegeBizImpl.findAllOneMenu();
+		System.out.println("所有一级菜单为=====" + allOneMenu);
+		List<Menu> allTwoMenu = systemManegeBizImpl.findAllTwoMenu();
+		System.out.println("所有二级菜单为=====" + allTwoMenu);
+		List<Menu> twoPowerList = systemManegeBizImpl.powerList(roleID);
+		System.out.println("拥有二级菜单为=====" + twoPowerList);
+		Map<String, List<Menu>> allMenu = new HashMap<String, List<Menu>>();
+		allMenu.put("allOneMenu", allOneMenu);
+		allMenu.put("allTwoMenu", allTwoMenu);
+		allMenu.put("twoMenuList", twoPowerList);
+		return allMenu;
+	}
+
+	// jhx 提交角色权限更改 6.22
+	@RequestMapping(value = "/updatePower.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String updatePower(@RequestBody Map<String, Object> rePower) {
+		System.out.println("到后台了");
+		// "roleID":roleID,"powerMenus":powers
+		Object id = rePower.get("roleID");
+		Long roleID = Long.valueOf(String.valueOf(id));
+		ArrayList<Long> twoMenus = (ArrayList<Long>) rePower.get("powerMenus");
+		System.out.println("======角色ID为" + roleID);
+		System.out.println("======权限ID为" + twoMenus);
+		systemManegeBizImpl.deleteRolePower(roleID);
+		for (int i = 0; i < twoMenus.size(); i++) {
+			RolePower rp = new RolePower();
+			Long menuID = Long.valueOf(String.valueOf(twoMenus.get(i)));
+			Long powerID = systemManegeBizImpl.findPowerID(menuID);
+			System.out.println("权限ID为====" + powerID);
+			rp.setRoleID(roleID);
+			rp.setPowerID(powerID);
+
+			systemManegeBizImpl.updateRolePower(rp);
+		}
+
+		return "success";
+	}
+
+	// jhx 员工管理 6.26
+	@RequestMapping("/empManage.action")
+	public ModelAndView empManage(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
+		System.out.println("执行员工管理action");
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Emps> emplist = systemManegeBizImpl.findByCondition(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo pageInfo = new PageInfo<>(emplist, pageSize);
+		System.out.println(pageInfo.getTotal());
+		List<Role> roleList = systemManegeBizImpl.roleList();
+		req.setAttribute("roleList", roleList);
+		req.setAttribute("emplist", pageInfo);
+		req.setAttribute("condition", condition);
+		mav = new ModelAndView("background/empManage");
+		return mav;
+
+	}
+
+	// 更改用户状态 jhx 6.27
+	@RequestMapping("/changeStatus.action")
+	public @ResponseBody String Disable(HttpServletRequest req, @RequestBody Emps emp) {
+		System.out.println("禁用");
+		System.out.println("禁用员工为=====" + emp.getEmpStatusID());
+		if (emp.getEmpStatusID() == 1) {
+			systemManegeBizImpl.disable(emp.getEmpID());
+		} else {
+			systemManegeBizImpl.enable(emp.getEmpID());
+		}
+
+		return "success";
+	}
+
+	// 新增工作人员 jhx 6.27
+	@RequestMapping("/addNewEmp.action")
+	public @ResponseBody String addNewEmp(HttpServletRequest req, @RequestBody Emps emp) {
+		System.out.println("新增员工");
+		System.out.println("新增员工=====" + emp.getEmpName());
+		// if (emp.getEmpStatusID() == 1) {
+		// systemManegeBizImpl.disable(emp.getEmpID());
+		// } else {
+		// systemManegeBizImpl.enable(emp.getEmpID());
+		// }
+
+		return "success";
+	}
+
+	// 修改员工信息，查找员工 jhx 6.27
+	@RequestMapping("/empInfo.action")
+	public @ResponseBody Emps empInfo(HttpServletRequest req, @RequestBody Long empID) {
+		System.out.println("修改信息之获取员工信息");
+		System.out.println("修改信息之获取员工信息id" + empID);
+		Emps emp = systemManegeBizImpl.findEmpById(empID);
+
+		return emp;
 	}
 
 	// 类型数据添加 袁楠文 2018-6-16 12:17

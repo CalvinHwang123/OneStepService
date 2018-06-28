@@ -7,21 +7,30 @@ import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
-import oss.bean.Powers;
 import oss.bean.Role;
+import oss.bean.RolePower;
 
 /*
  * 系统管理Mapper接口
  */
 @MyRepository
 public interface SystemManegeMapper {
-	// jhx 获取权限列表 2018-6-14
-	public List<Powers> listPower();
+	// jhx 根据角色获取已有权限列表 2018-6-25
+	public List<Menu> powerList(Long roleID);
+
+	// jhx 通过二级菜单找权限（权限配置） 6.25
+	public Long findPowerID(Long munuID);
+
+	// jhx 删除角色的所有权限（权限配置） 6.25
+	public Long deleteRolePower(Long roleID);
+
+	// jhx 插入新配置权限 6.25
+	public Long updateRolePower(RolePower rolePower);
 
 	// jhx 获取所有角色列表 6.21
 	public List<Role> listRole();
 
-	// jhx 获取所有一二级动态菜单 6.21
+	// jhx 获取所有一二级菜单 6.21
 	public List<Menu> allOneMenu();
 
 	public List<Menu> allTwoMenu();
@@ -31,8 +40,32 @@ public interface SystemManegeMapper {
 
 	public List<Menu> twoMenuList(Long empID);
 
-	// jhx 查找用户 2018-6-14
+	// jhx 6.26 登录 查找该员工
 	public Emps findEmp(String empAccount);
+
+	// jhx 6.26 查找所有员工
+	public List<Emps> findAllEmp();
+
+	// jhx 6.26 按条件查找员工
+	public List<Emps> findByCondition(Condition cd);
+
+	// jhx 6.26 添加员工
+	public Long addEmp(Emps emp);
+
+	// jhx 6.26 删除员工
+	public Long deleteEmp(String empID);
+
+	// jhx 6.26 修改员工资料
+	public Long updateEmp(Emps emp);
+
+	// jhx 6.26 修改员工账号状态 禁用
+	public Long disable(Long empID);
+
+	// jhx 6.26 修改员工账号状态 启用
+	public Long enable(Long empID);
+
+	// jhx 6.27 通过id查找员工信息
+	public Emps findEmpById(Long empID);
 
 	// 一级分类唯一验证 袁楠文 2018-6-14 10:50
 	public List<Object> Classuniquequery(String oneclassname);

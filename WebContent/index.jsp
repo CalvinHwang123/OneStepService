@@ -90,6 +90,10 @@
 										<cite>权限配置</cite>
 
 								</a></li>
+								<li><a _href=<%=path+"/SystemManage/empManage.action" %>> <i class="iconfont">&#xe6a7;</i>
+										<cite>人员管理</cite>
+
+								</a></li>
 								
 							</ul></li>
 						<li><a _href="member-del.html"> <i class="iconfont">&#xe6a7;</i>

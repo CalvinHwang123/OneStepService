@@ -2,7 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.SystemManegeMapper">
-	<select id="listPower" resultType="oss.bean.Powers">
-		select * from Powers where 1 = 1
+	<select id="deleteRolePower"  parameterType="Long" resultType="long" >
+		delete  from ROLEPOWER where roleId=#{id}
 	</select>
+	
+	<select id="findPowerID"  parameterType="Long" resultType="long" >
+		select powerID  from powers  where menuID=#{id}
+	</select>
+	
+	<insert id="updateRolePower" parameterType="oss.bean.RolePower">
+		<selectKey keyProperty="rolePowerID" order="BEFORE"
+			resultType="long">
+			select RolePowerSEQ.nextval from dual
+		</selectKey>
+		insert into RolePower (ROLEPOWERID,ROLEID,POWERID)values(#{rolePowerID,jdbcType=VARCHAR},#{roleID,jdbcType=VARCHAR},#{powerID,jdbcType=VARCHAR})
+	</insert>
 </mapper>
