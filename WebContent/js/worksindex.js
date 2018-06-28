@@ -25,17 +25,16 @@ $(function() {
 		for (var i = 0; i < arr.length; i++) {
 			if (arr[i].value==$("#jspPane").attr("title")) {
 				arr[i].checked=true;
-				alert(arr[i].value);
 				clicknum=1;
 			}
 		}
 	}else {
 		$("#jspPane").attr("title","");
 	}
+	classvalue=$("#beWorksPrice").attr("title")+"-"+$("#endWorksPrice").attr("title");
 })
 
 $(function() {
-
 	// 按价格出现
 	$(".racheckbox").click(function() {
 		if ($(this).attr("value") != classvalue) {
@@ -49,13 +48,15 @@ $(function() {
 			clicknum = clicknum + 1;
 			if (clicknum == 2) {
 				$(this).attr("checked", false);
-				classpricevalue = "null";
+				classpricevalue = "null-null";
 				classvalue = "null";
 			}
 		}
 		$("#beWorksPrice").attr("value", classpricevalue.split("-")[0]);
 		$("#endWorksPrice").attr("value", classpricevalue.split("-")[1]);
-		$("#workslook").submit();
+		if (clicknum != 2) {	
+			$("#workslook").submit();
+		}
 	})
 	// 按类型查询
 	$(".twoclassname").click(function() {
