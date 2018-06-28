@@ -13,6 +13,7 @@ import oss.bean.Violations;
 import oss.bean.Works;
 import oss.bean.userService;
 import oss.bean.Demands;
+import oss.bean.Tender;
 import oss.bean.Trading;
 import oss.mapper.BusiManageMapper;
 
@@ -172,5 +173,32 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public List<userService> userServiceList(Condition condition) {
 	
 		return busiManageMapper.userServiceList(condition);
+	}
+
+	//by hsp 6-28 11:05 检查服务商是否投过该需求的标
+	@Override
+	public Tender checkIsBidded(Tender tender) {
+		return busiManageMapper.selectTenderByID(tender);
+	}
+
+	
+	//by hsp 6-28 11:25 查找具体的需求
+	@Override
+	public Demands selectDemand(Tender tender) {
+		return busiManageMapper.selectDemandByID(tender);
+	}
+
+	
+	//by hsp 6-28 11:36投标成功后，需求的剩余投标数量-1
+	@Override
+	public int deductTenderNumber(Demands demands) {
+		return busiManageMapper.updateDemandTenderNumber(demands);
+	}
+
+	
+	//by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
+	@Override
+	public int bidding(Tender tender) {
+		return busiManageMapper.insertTender(tender);
 	}
 }

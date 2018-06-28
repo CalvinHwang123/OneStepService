@@ -217,22 +217,11 @@ window.ZBJInfo.pubCategory='剪辑服务';
 												onclick="bidding()">确定</button>
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">取消</button>
-											<button type="button" class="btn btn-default"
-												onclick="layUITest()">laiUI测试</button>
 										</div>
 									</div>
 								</div>
-							</div>		
+							</div>
 							<script type="text/javascript">
-								function layUITest(){
-									layer.confirm('确认吗？',function(index){
-							    		
-							 		})
-								}
-							
-							
-							
-							
 								var demandID;
 								var demandBelongID;
 // 								打开是否确定投标的模态框
@@ -249,26 +238,34 @@ window.ZBJInfo.pubCategory='剪辑服务';
 										$('#redirectLoginModal').modal("show");
 									}else if("${forelogin.userType}" == 1)
 									{
-										alert("您是雇主，还不是服务商，是否需要开店？");
+										layer.confirm("您还不是服务商，是否要进行服务商注册",function(index){
+										})
 									}else if("${forelogin.userID}" == demandBelongID){
-										alert("不能投属于自己的标");
+										layer.msg('投标失败，这是您自己的需求噢!',{icon:2,time:1500});
+									}else{
+// 										demandID;//需求ID
+// 										demandBelongID;//需求发布者ID
+										var userID = "${forelogin.userID}";//投标者ID
+										var tender ={"demandID":demandID,"userID":userID,"releaserID":demandBelongID};
+										 $.ajax({
+									 			url:"BusiManage/bidding.action",
+									 			type:"post",
+									 			dataType:"text",
+									 			contentType:"application/json",
+									 			data:JSON.stringify(tender),
+									 			async:true,
+									 			success:function(msg){//
+									 			  if (msg == "success") {
+									              		layer.msg('恭喜您，投标成功!',{icon:1,time:2000});
+									              		$("#biddingModal").modal('hide');
+									 			 	 }else if (msg == "bidded") {
+									 			 		layer.msg('投标失败，您已投过标!',{icon:2,time:2000});
+													}else if (msg == "full") {
+														layer.msg('投标失败，该需求投标数已满!',{icon:2,time:2000});
+													}
+									 			}
+									 		})
 									}
-										alert("您有服务商的身份，可以进行投标,标ID = "+ demandID);
-//										  var data ={"storyID":id};
-//								    	  deleteStorys.push(data);
-//										 $.ajax({
-//									 			url:"PortalManage/deleteStory.action",
-//									 			type:"post",
-//									 			dataType:"text",
-//									 			contentType:"application/json",
-//									 			data:JSON.stringify(deleteStorys),
-//									 			async:true,
-//									 			success:function(msg){//
-//									 				alert(msg);
-//									              layer.msg('已删除!',{icon:1,time:1000});
-//									              window.location.reload();
-//									 			}
-//									 		})
 								}
 							</script>
 
