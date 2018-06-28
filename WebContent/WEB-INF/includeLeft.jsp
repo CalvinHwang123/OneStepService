@@ -152,8 +152,7 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dd>
 
 							<dd>
-								<a class='J_menuItem ' href='/worked' data-linkid='10132979'
-									target='_self'>我合作过的</a>
+								<a class='J_menuItem ' href='BusiManage/cooperationList.action' >我合作过的</a>
 
 							</dd>
 

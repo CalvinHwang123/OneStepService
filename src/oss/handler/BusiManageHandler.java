@@ -438,4 +438,24 @@ public class BusiManageHandler {
 					ModelAndView mav = new ModelAndView("foreground/facilitatorTrading");
 					return mav;		
 				}
+				
+				// 雇主合作  wwj   6-28  11:31
+				@RequestMapping("/cooperationList.action")
+				public ModelAndView cooperationList(HttpServletRequest request,
+						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+					 HttpSession session=request.getSession();        
+						Users users2=(Users) session.getAttribute("forelogin");
+						String userAcc=users2.getUserAccount();			
+						condition.setTitle(userAcc);
+					PageHelper.startPage(pageNum, pageSize);
+					List<userService> listTrading = busiManageBizImpl.cooperationList(condition);
+					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+					System.out.println(pageInfo.getTotal());
+					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("condition", condition);
+					ModelAndView mav = new ModelAndView("Cooperation");
+					return mav;		
+				}
+				
 }

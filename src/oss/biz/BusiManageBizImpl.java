@@ -173,4 +173,10 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	
 		return busiManageMapper.userServiceList(condition);
 	}
+//合作  wwj
+	@Override
+	public List<userService> cooperationList(Condition condition) {
+		
+		return busiManageMapper.cooperationList(condition);
+	}
 }

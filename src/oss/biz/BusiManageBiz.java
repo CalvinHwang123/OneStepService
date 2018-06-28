@@ -87,4 +87,7 @@ public interface BusiManageBiz {
 		
 	//收藏
 	public List<userService> userServiceList(Condition condition);
+	
+	//合作  wwj  6-28
+		public List<userService> cooperationList(Condition condition);
 }

@@ -5,9 +5,9 @@
 	<!--收藏 -->
 	<select id="userServiceList" resultMap="CollectionMap" parameterType="oss.bean.Condition" >
 select a.userServiceID,a.userID,a.serviceID,b.userAccount,b.imageUrl,b.userName from userService a,users b where B.Useraccount=#{title} and A.Relationtypeid = 1
-<!-- 	<if test="title != null and title !='' "> -->
-<!-- 			and checkUsers.userName like concat(concat('%',#{title}),'%') -->
-<!-- 		</if> -->
+	<if test="startDate != null and startDate !='' ">
+			and checkUsers.userName like concat(concat('%',#{startDate}),'%')
+		</if>
 	</select>
 	<resultMap type="oss.bean.userService" id="CollectionMap">
 		<id property="userServiceID" column="userServiceID" />
@@ -21,6 +21,27 @@ select a.userServiceID,a.userID,a.serviceID,b.userAccount,b.imageUrl,b.userName 
 			<result property="imageUrl" column="imageUrl" />
 		</association>
 	</resultMap>
+	
+		<!--合作 -->
+	<select id="cooperationList" resultMap="cooperationMap" parameterType="oss.bean.Condition" >
+select a.userServiceID,a.userID,a.serviceID,b.userAccount,b.imageUrl,b.userName from userService a,users b where B.Useraccount=#{title} and A.Relationtypeid = 2
+	<if test="startDate != null and startDate !='' ">
+			and checkUsers.userName like concat(concat('%',#{startDate}),'%')
+		</if>
+	</select>
+	<resultMap type="oss.bean.userService" id="cooperationMap">
+		<id property="userServiceID" column="userServiceID" />
+		<result property="userID" column="userID" />
+		<result property="serviceID" column="serviceID" />
+		<result property="relationTypeID" column="relationTypeID" />
+		<association property="checkUsers" javaType="oss.bean.Users">
+			<id property="userID" column="userID" />
+			<result property="userAccount" column="userAccount" />
+			<result property="userName" column="userName" />
+			<result property="imageUrl" column="imageUrl" />
+		</association>
+	</resultMap>
+	
 </mapper>
 
 

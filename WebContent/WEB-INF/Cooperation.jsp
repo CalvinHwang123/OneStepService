@@ -3,131 +3,161 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>雇主中心-交易明细</title>
+<title>雇主中心-我的合作</title>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
 
-		<div class='order-wrap'>
-			<form id="pageForm" action="BusiManage/tradingList.action">
-				<div class='top-nav-wrap order-top-nav J-state' data-state='0'
-					id='utopia_widget_6'>
-					<!-- 隐藏域 每页条数 -->
-					<input type="hidden" id="pageSizeInput" name="pageSize"
-						value="${pageInfo.getPageSize()}">
-					<!-- 隐藏域 当前页数 -->
-					<input type="hidden" id="currentPageInput" name="pageNum"
-						value="${pageInfo.getPageNum()}"> <input type="hidden"
-						id="currentPageInput" name="pageNum"
-						value="${pageInfo.getPageNum()}">
-
-					<div class="form-group" style="width: 20%;">
-						<label class="sr-only" for="name">开始时间</label> <input type="date"
-							class="form-control" id="name" placeholder="请输入" name="startDate" value="${condition.startDate}">
-					</div>
-					<div class="glyphicon glyphicon-search" >
-						<input type="submit"  >
-					</div>
+	<div class='order-wrap'>
+		<form id="pageForm" action="BusiManage/cooperationList.action">
+			<div class='top-nav-wrap order-top-nav J-state' data-state='0'
+				id='utopia_widget_6'>
+				<!-- 隐藏域 每页条数 -->
+				<input type="hidden" id="pageSizeInput" name="pageSize"
+					value="${pageInfo.getPageSize()}">
+				<!-- 隐藏域 当前页数 -->
+				<input type="hidden" id="currentPageInput" name="pageNum"
+					value="${pageInfo.getPageNum()}"> <input type="hidden"
+					id="currentPageInput" name="pageNum"
+					value="${pageInfo.getPageNum()}">
+				<div class="form-inline">
+					<font size="3" face="sans serif">服务商名称:</font><input
+						style="width: 20%;" type="text" class="form-control" id="name"
+						placeholder="请输入服务商名称" name="startDate"
+						value="${condition.startDate}">
+					
+					<button type="submit" class="btn btn-default">查询</button>
 				</div>
-				<div class='order-top-banner' id='utopia_widget_7'>
-					<div class='top-banner-tips'>1</div>
-					<div class='top-banner-cont'>2</div>
-				</div>
-				<div class='order-bg'>
-					<div class='options'>
-						<div class="table-responsive">
-
-							<table class="table table-hover">
-								<caption>我的交易明细</caption>
-								<thead>
-									<tr>
-										<th>序列</th>
-										<th>交易金额</th>
-										<th>交易类型</th>
-										<th>需求</th>
-										<th>时间</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="i" items="${pageInfo.list}" begin="0"
-										varStatus="status">
-										<tr>
-											<td><c:out value="${status.index+1}"></c:out></td>
-											<td><c:out value="${i.amount}"></c:out></td>
-											<td><c:out value="${i.amountType}"></c:out></td>
-											<td><c:out value="${i.demandId}"></c:out></td>
-											<td><c:out value="${i.tradingTime}"></c:out></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-
-						</div>
-			</form>
-		</div>
-		<div class="page">
-		<form id="pageForm" class="layui-form layui-col-md12 x-so"
-		action="BusiManage/tradingList.action">
-		<!-- 隐藏域 每页条数 -->
-		<input type="hidden" id="pageSizeInput" name="pageSize"
-			value="${pageInfo.getPageSize()}" />
-		<!-- 隐藏域 当前页数 -->
-		<input type="hidden" id="currentPageInput" name="pageNum"
-			value="${pageInfo.getPageNum()}" />
-	</form>
-			<div>
-				共${pageInfo.getPages()}页
-				<c:choose>
-					<c:when test="${!pageInfo.hasPreviousPage}">
-						<span class="prev">上一页</span>
-					</c:when>
-					<c:otherwise>
-						<a class="prev" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.getPrePage()})">上一页</a>
-					</c:otherwise>
-				</c:choose>
-				<c:choose>
-					<c:when test="${pageInfo.pageNum <= 2}">
-						<c:if test="${pageInfo.pageNum != 1}">
-							<a class="num" href="javascript:void(0);"
-								onclick="changePage(${pageInfo.pageNum-1})"><c:out
-									value="${pageInfo.pageNum-1}"></c:out> </a>
-						</c:if>
-						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
-						<c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
-								<a class="num" href="javascript:void(0);"
-									onclick="changePage(${pageInfo.pageNum+num})"><c:out
-										value="${pageInfo.pageNum+num}"></c:out> </a>
-							</c:if>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<a class="num" href="javascript:void(0);"
-							onccick="changePage(${pageInfo.pageNum-1})"><c:out
-								value="${pageInfo.pageNum-1}"></c:out> </a>
-						<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
-						<c:forEach begin="1" step="1" end="4" var="num">
-							<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
-								<a class="num" href="javascript:void(0);"
-									onclick="changePage(${pageInfo.pageNum+num})"><c:out
-										value="${pageInfo.pageNum+num}"></c:out> </a>
-							</c:if>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-				<c:choose>
-					<c:when test="${!pageInfo.hasNextPage}">
-						<span class="next">下一页</span>
-					</c:when>
-					<c:otherwise>
-						<a class="next" href="javascript:void(0);"
-							onclick="changePage(${pageInfo.getNextPage()})">下一页</a>
-					</c:otherwise>
-				</c:choose>
 			</div>
+			<div class='order-top-banner' id='utopia_widget_7'>
+				<div class='top-banner-tips'>1</div>
+				<div class='top-banner-cont'>2</div>
+			</div>
+			<div class='order-bg'>
+				<div class='options'>
+					<div class="table-responsive">
+						<div class="add-products">
+							<div class="container">
+								<h3 class="w3ls-title"></h3>
+								<div class="add-products-row">
+									<c:forEach items="${pageInfo.list}" var="i" begin="0"
+										varStatus="s">
+										<c:if test="${i.checkUsers.imageUrl == null}">
+											<div class="info-item">
+												<img class="info-img" alt="服务商1"
+													style="background:url(<%=basePath%>/portal/images/detail.png)no-repeat 0px 0px; background-size: cover;">
+												<div class="content-wrap">
+													<h4 class="info-title text-overflow">
+														<a class="link-hover"
+															href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
+															<c:out value="${i.checkUsers.userName}"></c:out>
+														</a>
+													</h4>
+													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
+												</div>
+											</div>
+										</c:if>
+										<c:if test="${i.checkUsers.imageUrl != null}">
+											<div class="info-item">
+												<img
+													src="${i.checkUsers.imageUrl};a.c=200x150&amp;a.g=Center"
+													class="info-img" alt="从贫困村到“中国最美休闲乡村”逆袭，这三个村子有话说">
+
+												<div class="content-wrap">
+													<h4 class="info-title text-overflow">
+														<a class="link-hover"
+															href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
+															<c:out value="${i.checkUsers.userName}"></c:out>
+														</a>
+													</h4>
+													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+
+								</div>
+							</div>
+		</form>
+
+	</div>
+
+	<form id="pageForm" action="BusiManage/cooperationList.action">
+		<div class="page">
+			<c:choose>
+				<c:when test="${pageInfo.getPages() == 0}">
+					<blockquote class="layui-elem-quote layui-quote-nm">尊敬的用户，当前列表没有数据~~~</blockquote>
+				</c:when>
+				<c:otherwise>
+					<div>
+						共${pageInfo.getPages()}页，每页 <select
+							style="width: 6%; height: 30px;" name="pageSize"
+							onchange="changePageSize($('#pageSizeSelect option:selected').val())"
+							id="pageSizeSelect">
+							<option value="5"
+								${pageInfo.getPageSize() == 5 ? "selected" : ""}>5</option>
+							<option value="10"
+								${pageInfo.getPageSize() == 10 ? "selected" : ""}>10</option>
+							<option value="20"
+								${pageInfo.getPageSize() == 20 ? "selected" : ""}>20</option>
+						</select> 条
+						<c:choose>
+							<c:when test="${!pageInfo.hasPreviousPage}">
+								<span class="prev">上一页</span>
+							</c:when>
+							<c:otherwise>
+								<a class="prev" href="javascript:void(0);"
+									onclick="changePage(${pageInfo.getPrePage()})">上一页</a>
+							</c:otherwise>
+						</c:choose>
+
+						<c:choose>
+							<c:when test="${pageInfo.pageNum <= 2}">
+								<c:if test="${pageInfo.pageNum != 1}">
+									<a class="num" href="javascript:void(0);"
+										onclick="changePage(${pageInfo.pageNum-1})"><c:out
+											value="${pageInfo.pageNum-1}"></c:out> </a>
+								</c:if>
+								<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
+								<c:forEach begin="1" step="1" end="4" var="num">
+									<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
+										<a class="num" href="javascript:void(0);"
+											onclick="changePage(${pageInfo.pageNum+num})"><c:out
+												value="${pageInfo.pageNum+num}"></c:out> </a>
+									</c:if>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<a class="num" href="javascript:void(0);"
+									onclick="changePage(${pageInfo.pageNum-1})"><c:out
+										value="${pageInfo.pageNum-1}"></c:out> </a>
+								<span class="current"><c:out value="${pageInfo.pageNum}"></c:out></span>
+								<c:forEach begin="1" step="1" end="4" var="num">
+									<c:if test="${pageInfo.pages - pageInfo.pageNum - num>= 0}">
+										<a class="num" href="javascript:void(0);"
+											onclick="changePage(${pageInfo.pageNum+num})"><c:out
+												value="${pageInfo.pageNum+num}"></c:out> </a>
+									</c:if>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${!pageInfo.hasNextPage}">
+								<span class="next">下一页</span>
+							</c:when>
+							<c:otherwise>
+								<a class="next" href="javascript:void(0);"
+									onclick="changePage(${pageInfo.getNextPage()})">下一页</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
+	</form>
+	</div>
+
 	</div>
 	</div>
 	</div>
@@ -136,7 +166,7 @@
 	</div>
 	</div>
 
-	
+
 	<script type="text/javascript">
 //更改当前页
 function changePage(pageNum) {
@@ -154,8 +184,7 @@ function changePageSize(pageSize) {
 	$("#pageForm").submit();
 };
 </script>
-<%@include file="/end.jsp"%>
-  <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<%@include file="/end.jsp"%>
+
 </body>
 </html>
