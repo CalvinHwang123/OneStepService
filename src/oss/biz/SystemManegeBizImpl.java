@@ -10,8 +10,8 @@ import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Emps;
 import oss.bean.Menu;
-import oss.bean.Powers;
 import oss.bean.Role;
+import oss.bean.RolePower;
 import oss.mapper.SystemManegeMapper;
 
 /*
@@ -24,9 +24,9 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 
 	// jhx 获取权限列表 2018-6-14
 	@Override
-	public List<Powers> powerList() {
+	public List<Menu> powerList(Long roleID) {
 		// TODO Auto-generated method stub
-		return systemManegeMapper.listPower();
+		return systemManegeMapper.powerList(roleID);
 	}
 
 	// jhx 获取角色列表 6.21
@@ -34,6 +34,27 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 	public List<Role> roleList() {
 		// TODO Auto-generated method stub
 		return systemManegeMapper.listRole();
+	}
+
+	// jhx 删除角色的所有权限（权限配置） 6.25
+	@Override
+	public Long deleteRolePower(Long roleID) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.deleteRolePower(roleID);
+	}
+
+	// jhx 通过二级菜单找权限（权限配置） 6.25
+	@Override
+	public Long findPowerID(Long munuID) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.findPowerID(munuID);
+	}
+
+	// jhx 插入新配置权限 6.25
+	@Override
+	public Long updateRolePower(RolePower rolePower) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.updateRolePower(rolePower);
 	}
 
 	// jhx 获取所有一级动态菜单 6.21
@@ -64,11 +85,67 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		return systemManegeMapper.twoMenuList(empID);
 	}
 
-	// jhx 查找用户 2018-6-14
+	// jhx 6.26 登录 查找该员工
 	@Override
 	public Emps findEmp(String empAccount) {
 		// TODO Auto-generated method stub
 		return systemManegeMapper.findEmp(empAccount);
+	}
+
+	// jhx 6.26 查找所有员工
+	@Override
+	public List<Emps> findAllEmp() {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.findAllEmp();
+	}
+
+	// jhx 6.26 按条件查找员工
+	@Override
+	public List<Emps> findByCondition(Condition cd) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.findByCondition(cd);
+	}
+
+	// jhx 6.26 添加员工
+	@Override
+	public Long addEmp(Emps emp) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.addEmp(emp);
+	}
+
+	// jhx 6.26 删除员工
+	@Override
+	public Long deleteEmp(String empID) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.deleteEmp(empID);
+	}
+
+	// jhx 6.26 修改员工资料
+	@Override
+	public Long updateEmp(Emps emp) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.updateEmp(emp);
+	}
+
+	// jhx 6.26 修改员工账号状态 禁用
+	@Override
+	public Long disable(Long empID) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.disable(empID);
+	}
+
+	// jhx 6.26 修改员工账号状态 启用
+	@Override
+	public Long enable(Long empID) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.enable(empID);
+	}
+
+	// jhx 6.27 通过id查找员工信息
+	@Override
+	public Emps findEmpById(Long empID) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.findEmpById(empID);
 	}
 
 	// 一级分类唯一验证 袁楠文 2018-6-14 10:50

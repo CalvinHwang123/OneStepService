@@ -36,6 +36,7 @@ body {
 
 </head>
 <body class="gray-bg2">
+<input type="hidden" id="basePath" title=<%=path %>>
 	<div class="wrapper wrapper-content" id="statisipDataArea">
 		<div id="statisipArea" class="">
 			<h3>权限配置</h3>
@@ -54,7 +55,6 @@ body {
 						<td><c:out value="${role.roleID}"></c:out></td>
 						<td><c:out value="${role.roleName}"></c:out></td>
 						<td> 
-                <button class="btn btn-info btn-sm  modifyRoleBtn rightSize" type="button" data-id="${role.roleID}" ><i class="fa fa-paste"></i> 修改</button>
                 <button class="btn btn-primary btn-sm grantAuthorityBtn rightSize" type="button" data-id="${role.roleID}" ><i class="fa fa-external-link"></i> 授权</button>
             </td>
 						</tr>
@@ -80,20 +80,7 @@ body {
 					<h4 class="modal-title" id="AuthorityTitle"></h4>
 				</div>
 				<div class="modal-body" id="authorityBody">
-				<select id="authorifyselect" multiple="multiple">
-				<c:forEach items="${allOneMenu}" var="menu1" begin="0">
-				<c:forEach items="${allTwoMenu}" var="menu2" begin="0">
-				<c:if test="${menu1.menuID==menu2.menuPID}">
-<%-- 				<c:forEach items="${twoMenuList}" var="twoMenu" begin="0"> --%>
-<%-- 				<c:if test="${menu2.menuID==twoMenu.menuID}"> --%>
-<%-- 				<option  value="interface_test" data-section="${menu1.menuName}" selected>${menu2.menuName}</option> --%>
-<%-- 				</c:if> --%>
-<%-- 				</c:forEach> --%>
-				<option  value="interface_test" data-section="${menu1.menuName}">${menu2.menuName}</option>
-				</c:if>
-				</c:forEach>
-				</c:forEach>
-				</select>
+				
 				
 				</div>
 				<div class="modal-footer">
@@ -104,18 +91,6 @@ body {
 		</div>
 	</div>
 
-<!-- 	<script id="treeSelect-template" type="text/x-dot-template"> -->
-<!--          <tr> -->
-<%--             <td><%= it.i %></td> --%>
-<%--             <td><%= it.rolename %></td> --%>
-<%--             <td><%= it.createTime %></td> --%>
-<%--             <td><%= it.roleDescription %></td> --%>
-<!--             <td>  -->
-<%--                 <button class="btn btn-info btn-sm  modifyRoleBtn rightSize" type="button" data-id=<%= it.i %> ><i class="fa fa-paste"></i> 修改</button> --%>
-<%--                 <button class="btn btn-primary btn-sm grantAuthorityBtn rightSize" type="button" data-id=<%= it.i %> ><i class="fa fa-external-link"></i> 授权</button> --%>
-<!--             </td> -->
-<!--         </tr> -->
-<!--     </script> -->
 
 	<script src=<%=path + "/power/plugins/jquery/jquery.min.js"%>></script>
 	<script src=<%=path+"/power/plugins/jquery/jquery-ui.min.js"%>></script>

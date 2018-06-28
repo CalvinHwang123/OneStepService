@@ -24,4 +24,10 @@ and a.POWERID=b.POWERID and b.MENUID=c.MENUID
 
 	</select>
 	
+	<select id="powerList" parameterType="Long" resultType="oss.bean.Menu" >
+		select c.MENUID,c.MENUPID,c.Menuname,c.URL from ROLEPOWER a,powers b,menu c
+where a.roleid=#{id} and a.POWERID=b.POWERID and b.MENUID=c.MENUID
+
+	</select>
+	
 </mapper>

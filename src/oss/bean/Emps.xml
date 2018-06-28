@@ -3,6 +3,50 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.SystemManegeMapper">
 	<select id="findEmp" parameterType="String" resultType="oss.bean.Emps">
-		select * from Emps where empAccount = #{id}
+		select * from EMPS where empAccount = #{id}
 	</select>
+	
+	<select id="findEmpById" parameterType="Long" resultType="oss.bean.Emps">
+		select * from EMPS where empID = #{id}
+	</select>
+	
+	<select id="findAllEmp"  resultType="oss.bean.Emps">
+		select * from EMPS 
+	</select>
+	
+	<select id="findByCondition" parameterType="oss.bean.Condition" resultType="oss.bean.Emps">
+		select * from EMPS where 1=1
+		
+		<if test="title != null and title != ''">
+			and empName like '%${title}%'
+		</if>
+	</select>
+	
+	<insert id="addEmp" parameterType="oss.bean.Emps">
+		<selectKey keyProperty="empID" order="BEFORE"
+			resultType="long">
+			select EMPSEQ.nextval from dual
+		</selectKey>
+		insert into EMPS 
+		(EMPID,EMPACCOUNT,EMPPWD,EMPNAME,EMPPHONE,EMPIDENTITY,EMPEMAIL,EMPADDRESS,EMPSTATUSID)
+		VALUES
+		(#{empID},#{empAccount},#{empPwd},#{empName},#{empPhone},#{empIdentity},#{empEmail},#{empAddress},#{empStatusID})
+	</insert>
+	
+	<delete id="deleteEmp" parameterType="String" >
+	delete  from EMPS where roleId=#{id}
+	</delete>
+	
+<!-- 	<update id="updateEmp" parameterType="Emps" > -->
+	
+<!-- 	</update> -->
+	
+	<update id="disable" parameterType="Long" >
+	update EMPS SET empStatusID=2 where empID=#{id}
+	</update>
+	
+	<update id="enable" parameterType="Long" >
+	update EMPS SET empStatusID=1 where empID=#{id}
+	</update>
+	
 </mapper>
