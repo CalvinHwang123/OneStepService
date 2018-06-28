@@ -236,39 +236,12 @@ public class PortalHandler {
 	@RequestMapping("/worksIntroduction")
 	public ModelAndView worksIntroduction(HttpServletRequest request,
 			@RequestParam(value = "worksId", required = true, defaultValue = "empty") Long worksId) {
-		System.out.println("进入-" + worksId + "-详情");
 
 		List<Workinformation> workinfolist = portalBizImpl.worksIntroduction(worksId);
 		request.setAttribute("worksIntroduction", workinfolist);
 
 		ModelAndView worksIntroduction = new ModelAndView("/foreground/worksIntroduction");
 		return worksIntroduction;
-	}
-
-	// 前端 作品 按价格分类 袁楠文 2018-6-21 11:09
-	@RequestMapping("/classpricevaluelook")
-	public ModelAndView classpricevaluelook(HttpServletRequest request,
-			@RequestParam(value = "pageSize", required = true, defaultValue = "12") int pageSize,
-			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
-		String classpricevalue = request.getParameter("classpricevalue");
-
-		System.out.println(classpricevalue.split("-")[0] + "-" + classpricevalue.split("-")[1]);
-
-		/*
-		 * PageHelper.startPage(pageNum, pageSize); List<Workinformation> workinfolist =
-		 * portalBizImpl.workInfoList(condition);
-		 * 
-		 * List<Classification> oneclassmenulist = systemManegeBizImpl.oneclassMenu();
-		 * List<Classification> twoclassmenulist = systemManegeBizImpl.twoclassMenu();
-		 * 
-		 * PageInfo pageInfo = new PageInfo<>(workinfolist, pageSize);
-		 * request.setAttribute("pageInfo", pageInfo);
-		 * request.setAttribute("oneclassmenulist", oneclassmenulist);
-		 * request.setAttribute("twoclassmenulist", twoclassmenulist); ModelAndView
-		 * classification = new ModelAndView("worksindex"); return classification;
-		 */
-		return null;
-
 	}
 
 	// 查询成功案例列表 by hsp 6-20 22:26

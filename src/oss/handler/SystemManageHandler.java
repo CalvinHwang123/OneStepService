@@ -196,7 +196,6 @@ public class SystemManageHandler {
 			Condition condition = new Condition();
 			condition.setClassPid(classificationId.intValue());
 			List<Classification> classlist = systemManegeBizImpl.seekclasslist(condition);
-			System.out.println("二级分类数量:" + classlist.size());
 			int j = 0;
 			if (classlist.size() != 0) {
 				for (int i = 0; i < classlist.size(); i++) {
@@ -235,7 +234,6 @@ public class SystemManageHandler {
 				flg = "success";
 			}
 		}
-		System.out.println(flg);
 		return flg;
 	}
 
