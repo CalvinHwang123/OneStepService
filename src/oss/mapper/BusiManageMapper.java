@@ -1,15 +1,16 @@
 package oss.mapper;
 
 import java.util.List;
+
 import oss.annotation.MyRepository;
 import oss.bean.Condition;
 import oss.bean.Credit;
-import oss.bean.Links;
+import oss.bean.Demands;
+import oss.bean.Tender;
 import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
-import oss.bean.Demands;
 
 /*
  * 业务管理Mapper接口
@@ -85,4 +86,16 @@ public interface BusiManageMapper {
 
 	// 信用明细
 	public List<Credit> creditList(Users users);
+	
+	//by hsp 6-28 11:05 检查服务商是否投过该需求的标
+	public Tender selectTenderByID(Tender tender);
+	
+	//by hsp 6-28 11:25 查找具体的需求
+	public Demands selectDemandByID(Tender tender);
+	
+	//by hsp 6-28 11:36投标成功后，需求的剩余投标数量-1
+	public int updateDemandTenderNumber(Demands demands);
+
+	//by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
+	public int insertTender(Tender tender);
 }

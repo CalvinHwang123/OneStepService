@@ -1942,7 +1942,7 @@
 									<td><p class="normal-p">
 											<a class="blue" rel="nofollow"
 												href="//task.zbj.com/13655206/#bid-erea" target="_blank"
-												data-zbjlog="{obj:'main'}">0</a><span class="text">参与</span><span
+												data-zbjlog="{obj:'main'}">${8-dem.tenderNumber}</a><span class="text">参与</span><span
 												class="text"> | </span>
 												<span class="text">招标中</span>
 										</p>
