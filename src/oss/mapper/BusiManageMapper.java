@@ -9,6 +9,7 @@ import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
+import oss.bean.userService;
 import oss.bean.Demands;
 
 /*
@@ -84,5 +85,8 @@ public interface BusiManageMapper {
 	public List<Trading> tradingList(Condition condition);
 
 	// 信用明细
-	public List<Credit> creditList(Users users);
+	public List<Credit> creditList(Condition condition);
+	
+	//收藏
+	public List<userService> userServiceList(Condition condition);
 }

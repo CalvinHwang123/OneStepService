@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>雇主中心-信用明细</title>
+<title>雇主中心-交易明细</title>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
 
 	<div class='order-wrap'>
-		<form id="pageForm" action="BusiManage/creditList.action">
+		<form id="pageForm" action="BusiManage/tradingList.action">
 			<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 				id='utopia_widget_6'>
 				<!-- 隐藏域 每页条数 -->
@@ -22,51 +22,80 @@
 					id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}">
 
-				<div class="form-inline">
-					<font size="3" face="sans serif">信用类型:</font> 
-					<select class="form-control" name="classPid" >
-						<option value=0></option>
-						<option value=1>完成</option>
-						<option value=2>违约</option>
-					</select>
-
-					<button type="submit" class="btn btn-default">查询</button>
+				<div class="form-group" style="width: 20%;">
+					<label class="sr-only" for="name">开始时间</label> <input type="date"
+						class="form-control" id="name" placeholder="请输入" name="startDate"
+						value="${condition.startDate}">
+				</div>
+				<div class="glyphicon glyphicon-search">
+					<input type="submit">
 				</div>
 			</div>
 			<div class='order-top-banner' id='utopia_widget_7'>
-				<div class='top-banner-tips'></div>
-				<div class='top-banner-cont'></div>
+				<div class='top-banner-tips'>1</div>
+				<div class='top-banner-cont'>2</div>
 			</div>
 			<div class='order-bg'>
 				<div class='options'>
 					<div class="table-responsive">
-						<table class="table table-hover">
-							<caption>我的信用</caption>
-							<thead>
-								<tr>
-									<th>序列</th>
-									<th>信用类型</th>
-									<th>信用分</th>
-									<th>信用变动原因</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="i" items="${pageInfo.list}" begin="0"
-									varStatus="status">
-									<tr>
-										<td><c:out value="${status.index+1}"></c:out></td>
-										<td><c:out value="${i.creditType}"></c:out></td>
-										<td><c:out value="${i.creditPoints}"></c:out></td>
-										<td><c:out value="${i.creditWhy}"></c:out></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<div class="add-products">
+							<div class="container">
+								<h3 class="w3ls-title"></h3>
+								<div class="add-products-row">
+									<c:forEach items="${pageInfo.list}" var="i" begin="0"
+										varStatus="s">
+										<c:if test="${i.checkUsers.imageUrl == null}">
+											<div class="w3ls-add-grids"
+												style="background:url(<%=basePath%>/portal/images/noface.gif)no-repeat 0px 0px;
+						background-size: cover;">
+												<a
+													href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
+													<h5>
+														<c:out value="${i.checkUsers.userName}"></c:out>
+														<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+													</h5>
+												</a>
+											</div>
+											<div class="successText">
+												<a
+													href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
+													<h6>
+														<c:out value="${i.checkUsers.userName}"></c:out>
+													</h6>
+												</a>
+												<HR
+													style="FILTER: alpha(opacity = 100, finishopacity = 0, style = 3)"
+													width="80%" color=#987cb9 SIZE=3>
+											</div>
+											<br></br>
+										</c:if>
+										<c:if test="${i.checkUsers.imageUrl != null}">
+											<div class="info-item">
+												<img
+													src="${i.checkUsers.imageUrl};a.c=220x160&amp;a.g=Center"
+													class="info-img" alt="从贫困村到“中国最美休闲乡村”逆袭，这三个村子有话说">
 
-					</div>
+												<div class="content-wrap">
+													<h4 class="info-title text-overflow">
+														<a class="link-hover"
+															href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
+															<c:out value="${i.checkUsers.userName}"></c:out>
+														</a>
+													</h4>
+													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
+												</div>
+											</div>
+											<br></br>
+										</c:if>
+									</c:forEach>
+
+								</div>
+							</div>
 		</form>
+
 	</div>
-	<form id="pageForm" action="BusiManage/creditList.action">
+
+	<form id="pageForm" action="BusiManage/facilitatorCreditList.action">
 		<div class="page">
 			<c:choose>
 				<c:when test="${pageInfo.getPages() == 0}">
@@ -139,8 +168,8 @@
 			</c:choose>
 		</div>
 	</form>
-
 	</div>
+
 	</div>
 	</div>
 	</div>
@@ -168,8 +197,6 @@ function changePageSize(pageSize) {
 };
 </script>
 	<%@include file="/end.jsp"%>
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script
-		src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>

@@ -28,6 +28,7 @@ import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
+import oss.bean.userService;
 import oss.bean.Demands;
 import oss.biz.BusiManageBiz;
 import oss.biz.SystemManegeBiz;
@@ -336,18 +337,36 @@ public class BusiManageHandler {
 		@RequestMapping("/creditList.action")
 		public ModelAndView creditList(HttpServletRequest request,
 				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
-				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Users users) {
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
 			 HttpSession session=request.getSession();        
 			Users users2=(Users) session.getAttribute("forelogin");
 			String userAcc=users2.getUserAccount();
-			users.setUserAccount(userAcc);
+			condition.setTitle(userAcc);
 			PageHelper.startPage(pageNum, pageSize);
-			List<Credit> listCredit = busiManageBizImpl.creditList(users);
+			List<Credit> listCredit = busiManageBizImpl.creditList(condition);
 			PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
 			System.out.println(pageInfo.getTotal());
 			request.setAttribute("pageInfo", pageInfo);	
 			ModelAndView mav = new ModelAndView("CreditList");
 			return mav;		
 		}
-	
+		
+		// 雇主收藏  wwj   6-27 15:39
+				@RequestMapping("/userServiceList.action")
+				public ModelAndView userServiceList(HttpServletRequest request,
+						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+					 HttpSession session=request.getSession();        
+						Users users2=(Users) session.getAttribute("forelogin");
+						String userAcc=users2.getUserAccount();			
+						condition.setTitle(userAcc);
+					PageHelper.startPage(pageNum, pageSize);
+					List<userService> listTrading = busiManageBizImpl.userServiceList(condition);
+					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+					System.out.println(pageInfo.getTotal());
+					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("condition", condition);
+					ModelAndView mav = new ModelAndView("Collection");
+					return mav;		
+				}
 }

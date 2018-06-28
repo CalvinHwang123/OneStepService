@@ -15,9 +15,7 @@ public class Users {
 	private Long userStatusID;// 用户账号状态
 	private Long userCredit;// 用户信用分
 	private Long userType;// 用户类型
-
-
-
+	private String imageUrl;           
 	private  Credit  credit;
 
 	public Users() {
@@ -130,8 +128,11 @@ public class Users {
 	public void setCredit(Credit credit) {
 		this.credit = credit;
 	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
-	
-
-	
 }

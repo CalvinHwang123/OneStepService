@@ -141,10 +141,7 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dt>
 
 							<dd>
-								<a class='J_menuItem ' href='/collection-provider'
-									data-linkid='10132978'
-									data-extra-path='/collection-service,/collection-task'
-									target='_self'>我收藏的</a>
+								<a class='J_menuItem ' href='BusiManage/userServiceList.action'>我收藏的</a>
 
 							</dd>
 

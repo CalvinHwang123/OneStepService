@@ -111,10 +111,8 @@ function login(result) {
 	if (result == "success") {
 		$("#Login").submit();
 	} else if (result == "fail") {
-		toastr.error("账号失效");
 		alert("账号失效");
 	} else {
-		toastr.error("登入失败");
 		 alert("登入失败");	 
 		$("#Login").attr("action", "ForeLogin.jsp")
 		$("#Login").submit();

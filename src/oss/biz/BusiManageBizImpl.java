@@ -11,6 +11,7 @@ import oss.bean.Credit;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
+import oss.bean.userService;
 import oss.bean.Demands;
 import oss.bean.Trading;
 import oss.mapper.BusiManageMapper;
@@ -155,13 +156,21 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	// 交易明细
 	@Override
 	public List<Trading> tradingList(Condition condition) {
-		
+
 		return busiManageMapper.tradingList(condition);
 	}
+
 	// 信用明细
 	@Override
-	public List<Credit> creditList(Users users) {
-	
-		return busiManageMapper.creditList(users);
+	public List<Credit> creditList(Condition condition) {
+
+		return busiManageMapper.creditList(condition);
+	}
+
+	// 收藏
+	@Override
+	public List<userService> userServiceList(Condition condition) {
+
+		return busiManageMapper.userServiceList(condition);
 	}
 }

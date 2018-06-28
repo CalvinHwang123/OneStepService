@@ -55,8 +55,7 @@
 <link href="portal/css/bootstrapValidator.css" rel="stylesheet">
 <!-- bootstrapValidator -->
 <!-- js -->
-<script src="portal/js/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="portal/js/md5.js"></script>
+
 <!-- //js -->
 <!-- web-fonts -->
 <link
@@ -70,6 +69,14 @@
 	rel='stylesheet' type='text/css'>
 <!-- web-fonts -->
 <script src="portal/js/owl.carousel.js"></script>
+
+<script src="portal/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="portal/js/md5.js"></script>
+<link rel="stylesheet" href="portal/css/jigsaw.css">
+<script src="portal/js/jquery-scrolltofixed-min.js"
+	type="text/javascript"></script>
+	<script src="portal/js/login.js" type="text/javascript"></script>
+<script src="portal/js/toastr.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
 		$("#owl-demo").owlCarousel({
