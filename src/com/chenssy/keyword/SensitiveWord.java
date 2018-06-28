@@ -25,7 +25,7 @@ public class SensitiveWord {
     private int replceSize = 500;  
     private String fileName = "CensorWords.txt";  
     private List<String> arrayList;  
-    public Set<String> sensitiveWordSet;//包含的敏感词列表，过滤掉重复项
+    public static Set<String> sensitiveWordSet;//包含的敏感词列表，过滤掉重复项
     public List<String> sensitiveWordList;//包含的敏感词列表，包括重复项，统计次数
     
     /** 
@@ -185,8 +185,7 @@ public class SensitiveWord {
 	    System.out.println("被检测字符串长度:"+str.length());  
 	    str = sw.filterInfo(str);  
 	    long endNumber = System.currentTimeMillis();  
-	    //System.out.println("语句中包含敏感词的个数为：" + sensitiveWordSet.size() + "。包含：" + sensitiveWordSet);
-	    //System.out.println("语句中包含敏感词的个数为：" + sensitiveWordList.size() + "。包含：" + sensitiveWordList);
+	    System.out.println("语句中包含敏感词的个数为：" + sensitiveWordSet.size() + "。包含：" + sensitiveWordSet);
 	    System.out.println("总共耗时:"+(endNumber-startNumer)+"ms");  
 	    System.out.println("替换后的字符串为:\n"+str);  
 	}

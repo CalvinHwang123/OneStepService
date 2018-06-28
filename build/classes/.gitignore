@@ -1,9 +1,10 @@
-<<<<<<< HEAD
-=======
+/CensorWords.txt
+/applicationContext.xml
 /com/
->>>>>>> refs/remotes/origin/nw
+<<<<<<< HEAD
+/log4j.properties
 /oss/
-<<<<<<< HEAD
-/com/
+/springmvc.xml
 =======
->>>>>>> refs/remotes/origin/nw
+/SensitiveWord.txt
+>>>>>>> refs/heads/sp

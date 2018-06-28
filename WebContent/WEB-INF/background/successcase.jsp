@@ -302,7 +302,6 @@
        			data:JSON.stringify(deleteCases),
        			async:true,
        			success:function(msg){//
-       				alert(msg);
                     layer.msg('已删除!',{icon:1,time:1000});
                     window.location.reload();
        			}
@@ -332,7 +331,6 @@
  			data:JSON.stringify(deleteCases),
  			async:true,
  			success:function(msg){//
- 				alert(msg);
               layer.msg('已删除!',{icon:1,time:1000});
               window.location.reload();
  			}

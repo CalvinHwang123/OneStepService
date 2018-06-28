@@ -116,11 +116,17 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dt>
 
 							<dd>
-								<a class='J_menuItem ' href='/order' data-linkid='10132975'
-									target='_self'>我的订单</a>
+								<a class='J_menuItem ' href='BusiManage/userPersonal.action' data-linkid='10132975'
+									target='_self'>我的需求</a>
 
 							</dd>
+							
+							<dd>
+								<a class='J_menuItem ' href='/order' data-linkid='10132975'
+									target='_self'>我购买的作品</a>
 
+							</dd>
+							
 							<dd>
 								<a class='J_menuItem ' href='/comment/tobe'
 									data-linkid='10132976' target='_self'>我的评价</a>

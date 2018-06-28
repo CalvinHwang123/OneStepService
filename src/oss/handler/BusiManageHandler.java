@@ -22,9 +22,7 @@ import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Dynamics;
 import oss.bean.Links;
-import oss.bean.Logs;
 import oss.bean.Trading;
-import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
@@ -223,9 +221,9 @@ public class BusiManageHandler {
 	// 退出
 	@RequestMapping("/usersExit.action")
 	public ModelAndView usersExit(HttpServletRequest request, Users users) {
-		 HttpSession session=request.getSession(false);         
-         //从session移除
-         session.removeAttribute("forelogin");
+		HttpSession session = request.getSession(false);
+		// 从session移除
+		session.removeAttribute("forelogin");
 		ModelAndView mav = new ModelAndView("../ForeLogin");
 		return mav;
 	}
@@ -276,28 +274,53 @@ public class BusiManageHandler {
 		int up = busiManageBizImpl.updateWorksById(works);
 		return "success";
 	}
-	
+
 	// 个人中心修改
 	@RequestMapping("/usersInfo.action")
 	public ModelAndView usersInfo(HttpServletRequest request, Users users) {
-		Users usersList=busiManageBizImpl.updateUsersByAcc(users);
+		Users usersList = busiManageBizImpl.updateUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
 		ModelAndView mav = new ModelAndView("PersonInfo");
-		return mav;		
+		return mav;
 	}
+
 	
-	// 个人中心查詢
-	@RequestMapping("/selectUsersByAcc.action")
-	public ModelAndView SelectUsersByAcc(HttpServletRequest request, Users users) {
+	// 服务商个人信息修改
+		@RequestMapping("/facilitatorusersInfo.action")
+		public ModelAndView facilitatorusersInfo(HttpServletRequest request, Users users) {
+			Users usersList=busiManageBizImpl.updateUsersByAcc(users);
+			request.setAttribute("usersList", usersList);
+			ModelAndView mav = new ModelAndView("/foreground/myOrder");
+			return mav;		
+		}
+	
+	// 服务商个人中心查詢
+	@RequestMapping("/Individualcenter.action")
+	public ModelAndView Individualcenter(HttpServletRequest request, Users users) {
 		 HttpSession session=request.getSession();        
 		Users users2=(Users) session.getAttribute("forelogin");
 		String userAcc=users2.getUserAccount();
 		users.setUserAccount(userAcc);
-		Users usersList=busiManageBizImpl.SelectUsersByAcc(users);
+		Users usersList = busiManageBizImpl.SelectUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("PersonInfo");
+		ModelAndView mav = new ModelAndView("/foreground/myOrder");
 		return mav;		
+
 	}
+
+	// 个人中心查詢
+		@RequestMapping("/selectUsersByAcc.action")
+		public ModelAndView SelectUsersByAcc(HttpServletRequest request, Users users) {
+			 HttpSession session=request.getSession();        
+			Users users2=(Users) session.getAttribute("forelogin");
+			String userAcc=users2.getUserAccount();
+			users.setUserAccount(userAcc);
+			Users usersList=busiManageBizImpl.SelectUsersByAcc(users);
+			request.setAttribute("usersList", usersList);
+			ModelAndView mav = new ModelAndView("PersonInfo");
+			return mav;		
+		}
+
 	// 交易明细
 		@RequestMapping("/tradingList.action")
 		public ModelAndView TradingList(HttpServletRequest request,
@@ -318,18 +341,27 @@ public class BusiManageHandler {
 		}
 
 
+
+
 	// by hsp 雇主发布需求 6-26 10:20
 	@RequestMapping("/releaseDemand.action")
 	public ModelAndView releaseDemand(HttpServletRequest req, Demands demands) {
 		demands.setReleaseTime(DateUtil.getCurrentDate());
-		// busiManageBizImpl.releaseDemand(demands);
-		System.out.println("需求标题：" + demands.getDemandTitle());
-		System.out.println("需求内容：" + demands.getDemandContent());
-		System.out.println("需求预算：" + demands.getDemandPrice());
-		System.out.println("截止时间：" + demands.getAsoftTime());
-		System.out.println("服务类型ID：" + demands.getClassificationID());
-		System.out.println("雇主ID："+demands.getUserID());
-		ModelAndView mav = new ModelAndView("foreground/successcase");
+		demands.setTenderNumber(8L);
+		//测试，投标状态id为2，已通过审核，
+		demands.setDemandstatusid(2L);
+		 busiManageBizImpl.releaseDemand(demands);
+		ModelAndView mav = new ModelAndView("../foregroundindex");
+		return mav;
+	}
+
+	// by hsp 个人中心 6-26 10:20
+	@RequestMapping("/userPersonal.action")
+	public ModelAndView userPersonal(HttpServletRequest req, Demands demands) {
+		//根据用户ID查找用户的订单
+		
+		
+		ModelAndView mav = new ModelAndView("userpersonal/myorder");
 		return mav;
 	}
 	
@@ -367,6 +399,43 @@ public class BusiManageHandler {
 					request.setAttribute("pageInfo", pageInfo);	
 					request.setAttribute("condition", condition);
 					ModelAndView mav = new ModelAndView("Collection");
+					return mav;		
+				}
+		// 服务商信用明细
+				@RequestMapping("/facilitatorCreditList.action")
+				public ModelAndView facilitatorCreditList(HttpServletRequest request,
+						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+					 HttpSession session=request.getSession();        
+					Users users2=(Users) session.getAttribute("forelogin");
+					String userAcc=users2.getUserAccount();
+					condition.setTitle(userAcc);
+					condition.setClassPid(171120);
+					PageHelper.startPage(pageNum, pageSize);
+					List<Credit> listCredit = busiManageBizImpl.creditList(condition);
+					PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
+					System.out.println(pageInfo.getTotal());
+					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("condition", condition);
+					ModelAndView mav = new ModelAndView("foreground/facilitatorCredit");
+					return mav;		
+				}
+				// 服务商交易明细
+				@RequestMapping("/facilitatortradingList.action")
+				public ModelAndView facilitatorTradingList(HttpServletRequest request,
+						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+					 HttpSession session=request.getSession();        
+						Users users2=(Users) session.getAttribute("forelogin");
+						String userAcc=users2.getUserAccount();			
+						condition.setTitle(userAcc);
+					PageHelper.startPage(pageNum, pageSize);
+					List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
+					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+					System.out.println(pageInfo.getTotal());
+					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("condition", condition);
+					ModelAndView mav = new ModelAndView("foreground/facilitatorTrading");
 					return mav;		
 				}
 }

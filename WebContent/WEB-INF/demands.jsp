@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<head>
+
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="renderer" content="webkit" />
@@ -19,8 +19,7 @@
 
 
 
-<link rel="shortcut icon" href="//s.zbjimg.com/img/favicon.ico"
-	type="image/x-icon" />
+
 
 
 <link
@@ -83,18 +82,17 @@
 <script type="text/javascript"
 	src="//as.zbjimg.com/rake-component/fe-common/utopia-bees-core/0.0.8/index.js"></script>
 
-<script>(function(j){var h=j.sdkUrl,a=j.name,d=this,g=d.document,f=null,e=null;d.AGENT20170621=a;d[a]=d[a]||function(i){return function(){(d[a]._agenti=d[a]._agenti||[]).push([i,arguments])}};var b=["track","trackSignup","userIdentify"];for(var c=0;c<b.length;c++){d[a][b[c]]=d[a].call(null,b[c])}if(!d[a].lt){f=g.createElement("script"),e=g.getElementsByTagName("script")[0];f.async=true;f.src=h;e.parentNode.insertBefore(f,e);d[a].lt=1*new Date();d[a].para=j})({sdkUrl:location.protocol+"//v2.web.ue.zhubajie.la/api/v1/agent/info/4GDGFHGF8S215NS5G855RDDGR14DSGR4/15F1N2G2R54GW6WS964SGDD9S89G8GS5",sendLimit:1,showLog:true,name:"taskhall",autoTrack:true,apiHost:location.protocol+"//v2.web.ue.zhubajie.la",appToken:"15F1N2G2R54GW6WS964SGDD9S89G8GS5"});</script>
 
 <script>
         MonitorHD.sh = +new Date;
     </script>
 </head>
-<body >
-<%@include file="/head.jsp"%>
+<body>
+	<%@include file="/head.jsp"%>
 
 
 	<div class="grid list-category-nav">
-		<form method="get" action="">
+		<!-- <form method="get" action="">
 			<a href="//task.zbj.com">需求大厅</a> <span class="ui-breadcrumb-divider">&gt;</span>
 			<div class="ui-dropdown ui-dropdown-level1">
 				<a data-linkid="10002776" href="//task.zbj.com/xuqiu/"
@@ -232,7 +230,7 @@
 				</button>
 			</div>
 			本次共找到<span class="highlight">7991</span>条需求外包信息
-		</form>
+		</form> -->
 	</div>
 
 
@@ -243,7 +241,7 @@
 
 			<div class="list-container">
 
-				<a href="//quan.zbj.com/thread-11973-1-1.html" target="_blank"
+				<a href="" target="_blank"
 					class="bid-desc-link"> 付费投标说明 <span></span>
 				</a>
 				<div class="list-container-hd clearfix hide">
@@ -260,69 +258,46 @@
 				<div class="list-filter filter-along">
 
 
-					<dl>
-						<dt>交易模式:</dt>
-						<dd>
-
-							<a data-linkid="10002781" href="//task.zbj.com/s5.html?m=1"
-								class='selected' rel="nofollow">全部</a> <a data-linkid="10002781"
-								href="//task.zbj.com/s5.html?m=5" rel="nofollow">众包</a> <a
-								data-linkid="10002781" href="//task.zbj.com/s5.html?m=2"
-								rel="nofollow">比稿</a> <a data-linkid="10002781"
-								href="//task.zbj.com/s5.html?m=3" rel="nofollow">招标</a> <a
-								data-linkid="10002781" href="//task.zbj.com/s5.html?m=4"
-								rel="nofollow">计件</a>
-						</dd>
-					</dl>
+					
 					<dl>
 						<dt>
-							赏<span style="visibility: hidden;">占位</span>金:
+							金<span style="visibility: hidden;">占位</span>额:
 						</dt>
 						<dd>
-							<a data-linkid="10002782" href="//task.zbj.com/s5.html?h=1"
+							<a data-linkid="10002782" href=""
 								class='selected' rel="nofollow">全部</a> <a data-linkid="10002782"
-								href="//task.zbj.com/s5.html?h=3" rel="nofollow">已托管赏金</a> <a
-								data-linkid="10002782" href="//task.zbj.com/s5.html?h=4"
-								rel="nofollow">未托管赏金</a> <a data-linkid="10002782"
-								href="//task.zbj.com/s5.html?h=2" rel="nofollow">可议价</a>
+								href="" rel="nofollow">0-1000</a> <a
+								data-linkid="10002782" href=""
+								rel="nofollow">1000-3000</a> <a data-linkid="10002782"
+								href="" rel="nofollow">3000以上</a>
 						</dd>
 					</dl>
 					<dl>
 						<dt>需求时间:</dt>
 						<dd>
-							<a data-linkid="10002783" href="//task.zbj.com/s5.html?t=1"
-								class='selected' rel="nofollow">全部</a> <a data-linkid="10002783"
-								href="//task.zbj.com/s5.html?t=998" rel="nofollow">加急</a> <a
-								data-linkid="10002783" href="//task.zbj.com/s5.html?t=5"
+							<a data-linkid="10002783" href=""
+								class='selected' rel="nofollow">全部</a>  <a
+								data-linkid="10002783" href=""
 								rel="nofollow">今日发布</a> <a data-linkid="10002783"
-								href="//task.zbj.com/s5.html?t=6" rel="nofollow">昨日发布</a> <a
-								data-linkid="10002783" href="//task.zbj.com/s5.html?t=2"
+								href="" rel="nofollow">昨日发布</a> <a
+								data-linkid="10002783" href=""
 								rel="nofollow">近3天发布</a> <a data-linkid="10002783"
-								href="//task.zbj.com/s5.html?t=4" rel="nofollow">24小时内到期</a> <a
-								data-linkid="10002783" href="//task.zbj.com/s5.html?t=7"
+								href="" rel="nofollow">24小时内到期</a> <a
+								data-linkid="10002783" href=""
 								rel="nofollow">2天内到期</a> <a data-linkid="10002783"
-								href="//task.zbj.com/s5.html?t=3" rel="nofollow">3天内到期</a>
+								href="" rel="nofollow">3天内到期</a>
 						</dd>
 					</dl>
 
 					<dl>
 						<dt>投标情况:</dt>
 						<dd>
-							<a data-linkid="10002784" href="//task.zbj.com/s5.html?w=1"
+							<a data-linkid="10002784" href=""
 								class='selected' rel="nofollow">全部</a> <a data-linkid="10033380"
-								href="//task.zbj.com/s5.html?w=2" rel="nofollow">投标未满</a>
+								href="">投标未满</a>
 						</dd>
 					</dl>
-					<dl class="filter-last">
-						<dt>会员订单:</dt>
-						<dd>
-							<a data-linkid="10030934" href="//task.zbj.com/s5.html?x=0"
-								class='selected' rel="nofollow">全部</a> <a data-linkid="10030934"
-								href="//task.zbj.com/s5.html?x=5" rel="nofollow">五星会员订单</a> <a
-								data-linkid="10030934" href="//task.zbj.com/s5.html?x=2"
-								rel="nofollow">校园订单</a>
-						</dd>
-					</dl>
+					
 				</div>
 
 
@@ -330,11 +305,11 @@
 					<div id="j-list-advrs"></div>
 					<ul class="list-change">
 						<li class="current"><a data-linkid="10033182"
-							href="//task.zbj.com/s5.html" class='selected'>进行中</a></li>
+							href="" class='selected'>进行中</a></li>
 						<li><a data-linkid="10002785"
-							href="http://task.zbj.com/success/" class="selected">成功案例</a></li>
+							href="" class="selected">成功案例</a></li>
 
-						<li><a href="//tools.zbj.com" target="_blank">工具市场</a></li>
+						
 					</ul>
 					<span class="list-container-pub-entry fr"> </span>
 
@@ -345,13 +320,13 @@
 					<form method="get" id="zbj-storprice1"
 						action="//task.zbj.com/s5.html" class="">
 						<div class="list-sorttag">
-							<a href="//task.zbj.com/s5.html?o=0" class="selected">综合</a> <a
-								data-linkid="10002786" href="//task.zbj.com/s5.html?o=7">发布时间<i
+							<a href="" class="selected">综合</a> <a
+								data-linkid="10002786" href="">发布时间<i
 								class="iconfont">&#xe80c;</i></a> <a data-linkid="10002787"
-								href="//task.zbj.com/s5.html?o=1">剩余时间<i class="iconfont">&#xe80c;</i></a>
-							<a data-linkid="10002788" href="//task.zbj.com/s5.html?o=3">参与数<i
+								href="">剩余时间<i class="iconfont">&#xe80c;</i></a>
+							<a data-linkid="10002788" href="">参与数<i
 								class="iconfont">&#xe80c;</i></a> <a data-linkid="10002789"
-								href="//task.zbj.com/s5.html?o=5">价格<i class="iconfont">&#xe80c;</i></a>
+								href="">价格<i class="iconfont">&#xe80c;</i></a>
 						</div>
 						<div class="price-range">
 							<p class="js_range_input">
@@ -364,25 +339,25 @@
 							<div class="show-dor">
 								<ul class="unstyled">
 									<li data-max="100" data-min=""><a data-linkid="10002790"
-										rel="nofollow" href="//task.zbj.com/s5.html?b=100">100元以下</a>
+										rel="nofollow" href="">100元以下</a>
 									</li>
 									<li data-max="500" data-min="100"><a
 										data-linkid="10002790" rel="nofollow"
-										href="//task.zbj.com/s5.html?j=100&b=500">100—500</a></li>
+										href="">100—500</a></li>
 									<li data-max="1000" data-min="500"><a
 										data-linkid="10002790" rel="nofollow"
-										href="//task.zbj.com/s5.html?j=500&b=1000">500—1000</a></li>
+										href="">500—1000</a></li>
 									<li data-max="2000" data-min="1000"><a
 										data-linkid="10002790" rel="nofollow"
-										href="//task.zbj.com/s5.html?j=1000&b=2000">1000—2000</a></li>
+										href="">1000—2000</a></li>
 									<li data-max="5000" data-min="2000"><a
 										data-linkid="10002790" rel="nofollow"
-										href="//task.zbj.com/s5.html?j=2000&b=5000">2000—5000</a></li>
+										href="">2000—5000</a></li>
 									<li data-max="20000" data-min="5000"><a
 										data-linkid="10002790" rel="nofollow"
-										href="//task.zbj.com/s5.html?j=5000&b=20000">5000—20000</a></li>
+										href="">5000—20000</a></li>
 									<li data-max="" data-min="20000"><a data-linkid="10002790"
-										rel="nofollow" href="//task.zbj.com/s5.html?j=20000">2万元以上</a>
+										rel="nofollow" href="">2万元以上</a>
 									</li>
 								</ul>
 							</div>
@@ -397,8 +372,8 @@
 							data-area-pid="" data-area-cid="">
 							<a href="//map.zbj.com/list/getMapData/" target="_blank"
 								class="map-entry" data-linkid="10033176">
-								<div class="map-entry-box" >
-									<i class="map-icon-raw" ></i> <i
+								<div class="map-entry-box">
+									<i class="map-icon-raw"></i> <i
 										class="map-icon-close J-map-close"></i> 进入地图查找需求
 								</div>
 							</a> <a data-linkid="" href="#none" class="ui-dropdown-hd"><i
@@ -1875,7 +1850,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</form>
 				</div>
 
@@ -1946,34 +1921,40 @@
 							<td><span class="text">6天 后截止</span></td>
 						</tr> -->
 
-							<tr>
-								<td><p>
-										<em class="list-task-reward">&yen;1000</em><a
-											class="list-task-title" title="${dem.demandTitle }"
-											href="Portal/demandDetailsList.action?demandID=${dem.demandID}" target="_blank"
-											data-zbjlog="{obj:'main'}">${dem.demandTitle }</a>
-									</p>
-									<p class="list-task-ctn">${dem.demandContent }</p></td>
-								<td><p></p></td>
-								<td><p class="normal-p">
-										<a class="blue" rel="nofollow"
-											href="//task.zbj.com/13655206/#bid-erea" target="_blank"
-											data-zbjlog="{obj:'main'}">0</a><span class="text">参与</span><span
-											class="text"> | </span>
-											
-											
-											<c:if test="${dem.demandstatusid ==3}">
-											<span class="text">招标中</span>
-											</c:if>
-									</p>
-									<p class="normal-p">
-										<span style="white-space: nowrap; color: #999;">仅剩<span
-											class="highlight">8</span>个投标机会
-										</span>
-									</p></td>
-								<td><span class="text">截止时间为：${dem.asoftTime }</span></td>
-							</tr>
+							<c:if test="${dem.demandstatusid ==2}">
+								<tr>
+									<td>
 
+										<p>                                          
+											<em class="list-task-reward">&yen;${dem.demandPrice}</em><a
+												class="list-task-title" title="${dem.demandTitle }"
+												href="Portal/demandDetailsList.action?demandID=${dem.demandID}"
+												target="_blank" data-zbjlog="{obj:'main'}">${dem.demandTitle }</a>
+										</p>
+
+										<p class="list-task-ctn">${dem.demandContent }</p>
+									</td>
+									<td>
+									<p class="normal-p">
+									<span class="text">发布时间为：${dem.releaseTime }</span>
+									</p>
+									</td>
+									<td><p class="normal-p">
+											<a class="blue" rel="nofollow"
+												href="//task.zbj.com/13655206/#bid-erea" target="_blank"
+												data-zbjlog="{obj:'main'}">0</a><span class="text">参与</span><span
+												class="text"> | </span>
+												<span class="text">招标中</span>
+										</p>
+										<p class="normal-p">
+											<span style="white-space: nowrap; color: #999;">仅剩<span
+												class="highlight">${dem.tenderNumber}</span>个投标机会
+											</span>
+										</p></td>
+									<td><span class="text">截止时间为：${dem.asoftTime }</span></td>
+
+								</tr>
+							</c:if>
 						</table>
 				</c:forEach>
 				<div class="list-footer">
@@ -2059,7 +2040,7 @@
 
 	<br>
 	<br>
-<div class='cls'></div>
+	<div class='cls'></div>
 	<%@include file="/end.jsp"%>
 
 

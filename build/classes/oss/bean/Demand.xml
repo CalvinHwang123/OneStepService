@@ -34,9 +34,9 @@
 		</selectKey>
 		insert into demands 
 		(demandID,classificationID,userID,demandstatusid,demandTitle,demandContent,releaseTime
-		,asoftTime,demandPrice) values 
+		,asoftTime,demandPrice,tenderNumber) values 
 		(#{demandID},#{classificationID},#{userID},#{demandstatusid},#{demandTitle},#{demandContent}
-		,,#{releaseTime},#{asoftTime},#{demandPrice})
+		,#{releaseTime},#{asoftTime},#{demandPrice},#{tenderNumber})
 	</insert>
 	
 	

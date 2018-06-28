@@ -64,7 +64,7 @@
 </head>
 <body style="background-color: white;">
 	<div class='sub'>
-		<div class='menu' style="background-color: #F5F5F5;">
+		<div class='menu' >
 
 			<dl>
 				<dt>
@@ -72,7 +72,7 @@
 				</dt>
 
 				<dd>
-					<a class='J_menuItem ' href='/order' data-linkid='10132975'
+					<a class='J_menuItem '  href='BusiManage/facilitatortradingList.action' data-linkid='10132975'
 						target='_self'>我的订单</a>
 
 				</dd>
@@ -112,14 +112,14 @@
 				</dt>
 
 				<dd>
-					<a class='J_menuItem J_accountLink' href='javascript:;'
+					<a class='J_menuItem J_accountLink' href='BusiManage/Individualcenter.action'
 						data-linkid='10132981' target='_blank'>我的账户</a>
 
 				</dd>
 
 				<dd>
-					<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
-						data-linkid='10157962' target='_blank'>我的积分</a>
+					<a class='J_menuItem '  href='BusiManage/facilitatorCreditList.action'
+						data-linkid='10157962' target='_blank'>我的信用</a>
 
 				</dd>
 			</dl>

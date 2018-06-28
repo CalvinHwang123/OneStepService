@@ -89,4 +89,5 @@ public interface BusiManageMapper {
 	
 	//收藏
 	public List<userService> userServiceList(Condition condition);
+
 }

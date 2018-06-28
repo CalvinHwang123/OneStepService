@@ -10,8 +10,8 @@
 <title>规则中心</title>
 
 
-<link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
-	type='image/x-icon' />
+<!-- <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
+	type='image/x-icon' /> -->
 
 <script type='text/javascript'>
 	window.ZBJInfo = {

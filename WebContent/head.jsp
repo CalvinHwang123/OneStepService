@@ -16,17 +16,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
-	
-	
-	
-	
-	
-	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } 
-
-
-
-
+	 
+ 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
+		function hideURLbar(){ window.scrollTo(0,1); }   
+ 
 </script>
 <!-- Custom Theme files -->
 <link href="portal/css/bootstrap.css" rel="stylesheet" type="text/css"
@@ -178,7 +171,7 @@
 
 							<ul class="dropdown-menu">
 								<li><a href="login.html">${forelogin.userName}</a></li>
-							
+
 								<li><a href="BusiManage/usersExit.action">退出</a></li>
 							</ul>
 					</c:if>
@@ -189,7 +182,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="Person.jsp">雇主中心</a></li>
+								<li><a href="BusiManage/userPersonal.action">雇主中心</a></li>
 								<li><a href="offers.html">我的足迹</a></li>
 								<li><a href="offers.html">我的收藏</a></li>
 								<li><a href="offers.html">真经</a></li>
@@ -204,6 +197,7 @@
 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
+							<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
 								<li><a href="offers.html">立即开店赚钱</a></li>
 								<li><a href="offers.html">具体开店流程</a></li>
 								<li><a href="offers.html">开店须知</a></li>
@@ -214,7 +208,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="Person.jsp">雇主中心</a></li>
+								<li><a href="BusiManage/userPersonal.action">雇主中心</a></li>
 								<li><a href="offers.html">我的足迹</a></li>
 								<li><a href="offers.html">我的收藏</a></li>
 								<li><a href="offers.html">真经</a></li>
@@ -229,7 +223,7 @@
 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="offers.html">服务商中心</a></li>
+								<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
 							</ul></li>
 					</c:if>
 					<li class="dropdown head-dpdn"><a href="#"
@@ -241,7 +235,6 @@
 							<li><a href="Portal/foreViolationsList.action">曝光台</a></li>
 							<li><a href="Portal/successCaseList.action">成功案例</a></li>
 							<li><a href="Portal/creditQuery.action">信用查询</a></li>
-							<li><a href="Portal/beforeDemandsList.action">需求大厅-所有需求</a></li>
 						</ul></li>
 					<li class="dropdown head-dpdn"><a href="contact.html"
 						class="dropdown-toggle"><i class="fa fa-map-marker"
@@ -335,6 +328,9 @@
 					</div>
 					<script type="text/javascript"
 						src="portal/js/jquery.marquee.min.js"></script>
+					<script type="text/javascript" src="./lib/layui/layui.js"
+						charset="utf-8"></script>
+					<script type="text/javascript" src="./js/xadmin.js"></script>
 					<script>
 						$('.marquee').marquee({
 							pauseOnHover : true
@@ -549,14 +545,14 @@
 	<!-- 	modal判断做敏感操作时，用户未登录的跳转登录界面modal -->
 	<div class="modal fade" id="redirectLoginModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: 250px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">您还未登录！</h4>
 				</div>
-				<div class="modal-body">是否跳转到登录界面？</div>
+				<div class="modal-body" style="text-align: center;">是否跳转到登录界面？</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary"
 						onclick="window.location.href = 'ForeLogin.jsp'">确定</button>

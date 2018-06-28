@@ -22,11 +22,12 @@
 在校友们的热心帮助下，经过约一年的筹备与拍摄，河北工业大学天津校友' />
 
 
-<link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico' type='image/x-icon'/>
-<link rel='dns-prefetch' href='//t.zbjimg.com'/>
-<link rel='dns-prefetch' href='//as.zbjimg.com'/>
-<link rel='dns-prefetch' href='//rms.zhubajie.com'/>
-<link rel='dns-prefetch' href='//avatar.zbjimg.com'/>
+<!-- <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
+	type='image/x-icon' /> -->
+<!-- <link rel='dns-prefetch' href='//t.zbjimg.com' />
+<link rel='dns-prefetch' href='//as.zbjimg.com' />
+<link rel='dns-prefetch' href='//rms.zhubajie.com' />
+<link rel='dns-prefetch' href='//avatar.zbjimg.com' /> -->
 <script type='text/javascript'>
 
 window.ZBJInfo = {
@@ -42,11 +43,6 @@ ZBJE1URI: "zbj.com",
 ueAgentURL: "ue.zhubajie.la"
 };
 </script>
-
-
-
-
-
 
 
 <script>/*<![CDATA[*/(function(j){var h=j.sdkUrl,a=j.name,d=this,g=d.document,f=null,e=null;d.AGENT20170621=a;d[a]=d[a]||function(i){return function(){(d[a]._agenti=d[a]._agenti||[]).push([i,arguments])}};var b=["track","trackSignup","userIdentify"];for(var c=0;c<b.length;c++){d[a][b[c]]=d[a].call(null,b[c])}if(!d[a].lt){f=g.createElement("script"),e=g.getElementsByTagName("script")[0];f.async=true;f.src=h;e.parentNode.insertBefore(f,e);d[a].lt=1*new Date();d[a].para=j}})({sdkUrl:location.protocol+"//"+  "//v2.web.ue.zhubajie.la"+"/api/v1/agent/info/" + "42D1FSGHDG9G22F4G6FRF1HRF6FDS42N/HF9NHWGRRG826WN4NDFDN2N4N926NHG4",sendLimit:10,showLog:true,name: "PcUnloginDemand",autoTrack:true,apiHost:location.protocol+"//"+  "//v2.web.ue.zhubajie.la",appToken: "HF9NHWGRRG826WN4NDFDN2N4N926NHG4" });//]]></script>
@@ -75,8 +71,10 @@ window.ZBJInfo.pubCategory='剪辑服务';
 
 
 
-<link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/nodejs-zbj-final-api/view/task/un-login_386898a.css,/static/nodejs-zbj-final-api/widget/task/un-login/top-banner/top-banner_335494a.css,/static/nodejs-zbj-final-api/widget/task/un-login/breadcrumb/breadcrumb_2b9b902.css,/static/nodejs-zbj-final-api/widget/task/un-login/join-service/join-service_433d54e.css,/static/nodejs-zbj-final-api/widget/task/un-login/piecework/piecework_024a6c8.css,/static/nodejs-zbj-final-api/widget/task/un-login/join-service/more-shop_bc71f1c.css,/static/nodejs-zbj-final-api/widget/task/un-login/project-info/project-info_0352695.css,/static/nodejs-zbj-final-api/widget/task/un-login/join-service/more-service_5965bd1.css,/static/nodejs-zbj-final-api/widget/task/un-login/recommend-contact/recommend-contact_eac7712.css,/static/nodejs-zbj-final-api/widget/task/un-login/related-shop/related-shop_3ad3122.css,/static/nodejs-zbj-final-api/widget/task/un-login/service-case-info/service-case-info_6dbbcbc.css,/static/nodejs-zbj-final-api/widget/task/un-login/recommend-service/recommend-service_9d605fb.css,/static/nodejs-zbj-final-api/widget/task/un-login/related-service/related-service_198c75e.css,/static/nodejs-zbj-final-api/widget/task/un-login/pub/pub_fbfd1e4.css"/>
-<link rel="stylesheet" type="text/css" href="//as.zbjimg.com/??/static/nodejs-zbj-utopiacs-web/widget/header-top-v1/header-top-v1_80a3c8b.css,/static/nodejs-zbj-utopiacs-web/widget/header-nav-v1/header-nav-v1_3ced18e.css,/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_dec9231.css"/>
+<link rel="stylesheet" type="text/css"
+	href="//as.zbjimg.com/??/static/nodejs-zbj-final-api/view/task/un-login_386898a.css,/static/nodejs-zbj-final-api/widget/task/un-login/top-banner/top-banner_335494a.css,/static/nodejs-zbj-final-api/widget/task/un-login/breadcrumb/breadcrumb_2b9b902.css,/static/nodejs-zbj-final-api/widget/task/un-login/join-service/join-service_433d54e.css,/static/nodejs-zbj-final-api/widget/task/un-login/piecework/piecework_024a6c8.css,/static/nodejs-zbj-final-api/widget/task/un-login/join-service/more-shop_bc71f1c.css,/static/nodejs-zbj-final-api/widget/task/un-login/project-info/project-info_0352695.css,/static/nodejs-zbj-final-api/widget/task/un-login/join-service/more-service_5965bd1.css,/static/nodejs-zbj-final-api/widget/task/un-login/recommend-contact/recommend-contact_eac7712.css,/static/nodejs-zbj-final-api/widget/task/un-login/related-shop/related-shop_3ad3122.css,/static/nodejs-zbj-final-api/widget/task/un-login/service-case-info/service-case-info_6dbbcbc.css,/static/nodejs-zbj-final-api/widget/task/un-login/recommend-service/recommend-service_9d605fb.css,/static/nodejs-zbj-final-api/widget/task/un-login/related-service/related-service_198c75e.css,/static/nodejs-zbj-final-api/widget/task/un-login/pub/pub_fbfd1e4.css" />
+<link rel="stylesheet" type="text/css"
+	href="//as.zbjimg.com/??/static/nodejs-zbj-utopiacs-web/widget/header-top-v1/header-top-v1_80a3c8b.css,/static/nodejs-zbj-utopiacs-web/widget/header-nav-v1/header-nav-v1_3ced18e.css,/static/nodejs-zbj-utopiacs-web/widget/footer-v1/footer-v1_dec9231.css" />
 <meta name="referrer" content="always">
 <script type="text/javascript">
     window.__bees__rates__ = {
@@ -90,92 +88,65 @@ window.ZBJInfo.pubCategory='剪辑服务';
         }]
     }
 </script>
-<script type="text/javascript" src="//as.zbjimg.com/rake-component/fe-common/utopia-bees-core/0.0.9/index.js"></script>
-<script id="seajsnode" src="//as.zbjimg.com/rake-component/fe-common/utopia-core/0.0.2/index.js"></script>
+<script type="text/javascript"
+	src="//as.zbjimg.com/rake-component/fe-common/utopia-bees-core/0.0.9/index.js"></script>
+<script id="seajsnode"
+	src="//as.zbjimg.com/rake-component/fe-common/utopia-core/0.0.2/index.js"></script>
 
 <style>
-.qs-module .qs-adviser-bottom .qs-adviser-wrap .adviser-item-container .qs-adviser-right {width: 158px;}
-.qs-module .qs-adviser-bottom .qs-adviser-wrap .adviser-item-container .qs-adviser-right .adviser-desc p {width: 158px;text-overflow: ellipsis;}
-</style><script type="text/javascript" src="//as.zbjimg.com/static/nodejs-zbj-final-api/seajs-config_6a9aa49.js"></script>
-<script type="text/javascript" src="//utopiacs.zbj.com/module-version.js"></script>
+.qs-module .qs-adviser-bottom .qs-adviser-wrap .adviser-item-container .qs-adviser-right
+	{
+	width: 158px;
+}
+
+.qs-module .qs-adviser-bottom .qs-adviser-wrap .adviser-item-container .qs-adviser-right .adviser-desc p
+	{
+	width: 158px;
+	text-overflow: ellipsis;
+}
+</style>
+<script type="text/javascript"
+	src="//as.zbjimg.com/static/nodejs-zbj-final-api/seajs-config_6a9aa49.js"></script>
+<script type="text/javascript"
+	src="//utopiacs.zbj.com/module-version.js"></script>
 </head>
 
 <body>
-
-
-	
+	<%@include file="/head.jsp"%>
+	<div class='container'>
 		<div class='task-base-content bgcolor'>
 			<div class='content'>
-				<div class='module-unlogin-breadcrumb' id='utopia_widget_3'>
-					<ul class='ui-breadcrumb'>
-
-						<li><a href='//task.zbj.com' title='需求大厅' target='_blank'>需求大厅</a>
-							<span class='ui-breadcrumb-divider'></span></li>
-
-
-<!-- 
-						<li><a href='//task.zbj.com/t-video' target='_blank'>
-								影视制作</a> <span class='ui-breadcrumb-divider'></span></li>
-
-
-
-
-
-						<li><a href='//task.zbj.com/t-yszz' target='_blank'> 影视后期</a>
-							<span class='ui-breadcrumb-divider'></span></li>
- -->
-						<li><c:out value="${dem.demandTitle}"></c:out></li>
-
-					</ul>
-				</div>
-				
 				<div class='task-area'>
-
-
-
-
-
-
-
-
 					<div class='right'>
 						<div class='join-service-container'>
 							<div class='join-service-model' id='utopia_widget_4'>
-								
-
-
+								<h2>
+									参与此项目的服务商 <a href='javascript:void(0);' class='title-entrance'
+										target='_blank' data-linkid='pcDemand-title-entrance-time'></a>
+								</h2>
+								<div class='no-service-container'>
+									<span class='hidden-icon'></span>
+									<p>帝六人网的专业服务商正在为客户定制方案 ...</p>
+								</div>
 							</div>
-							<script>/*<![CDATA[*/
-utopia.arrived({uid:'utopia_widget_4', js:["global/css/jquery.fancybox-thumbs.css","global/css/jquery.fancybox.css","global/js/fancybox.js","global/js/img-lazyload.js"], entry:function(e){e("global/css/jquery.fancybox-thumbs.css"),e("global/css/jquery.fancybox.css"),e("global/js/fancybox"),e("global/js/img-lazyload");var i={init:function(){var e=$(".join-sketch-items .service-image-container li"),i=$(".join-service-piecework-model li"),t=$(".shop-items li").length,s=$(".join-sketch-items .service-image-container li").length;s>4&&e.eq(3).append('<div class = "more-image">更多('+(s-4)+")</div>"),i.each(function(){var e=$(this).find(".image-items");e.length>5&&e.eq(4).append('<div class = "more-image">更多('+(e.length-5)+")</div>")}),$(window).scroll(function(){var e=$(document).scrollTop(),i=$(".module-project-info").height(),t=0;e>=180?(t=i-460,i>460&&$(".join-service-container").css(t>=e-170?{"margin-top":e-160+"px"}:{"margin-top":t+"px"})):180>e&&$(".join-service-container").css({"margin-top":"0px"})}),$(".more-shop-container .shop-items").css({width:40*t-10*(t-1)+"px"}),$("img.lazy").lazyload({effect:"fadeIn",threshold:300}),this.initEvent()},initEvent:function(){$(".join-sketch-items .image-tems .sketch-icon,.join-sketch-items .image-tems .more-image").on("click",function(){var e=$(this).siblings("img").attr("data-show"),i=($(this).siblings("img").attr("data-index"),$(this).parents(".join-sketch-items").find(".service-logo img").attr("src")),t=$(this).parents(".join-sketch-items").find(".service-base-message h3").text(),s=$(this).parents(".join-sketch-items").find(".join-sketch-time").val(),n=($(this).parent().siblings(),$(this).parents(".join-sketch-items").find(".service-base-message a").attr("href")),a=[],r=[];a.push({href:e,type:"image"});for(var o=$(this).parent().next(),c=$(this).parent().prev(),h="";o.length;)h=o.find("img").attr("data-show"),a.push({href:h,type:"image"}),o=o.next();for(;c.length;)prevHref=c.find("img").attr("data-show"),r.push({href:prevHref,type:"image"}),c=c.prev();a=a.concat(r.reverse()),$.fancybox.open(a,{helpers:{thumbs:{width:75,height:50,content:{img:i,description:t,time:s?s:"",href:n}}}})}),$(".join-service-piecework-model .image-items .piecework-icon,.join-service-piecework-model .image-items .more-image").on("click",function(){var e=$(this).siblings("img").attr("data-show"),i=($(this).siblings("img").attr("data-index"),$(this).parents("li").find(".piecework-logo img").attr("src")),t=$(this).parents("li").find(".title-desc").text(),s=$(this).parents("li").find(".piecework-time").val(),n=($(this).parent().siblings(),$(this).parents("li").find(".service-piecework-title a").attr("href")),a=[],r=[];a.push({href:e,type:"image"});for(var o=$(this).parent().next(),c=$(this).parent().prev(),h="";o.length;)h=o.find("img").attr("data-show"),a.push({href:h,type:"image"}),o=o.next();for(;c.length;)prevHref=c.find("img").attr("data-show"),r.push({href:prevHref,type:"image"}),c=c.prev();a=a.concat(r.reverse()),$.fancybox.open(a,{helpers:{thumbs:{width:85,height:50,content:{img:i,description:t,time:s,href:n}}}})})}};i.init()}});
-//]]></script>
 						</div>
 					</div>
 					<div class='left'>
+						<br> <br>
+						<h2 class='title'>
+							<c:out value="${dem.demandTitle}"></c:out>
+						</h2>
 						<div class='infomation project-info-infomation'>
+
 							<div class='module-project-info' id='utopia_widget_10'>
-
-
 								<div class='essential-information clearfix'>
 									<div class='text-area clearfix'>
 										<div class='fl'>
-											<h2 class='title'><c:out value="${dem.demandTitle}"></c:out></h2>
-											
+
 											<div class='info-area'>
 												<p class='money'>
-													￥10000<!-- <a
-														href='http://search.zbj.com/e/?kw=%E5%89%AA%E8%BE%91%E6%9C%8D%E5%8A%A1'
-														data-linkid='pcDemand-0-demand-similarProjectPrice'
-														class='encyclopedia-entrance-cls' target='_blank'><span
-														class='text'>查看更多类似项目报价</span><span class='more-arrow'></span></a> -->
-												</p>
-												<p class='description'>
-													<!-- 客户<span class='username'>t**3</span>发布了该项目，并找到了满意的<a
-														href='http://search.zbj.com/c/?kw=%E5%89%AA%E8%BE%91%E6%9C%8D%E5%8A%A1'
-														target='_blank' style='color: #3996D1;'
-														data-linkid='pcDemand-0-demand-category'>剪辑服务</a>方案<a
-														href='' target='_blank'
-														data-linkid='pcDemand-1-demand-category'
-														class='entrance-relative-href'></a> -->
+													￥
+													<c:out value="${dem.demandPrice}"></c:out>
 												</p>
 
 												<div class='cb'></div>
@@ -195,23 +166,7 @@ utopia.arrived({uid:'utopia_widget_4', js:["global/css/jquery.fancybox-thumbs.cs
 
 										<div class='js-describe-content'>
 											<div class='content-item'>
-												<!-- 我需要影视/动漫/游戏-剪辑服务 <br />在校友们的热心帮助下，经过约一年的筹备与拍摄，河北工业大学天津校友会宣传片（下称宣传片）的视频素材拍摄工作将届尾声，即将进入后期制作阶段。现公开征集宣传片的后期制作方，欢迎广大校友、各专业制作单位踊跃报名。
-												<br />一、服务范围： <br />1. 现有剧本（附件1）的整理、完善，提出补拍需求（如有）。 <br />2.
-												根据剧本要求，完成片头动画(约10s)的创作。 <br />3. 序幕（约50s）和片尾部分的剪辑制作。 <br />4.
-												对前期拍摄的视频素材进行剪辑与后期制作，与片头、序幕顺畅衔接，形成符合剧本要求，表达清晰的宣传片（约275-300s，不含片尾）。
-												<br />5. 制作过程中，需针对以上各部分，按双方商定的工作计划，定期进行工作成果的汇报沟通会。 <br />6.
-												其中第2条所列“片头动画(约10s)的创作”可拆分由独立制作方完成。 <br />二、制作周期 <br />2018年7月2日-8月10日
-												<br />三、服务费用 <br />按成果质量、制作周期及其他约束条款进行分步骤付款 <br />四、相关要求 <br />1.
-												制作方需具备过硬的专业能力、成熟的制作团队，及类似的工作经历。 <br />2.
-												熟悉河北工大的历史文化及校友会的发展历程。 <br />3.
-												拟投入本宣传片的制作团队成员，2/3以上为全日制校友的，优先考虑。 <br />4. 不得转包。 <br />五、投标须知
-												<br />1. 根据剧本编制可行、可控的制作、汇报、修改计划。 <br />2.
-												需提供至少3个相关作品，以作为具备专业能力的证明。 <br />3. 需提供涵盖各详细分项、分阶段的报价单。 <br />六、遴选过程
-												<br />1. 即日-6月30日 公开征集制作方(入选者准备陈述材料)。 <br />2. 6月30-7月1日
-												制作方现场陈述，校友会根据报名提供材料及陈述情况评选制作方。 <br />3. 7月2日 签订服务合同，进入制作周期。 -->
 												<c:out value="${dem.demandContent}"></c:out>
-												<br/>
-												<%-- 发布时间为：<c:out value="${dem.releaseTime}"></c:out> --%>
 											</div>
 											<div class='task-file-box'>
 
@@ -223,13 +178,18 @@ utopia.arrived({uid:'utopia_widget_4', js:["global/css/jquery.fancybox-thumbs.cs
 													</div>
 												</div>
 											</div>
-											<p class='pub-task-date'><c:out value="${dem.releaseTime}"></c:out></p>
+
 
 
 											<div>
 												<p>补充需求：</p>
-												<p><c:out value="${dem.demandRequire}"></c:out></p>
-												<p class='pub-task-date'><c:out value="${dem.releaseTime}"></c:out></p>
+												<p>
+													<c:out value="${dem.demandRequire}"></c:out>
+												</p>
+												<p class='pub-task-date'>
+													发布时间：
+													<c:out value="${dem.releaseTime}"></c:out>
+												</p>
 											</div>
 
 
@@ -239,33 +199,95 @@ utopia.arrived({uid:'utopia_widget_4', js:["global/css/jquery.fancybox-thumbs.cs
 												class='open-icon'></span>
 										</div>
 									</div>
-
 									<p class='contact-buyer'>
-										<a class='contact-buyer-linker' target='_blank'
-											href='//kw.zbj.com' data-linkid='10182401'>我也能做，立即联系雇主 ></a>
+										<a class='contact-buyer-linker' href='javascript:void(0);'
+											onclick="openBiddingModel(this)" demandID="${dem.demandID}"
+											demandBelongID="${dem.userID}"> 立即投标 ></a>
 									</p>
 								</div>
-
 							</div>
+
+							<div class="modal fade" id="biddingModal" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" style="width: 250px;">
+									<div class="modal-content">
+										<div class="modal-body" style="text-align: center;">是否确定要投标？</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary"
+												onclick="bidding()">确定</button>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-default"
+												onclick="layUITest()">laiUI测试</button>
+										</div>
+									</div>
+								</div>
+							</div>		
+							<script type="text/javascript">
+								function layUITest(){
+									layer.confirm('确认吗？',function(index){
+							    		
+							 		})
+								}
+							
+							
+							
+							
+								var demandID;
+								var demandBelongID;
+// 								打开是否确定投标的模态框
+								function openBiddingModel(a){
+									demandID = a.getAttribute("demandID");
+									demandBelongID = a.getAttribute("demandBelongID");
+									$("#biddingModal").modal('show');
+								}
+// 								确定投标之后进行判断，判断过后走ajax去投标
+								function bidding(){
+									var user = "${forelogin}"; 
+									if (user == "") {
+										$("#biddingModal").modal('hide');
+										$('#redirectLoginModal').modal("show");
+									}else if("${forelogin.userType}" == 1)
+									{
+										alert("您是雇主，还不是服务商，是否需要开店？");
+									}else if("${forelogin.userID}" == demandBelongID){
+										alert("不能投属于自己的标");
+									}
+										alert("您有服务商的身份，可以进行投标,标ID = "+ demandID);
+//										  var data ={"storyID":id};
+//								    	  deleteStorys.push(data);
+//										 $.ajax({
+//									 			url:"PortalManage/deleteStory.action",
+//									 			type:"post",
+//									 			dataType:"text",
+//									 			contentType:"application/json",
+//									 			data:JSON.stringify(deleteStorys),
+//									 			async:true,
+//									 			success:function(msg){//
+//									 				alert(msg);
+//									              layer.msg('已删除!',{icon:1,time:1000});
+//									              window.location.reload();
+//									 			}
+//									 		})
+								}
+							</script>
+
 							<script>/*<![CDATA[*/
-utopia.arrived({uid:'utopia_widget_10', js:["global/js/fancybox.js","global/css/jquery.fancybox-thumbs.css","global/css/jquery.fancybox.css","global/js/img-lazyload.js","fe-module/utopia-module-pubtask-bottom"], entry:function(e,t,o){"use strict";e("global/js/fancybox"),e("global/css/jquery.fancybox-thumbs.css"),e("global/css/jquery.fancybox.css"),e("global/js/img-lazyload");var i=e("fe-module/utopia-module-pubtask-bottom"),n={q:{describeArea:".describe-area",openContent:".js-open",describeContent:".js-describe-content"},util:{checkHide:function(){$(n.q.describeContent).height()>=240?$(n.q.describeArea).find(n.q.openContent).click():$(n.q.describeArea).find(n.q.openContent).hide()}},bindEvent:function(){$(n.q.describeArea).on("click",n.q.openContent,function(){$(n.q.describeContent).toggleClass("small"),$(this).toggleClass("contrary"),"展开"===$(this).find(".text").text()?($(".module-project-info").css({height:"auto"}),$(".module-project-info .describe-area .describe").css({height:"auto"}),$(this).find(".text").text("收起")):($(this).find(".text").text("展开"),$(".module-project-info").css({height:"460px"}),$(".module-project-info .describe-area .describe").css({height:"241px"}),$(".join-service-container").removeClass("scrollTop"),$(".join-service-container").css({"margin-top":"0px"}))}),$("img.lazy").lazyload({effect:"fadeIn",threshold:300})},imageView:function(){$(".js-describe-content .task-file-item .project-info-icon").click(function(){var e=[],t=$(this).siblings("img").attr("src"),o=$(this).siblings("img").attr("data-index"),i=$(this).parent().siblings();e.push({href:t,type:"image"}),i.each(function(t,i){var n=$(i).find("img").attr("data-index"),s=$(i).find("img").attr("src");n&&o!==n&&e.push({href:s,type:"image"})}),$.fancybox.open(e,{closeEffect:"none",helpers:{thumbs:{width:85,height:55}}})})},initPub:function(){var e=$(".project-pub-container .pub-content");if(ZBJInfo&&ZBJInfo.taskInfo&&ZBJInfo.taskInfo.basicCategory3Id){var t=ZBJInfo.pubCategory;new i({baseId:ZBJInfo.taskInfo.basicCategory3Id,taskTitle:t?t:"",scrollSwitch:!1,showStatus:!0,type:4,element:e,bottomImg:""})}else{new i({scrollSwitch:!1,showStatus:!0,type:1,element:e,bottomImg:""})}},init:function(){n.bindEvent(),n.util.checkHide(),n.imageView()}};n.init();var s={};o.exports=s}});
-//]]></script>
+  utopia.arrived({uid:'utopia_widget_10', js:["global/js/fancybox.js","global/css/jquery.fancybox-thumbs.css","global/css/jquery.fancybox.css","global/js/img-lazyload.js","fe-module/utopia-module-pubtask-bottom"], entry:function(e,t,o){"use strict";e("global/js/fancybox"),e("global/css/jquery.fancybox-thumbs.css"),e("global/css/jquery.fancybox.css"),e("global/js/img-lazyload");var i=e("fe-module/utopia-module-pubtask-bottom"),n={q:{describeArea:".describe-area",openContent:".js-open",describeContent:".js-describe-content"},util:{checkHide:function(){$(n.q.describeContent).height()>=240?$(n.q.describeArea).find(n.q.openContent).click():$(n.q.describeArea).find(n.q.openContent).hide()}},bindEvent:function(){$(n.q.describeArea).on("click",n.q.openContent,function(){$(n.q.describeContent).toggleClass("small"),$(this).toggleClass("contrary"),"展开"===$(this).find(".text").text()?($(".module-project-info").css({height:"auto"}),$(".module-project-info .describe-area .describe").css({height:"auto"}),$(this).find(".text").text("收起")):($(this).find(".text").text("展开"),$(".module-project-info").css({height:"460px"}),$(".module-project-info .describe-area .describe").css({height:"241px"}),$(".join-service-container").removeClass("scrollTop"),$(".join-service-container").css({"margin-top":"0px"}))}),$("img.lazy").lazyload({effect:"fadeIn",threshold:300})},imageView:function(){$(".js-describe-content .task-file-item .project-info-icon").click(function(){var e=[],t=$(this).siblings("img").attr("src"),o=$(this).siblings("img").attr("data-index"),i=$(this).parent().siblings();e.push({href:t,type:"image"}),i.each(function(t,i){var n=$(i).find("img").attr("data-index"),s=$(i).find("img").attr("src");n&&o!==n&&e.push({href:s,type:"image"})}),$.fancybox.open(e,{closeEffect:"none",helpers:{thumbs:{width:85,height:55}}})})},initPub:function(){var e=$(".project-pub-container .pub-content");if(ZBJInfo&&ZBJInfo.taskInfo&&ZBJInfo.taskInfo.basicCategory3Id){var t=ZBJInfo.pubCategory;new i({baseId:ZBJInfo.taskInfo.basicCategory3Id,taskTitle:t?t:"",scrollSwitch:!1,showStatus:!0,type:4,element:e,bottomImg:""})}else{new i({scrollSwitch:!1,showStatus:!0,type:1,element:e,bottomImg:""})}},init:function(){n.bindEvent(),n.util.checkHide(),n.imageView()}};n.init();var s={};o.exports=s}}); 
+ ]]></script>
 						</div>
 					</div>
 
-					
+
 					<script>
-utopia.arrived({uid:'utopia_widget_11', js:[], entry:function(){}});
-</script>
+ utopia.arrived({uid:'utopia_widget_11', js:[], entry:function(){}}); 
+ </script>
 					<div class='cb'></div>
-
-
-
-
 
 				</div>
 			</div>
 		</div>
-	
+	</div>
+	<%@include file="/end.jsp"%>
 </body>
 </html>
