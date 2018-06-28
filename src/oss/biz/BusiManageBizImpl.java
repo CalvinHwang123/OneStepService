@@ -160,8 +160,8 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	}
 	// 信用明细
 	@Override
-	public List<Credit> creditList(Users users) {
+	public List<Credit> creditList(Condition condition) {
 	
-		return busiManageMapper.creditList(users);
+		return busiManageMapper.creditList(condition);
 	}
 }

@@ -84,5 +84,5 @@ public interface BusiManageMapper {
 	public List<Trading> tradingList(Condition condition);
 
 	// 信用明细
-	public List<Credit> creditList(Users users);
+	public List<Credit> creditList(Condition condition);
 }

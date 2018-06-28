@@ -22,9 +22,7 @@ import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Dynamics;
 import oss.bean.Links;
-import oss.bean.Logs;
 import oss.bean.Trading;
-import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
@@ -286,6 +284,15 @@ public class BusiManageHandler {
 	}
 
 	
+	// 服务商个人信息修改
+		@RequestMapping("/facilitatorusersInfo.action")
+		public ModelAndView facilitatorusersInfo(HttpServletRequest request, Users users) {
+			Users usersList=busiManageBizImpl.updateUsersByAcc(users);
+			request.setAttribute("usersList", usersList);
+			ModelAndView mav = new ModelAndView("/foreground/myOrder");
+			return mav;		
+		}
+	
 	// 服务商个人中心查詢
 	@RequestMapping("/Individualcenter.action")
 	public ModelAndView Individualcenter(HttpServletRequest request, Users users) {
@@ -361,18 +368,55 @@ public class BusiManageHandler {
 		@RequestMapping("/creditList.action")
 		public ModelAndView creditList(HttpServletRequest request,
 				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
-				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Users users) {
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
 			 HttpSession session=request.getSession();        
 			Users users2=(Users) session.getAttribute("forelogin");
 			String userAcc=users2.getUserAccount();
-			users.setUserAccount(userAcc);
+			condition.setTitle(userAcc);
 			PageHelper.startPage(pageNum, pageSize);
-			List<Credit> listCredit = busiManageBizImpl.creditList(users);
+			List<Credit> listCredit = busiManageBizImpl.creditList(condition);
 			PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
 			System.out.println(pageInfo.getTotal());
 			request.setAttribute("pageInfo", pageInfo);	
 			ModelAndView mav = new ModelAndView("CreditList");
 			return mav;		
 		}
-	
+		// 服务商信用明细
+				@RequestMapping("/facilitatorCreditList.action")
+				public ModelAndView facilitatorCreditList(HttpServletRequest request,
+						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+					 HttpSession session=request.getSession();        
+					Users users2=(Users) session.getAttribute("forelogin");
+					String userAcc=users2.getUserAccount();
+					condition.setTitle(userAcc);
+					condition.setClassPid(171120);
+					PageHelper.startPage(pageNum, pageSize);
+					List<Credit> listCredit = busiManageBizImpl.creditList(condition);
+					PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
+					System.out.println(pageInfo.getTotal());
+					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("condition", condition);
+					ModelAndView mav = new ModelAndView("foreground/facilitatorCredit");
+					return mav;		
+				}
+				// 服务商交易明细
+				@RequestMapping("/facilitatortradingList.action")
+				public ModelAndView facilitatorTradingList(HttpServletRequest request,
+						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
+					 HttpSession session=request.getSession();        
+						Users users2=(Users) session.getAttribute("forelogin");
+						String userAcc=users2.getUserAccount();			
+						condition.setTitle(userAcc);
+					PageHelper.startPage(pageNum, pageSize);
+					List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
+					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+					System.out.println(pageInfo.getTotal());
+					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("condition", condition);
+					ModelAndView mav = new ModelAndView("foreground/facilitatorTrading");
+					return mav;		
+				}
+
 }

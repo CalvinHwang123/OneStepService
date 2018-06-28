@@ -3,8 +3,11 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.BusiManageMapper">
 <!-- 链接列表 -->
-	<select id="creditList" resultMap="CreditaMap" >
-		select a.creditID,a.creditType,a.creditPoints,a.creditWhy,b.userName,b.userAccount,b.userCredit,b.userID from Credit a, Users b where A.Userid=B.Userid and B.Useraccount=#{userAccount}
+	<select id="creditList" resultMap="CreditaMap" parameterType="oss.bean.Condition">
+		select a.creditID,a.creditType,a.creditPoints,a.creditWhy,b.userName,b.userAccount,b.userCredit,b.userID from Credit a, Users b where A.Userid=B.Userid and B.Useraccount=#{title}
+	<if test="classPid != null and classPid !='' and classPid!=171120">
+			and  a.creditType = #{classPid}
+	</if>
 	</select>
 	<resultMap type="oss.bean.Credit" id="CreditaMap">
 		<id property="creditID" column="creditID" />
