@@ -201,4 +201,10 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public int bidding(Tender tender) {
 		return busiManageMapper.insertTender(tender);
 	}
+//合作  wwj
+	@Override
+	public List<userService> cooperationList(Condition condition) {
+		
+		return busiManageMapper.cooperationList(condition);
+	}
 }

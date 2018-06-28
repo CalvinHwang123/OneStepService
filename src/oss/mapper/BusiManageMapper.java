@@ -91,6 +91,7 @@ public interface BusiManageMapper {
 	//收藏
 	public List<userService> userServiceList(Condition condition);
 
+
 	//by hsp 6-28 11:05 检查服务商是否投过该需求的标
 	public Tender selectTenderByID(Tender tender);
 	
@@ -102,4 +103,7 @@ public interface BusiManageMapper {
 
 	//by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
 	public int insertTender(Tender tender);
+	
+	//合作
+	public List<userService> cooperationList(Condition condition);
 }

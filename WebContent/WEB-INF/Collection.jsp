@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>雇主中心-交易明细</title>
+<title>雇主中心-我的收藏</title>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
 
 	<div class='order-wrap'>
-		<form id="pageForm" action="BusiManage/tradingList.action">
+		<form id="pageForm" action="BusiManage/userServiceList.action">
 			<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 				id='utopia_widget_6'>
 				<!-- 隐藏域 每页条数 -->
@@ -21,14 +21,13 @@
 					value="${pageInfo.getPageNum()}"> <input type="hidden"
 					id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}">
-
-				<div class="form-group" style="width: 20%;">
-					<label class="sr-only" for="name">开始时间</label> <input type="date"
-						class="form-control" id="name" placeholder="请输入" name="startDate"
+				<div class="form-inline">
+					<font size="3" face="sans serif">服务商名称:</font><input
+						style="width: 20%;" type="text" class="form-control" id="name"
+						placeholder="请输入服务商名称" name="startDate"
 						value="${condition.startDate}">
-				</div>
-				<div class="glyphicon glyphicon-search">
-					<input type="submit">
+					
+					<button type="submit" class="btn btn-default">查询</button>
 				</div>
 			</div>
 			<div class='order-top-banner' id='utopia_widget_7'>
@@ -45,34 +44,24 @@
 									<c:forEach items="${pageInfo.list}" var="i" begin="0"
 										varStatus="s">
 										<c:if test="${i.checkUsers.imageUrl == null}">
-											<div class="w3ls-add-grids"
-												style="background:url(<%=basePath%>/portal/images/noface.gif)no-repeat 0px 0px;
-						background-size: cover;">
-												<a
-													href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
-													<h5>
-														<c:out value="${i.checkUsers.userName}"></c:out>
-														<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-													</h5>
-												</a>
+											<div class="info-item">
+												<img class="info-img" alt="服务商1"
+													style="background:url(<%=basePath%>/portal/images/detail.png)no-repeat 0px 0px; background-size: cover;">
+												<div class="content-wrap">
+													<h4 class="info-title text-overflow">
+														<a class="link-hover"
+															href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
+															<c:out value="${i.checkUsers.userName}"></c:out>
+														</a>
+													</h4>
+													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
+												</div>
 											</div>
-											<div class="successText">
-												<a
-													href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
-													<h6>
-														<c:out value="${i.checkUsers.userName}"></c:out>
-													</h6>
-												</a>
-												<HR
-													style="FILTER: alpha(opacity = 100, finishopacity = 0, style = 3)"
-													width="80%" color=#987cb9 SIZE=3>
-											</div>
-											<br></br>
 										</c:if>
 										<c:if test="${i.checkUsers.imageUrl != null}">
 											<div class="info-item">
 												<img
-													src="${i.checkUsers.imageUrl};a.c=220x160&amp;a.g=Center"
+													src="${i.checkUsers.imageUrl};a.c=200x150&amp;a.g=Center"
 													class="info-img" alt="从贫困村到“中国最美休闲乡村”逆袭，这三个村子有话说">
 
 												<div class="content-wrap">
@@ -85,7 +74,6 @@
 													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
 												</div>
 											</div>
-											<br></br>
 										</c:if>
 									</c:forEach>
 
@@ -95,7 +83,7 @@
 
 	</div>
 
-	<form id="pageForm" action="BusiManage/facilitatorCreditList.action">
+	<form id="pageForm" action="BusiManage/userServiceList.action">
 		<div class="page">
 			<c:choose>
 				<c:when test="${pageInfo.getPages() == 0}">

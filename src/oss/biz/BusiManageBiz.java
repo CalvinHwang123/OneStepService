@@ -100,4 +100,7 @@ public interface BusiManageBiz {
 
 	// by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
 	public int bidding(Tender tender);
+	
+	//合作  wwj  6-28
+		public List<userService> cooperationList(Condition condition);
 }
