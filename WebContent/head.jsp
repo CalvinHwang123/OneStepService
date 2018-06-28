@@ -197,7 +197,11 @@
 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
+<<<<<<< HEAD
 							<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
+=======
+								<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
+>>>>>>> refs/remotes/origin/hlq
 								<li><a href="offers.html">立即开店赚钱</a></li>
 								<li><a href="offers.html">具体开店流程</a></li>
 								<li><a href="offers.html">开店须知</a></li>
@@ -273,10 +277,16 @@
 				</div>
 				<div class="header-cart">
 					<button class="w3view-cart" type="button" name="" value=""
-						style="border-radius: 0; margin: 4px 150px 0 0; color: white; background-color: #f44336; height: 50px; width: 80px; padding: 0; -moz-transition: 0.5s all;"
+						style="border-radius: 0; margin: 4px 30px 0 0; color: white; background-color: #f44336; height: 50px; width: 80px; padding: 0; -moz-transition: 0.5s all;"
 						id="btnclick">
 						<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
 						发布需求
+					</button>
+					<button class="w3view-cart" type="button" name="" value=""
+						style="border-radius: 0; margin: 4px 30px 0 0; color: white; background-color: #f44336; height: 50px; width: 80px; padding: 0; -moz-transition: 0.5s all;"
+						id="btnclickWorks">
+						<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+						发布作品
 					</button>
 				</div>
 				<div class="clearfix"></div>
@@ -515,6 +525,82 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 发布作品modal	 -->
+	<div class="modal fade" id="publishWorksModal" tabindex="-1">
+		<div class="modal-dialog" style="display: inline-block; width: auto;">
+			<div class="modal-content">
+				<div class="modal-header"
+					style="background: url(portal/images/bg.png) #08bce4 no-repeat; background-size: cover; border-radius: 6px 6px 0px 0px;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">服务商发布作品</h4>
+				</div>
+				<form action="Facilitator/publishWorks.action" method="post"
+					class="form-inline" id="formPublishWorks">
+					<input type="hidden" value="${sessionScope.forelogin.userID}"
+						name="userId" />
+					<div class="modal-body" style="width: 900px; height: 420px;">
+						<div style="width: 100%; height: 12%; text-align: center;">
+							<div class="form-group">
+								<label for="first_classification2">请选择行业：</label> <select
+									name="first_classification2" id="first_classification2"
+									class="form-control" style="width: 200px;">
+									<option value="">请选择一级分类</option>
+								</select> <label for="second_classification2">请选择服务类型：</label> <select
+									name="classificationId" id="second_classification2"
+									class="form-control" style="width: 200px;">
+									<option value="">请选择二级分类</option>
+								</select>
+							</div>
+						</div>
+						<div style="width: 100%; height: 88%; background-color: #f7f7f7;">
+							<div class="login-body" style="width: 100%; height: 100%;">
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="worksName">作品标题：</label> <input type="text"
+										name="worksName" class="form-control" placeholder="请输入作品标题"
+										style="width: 80%;">
+								</div>
+								<br>
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="worksContext">作品内容：</label>
+									<textarea class="form-control" rows="3" style="width: 80%;"
+										name="worksContext" placeholder="请输入作品内容"></textarea>
+								</div>
+								<br>
+
+								<div class="form-group"
+									style="width: 100%; margin-bottom: 1.3em;">
+									<label for="url">作品封面：</label>
+									<div>
+										<input type="file" id="url" name="url">
+									</div>
+								</div>
+								<br>
+								<div class="form-group"
+									style="width: 50%; margin-bottom: 1.3em;">
+									<label for="worksPrice">作品价格：</label> <input type="text"
+										name="worksPrice" class="form-control" placeholder="请输入作品价格"
+										style="width: 80%;">
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="text-align: center;">
+						<button type="button" class="btn btn-primary" id="publishWorksSubmit">立
+							即 发 布</button>
+						<button type="reset" class="btn btn-default">重 置</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关
+							闭</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+		
 	<!-- 	行业和服务分类脚本 -->
 	<script type="text/javascript">
         $(function(){
@@ -563,6 +649,33 @@
 		</div>
 	</div>
 
+
+	<!-- 	行业和服务分类脚本2 -->
+	<script type="text/javascript">
+        $(function(){
+            //页面加载完毕后开始执行的事件
+            var class_json = '${classJson}';
+            var class_obj=eval('('+class_json+')');
+            for (var key in class_obj)
+            {
+                $("#first_classification2").append("<option value="+key+">"+key+"</option>");
+            }
+            $("#first_classification2").change(function(){
+                var now_first_class=$(this).val();
+                $("#second_classification2").html('<option value="">请选择二级分类</option>');
+                for(var k in class_obj[now_first_class])
+                {
+                    var now_second_class=class_obj[now_first_class][k];
+                    
+                    for (var m in now_second_class) {
+                    	/* alert(now_city[m]); */
+                    	$("#second_classification2").append('<option value='+m+'>'+now_second_class[m]+'</option>');
+                    }
+                }
+            });
+        });
+    </script>
+	<!-- 	//行业和服务分类脚本 -->
 
 
 	<!-- 	发布需求模态框和日期选择控件脚本 -->
@@ -699,5 +812,88 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<!-- 	发布作品模态框 -->
+	<script>
+		$(function() {
+			$("#btnclickWorks").click(function() {
+				$('#publishWorksModal').modal({
+					show : true,
+					backdrop : 'static'
+				});
+			});
+			
+			$("#formPublishWorks").bootstrapValidator({  
+				  message:'This value is not valid',
+//	            定义未通过验证的状态图标
+	            feedbackIcons: {/*输入框不同状态，显示图片的样式*/
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+//	            字段验证
+	            fields:{
+//	               作品标题
+	                worksName:{
+	                    message:'作品标题非法',
+	                    validators:{
+//	                        非空
+	                        notEmpty:{
+	                            message:'作品标题不能为空'
+	                        },
+//	                        限制字符串长度
+	                        stringLength:{
+	                            min:2,
+	                            max:20,
+	                            message:'作品标题长度必须位于2到20之间'
+	                        },
+	                    }
+	                },
+	                worksContext:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请填写作品内容' 
+	                		 },
+	                	 }
+	                },
+	                worksPrice:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请填写作品价格' 
+	                		 },
+//                  基于正则表达是的验证
+                 			 regexp:{
+                     			 regexp:/^[1-9]\d*$/,
+                    		     message:'请输入正确的作品价格'
+                  		},
+                  		stringLength:{
+	                            min:1,
+	                            max:8,
+	                            message:'需求预算在1-99999999之间'
+	                        },
+	                	 }
+	                },
+	                classificationID:{
+	                	 validators:{
+	                		 notEmpty:{
+	                			message:'请选择服务类型' 
+	                		 },
+	                	 }
+	                },
+	
+	            }
+		    });
+			
+			$("#publishWorksSubmit").click(publishWorks);
+		});
+		
+		function publishWorks(){
+			if ($("#loginUser").val() == "") {
+				$('#redirectLoginModal').modal("show");
+			}else{
+				document.getElementById('formPublishWorks').submit();
+			}
+		}
+	</script>
 </body>
 </html>

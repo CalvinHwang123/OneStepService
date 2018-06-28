@@ -103,4 +103,9 @@ public interface BusiManageBiz {
 	
 	//合作  wwj  6-28
 		public List<userService> cooperationList(Condition condition);
+	
+	// 发布作品 hlq 2018-06-27 20:22
+	public boolean publishWorks(Works works);
+	// 修改成交量
+	public boolean updateWorksNumById(Works works);
 }

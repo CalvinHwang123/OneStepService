@@ -49,5 +49,20 @@
 		worksStatusId=#{worksStatusId} where worksId=#{worksId}
 	</update>
 
+	<!-- 发布作品 hlq 2018-06-27 20:14 -->
+	<insert id="insertWorks" parameterType="oss.bean.Works">
+		<selectKey keyProperty="worksId" order="BEFORE" resultType="long">
+			select workersSeq.nextVal from dual
+		</selectKey>
+		insert into works
+		(worksId, userId, worksName, classificationId, worksPrice, worksNum, worksStatusId, url, worksContext)
+		values (#{worksId}, #{userId}, #{worksName}, #{classificationId}, #{worksPrice}, #{worksNum}, #{worksStatusId}, #{url}, #{worksContext})
+	</insert>
+
+	<!-- 修改作品成交量 hlq 2018-06-27 21:37 -->
+	<update id="updateWorksNumById" parameterType="oss.bean.Works">
+		update Works set
+		worksNum=worksNum+1 where worksId=#{worksId}
+	</update>
 </mapper>
 	

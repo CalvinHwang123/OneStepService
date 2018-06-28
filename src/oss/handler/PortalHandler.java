@@ -19,16 +19,17 @@ import com.google.gson.Gson;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
-import oss.bean.Rulee;
-import oss.bean.SuccessCase;
 import oss.bean.Credit;
 import oss.bean.Demands;
+import oss.bean.Rulee;
+import oss.bean.SuccessCase;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Violations2;
 import oss.bean.Workinformation;
-
+import oss.bean.Works;
+import oss.biz.BusiManageBiz;
 import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
@@ -47,6 +48,8 @@ public class PortalHandler {
 	private PortalBiz portalBizImpl;
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
+	@Resource
+	private BusiManageBiz busiManageBizImpl; 
 
 	// 前端规则中心页面跳转
 	@RequestMapping("/ruleList.action")
@@ -269,5 +272,14 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/singlesuccesscase");
 		return mav;
 	}
-
+	
+	// 购买作品，修改成交量 hlq 2018-06-27 21:43
+	@RequestMapping(value = "/purchaseWorks.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String purchaseWorks(@RequestBody Works works) {
+		if (busiManageBizImpl.updateWorksNumById(works)) {
+			return "购买成功";
+		} else {
+			return "购买失败";
+		}
+	}
 }
