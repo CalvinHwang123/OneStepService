@@ -21,8 +21,7 @@
 			<div class="col-md-9 column">
 				<br> <br>
 				<div class='order-wrap'>
-					<form id="pageForm"
-						action="BusiManage/facilitatorCreditList.action">
+					<form id="pageForm" action="BusiManage/facilitatorCreditList.action">
 						<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 							id='utopia_widget_6'>
 							<!-- 隐藏域 每页条数 -->
@@ -33,7 +32,6 @@
 								value="${pageInfo.getPageNum()}"> <input type="hidden"
 								id="currentPageInput" name="pageNum"
 								value="${pageInfo.getPageNum()}">
-
 						</div>
 
 						<div class="form-inline">
@@ -56,7 +54,6 @@
 								<option value=2>违规</option>
 								</c:if>
 							</select>
-							
 							<button type="submit" class="btn btn-default">查询</button>
 						</div>
 						<div class='order-top-banner' id='utopia_widget_7'>
