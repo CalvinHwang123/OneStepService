@@ -15,10 +15,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
- <script type="application/x-javascript"> 
+<script type="application/x-javascript">
+	 
  	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
 		function hideURLbar(){ window.scrollTo(0,1); }   
- </script> 
+ 
+</script>
 <!-- Custom Theme files -->
 <link href="portal/css/bootstrap.css" rel="stylesheet" type="text/css"
 	media="all" />
@@ -162,7 +164,7 @@
 
 							<ul class="dropdown-menu">
 								<li><a href="login.html">${forelogin.userName}</a></li>
-							
+
 								<li><a href="BusiManage/usersExit.action">退出</a></li>
 							</ul>
 					</c:if>
@@ -319,6 +321,9 @@
 					</div>
 					<script type="text/javascript"
 						src="portal/js/jquery.marquee.min.js"></script>
+					<script type="text/javascript" src="./lib/layui/layui.js"
+						charset="utf-8"></script>
+					<script type="text/javascript" src="./js/xadmin.js"></script>
 					<script>
 						$('.marquee').marquee({
 							pauseOnHover : true
@@ -533,14 +538,14 @@
 	<!-- 	modal判断做敏感操作时，用户未登录的跳转登录界面modal -->
 	<div class="modal fade" id="redirectLoginModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog"  style="width:250px;">
+		<div class="modal-dialog" style="width: 250px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">您还未登录！</h4>
 				</div>
-				<div class="modal-body"  style="text-align: center;">是否跳转到登录界面？</div>
+				<div class="modal-body" style="text-align: center;">是否跳转到登录界面？</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary"
 						onclick="window.location.href = 'ForeLogin.jsp'">确定</button>

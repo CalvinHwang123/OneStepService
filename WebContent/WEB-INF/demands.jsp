@@ -1934,21 +1934,21 @@
 
 										<p class="list-task-ctn">${dem.demandContent }</p>
 									</td>
-									<td><p></p></td>
+									<td>
+									<p class="normal-p">
+									<span class="text">发布时间为：${dem.releaseTime }</span>
+									</p>
+									</td>
 									<td><p class="normal-p">
 											<a class="blue" rel="nofollow"
 												href="//task.zbj.com/13655206/#bid-erea" target="_blank"
 												data-zbjlog="{obj:'main'}">0</a><span class="text">参与</span><span
 												class="text"> | </span>
-
-
-											<c:if test="${dem.demandstatusid ==3}">
 												<span class="text">招标中</span>
-											</c:if>
 										</p>
 										<p class="normal-p">
 											<span style="white-space: nowrap; color: #999;">仅剩<span
-												class="highlight">8</span>个投标机会
+												class="highlight">${dem.tenderNumber}</span>个投标机会
 											</span>
 										</p></td>
 									<td><span class="text">截止时间为：${dem.asoftTime }</span></td>
