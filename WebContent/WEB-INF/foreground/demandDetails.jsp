@@ -228,12 +228,74 @@ window.ZBJInfo.pubCategory='剪辑服务';
 									</div>
 
 									<p class='contact-buyer'>
-										<a class='contact-buyer-linker' target='_blank'
-											href='' data-linkid='10182401'>立即投标 ></a>
+										<a class='contact-buyer-linker' href='javascript:void(0);'
+											onclick="openBiddingModel(this)" demandID="${dem.demandID}"
+											demandBelongID="${dem.userID}"> 立即投标 ></a>
 									</p>
 								</div>
-
 							</div>
+
+							<div class="modal fade" id="biddingModal" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" style="width: 250px;">
+									<div class="modal-content">
+										<div class="modal-body" style="text-align: center;">是否确定要投标？</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary"
+												onclick="bidding()">确定</button>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script type="text/javascript">
+								var demandID;
+								var demandBelongID;
+// 								打开是否确定投标的模态框
+								function openBiddingModel(a){
+									demandID = a.getAttribute("demandID");
+									demandBelongID = a.getAttribute("demandBelongID");
+									$("#biddingModal").modal('show');
+								}
+// 								确定投标之后进行判断，判断过后走ajax去投标
+								function bidding(){
+									var user = "${forelogin}"; 
+									if (user == "") {
+										$("#biddingModal").modal('hide');
+										$('#redirectLoginModal').modal("show");
+									}else if("${forelogin.userType}" == 1)
+									{
+										layer.confirm("您还不是服务商，是否要进行服务商注册",function(index){
+										})
+									}else if("${forelogin.userID}" == demandBelongID){
+										layer.msg('投标失败，这是您自己的需求噢!',{icon:2,time:1500});
+									}else{
+// 										demandID;//需求ID
+// 										demandBelongID;//需求发布者ID
+										var userID = "${forelogin.userID}";//投标者ID
+										var tender ={"demandID":demandID,"userID":userID,"releaserID":demandBelongID};
+										 $.ajax({
+									 			url:"BusiManage/bidding.action",
+									 			type:"post",
+									 			dataType:"text",
+									 			contentType:"application/json",
+									 			data:JSON.stringify(tender),
+									 			async:true,
+									 			success:function(msg){//
+									 			  if (msg == "success") {
+									              		layer.msg('恭喜您，投标成功!',{icon:1,time:2000});
+									              		$("#biddingModal").modal('hide');
+									 			 	 }else if (msg == "bidded") {
+									 			 		layer.msg('投标失败，您已投过标!',{icon:2,time:2000});
+													}else if (msg == "full") {
+														layer.msg('投标失败，该需求投标数已满!',{icon:2,time:2000});
+													}
+									 			}
+									 		})
+									}
+								}
+							</script>
 							<script>/*<![CDATA[*/
 utopia.arrived({uid:'utopia_widget_10', js:["global/js/fancybox.js","global/css/jquery.fancybox-thumbs.css","global/css/jquery.fancybox.css","global/js/img-lazyload.js","fe-module/utopia-module-pubtask-bottom"], entry:function(e,t,o){"use strict";e("global/js/fancybox"),e("global/css/jquery.fancybox-thumbs.css"),e("global/css/jquery.fancybox.css"),e("global/js/img-lazyload");var i=e("fe-module/utopia-module-pubtask-bottom"),n={q:{describeArea:".describe-area",openContent:".js-open",describeContent:".js-describe-content"},util:{checkHide:function(){$(n.q.describeContent).height()>=240?$(n.q.describeArea).find(n.q.openContent).click():$(n.q.describeArea).find(n.q.openContent).hide()}},bindEvent:function(){$(n.q.describeArea).on("click",n.q.openContent,function(){$(n.q.describeContent).toggleClass("small"),$(this).toggleClass("contrary"),"展开"===$(this).find(".text").text()?($(".module-project-info").css({height:"auto"}),$(".module-project-info .describe-area .describe").css({height:"auto"}),$(this).find(".text").text("收起")):($(this).find(".text").text("展开"),$(".module-project-info").css({height:"460px"}),$(".module-project-info .describe-area .describe").css({height:"241px"}),$(".join-service-container").removeClass("scrollTop"),$(".join-service-container").css({"margin-top":"0px"}))}),$("img.lazy").lazyload({effect:"fadeIn",threshold:300})},imageView:function(){$(".js-describe-content .task-file-item .project-info-icon").click(function(){var e=[],t=$(this).siblings("img").attr("src"),o=$(this).siblings("img").attr("data-index"),i=$(this).parent().siblings();e.push({href:t,type:"image"}),i.each(function(t,i){var n=$(i).find("img").attr("data-index"),s=$(i).find("img").attr("src");n&&o!==n&&e.push({href:s,type:"image"})}),$.fancybox.open(e,{closeEffect:"none",helpers:{thumbs:{width:85,height:55}}})})},initPub:function(){var e=$(".project-pub-container .pub-content");if(ZBJInfo&&ZBJInfo.taskInfo&&ZBJInfo.taskInfo.basicCategory3Id){var t=ZBJInfo.pubCategory;new i({baseId:ZBJInfo.taskInfo.basicCategory3Id,taskTitle:t?t:"",scrollSwitch:!1,showStatus:!0,type:4,element:e,bottomImg:""})}else{new i({scrollSwitch:!1,showStatus:!0,type:1,element:e,bottomImg:""})}},init:function(){n.bindEvent(),n.util.checkHide(),n.imageView()}};n.init();var s={};o.exports=s}});
 //]]></script>
