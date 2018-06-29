@@ -199,11 +199,7 @@
 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-<<<<<<< HEAD
-							<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
-=======
 								<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
->>>>>>> refs/remotes/origin/hlq
 								<li><a href="offers.html">立即开店赚钱</a></li>
 								<li><a href="offers.html">具体开店流程</a></li>
 								<li><a href="offers.html">开店须知</a></li>
