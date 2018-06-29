@@ -53,13 +53,13 @@
 			</form>
 		</div>
 
-		<button class="layui-btn layui-btn-danger" onclick="delAll()">
+		<!-- <button class="layui-btn layui-btn-danger" onclick="delAll()">
 			<i class="layui-icon"></i>批量删除
 		</button>
 		<button class="layui-btn"
 			onclick="x_admin_show('添加用户','./admin-add.html')">
 			<i class="layui-icon"></i>添加
-		</button>
+		</button> -->
 		<span class="x-right" style="line-height: 40px">共有数据：${demandList.getTotal() }
 			条</span>
 		</xblock>
@@ -67,12 +67,12 @@
 			<table class="layui-table">
 				<thead>
 					<tr>
-						<th>
+						<!-- <th>
 							<div class="layui-unselect header layui-form-checkbox"
 								lay-skin="primary">
 								<i class="layui-icon">&#xe605;</i>
 							</div>
-						</th>
+						</th> -->
 
 						<th>需求ID</th>
 						
@@ -89,13 +89,13 @@
 
 							<tr>
 
-								<td>
+								<!-- <td>
 									<div class="layui-unselect layui-form-checkbox"
 										lay-skin="primary" data-id='2'>
 										<i class="layui-icon">&#xe605;</i>
 									</div>
-								</td>
-								<td>${demand.userID }</td>
+								</td> -->
+								<td>${demand.demandID }</td>
 								
 								<td>${demand.releaseTime }</td>
 								<td>${demand.asoftTime }</td>

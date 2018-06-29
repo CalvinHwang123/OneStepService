@@ -12,7 +12,9 @@ public class Condition {
 	private int classPid;// 上级id
 	private int beWorksPrice;// 起始价格
 	private int endWorksPrice;// 结束价格
-	
+	private int descendingOrder;// 降序
+	private int ascenDing;//升序
+
 	public Condition() {
 	}
 
@@ -63,5 +65,23 @@ public class Condition {
 	public void setEndWorksPrice(int endWorksPrice) {
 		this.endWorksPrice = endWorksPrice;
 	}
+
+	public int getDescendingOrder() {
+		return descendingOrder;
+	}
+
+	public void setDescendingOrder(int descendingOrder) {
+		this.descendingOrder = descendingOrder;
+	}
+
+	public int getAscenDing() {
+		return ascenDing;
+	}
+
+	public void setAscenDing(int ascenDing) {
+		this.ascenDing = ascenDing;
+	}
+
+	
 
 }

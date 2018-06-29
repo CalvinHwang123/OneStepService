@@ -212,10 +212,7 @@ window.ZBJInfo.pubCategory='剪辑服务';
 
 
 											<div>
-												<p>补充需求：</p>
-												<p>
-													<c:out value="${dem.demandRequire}"></c:out>
-												</p>
+												
 												<p class='pub-task-date'>
 													发布时间：
 													<c:out value="${dem.releaseTime}"></c:out>

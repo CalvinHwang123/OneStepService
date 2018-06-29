@@ -59,7 +59,7 @@ public class PortalHandler {
 		//
 		req.setAttribute("ruleList", ruleList);
 
-		ModelAndView mav = new ModelAndView("rule");
+		ModelAndView mav = new ModelAndView("/foreground/rule");
 		return mav;
 	}
 	// 前端规则内容页面跳转
@@ -68,7 +68,7 @@ public class PortalHandler {
 	public ModelAndView userStory(HttpServletRequest req, Rulee rulee) {
 		Rulee rule = portalManageBizImpl.conTentList(rulee);
 		req.setAttribute("rule", rule);
-		ModelAndView mav = new ModelAndView("conTent");
+		ModelAndView mav = new ModelAndView("/foreground/conTent");
 		return mav;
 	}
 
@@ -78,7 +78,7 @@ public class PortalHandler {
 	public ModelAndView demandDetailsList(HttpServletRequest req, Demands demands) {
 		Demands dem = portalBizImpl.demandDetailsList(demands);
 		req.setAttribute("dem", dem);
-		ModelAndView mav = new ModelAndView("demandDetails");
+		ModelAndView mav = new ModelAndView("/foreground/demandDetails");
 		return mav;
 	}
 
@@ -114,7 +114,8 @@ public class PortalHandler {
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
 		req.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("demands");
+		ModelAndView mav = new ModelAndView("/foreground/demands");
+		System.out.println("起始金额="+condition.getBeWorksPrice());
 		return mav;
 	}
 

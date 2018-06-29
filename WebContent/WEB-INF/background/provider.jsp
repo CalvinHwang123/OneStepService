@@ -48,13 +48,13 @@
 			</form>
 		</div>
 
-		<button class="layui-btn layui-btn-danger" onclick="delAll()">
+		<!-- <button class="layui-btn layui-btn-danger" onclick="delAll()">
 			<i class="layui-icon"></i>批量删除
 		</button>
 		<button class="layui-btn"
 			onclick="x_admin_show('添加用户','./admin-add.html')">
 			<i class="layui-icon"></i>添加
-		</button>
+		</button> -->
 		<span class="x-right" style="line-height: 40px">共有数据：${providerList.getTotal() }
 			条</span>
 		</xblock>
@@ -62,12 +62,12 @@
 			<table class="layui-table">
 				<thead>
 					<tr>
-						<th>
+						<!-- <th>
 							<div class="layui-unselect header layui-form-checkbox"
 								lay-skin="primary">
 								<i class="layui-icon">&#xe605;</i>
 							</div>
-						</th>
+						</th> -->
 
 						<th>服务商名称</th>
 						<th>服务商账号</th>
@@ -84,12 +84,12 @@
 
 							<tr>
 
-								<td>
+								<!-- <td>
 									<div class="layui-unselect layui-form-checkbox"
 										lay-skin="primary" data-id='2'>
 										<i class="layui-icon">&#xe605;</i>
 									</div>
-								</td>
+								</td> -->
 								<td>${user.userName }</td>
 								<td>${user.userAccount }</td>
 								<td>${user.userBalance }</td>
@@ -114,7 +114,15 @@
 											href="javascript:;" title="${user.userStatusID }"> <i
 											class="layui-icon">&#xe62f;</i>
 										</a>
-									</c:if> <c:if test="${user.userStatusID==3 }">
+									</c:if> 
+									<c:if test="${user.userStatusID==3 }">
+										<a onclick="member_stop(this,'${user.userID}')"
+											href="javascript:;" title="${user.userStatusID }"> <i
+											class="layui-icon">&#xe62f;</i>
+										</a>
+									</c:if> 
+									
+									<c:if test="${user.userStatusID==3 }">
 										<input onclick="cancelBlacklist()" title="${user.userID }"
 											style="height: 30px; width: 125px;" value="取消黑名单"
 											class="cancelBlacklist  layui-btn layui-btn-primary">
