@@ -59,7 +59,7 @@ public class BusiManageHandler {
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("UserList", pageInfo);
 		req.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("Employer");
+		ModelAndView mav = new ModelAndView("/background/Employer");
 		return mav;
 	}
 
@@ -77,7 +77,7 @@ public class BusiManageHandler {
 		PageInfo pageInfo = new PageInfo<>(providerList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("providerList", pageInfo);
-		ModelAndView mav = new ModelAndView("provider");
+		ModelAndView mav = new ModelAndView("/background/provider");
 		return mav;
 	}
 
@@ -95,7 +95,7 @@ public class BusiManageHandler {
 		PageInfo pageInfo = new PageInfo<>(demandList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("demandList", pageInfo);
-		ModelAndView mav = new ModelAndView("demandManagement");
+		ModelAndView mav = new ModelAndView("/background/demandManagement");
 		return mav;
 
 	}

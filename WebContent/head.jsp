@@ -235,6 +235,10 @@
 							<li><a href="Portal/foreViolationsList.action">曝光台</a></li>
 							<li><a href="Portal/successCaseList.action">成功案例</a></li>
 							<li><a href="Portal/creditQuery.action">信用查询</a></li>
+
+
+							<li><a href="Portal/beforeDemandsList.action">需求大厅</a></li>
+
 						</ul></li>
 					<li class="dropdown head-dpdn"><a href="contact.html"
 						class="dropdown-toggle"><i class="fa fa-map-marker"
@@ -258,7 +262,7 @@
 			<div class="container">
 				<div class="header-logo">
 					<h1>
-						<a href="index.html"><span>帝</span>六 <i>人</i></a>
+						<a href=""><span>帝</span>六 <i>人</i></a>
 					</h1>
 					<h6>DLR.COM</h6>
 				</div>
