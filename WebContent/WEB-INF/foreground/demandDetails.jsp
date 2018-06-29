@@ -22,8 +22,7 @@
 在校友们的热心帮助下，经过约一年的筹备与拍摄，河北工业大学天津校友' />
 
 
-<!-- <link rel='shortcut icon' href='//s.zbjimg.com/img/favicon.ico'
-	type='image/x-icon' /> -->
+
 <!-- <link rel='dns-prefetch' href='//t.zbjimg.com' />
 <link rel='dns-prefetch' href='//as.zbjimg.com' />
 <link rel='dns-prefetch' href='//rms.zhubajie.com' />
