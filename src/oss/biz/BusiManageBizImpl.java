@@ -13,6 +13,7 @@ import oss.bean.Violations;
 import oss.bean.Works;
 import oss.bean.userService;
 import oss.bean.Demands;
+import oss.bean.Orders;
 import oss.bean.Tender;
 import oss.bean.Trading;
 import oss.mapper.BusiManageMapper;
@@ -219,10 +220,33 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		return busiManageMapper.updateWorksNumById(works) > 0;
 	}
 
-	
 	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
 	@Override
 	public List<Demands> serversBidsList(Users users) {
 		return busiManageMapper.selectBidsByServerID(users);
+	}
+	
+	// 增加订单 hlq 2018-06-29 11:19
+	@Override
+	public boolean addOrders(Orders orders) {
+		return busiManageMapper.addOrders(orders) > 0;
+	}
+
+	// 修改用户余额  hlq 2018-06-29 14:07
+	@Override
+	public boolean updateUserBalanceById(Users users) {
+		return busiManageMapper.updateUserBalanceById(users) > 0;
+	}
+
+	// 根据作品id获取作品信息 hlq 2018-06-29 14:15
+	@Override
+	public Works selectWorksById(Long worksId) {
+		return busiManageMapper.selectWorksById(worksId);
+	}
+
+	// 添加交易记录 hlq 2018-06-29 14:58
+	@Override
+	public boolean AddTrading(Trading trading) {
+		return busiManageMapper.AddTrading(trading) > 0;
 	}
 }

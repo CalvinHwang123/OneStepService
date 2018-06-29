@@ -21,8 +21,10 @@ import oss.bean.Classification;
 import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Demands;
+import oss.bean.Orders;
 import oss.bean.Rulee;
 import oss.bean.SuccessCase;
+import oss.bean.Trading;
 import oss.bean.UserStory;
 import oss.bean.Users;
 import oss.bean.Violations;
@@ -33,6 +35,7 @@ import oss.biz.BusiManageBiz;
 import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
+import oss.util.DateUtil;
 
 /*
  * 门户Handler
@@ -276,11 +279,37 @@ public class PortalHandler {
 	
 	// 购买作品，修改成交量 hlq 2018-06-27 21:43
 	@RequestMapping(value = "/purchaseWorks.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String purchaseWorks(@RequestBody Works works) {
-		if (busiManageBizImpl.updateWorksNumById(works)) {
-			return "购买成功";
-		} else {
-			return "购买失败";
-		}
+	public @ResponseBody String purchaseWorks(HttpServletRequest req, @RequestBody Orders orders) {
+		System.out.println(orders);
+		orders.setOrderStatusId(1L);
+		orders.setOrderTime(DateUtil.getCurrentDate());
+		// 新增订单记录
+		busiManageBizImpl.addOrders(orders);
+		
+		Works works = busiManageBizImpl.selectWorksById(orders.getWorksId());
+		
+		// 修改成交量
+		busiManageBizImpl.updateWorksNumById(works);
+		
+		// 修改用户余额
+		Users employer = new Users();
+		employer.setUserID(orders.getUserId());
+		employer.setUserBalance(-Long.parseLong(works.getWorksPrice()));// 雇主本次扣除的金额
+		busiManageBizImpl.updateUserBalanceById(employer);// 雇主扣除余额
+		Users provider = new Users();
+		provider.setUserID(works.getUserId());
+		provider.setUserBalance(Long.parseLong(works.getWorksPrice()));// 服务商本次增加的金额
+		busiManageBizImpl.updateUserBalanceById(provider);// 服务商增加余额
+		
+		// 新增交易记录
+		Trading trading = new Trading();
+		trading.setUserId(orders.getUserId());
+		trading.setUserId2(works.getUserId());
+		trading.setAmount(Long.parseLong(works.getWorksPrice()));
+		trading.setAmountType(1L);
+		trading.setTradingTime(DateUtil.getCurrentDate());
+		busiManageBizImpl.AddTrading(trading);
+		
+		return "success";
 	}
 }

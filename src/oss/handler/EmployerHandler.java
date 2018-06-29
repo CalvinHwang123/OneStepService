@@ -19,6 +19,4 @@ public class EmployerHandler {
 	@Resource
 	private EmployerBiz employerBizImpl;
 	
-	
-
 }

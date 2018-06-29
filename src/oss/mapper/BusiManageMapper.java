@@ -6,6 +6,7 @@ import oss.annotation.MyRepository;
 import oss.bean.Condition;
 import oss.bean.Credit;
 import oss.bean.Demands;
+import oss.bean.Orders;
 import oss.bean.Tender;
 import oss.bean.Trading;
 import oss.bean.Users;
@@ -113,5 +114,13 @@ public interface BusiManageMapper {
 	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
 	public List<Demands> selectBidsByServerID(Users users); 
 	
+	// 增加订单 hlq
+	int addOrders(Orders orders);
+	// 修改用户余额  hlq 2018-06-29 14:07
+	int updateUserBalanceById(Users users);
+	// 根据作品id获取作品信息 hlq 2018-06-29 14:15
+	Works selectWorksById(Long worksId);
+	// 添加交易记录 hlq 2018-06-29 14:58
+	int AddTrading(Trading trading);
 	
 }

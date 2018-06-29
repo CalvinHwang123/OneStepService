@@ -8,8 +8,17 @@ public class Trading {
 	private Long amountType;
 	private String tradingTime;
 	private Users checkUsers;
+	private Long userId2;
 	public Trading() {
 		
+	}
+
+	public Long getUserId2() {
+		return userId2;
+	}
+
+	public void setUserId2(Long userId2) {
+		this.userId2 = userId2;
 	}
 
 	public Long getTradingId() {

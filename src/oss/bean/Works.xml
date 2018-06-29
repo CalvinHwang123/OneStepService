@@ -64,5 +64,20 @@
 		update Works set
 		worksNum=worksNum+1 where worksId=#{worksId}
 	</update>
+	
+	<!-- 增加订单 hlq 2018-06-28 23:40 -->
+	<insert id="addOrders" parameterType="oss.bean.Orders">
+		<selectKey keyProperty="orderId" order="BEFORE" resultType="long">
+			select orderSeq.nextVal from dual
+		</selectKey>
+		insert into orders
+		(orderId, userId, orderStatusId, worksId, orderTime)
+		values (#{orderId}, #{userId}, #{orderStatusId}, #{worksId}, #{orderTime})
+	</insert>
+	
+	<!-- 根据id获取作品信息 -->
+	<select id="selectWorksById" parameterType="java.lang.Long" resultType="oss.bean.Works">
+		select * from works where worksId = #{worksId}
+	</select>
 </mapper>
 	
