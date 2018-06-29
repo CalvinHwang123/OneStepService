@@ -4,13 +4,14 @@ import java.util.List;
 
 import oss.bean.Condition;
 import oss.bean.Credit;
+import oss.bean.Demands;
+import oss.bean.Orders;
+import oss.bean.Tender;
+import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
 import oss.bean.userService;
-import oss.bean.Demands;
-import oss.bean.Tender;
-import oss.bean.Trading;
 
 /*
  * 业务管理Biz业务接口
@@ -106,6 +107,15 @@ public interface BusiManageBiz {
 	
 	// 发布作品 hlq 2018-06-27 20:22
 	public boolean publishWorks(Works works);
-	// 修改成交量
+	// 修改成交量 hlq
 	public boolean updateWorksNumById(Works works);
+	
+	// 增加订单 hlq 2018-06-29 11:19
+	public boolean addOrders(Orders orders);
+	// 修改用户余额 hlq 2018-06-29 14:08
+	public boolean updateUserBalanceById(Users users);
+	// 根据作品id获取作品信息 hlq 2018-06-29 14:15
+	Works selectWorksById(Long worksId);
+	// 添加交易记录 hlq 2018-06-29 14:58
+	boolean AddTrading(Trading trading);
 }

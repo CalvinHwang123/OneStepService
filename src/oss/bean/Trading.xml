@@ -24,6 +24,16 @@
 			<result property="userBalance" column="userBalance" />
 		</association>
 	</resultMap>
+	
+	<!-- 新增交易记录  hlq 2018-06-29 14:54-->
+	<insert id="AddTrading" parameterType="oss.bean.Trading">
+		<selectKey keyProperty="tradingId" order="BEFORE" resultType="long">
+			select tradingSeq.nextval from dual
+		</selectKey>
+		insert into
+		trading (tradingId,userId,amount,amountType,tradingTime,userId2)
+		values(#{tradingId},#{userId},#{amount},#{amountType},#{tradingTime},#{userId2})
+	</insert>
 </mapper>
 
 

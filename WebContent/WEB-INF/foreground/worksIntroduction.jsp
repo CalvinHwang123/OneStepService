@@ -46,15 +46,17 @@
 					</ul>
 				</div>
 				<p class="single-price-text">作品介绍.</p>
-				<form action="#" method="post">
-					<input name="cmd" value="_cart" type="hidden"> <input
+				<form name=alipayment id="form_pay" action="alipay.trade.page.pay.jsp" method="post" target="_blank">
+					<%-- <input name="cmd" value="_cart" type="hidden"> <input
 						name="add" value="1" type="hidden"> <input
 						name="w3ls_item" value="${i.worksName}" type="hidden"> <input
-						name="amount" value="${i.worksPrice}" type="hidden">
+						name="amount" value="${i.worksPrice}" type="hidden"> --%>
+					<input id="WIDout_trade_no" name="WIDout_trade_no" type="hidden">
+					<input id="WIDsubject" name="WIDsubject" value="${i.worksName }" type="hidden">
+					<input id="WIDtotal_amount" name="WIDtotal_amount" value="${i.worksPrice}" type="hidden">
 					<button type="button" class="w3ls-cart" onclick="purchaseWorks('${i.worksId}','${i.userId}', '${i.worksPrice }')">
 						<i class="fa fa-cart-plus" ></i> 购买
 					</button>
-					
 				</form>
 			</div>
 			</c:forEach>
@@ -158,6 +160,21 @@
 		
 		<!-- 购买作品，修改成交量 -->
 		<script type="text/javascript">
+
+			function GetDateNow() {
+				var vNow = new Date();
+				var sNow = "";
+				sNow += String(vNow.getFullYear());
+				sNow += String(vNow.getMonth() + 1);
+				sNow += String(vNow.getDate());
+				sNow += String(vNow.getHours());
+				sNow += String(vNow.getMinutes());
+				sNow += String(vNow.getSeconds());
+				sNow += String(vNow.getMilliseconds());
+				/* document.getElementById("WIDout_trade_no").value = sNow; */
+				return sNow;
+			}
+
 			function purchaseWorks(worksId, userId, worksPrice) {
 				// 是否登录
 				if ("${sessionScope.forelogin}" == ""
@@ -166,25 +183,49 @@
 				} else {
 					// 是否是自己的作品
 					if (userId == "${sessionScope.forelogin.userID}") {
-						alert("您不能购买自己的作品");
+						layer.alert("您不能购买自己的作品", function() {
+							layer.closeAll();
+						});
 						return;
 					}
 					// 余额是否充足
 					if (worksPrice > parseInt("${sessionScope.forelogin.userBalance}")) {
-						alert("余额不足，当前余额为：${sessionScope.forelogin.userBalance}");
+						layer
+								.alert(
+										"余额不足，当前余额为：${sessionScope.forelogin.userBalance}",
+										function() {
+											layer.closeAll();
+										});
 						return;
+					} else {
+						// 确认提交订单
+						layer.confirm("确认提交订单？", function() {
+							$("#WIDout_trade_no").val(GetDateNow());
+							// 调用支付宝支付接口
+							$("#form_pay").submit();
+							layer.closeAll();
+
+							var orderData = JSON.stringify({"worksId": parseInt(worksId), 
+								"userId": parseInt("${sessionScope.forelogin.userID}")});
+							//$.post($("base").attr("href") + "Portal/purchaseWorks.action", data);
+							
+							// 购买作品请求
+							$.ajax({
+								url: $("base").attr("href") + "Portal/purchaseWorks.action",
+								type:"post",
+								dataType:"text",
+								contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
+								data: orderData,
+								async:true,
+								success:function(msg){
+									/* layer.alert(msg, function() {
+										layer.closeAll();
+									}); */
+								}
+							});
+						});
 					}
-					$.ajax({
-			  			url: $("base").attr("href") + "Portal/purchaseWorks.action",
-			  			type:"post",
-			  			dataType:"text",
-			  			contentType : "application/json;charset=utf-8", //如果采用requestbody那么一定要加
-			  			data:JSON.stringify({"worksId": worksId}),
-			  			async:true,
-			  			success:function(msg){
-			  				alert(msg);
-			  			}
-			  		});
+
 				}
 			}
 		</script>
