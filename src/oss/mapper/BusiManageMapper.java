@@ -109,4 +109,9 @@ public interface BusiManageMapper {
 	public int insertWorks(Works works);
 	// 作品修改成交量 hlq 2018-06-27 21:39
 	public abstract int updateWorksNumById(Works works);
+	
+	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
+	public List<Demands> selectBidsByServerID(Users users); 
+	
+	
 }

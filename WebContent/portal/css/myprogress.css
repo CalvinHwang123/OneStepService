@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+.J-order-details {
+	height: 147px;
+}
+
+.order-proccess {
+	position: relative;
+	height: 100px;
+	padding:10px 0 10px 0;
+	text-align: center;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	margin-top:5px;
+	color: #999;
+}
+
+.proccess-line {
+	margin: 0 auto;
+	width: 85%;
+	border-top: 1px solid #ebebeb;
+}
+
+.proccess-details {
+	position: relative;
+	padding-top: 10px;
+}
+
+.sub-content-wrap {
+	display: inline-block;
+	width: 162px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.sub-content-wrap::after {
+	position: absolute;
+	top: -3px;
+	margin-left: -3px;
+	content: '';
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 3px;
+	background: #ccc;
+}
+
+.content {
+	font-size: 14px;
+}
+
+.content-time {
+	font-size: 12px;
+	padding: 5px 0;
+}
+
+.myorder-div{
+	border:1px solid #ebebeb;
+}
+
+.myorder {
+	position: relative;
+	margin-top: 5px;
+	padding-bottom: 20px;
+}
+
+.myoptions {
+	background: #d7f5ff;
+	border: 1px solid #ebebeb;
+	padding: 6px 20px;
+}
+
+.myorder ul {
+	position: relative;
+	list-style: none;
+	display: inline-block;
+}
+
+
+.myorder .myoptions .order {
+    line-height: inherit;
+}
+
+.myorder ul li {
+    position: relative;
+    float: left;
+    text-align: center;
+}
+
+.ordertitle {
+	line-height: inherit;
+	width: 168px;
+}
+.orderprice {
+	line-height: inherit;
+	width: 168px;
+}
+.ordertime {
+	line-height: inherit;
+	width: 168px;
+}
+.orderstate {
+	line-height: inherit;
+	width: 168px;
+}
+.orderoptions {
+	line-height: inherit;
+	width: 168px;
+}
+
+
+
+.order-details-div {
+    position: relative;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.order-details {
+    height: 147px;
+}
+
+.myorder .order-details-div .top-info {
+    padding: 7px 0;
+    color: #999;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ebebeb;
+}
+
+/* //-------------------- */
+.myorder .order-details-div .time {
+    margin: 0 25px 0 20px;
+}
+
+.myorder .order-details-div .order-num {
+    margin-right: 40px;
+}
+

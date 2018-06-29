@@ -108,4 +108,7 @@ public interface BusiManageBiz {
 	public boolean publishWorks(Works works);
 	// 修改成交量
 	public boolean updateWorksNumById(Works works);
+	
+	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
+	public List<Demands> serversBidsList(Users users);
 }

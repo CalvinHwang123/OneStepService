@@ -66,6 +66,8 @@
 
 <script type="text/javascript" src="portal/js/md5.js"></script>
 <link rel="stylesheet" href="portal/css/jigsaw.css">
+<link href="portal/css/myprogress.css" rel="stylesheet" type="text/css"
+	media="all" />
 <script src="portal/js/jquery-scrolltofixed-min.js"
 	type="text/javascript"></script>
 	<script src="portal/js/login.js" type="text/javascript"></script>

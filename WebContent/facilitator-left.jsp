@@ -78,7 +78,7 @@
 				</dd>
 
 				<dd>
-					<a class='J_menuItem ' href='/comment/tobe' data-linkid='10132976'
+					<a class='J_menuItem ' href='BusiManage/serverBidsList.action' data-linkid='10132976'
 						target='_self'>我的投标</a>
 
 				</dd>
