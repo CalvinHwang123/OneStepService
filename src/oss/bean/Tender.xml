@@ -22,4 +22,11 @@
 		insert into tender (tenderID,demandID,userID) values 
 		(#{tenderID},#{demandID},#{userID})
 	</insert>
+	
+<!-- 	by hsp 6-28 20：40  通过服务商ID，查找服务商投过标的需求 -->
+	<select id="selectBidsByServerID" resultType="oss.bean.Demands" parameterType="oss.bean.Users">
+		select * from demands  where demandID in (select demandID from tender where userID=#{userID}) 
+	</select>
+	
+	
 </mapper>

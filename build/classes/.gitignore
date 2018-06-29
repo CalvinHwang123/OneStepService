@@ -8,9 +8,8 @@
 <<<<<<< HEAD
 /log4j.properties
 /oss/
-<<<<<<< HEAD
-=======
 /springmvc.xml
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/hlq
 =======
 =======
@@ -23,3 +22,5 @@
 >>>>>>> refs/remotes/origin/Jhx
 /springmvc.xml
 >>>>>>> refs/heads/Jhx
+=======
+>>>>>>> refs/heads/sp

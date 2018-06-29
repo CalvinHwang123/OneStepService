@@ -39,5 +39,15 @@
 		,#{releaseTime},#{asoftTime},#{demandPrice},#{tenderNumber})
 	</insert>
 	
-	
+<!-- 	by hsp 6-28  -->
+<!-- 	<select id="demandList" parameterType="oss.bean.Condition" resultType="oss.bean.Demands"> -->
+<!-- 		select * from demands where 1 = 1 -->
+		
+<!-- 		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''"> -->
+<!-- 			and releaseTime between '${startDate} 00:00:00' and '${endDate} 23:59:59' -->
+<!-- 		</if> -->
+<!-- 		<if test="title != null and title != ''"> -->
+<!-- 			and demandID like '%${title}%' -->
+<!-- 		</if> -->
+<!-- 	</select> -->
 </mapper>

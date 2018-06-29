@@ -218,4 +218,11 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public boolean updateWorksNumById(Works works) {
 		return busiManageMapper.updateWorksNumById(works) > 0;
 	}
+
+	
+	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
+	@Override
+	public List<Demands> serversBidsList(Users users) {
+		return busiManageMapper.selectBidsByServerID(users);
+	}
 }
