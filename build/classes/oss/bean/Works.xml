@@ -79,5 +79,33 @@
 	<select id="selectWorksById" parameterType="java.lang.Long" resultType="oss.bean.Works">
 		select * from works where worksId = #{worksId}
 	</select>
+	
+	<!-- 查看该用户的订单信息 hlq 2018-06-30 10:46 -->
+	<resultMap type="oss.bean.Orders" id="orderWorksMap">
+		<id property="orderId" column="orderId" />
+		<result property="userId" column="userId" />
+		<result property="orderStatusId" column="orderStatusId" />
+		<result property="orderTime" column="orderTime" />
+		<association property="works" javaType="oss.bean.Works">
+			<id property="worksId" column="worksId"/>
+			<result property="classificationId" column="classificationId" />
+			<result property="worksName" column="worksName" />
+			<result property="worksContext" column="worksContext" />
+			<result property="worksPrice" column="worksPrice" />
+		</association>
+	</resultMap>
+	<select id="selectOrderWorksByUserId" parameterType="oss.bean.Condition" resultMap="orderWorksMap">
+	select orders.orderId as orderId, orders.userId as userId,
+	orders.orderStatusId as orderStatusId,
+	orders.orderTime as orderTime, works.worksId as worksId,
+	works.classificationId as classificationId, works.worksName as worksName, 
+	works.worksContext as worksContext, works.worksPrice as worksPrice
+	from orders, works where orders.worksId = works.worksId and orders.userId =
+	#{classPid}
+	<if
+		test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+		and orders.orderTime between '${startDate} 00:00:00' and '${endDate} 23:59:59'
+	</if>
+	</select>
 </mapper>
 	

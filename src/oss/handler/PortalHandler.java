@@ -312,4 +312,19 @@ public class PortalHandler {
 		
 		return "success";
 	}
+	
+	// 查看的购买的作品请求
+	@RequestMapping("/orderWorksList.action")
+	public ModelAndView orderWorksList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Condition condition) {
+//		Long userId = Long.valueOf(condition.getClassPid());
+		PageHelper.startPage(pageNum, pageSize);
+		List<Orders> orderList = busiManageBizImpl.selectOrderWorksByUserId(condition);
+		System.out.println("orderList size = " + orderList.size());
+		PageInfo<Orders> pageInfo = new PageInfo<>(orderList, pageSize);
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		return new ModelAndView("userpersonal/myOrderWorks");
+	}
 }

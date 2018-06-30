@@ -122,7 +122,7 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 							</dd>
 							
 							<dd>
-								<a class='J_menuItem ' href='/order' data-linkid='10132975'
+								<a class='J_menuItem ' href='Portal/orderWorksList.action?classPid=${sessionScope.forelogin.userID }' data-linkid='10132975'
 									target='_self'>我购买的作品</a>
 
 							</dd>

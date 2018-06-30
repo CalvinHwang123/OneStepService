@@ -123,4 +123,6 @@ public interface BusiManageMapper {
 	// 添加交易记录 hlq 2018-06-29 14:58
 	int AddTrading(Trading trading);
 	
+	// 根据用户id查询订单作品信息
+	List<Orders> selectOrderWorksByUserId(Condition condition);
 }

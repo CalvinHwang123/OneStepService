@@ -7,6 +7,8 @@ public class Orders {
 	private Long orderStatusId;
 	private Long worksId;
 	private String orderTime;
+	private Works works;
+	
 	public Orders() {
 	}
 	public Long getOrderId() {
@@ -38,6 +40,13 @@ public class Orders {
 	}
 	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
+	}
+	
+	public Works getWorks() {
+		return works;
+	}
+	public void setWorks(Works works) {
+		this.works = works;
 	}
 	@Override
 	public String toString() {

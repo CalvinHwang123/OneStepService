@@ -249,4 +249,10 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public boolean AddTrading(Trading trading) {
 		return busiManageMapper.AddTrading(trading) > 0;
 	}
+
+	// 根据用户id查询订单作品信息
+	@Override
+	public List<Orders> selectOrderWorksByUserId(Condition condition) {
+		return busiManageMapper.selectOrderWorksByUserId(condition);
+	}
 }

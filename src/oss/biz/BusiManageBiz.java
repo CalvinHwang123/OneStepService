@@ -121,4 +121,7 @@ public interface BusiManageBiz {
 	Works selectWorksById(Long worksId);
 	// 添加交易记录 hlq 2018-06-29 14:58
 	boolean AddTrading(Trading trading);
+	
+	// 根据用户id查询订单作品信息
+	List<Orders> selectOrderWorksByUserId(Condition condition);
 }
