@@ -787,18 +787,18 @@
 			}
 		}		
 		$('#datetimeStart').datetimepicker({
-			format: 'yyyy-mm-dd hh:00:00',  //显示格式可为yyyymm/yyyy-mm-dd/yyyy.mm.dd  
+			format: 'yyyy-mm-dd 23:59:59',  //显示格式可为yyyymm/yyyy-mm-dd/yyyy.mm.dd  
 		    weekStart: 1,//0-周日,6-周六 。默认为0  
 		    autoclose: true,    
 		    startView: 2, //打开时显示的视图。0-'hour' 1-'day' 2-'month' 3-'year' 4-'decade'   
-		    minView: 1,//最小时间视图。默认0-'hour'  
+		    minView: 2,//最小时间视图。默认0-'hour'  
 		//  maxView: 4, <span style="white-space:pre;"> </span>//最大时间视图。默认4-'decade'  
 		//  todayBtn:true, <span style="white-space:pre;">  </span>//true时"今天"按钮仅仅将视图转到当天的日期。如果是'linked'，当天日期将会被选中。   
 		//  todayHighlight:true,<span style="white-space:pre;"> </span>//默认值: false,如果为true, 高亮当前日期。  
 		    startDate: new Date((new Date()/1000+86400)*1000),//日期只能从今天开始选择 
 		    endDate:  new Date((new Date()/1000+86400*30)*1000),//日期范围最多15天
 		    forceParse: false,//当输入非格式化日期时，强制格式化。默认true  
-		    bootcssVer:3,//显示向左向右的箭头  
+		    bootcssVer:1,//显示向左向右的箭头  
 		    language: 'zh-CN', //语言
 		    onSelect: gotoDate
 		}).on('changeDate',gotoDate).on('hide',function(e) {  

@@ -39,15 +39,44 @@
 		,#{releaseTime},#{asoftTime},#{demandPrice},#{tenderNumber})
 	</insert>
 	
-<!-- 	by hsp 6-28  -->
-<!-- 	<select id="demandList" parameterType="oss.bean.Condition" resultType="oss.bean.Demands"> -->
-<!-- 		select * from demands where 1 = 1 -->
-		
-<!-- 		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''"> -->
-<!-- 			and releaseTime between '${startDate} 00:00:00' and '${endDate} 23:59:59' -->
-<!-- 		</if> -->
-<!-- 		<if test="title != null and title != ''"> -->
-<!-- 			and demandID like '%${title}%' -->
-<!-- 		</if> -->
-<!-- 	</select> -->
+<!-- 	by hsp 6-29 雇主查找自己所发布的所有需求 -->
+	<select id="demandsByUserID" parameterType="oss.bean.Users" resultType="oss.bean.Demands">
+		select * from demands where 1 = 1 and userID = #{userID}
+	</select>
+	
+<!-- 	by hsp 6-30 20:17 雇主選擇中標者，更改需求状态以及填入中标者ID -->
+	<update id="updateDemandStatusToTender" parameterType="oss.bean.Demands">
+	update  demands set demandstatusid = 5,tenderID = #{tenderID} where demandID=#{demandID}
+	</update>
+	
+<!-- 	by hsp 7-1 12:45 雇主确认收货,更改需求状态 -->
+	<update id="updateDemandStatusToConfirmReceipt" parameterType="oss.bean.Demands">
+	update  demands set demandstatusid = 7 where demandID=#{demandID}
+	</update>
+
+<!-- 		by hsp 7-1 13:51 查詢雇主余额是否足够付款 -->
+	<select id="isSufficientFunds" parameterType="oss.bean.Demands" resultType="oss.bean.Users">
+		select * from users where 1 = 1 and userID = #{userID} and userBalance >= #{demandPrice}
+	</select>
+	
+	<!-- 	by hsp 7-1 14:04 雇主确认收获后，扣款 -->
+	<update id="deductUsersBalance"  parameterType="oss.bean.Users" >
+		update Users set userBalance = #{userBalance} where userID=#{userID}
+	</update>
+	
+<!-- 	by hsp 7-1 14：24 获取服务商的余额 -->
+	<select id="serverBalance" parameterType="oss.bean.Demands" resultType="java.lang.Long">
+		select userBalance from users where 1 = 1 and userID = #{tenderID}
+	</select>
+	
+<!-- 	by hsp 7-1 14:09 服务商收到货款 -->
+	<update id="addServerBalance"  parameterType="oss.bean.Demands" >		
+		update Users set userBalance = #{demandPrice} where userID=#{tenderID}
+	</update>
+
+<!-- 	by hsp 7-1 14:33 服务商确认发货,更改需求状态 -->
+	<update id="updateDemandStatusToSendGood" parameterType="oss.bean.Demands">
+	update  demands set demandstatusid = 6 where demandID=#{demandID}
+	</update>
+
 </mapper>

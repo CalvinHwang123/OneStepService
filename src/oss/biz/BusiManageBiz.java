@@ -111,4 +111,19 @@ public interface BusiManageBiz {
 	
 	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
 	public List<Demands> serversBidsList(Users users);
+	
+	//by hsp 6-29 15:34 雇主查找自己所发布的所有需求 
+	public List<Demands> usersDemandsList(Users users);
+	
+	//by hsp 6-30 15:41雇主根据需求ID查找投过标的服务商
+	public List<Users> biddedServerList(Demands demands);
+	
+	// by hsp 6-30 20:35  雇主選擇中標者，更改需求状态以及填入中标者ID 
+	public int chooseTender(Demands demands);
+	
+	// by hsp 7-1 12:45 雇主确认收货
+	public String confirmReceipt(Demands demands,Users users);
+	
+	// by hsp 7-1 14:31 服务商发货
+	public String sendGood(Demands demands);
 }

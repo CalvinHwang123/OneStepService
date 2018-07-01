@@ -313,7 +313,6 @@
        			data:JSON.stringify(deleteStorys),
        			async:true,
        			success:function(msg){//
-       				alert(msg);
                     layer.msg('已删除!',{icon:1,time:1000});
                     window.location.reload();
        			}
@@ -332,7 +331,6 @@
          for (var i = 0; i < deleteIDs.length; i++) {
  				var data =	{"storyID":deleteIDs[i]};
  				deleteStorys.push(data);
- 				alert(deleteStorys);
  		}
          $.ajax({
  			url:"PortalManage/deleteStory.action",
@@ -342,7 +340,6 @@
  			data:JSON.stringify(deleteStorys),
  			async:true,
  			success:function(msg){//
- 				alert(msg);
               layer.msg('已删除!',{icon:1,time:1000});
               window.location.reload();
  			}

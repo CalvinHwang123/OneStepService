@@ -11,7 +11,7 @@ public class Demands {
 	private String userPhone;// 电话号码
 	private String releaseTime;// 发布时间
 	private String asoftTime;// 截止时间
-	private Long tenderID;// 投标者ID
+	private Long tenderID;// 中标者ID
 	//by hsp 6-26 9:07
 	private Long demandPrice;//新增需求预算
 
