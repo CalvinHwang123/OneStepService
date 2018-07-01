@@ -101,27 +101,46 @@ public interface BusiManageBiz {
 
 	// by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
 	public int bidding(Tender tender);
-	
-	//合作  wwj  6-28
-		public List<userService> cooperationList(Condition condition);
-	
+
+	// 合作 wwj 6-28
+	public List<userService> cooperationList(Condition condition);
+
 	// 发布作品 hlq 2018-06-27 20:22
 	public boolean publishWorks(Works works);
+
 	// 修改成交量 hlq
 	public boolean updateWorksNumById(Works works);
-	
-	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
+
+	// by hsp 6-28 20：50 服务商查看自己已投过的标 列表
 	public List<Demands> serversBidsList(Users users);
-	
+
 	// 增加订单 hlq 2018-06-29 11:19
 	public boolean addOrders(Orders orders);
+
 	// 修改用户余额 hlq 2018-06-29 14:08
 	public boolean updateUserBalanceById(Users users);
+
 	// 根据作品id获取作品信息 hlq 2018-06-29 14:15
 	Works selectWorksById(Long worksId);
+
 	// 添加交易记录 hlq 2018-06-29 14:58
 	boolean AddTrading(Trading trading);
-	
+
 	// 根据用户id查询订单作品信息
 	List<Orders> selectOrderWorksByUserId(Condition condition);
+
+	// by hsp 6-29 15:34 雇主查找自己所发布的所有需求
+	public List<Demands> usersDemandsList(Users users);
+
+	// by hsp 6-30 15:41雇主根据需求ID查找投过标的服务商
+	public List<Users> biddedServerList(Demands demands);
+
+	// by hsp 6-30 20:35 雇主選擇中標者，更改需求状态以及填入中标者ID
+	public int chooseTender(Demands demands);
+
+	// by hsp 7-1 12:45 雇主确认收货
+	public String confirmReceipt(Demands demands, Users users);
+
+	// by hsp 7-1 14:31 服务商发货
+	public String sendGood(Demands demands);
 }

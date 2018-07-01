@@ -27,6 +27,10 @@
 	<select id="selectBidsByServerID" resultType="oss.bean.Demands" parameterType="oss.bean.Users">
 		select * from demands  where demandID in (select demandID from tender where userID=#{userID}) 
 	</select>
-	
-	
+
+<!-- by hsp 6-30 15:41雇主根据需求ID查找投过标的服务商	 -->
+	<select id="selectServerByDemandID" resultType="oss.bean.Users" parameterType="oss.bean.Demands">
+			select * from users where userID in (select userID from tender where DEMANDID = #{demandID})
+	</select>
+
 </mapper>

@@ -172,42 +172,41 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	// 收藏
 	@Override
 	public List<userService> userServiceList(Condition condition) {
-	
+
 		return busiManageMapper.userServiceList(condition);
 	}
 
-	//by hsp 6-28 11:05 检查服务商是否投过该需求的标
+	// by hsp 6-28 11:05 检查服务商是否投过该需求的标
 	@Override
 	public Tender checkIsBidded(Tender tender) {
 		return busiManageMapper.selectTenderByID(tender);
 	}
 
-	
-	//by hsp 6-28 11:25 查找具体的需求
+	// by hsp 6-28 11:25 查找具体的需求
 	@Override
 	public Demands selectDemand(Tender tender) {
 		return busiManageMapper.selectDemandByID(tender);
 	}
 
-	
-	//by hsp 6-28 11:36投标成功后，需求的剩余投标数量-1
+	// by hsp 6-28 11:36投标成功后，需求的剩余投标数量-1
 	@Override
 	public int deductTenderNumber(Demands demands) {
 		return busiManageMapper.updateDemandTenderNumber(demands);
 	}
 
-	
-	//by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
+	// by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
 	@Override
 	public int bidding(Tender tender) {
 		return busiManageMapper.insertTender(tender);
 	}
-//合作  wwj
+
+	// 合作 wwj
 	@Override
 	public List<userService> cooperationList(Condition condition) {
-		
+
 		return busiManageMapper.cooperationList(condition);
 	}
+
 	// 发布作品 hlq 2018-06-27 20:23
 	@Override
 	public boolean publishWorks(Works works) {
@@ -220,7 +219,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		return busiManageMapper.updateWorksNumById(works) > 0;
 	}
 
-	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
+	// by hsp 6-28 20：50 服务商查看自己已投过的标 列表
 	@Override
 	public List<Demands> serversBidsList(Users users) {
 		return busiManageMapper.selectBidsByServerID(users);
@@ -254,5 +253,55 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	@Override
 	public List<Orders> selectOrderWorksByUserId(Condition condition) {
 		return busiManageMapper.selectOrderWorksByUserId(condition);
+	}
+
+	// by hsp 6-29 15:34 雇主查找自己所发布的所有需求
+	@Override
+	public List<Demands> usersDemandsList(Users users) {
+		return busiManageMapper.demandsByUserID(users);
+	}
+
+	// by hsp 6-30 15:41雇主根据需求ID查找投过标的服务商
+	@Override
+	public List<Users> biddedServerList(Demands demands) {
+		return busiManageMapper.selectServerByDemandID(demands);
+	}
+
+	// by hsp 6-30 20:35 雇主選擇中標者，更改需求状态以及填入中标者ID
+	@Override
+	public int chooseTender(Demands demands) {
+		return busiManageMapper.updateDemandStatusToTender(demands);
+	}
+
+	// by hsp 7-1 12:45 雇主确认收货
+	@Override
+	public String confirmReceipt(Demands demands,Users users) {
+		//1 判断雇主余额是否充足
+		demands.setUserID(users.getUserID());
+		users = busiManageMapper.isSufficientFunds(demands);
+		if (users == null) {
+			return "NotEnough";
+		}
+		//2 如果充足，雇主扣款，
+		users.setUserBalance(users.getUserBalance() - demands.getDemandPrice());
+		busiManageMapper.deductUsersBalance(users);
+		
+		//3 服务商加款
+		demands.setDemandPrice(demands.getDemandPrice()+busiManageMapper.serverBalance(demands));
+		busiManageMapper.addServerBalance(demands);
+		
+		//4 更改需求状态为已付款
+		busiManageMapper.updateDemandStatusToConfirmReceipt(demands);
+		return "ConfirmSuccess";
+	}
+
+	// by hsp 7-1 14:31 服务商发
+	@Override
+	public String sendGood(Demands demands) {
+		String sendResult = "error";
+		if (busiManageMapper.updateDemandStatusToSendGood(demands) != 0) {
+			sendResult ="success";
+		}
+		return sendResult;
 	}
 }

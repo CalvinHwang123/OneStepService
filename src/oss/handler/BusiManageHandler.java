@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
@@ -352,10 +353,16 @@ public class BusiManageHandler {
 
 	// by hsp 个人中心 6-26 10:20
 	@RequestMapping("/userPersonal.action")
-	public ModelAndView userPersonal(HttpServletRequest req, Demands demands) {
-		// 根据用户ID查找用户的订单
-
-		ModelAndView mav = new ModelAndView("userpersonal/myorder");
+	public ModelAndView userPersonal(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
+		// 根据用户ID查找用户的需求
+		PageHelper.startPage(pageNum, pageSize);
+		List<Demands> demandsList = busiManageBizImpl
+				.usersDemandsList((Users) req.getSession().getAttribute("forelogin"));
+		PageInfo pageInfo = new PageInfo<>(demandsList, pageSize);
+		req.setAttribute("pageInfo", pageInfo);
+		ModelAndView mav = new ModelAndView("userpersonal/mydemands");
 		return mav;
 	}
 
@@ -479,7 +486,7 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// by hsp 6-28 20：50 服务商查看自己已投过的标  列表
+	// by hsp 6-28 20：50 服务商查看自己已投过的标 列表
 	@RequestMapping("/serverBidsList.action")
 	public ModelAndView serverBidsList(HttpServletRequest request,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
@@ -493,5 +500,38 @@ public class BusiManageHandler {
 		request.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("serverpersonal/serverBids");
 		return mav;
+	}
+
+	// by hsp 6-30 15:36 雇主查看需求的投标者
+	@RequestMapping(value = "/findTender.action", produces = "application/json; charset=utf-8")
+	public @ResponseBody String findTender(HttpServletRequest req, @RequestBody Demands demands) {
+		List<Users> serverList = busiManageBizImpl.biddedServerList(demands);
+		Gson gson = new Gson();
+		String serverListJson = gson.toJson(serverList);
+		return serverListJson;
+	}
+
+	// by hsp 6-30 16:24 雇主選擇投标者
+	@RequestMapping(value = "/chooseTender.action", produces = "application/json; charset=utf-8")
+	public @ResponseBody String chooseTender(HttpServletRequest req, @RequestBody Demands demands) {
+		int i = busiManageBizImpl.chooseTender(demands);
+		if (i != 0) {
+			return "success";
+		}
+		return "error";
+	}
+
+	// by hsp 7-1 12:45 雇主确认收货
+	@RequestMapping(value = "/confirmReceipt.action", produces = "application/json; charset=utf-8")
+	public @ResponseBody String confirmReceipt(HttpServletRequest req, @RequestBody Demands demands) {
+		Users users = (Users) req.getSession().getAttribute("forelogin");
+		String flag = busiManageBizImpl.confirmReceipt(demands, users);
+		return flag;
+	}
+
+	// by hsp 7-1 14:31 服务商发货
+	@RequestMapping(value = "/sendGood.action", produces = "application/json; charset=utf-8")
+	public @ResponseBody String sendGood(HttpServletRequest req, @RequestBody Demands demands) {
+		return busiManageBizImpl.sendGood(demands);
 	}
 }
