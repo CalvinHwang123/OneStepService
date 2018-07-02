@@ -45,7 +45,7 @@
 				<div class="clearfix"></div>
 			</div>
 
-			<c:forEach var="i" items="${works}" varStatus="status">				
+			<c:forEach var="i"  items="${works}" varStatus="status">				
 				<div class="offer-card-row">
 					<div class="col-md-4 offer-card-grids" style="margin: 10px">
 						<h4>${i.worksName}</h4>
