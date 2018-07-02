@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>雇主中心-信用明细</title>
+<title>雇主中心-我的合作</title>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
 
 	<div class='order-wrap'>
-		<form id="pageForm" action="BusiManage/creditList.action">
+		<form id="pageForm" action="BusiManage/cooperationList.action">
 			<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 				id='utopia_widget_6'>
 				<!-- 隐藏域 每页条数 -->
@@ -21,52 +21,72 @@
 					value="${pageInfo.getPageNum()}"> <input type="hidden"
 					id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}">
-
 				<div class="form-inline">
-					<font size="3" face="sans serif">信用类型:</font> 
-					<select class="form-control" name="classPid" >
-						<option value=0></option>
-						<option value=1>完成</option>
-						<option value=2>违约</option>
-					</select>
-
+					<font size="3" face="sans serif">服务商名称:</font><input
+						style="width: 20%;" type="text" class="form-control" id="name"
+						placeholder="请输入服务商名称" name="startDate"
+						value="${condition.startDate}">
+					
 					<button type="submit" class="btn btn-default">查询</button>
 				</div>
 			</div>
 			<div class='order-top-banner' id='utopia_widget_7'>
-				<div class='top-banner-tips'></div>
-				<div class='top-banner-cont'></div>
+				<div class='top-banner-tips'>1</div>
+				<div class='top-banner-cont'>2</div>
 			</div>
 			<div class='order-bg'>
 				<div class='options'>
 					<div class="table-responsive">
-						<table class="table table-hover">
-							<caption>我的信用</caption>
-							<thead>
-								<tr>
-									<th>序列</th>
-									<th>信用类型</th>
-									<th>信用分</th>
-									<th>信用变动原因</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="i" items="${pageInfo.list}" begin="0"
-									varStatus="status">
-									<tr>
-										<td><c:out value="${status.index+1}"></c:out></td>
-										<td><c:out value="${i.creditType}"></c:out></td>
-										<td><c:out value="${i.creditPoints}"></c:out></td>
-										<td><c:out value="${i.creditWhy}"></c:out></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<div class="add-products">
+							<div class="container" style="width: 100%;">
+								<h3 class="w3ls-title"></h3>
+								<div class="add-products-row" >
+									<c:forEach items="${pageInfo.list}" var="i" begin="0"
+										varStatus="s">
+		
+										<c:if test="${i.imageUrl == null}">
+											<div class="info-item" style="width:100%;border-bottom: 10px solid white;" >
+											
+											
+												<img class="info-img" 
+													style="background:url(<%=basePath%>/portal/images/detail.png)no-repeat 0px 0px; background-size: cover;">
+												<div class="content-wrap">
+													<h4 class="info-title text-overflow">
+														<a class="link-hover"
+															href="BusiManage/serviceDetails.action?userID=${i.userID}">
+															<c:out value="${i.userName}"></c:out>
+														</a>
+													</h4>
+													<div class="info-content">${i.userIntroduction}</div>
+												</div>
+											</div>
+										</c:if>
+										<c:if test="${i.imageUrl != null}">
+											<div class="info-item"  style="width:100%;border-bottom: 10px solid white;">
+												<img
+													src="${i.imageUrl};a.c=200x150&amp;a.g=Center"
+													class="info-img" alt="${i.userName}">
 
-					</div>
+												<div class="content-wrap">
+													<h4 class="info-title text-overflow">
+														<a class="link-hover"
+															href="BusiManage/serviceDetails.action?userID=${i.userID}">
+															<c:out value="${i.userName}"></c:out>
+														</a>
+													</h4>
+													<div class="info-content">${i.userIntroduction}</div>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+
+								</div>
+							</div>
 		</form>
+
 	</div>
-	<form id="pageForm" action="BusiManage/creditList.action">
+
+	<form id="pageForm" action="BusiManage/cooperationList.action">
 		<div class="page">
 			<c:choose>
 				<c:when test="${pageInfo.getPages() == 0}">
@@ -139,8 +159,8 @@
 			</c:choose>
 		</div>
 	</form>
-
 	</div>
+
 	</div>
 	</div>
 	</div>
@@ -168,8 +188,6 @@ function changePageSize(pageSize) {
 };
 </script>
 	<%@include file="/end.jsp"%>
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script
-		src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>

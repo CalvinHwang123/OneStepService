@@ -179,13 +179,11 @@ utopia.arrived({uid:'utopia_widget_3', js:[], entry:function(){}});
 
 							</dd>
 								<dd>
-								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
-									data-linkid='10157962' target='_blank'>我的余额</a>
+								<a class='J_menuItem ' href='balance.jsp'>我的余额</a>
 
 							</dd>
 								<dd>
-								<a class='J_menuItem ' href='//club.zbj.com/zbRecord'
-									data-linkid='10157962' target='_blank'>修改密码</a>
+								<a class='J_menuItem ' href='BusiManage/UpdatePwd.action'>修改密码</a>
 
 							</dd>
 

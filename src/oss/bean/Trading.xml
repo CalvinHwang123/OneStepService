@@ -3,8 +3,11 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="oss.mapper.BusiManageMapper">
 	<!--交易明细 -->
-	<select id="tradingList" resultMap="TradingMap" parameterType="oss.bean.Condition" >
-		select A.Tradingid,a.amount,a.demandId,a.amountType,a.tradingTime,b.userName,b.userAccount,b.userBalance from Trading a, Users b where A.Userid=B.Userid and B.Useraccount=#{title}
+	<select id="tradingList" resultMap="TradingMap" parameterType="oss.bean.Condition">
+		select
+		A.Tradingid,a.amount,a.demandId,a.amountType,a.tradingTime,c.demandTitle
+		from Trading a ,demands c
+		where A.Userid=#{classPid} and a.demandId = c.demandId
 		<if
 			test="startDate != null and endDate != null and startDate !='' and endDate !=''">
 			and tradingTime between #{startDate} and #{endDate}
@@ -17,11 +20,17 @@
 		<result property="demandId" column="demandId" />
 		<result property="amountType" column="amountType" />
 		<result property="tradingTime" column="tradingTime" />
-		<association property="checkUsers" javaType="oss.bean.Users">
-			<id property="userID" column="userID" />
-			<result property="userAccount" column="userAccount" />
-			<result property="userName" column="userName" />
-			<result property="userBalance" column="userBalance" />
+<!-- 		<association property="checkUsers" javaType="oss.bean.Users"> -->
+<!-- 			<id property="userID" column="userID" /> -->
+<!-- 			<result property="userAccount" column="userAccount" /> -->
+<!-- 			<result property="userName" column="userName" /> -->
+<!-- 			<result property="userBalance" column="userBalance" /> -->
+<!-- 		</association> -->
+		<association property="checkDemands" javaType="oss.bean.Demands">
+			<id property="demandID" column="demandID" />
+			<result property="demandTitle" column="demandTitle" />
+			<result property="demandstatusid" column="demandstatusid" />
+			<result property="demandTitle" column="demandTitle" />
 		</association>
 	</resultMap>
 	

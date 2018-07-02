@@ -89,8 +89,9 @@ public interface BusiManageMapper {
 	// 信用明细
 	public List<Credit> creditList(Condition condition);
 
+
 	// 收藏
-	public List<userService> userServiceList(Condition condition);
+	public List<Users> userServiceList(Condition condition);
 
 	// by hsp 6-28 11:05 检查服务商是否投过该需求的标
 	public Tender selectTenderByID(Tender tender);
@@ -105,7 +106,7 @@ public interface BusiManageMapper {
 	public int insertTender(Tender tender);
 
 	// 合作
-	public List<userService> cooperationList(Condition condition);
+	public List<Users> cooperationList(Condition condition);
 
 	// 插入作品表记录 hlq 2018-06-27 21:39
 	public int insertWorks(Works works);
@@ -157,4 +158,12 @@ public interface BusiManageMapper {
 
 	// by hsp 7-1 14:31 服务商发货
 	public int updateDemandStatusToSendGood(Demands demands);
+	// 修改密码 wwj 16:13
+	public abstract int updateUsersPwdById(Users users);
+	
+	//服务商详情   wwj  7-1
+	public abstract Users serviceDetails(Users users);
+	
+	//服务商详情   wwj  7-1
+		public abstract List<Works> serviceWorks(Users users);
 }

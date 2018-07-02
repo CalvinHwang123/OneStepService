@@ -99,12 +99,6 @@
 		select * from Users where userAccount=#{userAccount}
 	</select>
 
-
-
-
-
-
-
 	<!-- 华清修改：用户表扣除用户信用分 -->
 	<update id="userCreditScore" parameterType="oss.bean.Credit">
 
@@ -164,6 +158,24 @@
 		where userID = #{userID}
 	</update>
 
+
+<!-- 验证密码 -->
+<!-- <select id="SelectpwdByAcc" resultType="oss.bean.Users" -->
+<!-- 		parameterType="oss.bean.Users"> -->
+<!-- 		select * from Users where userAccount=#{userAccount} -->
+<!-- 	</select> -->	
+	<!-- 密码修改 -->
+	<update id="updateUsersPwdById"  parameterType="oss.bean.Users" >
+		update Users set
+		userPwd=#{userPwd}
+		where userAccount=#{userAccount}
+	</update>
+	
+<!-- 	服务商详情 -->
+	<select id="serviceDetails" resultType="oss.bean.Users"
+		parameterType="oss.bean.Users">
+		select * from Users where userID=#{userID}
+	</select>
 </mapper>
 
 

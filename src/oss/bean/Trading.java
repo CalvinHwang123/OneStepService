@@ -9,6 +9,7 @@ public class Trading {
 	private String tradingTime;
 	private Users checkUsers;
 	private Long userId2;
+	private Demands checkDemands;
 	public Trading() {
 		
 	}
@@ -75,6 +76,14 @@ public class Trading {
 
 	public void setCheckUsers(Users checkUsers) {
 		this.checkUsers = checkUsers;
+	}
+
+	public Demands getCheckDemands() {
+		return checkDemands;
+	}
+
+	public void setCheckDemands(Demands checkDemands) {
+		this.checkDemands = checkDemands;
 	}
 	
 }

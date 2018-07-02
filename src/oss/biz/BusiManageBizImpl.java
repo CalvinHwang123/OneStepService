@@ -171,7 +171,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 
 	// 收藏
 	@Override
-	public List<userService> userServiceList(Condition condition) {
+	public List<Users> userServiceList(Condition condition) {
 
 		return busiManageMapper.userServiceList(condition);
 	}
@@ -202,8 +202,8 @@ public class BusiManageBizImpl implements BusiManageBiz {
 
 	// 合作 wwj
 	@Override
-	public List<userService> cooperationList(Condition condition) {
 
+	public List<Users> cooperationList(Condition condition) {
 		return busiManageMapper.cooperationList(condition);
 	}
 
@@ -303,5 +303,23 @@ public class BusiManageBizImpl implements BusiManageBiz {
 			sendResult ="success";
 		}
 		return sendResult;
+	}
+	// 修改密码 wwj 16:19
+	@Override
+	public int updateUsersPwdById(Users users) {
+
+		return busiManageMapper.updateUsersPwdById(users);
+	}
+
+	// 服务商详情
+	@Override
+	public Users serviceDetails(Users users) {
+		return busiManageMapper.serviceDetails(users);
+	}
+	//服务商详情   wwj  7-1
+	@Override
+	public List<Works> serviceWorks(Users users) {
+		
+		return busiManageMapper.serviceWorks(users);
 	}
 }

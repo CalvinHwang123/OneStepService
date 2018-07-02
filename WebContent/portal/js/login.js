@@ -8,7 +8,7 @@ $(function() {
 			"userAccount" : params
 		};
 		$.ajax({
-			url : "BusiManage/selectName.action",
+			url : "BusiManage/updateUsersPwdById.action",
 			// 数据发送方式
 			type : "post",
 			// 接受数据格式
@@ -100,10 +100,10 @@ function show(result) {
 
 function regist(result) {
 	if (result == "success") {
-		alert("注册成功");
+		layer.msg('注册成功!',{icon:1,time:1000});
 		$("#ForeSign").submit();
 	} else {
-		alert("注册失败");
+		layer.msg('注册失败!',{icon:2,time:1000});
 	}
 }
 
@@ -111,10 +111,14 @@ function login(result) {
 	if (result == "success") {
 		$("#Login").submit();
 	} else if (result == "fail") {
-		alert("账号失效");
+		layer.msg('账号失效!',{icon:2,time:1000});
 	} else {
-		 alert("登入失败");	 
-		$("#Login").attr("action", "ForeLogin.jsp")
-		$("#Login").submit();
+		layer.msg('账号密码错误!',{icon:2,time:1000});
+//		 alert("登入失败");	 	
+		setTimeout("mooy()",1000);
 	}
 }
+function mooy(){
+	$("#Login").attr("action", "ForeLogin.jsp")
+	$("#Login").submit();
+ }
