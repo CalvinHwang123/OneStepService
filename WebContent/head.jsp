@@ -66,6 +66,8 @@
 
 <script type="text/javascript" src="portal/js/md5.js"></script>
 <link rel="stylesheet" href="portal/css/jigsaw.css">
+<link href="portal/css/myprogress.css" rel="stylesheet" type="text/css"
+	media="all" />
 <script src="portal/js/jquery-scrolltofixed-min.js"
 	type="text/javascript"></script>
 	<script src="portal/js/login.js" type="text/javascript"></script>
@@ -197,7 +199,7 @@
 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu">
-							<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
+								<li><a href="BusiManage/Individualcenter.action">服务商个人中心</a></li>
 								<li><a href="offers.html">立即开店赚钱</a></li>
 								<li><a href="offers.html">具体开店流程</a></li>
 								<li><a href="offers.html">开店须知</a></li>
@@ -238,6 +240,7 @@
 
 
 							<li><a href="Portal/beforeDemandsList.action">需求大厅</a></li>
+							<li><a href="Portal/serviceProviders.action">服务商大厅</a></li>
 
 						</ul></li>
 					<li class="dropdown head-dpdn"><a href="contact.html"
@@ -267,8 +270,8 @@
 					<h6>DLR.COM</h6>
 				</div>
 				<div class="header-search">
-					<form action="#" method="post">
-						<input type="search" name="Search" placeholder="搜索需求" required="">
+					<form action="Portal/beforeDemandsList.action" method="post">
+						<input type="search"  name="title" value="${condition.title}" placeholder="搜索需求" required="">
 						<button type="submit" class="btn btn-default"
 							aria-label="Left Align">
 							<i class="fa fa-search" aria-hidden="true"> </i>

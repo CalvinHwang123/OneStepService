@@ -12,7 +12,7 @@
 <meta name="google-site-verification"
 	content="EGpeU8lMdt7x_LsqOd7MAXeYZW9ZKf1MML-n6C4emtA" />
 <meta http-equiv="Cache-Control" content="no-transform " />
-<title>所有需求列表 -帝六人网</title>
+<title>服务商大厅 -帝六人网</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 
@@ -59,7 +59,7 @@
 				</a>
 				<div class="list-container-hd clearfix hide">
 					<h2 class="fl yahei">
-						所有需求<span class="list-number">(7991)</span>
+						所有服务商<span class="list-number">(7991)</span>
 					</h2>
 
 				</div>
@@ -73,53 +73,26 @@
 					<form id="pageForm" class="layui-form layui-col-md12 x-so"
 						action="Portal/beforeDemandsList.action">
 
-						<dl>
-							<dt>
-								金<span style="visibility: hidden;">占位</span>额:
-							</dt>
+					<dl>
+							<dt>按分类查询:</dt>
 							<dd>
-								<a data-linkid="10002782" href="" class='selected'
-									rel="nofollow">全部</a> <input type="text" class="layui-input"
-									placeholder="起始金额：最小为1" name="beWorksPrice" id="beWorks"
-									value="${condition.beWorksPrice}" autocomplete="off"> <input
-									type="text" class="layui-input" placeholder="最大金额"
-									name="endWorksPrice" id="endWorks"
-									value="${condition.endWorksPrice}" autocomplete="off">
-								<button type="button" class="ui-btn ui-btn-link"
-									data-linkid="10034048" onclick="mysubmit()">
-									<i class="iconfont">&#xe809;</i>
-								</button>
-							</dd>
-						</dl>
-						<dl>
-							<dt>需求时间:</dt>
-							<dd>
-								<a data-linkid="10002783" href="" class='selected'
-									rel="nofollow">全部</a>
-								<!--  <a
-								data-linkid="10002783" href=""
-								rel="nofollow">今日发布</a> <a data-linkid="10002783"
-								href="" rel="nofollow">昨日发布</a> <a
-								data-linkid="10002783" href=""
-								rel="nofollow">近3天发布</a> <a data-linkid="10002783"
-								href="" rel="nofollow">24小时内到期</a> <a
-								data-linkid="10002783" href=""
-								rel="nofollow">2天内到期</a> <a data-linkid="10002783"
-								href="" rel="nofollow">3天内到期</a> -->
 
-								<input type="date" placeholder="开始日" name="startDate" id="start"
-									value="${condition.startDate}" autocomplete="off"> <input
-									type="date" placeholder="截止日" name="endDate" id="end"
-									value="${condition.endDate}" autocomplete="off">
-								<button type="button" class="ui-btn ui-btn-link"
-									data-linkid="10034048" onclick="mysubmit2()">
+
+								 <a
+									data-linkid="10002783" href="" class='selected' rel="nofollow">全部</a><input
+									type="text" name="title" value="${condition.title}"
+									placeholder="请输入关键字" autocomplete="off" class="layui-input">
+								<button type="submit" class="ui-btn ui-btn-link"
+									data-linkid="10034048">
 									<i class="iconfont">&#xe809;</i>
 								</button>
+
+
 							</dd>
 						</dl>
 
 						<dl>
-							<dt>关键字查询:</dt>
+							<dt>按名称查询:</dt>
 							<dd>
 
 
@@ -151,7 +124,7 @@
 					<div id="j-list-advrs"></div>
 					<ul class="list-change">
 						<li class="current"><a data-linkid="10033182" href=""
-							class='selected'>进行中</a></li>
+							class='selected'>所有服务商</a></li>
 						<!-- <li><a data-linkid="10002785"
 							href="" class="selected">成功案例</a></li> -->
 
@@ -167,57 +140,23 @@
 					<div class="list-sorttag">
 						<a href="Portal/beforeDemandsList.action" class="selected">综合</a>
 
-						<c:choose>
-							<c:when test="${condition.descenDingOrder==1 }">
+						
 								<a href="javascript:void(0);" onclick="changetime(11)">发布时间<i
 									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							</c:when>
-							<c:when test="${condition.descenDingOrder==11 }">
-								<a href="javascript:void(0);" onclick="changetime(1)">发布时间<i
-									id="iconfont" class="iconfont">&#xe80d;</i></a>
-							</c:when>
+							
+							
 
 
-							<c:otherwise>
-								<a href="javascript:void(0);" onclick="changetime(1)">发布时间<i
-									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							</c:otherwise>
-						</c:choose>
-
-
-						<c:choose>
-							<c:when test="${condition.descenDingOrder==3 }">
+					
 								<a href="javascript:void(0);" onclick="changetime(33)">可投标数<i
 									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							</c:when>
-							<c:when test="${condition.descenDingOrder==33 }">
-								<a href="javascript:void(0);" onclick="changetime(3)">可投标数<i
-									id="iconfont" class="iconfont">&#xe80d;</i></a>
-							</c:when>
+						
 
-
-							<c:otherwise>
-								<a href="javascript:void(0);" onclick="changetime(3)">可投标数<i
-									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							</c:otherwise>
-						</c:choose>
-
-						<c:choose>
-							<c:when test="${condition.descenDingOrder==4 }">
+						
+						
 								<a href="javascript:void(0);" onclick="changetime(44)">价格<i
 									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							</c:when>
-							<c:when test="${condition.descenDingOrder==44 }">
-								<a href="javascript:void(0);" onclick="changetime(4)">价格<i
-									id="iconfont" class="iconfont">&#xe80d;</i></a>
-							</c:when>
-
-
-							<c:otherwise>
-								<a href="javascript:void(0);" onclick="changetime(4)">价格<i
-									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							</c:otherwise>
-						</c:choose>
+							
 
 
 
@@ -321,66 +260,42 @@
 								<col width="130px">
 								<col width="105px">
 							</colgroup>
-							<!-- <tr>
-							<td><p>
-									<span class='list-icon-top list-vas-top' title="需求置顶">置顶</span><em
-										class="list-task-reward">&yen;666.00</em><a rel="nofollow"
-										class="list-task-title" title="我需要品牌创意设计-名片设计"
-										href="//task.zbj.com/13668949/" target="_blank"
-										data-zbjlog="{obj:'main'}"><img
-										src="//task.zbj.com/main/textimg.html?tid=13668949&kw=&color=11,115,187&lcolor=255,138,0&fsize=10.5&mwidth=350&fspace=3&f=simsunbd"></a><a
-										tool-map="top" tool-text="屏蔽搜索引擎 "
-										class="zbj-tooltip task-icons task-icons-spider"
-										href="javascript:return false;"></a>
-								</p>
-								<p class="list-task-ctn"></p></td>
-							<td><p>
-									<em class="list-task-trusteeship">已托管</em>
-								</p></td>
-							<td><p class="normal-p">
-									<a class="blue" rel="nofollow"
-										href="//task.zbj.com/13668949/#bid-erea" target="_blank"
-										data-zbjlog="{obj:'main'}">0</a><span class="text">参与</span><span
-										class="text"> | </span><span class="text">比稿</span>
-								</p></td>
-							<td><span class="text">6天 后截止</span></td>
-						</tr> -->
+							
 
-							<c:if test="${dem.demandstatusid ==2}">
+							
 								<tr>
 									<td>
 
 										<p>
-											<em class="list-task-reward">&yen;${dem.demandPrice}</em><a
-												class="list-task-title" title="${dem.demandTitle }"
-												href="Portal/demandDetailsList.action?demandID=${dem.demandID}"
-												target="_blank" data-zbjlog="{obj:'main'}">${dem.demandTitle }</a>
+											<em class="list-task-reward">服务商名称：</em><a
+												class="list-task-title" title="${dem.userName }"
+												href="Portal/demandDetailsList.action?demandID=${dem.userName}"
+												target="_blank" data-zbjlog="{obj:'main'}">${dem.userName }</a>
 										</p>
 
-										<p class="list-task-ctn">${dem.demandContent }</p>
+										<p class="list-task-ctn">${dem.userName }</p>
 									</td>
 									<td>
 										<p class="normal-p">
-											<span class="text">发布时间为：${dem.releaseTime }</span>
+											<span class="text">发布时间为：${dem.userName }</span>
 										</p>
 									</td>
 									<td><p class="normal-p">
 											<a class="blue" rel="nofollow"
 												href="//task.zbj.com/13655206/#bid-erea" target="_blank"
-												data-zbjlog="{obj:'main'}">${8-dem.tenderNumber}</a><span
+												data-zbjlog="{obj:'main'}">大大</a><span
 												class="text">参与</span><span class="text"> | </span> <span
 												class="text">招标中</span>
 										</p>
 										<p class="normal-p">
 											<span style="white-space: nowrap; color: #999;">仅剩<span
-												class="highlight">${dem.tenderNumber}</span>个投标机会
+												class="highlight">${dem.userName}</span>个投标机会
 											</span>
 										</p></td>
-									<td><span class="text">截止时间为：${dem.asoftTime }</span> <%-- 剩余时间：
-	<span class="timer" asofttime="${dem.asoftTime }"></span> --%></td>
+									<td><span class="text">截止时间为：${dem.userName }</span> </td>
 
 								</tr>
-							</c:if>
+						
 						</table>
 				</c:forEach>
 				<div class="list-footer">
