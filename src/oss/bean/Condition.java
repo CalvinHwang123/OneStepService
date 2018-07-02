@@ -14,8 +14,17 @@ public class Condition {
 	private int endWorksPrice;// 结束价格
 	private int descenDingOrder;// 降序
 	private int ascenDing;//升序
+	private String classIficaTion;// 分类
+
 
 	public Condition() {
+	}
+	public String getClassIficaTion() {
+		return classIficaTion;
+	}
+	
+	public void setClassIficaTion(String classIficaTion) {
+		this.classIficaTion = classIficaTion;
 	}
 
 	public String getStartDate() {

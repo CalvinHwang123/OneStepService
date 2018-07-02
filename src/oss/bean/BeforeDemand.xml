@@ -4,83 +4,115 @@
 <mapper namespace="oss.mapper.PortalMapper">
 
 	<!-- 华清修改：前端需求列表查询 -->
-	<select id="beforeDemandsList" parameterType="oss.bean.Condition" resultType="oss.bean.Demands">
-		select * from demands where  1=1
-		
-		<if test="startDate != null and endDate != null and startDate != '' and endDate != ''">
-			and demandstatusid = 2 and releaseTime between '${startDate} 00:00:00' and '${endDate} 23:59:59'
+	<select id="beforeDemandsList"
+		parameterType="oss.bean.Condition" resultType="oss.bean.Demands">
+		select * from demands where 1=1
+
+		<if
+			test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+			and demandstatusid = 2 and releaseTime between '${startDate}
+			00:00:00' and '${endDate} 23:59:59'
 		</if>
-		
-		<if test="beWorksPrice != null and endWorksPrice != null and beWorksPrice != '' and endWorksPrice != ''">
-			and demandstatusid = 2 and demandPrice between #{beWorksPrice} and #{endWorksPrice}
+
+		<if
+			test="beWorksPrice != null and endWorksPrice != null and beWorksPrice != '' and endWorksPrice != ''">
+			and demandstatusid = 2 and demandPrice between #{beWorksPrice}
+			and #{endWorksPrice}
 		</if>
 
 		<if test="title != null and title != ''">
 			and demandstatusid = 2 and demandTitle like '%${title}%'
 		</if>
-		
+
 		<if test="descenDingOrder == 1">
 			order by releaseTime asc
 		</if>
 		<if test="descenDingOrder == 11">
-			 order by releaseTime desc
+			order by releaseTime desc
 		</if>
-		
+
 		<if test="descenDingOrder == 4">
-			 order by demandPrice asc
+			order by demandPrice asc
 		</if>
 		<if test="descenDingOrder == 44">
-			 order by demandPrice desc
+			order by demandPrice desc
 		</if>
 		<if test="descenDingOrder == 3">
-			 order by tenderNumber asc
+			order by tenderNumber asc
 		</if>
 		<if test="descenDingOrder == 33">
-			 order by tenderNumber desc
+			order by tenderNumber desc
 		</if>
 	</select>
-	
-	<select id="serviceProviders" parameterType="oss.bean.Condition" resultType="oss.bean.Users">
-		select * from Users where  1=1
-	
+
+	<select id="serviceProviders" parameterType="oss.bean.Condition"
+		resultType="oss.bean.Users">
+		select * from Users where 1=1
+
 
 		<if test="title != null and title != ''">
-			 and userName like '%${title}%'
+			and userName like '%${title}%'
 		</if>
-		
-		
+
+		<if test="classIficaTion != null and classIficaTion != ''">
+			and userName like '%${classIficaTion}%'
+		</if>
+
+
 	</select>
-	
-	
-	
-   <select id="demandDetailsList" resultType="oss.bean.Demands" parameterType="oss.bean.Demands">
-		
+
+
+
+
+
+	<select id="demandDetailsList" resultType="oss.bean.Demands"
+		parameterType="oss.bean.Demands">
+
 		select * from demands where demandID=#{demandID}
 	</select>
-	
-	<!--  服务商-作品上架/下架 -袁楠文 6-30 11:15 -->
+
+
+	<!-- 服务商-作品上架/下架 -袁楠文 6-30 11:15 -->
 	<update id="Workoffshelf" parameterType="oss.bean.Condition">
-		update WORKS set WORKSSTATUSID=#{beWorksPrice} where WORKSID=#{classPid}
+		update WORKS set
+		WORKSSTATUSID=#{beWorksPrice} where WORKSID=#{classPid}
 	</update>
-	
+
 	<!-- 服务商-作品删除 -袁楠文 6-30 12:45 -->
 	<delete id="Worksdel" parameterType="oss.bean.Condition">
-		DELETE FROM WORKS WHERE WORKSID=#{classPid}
+		DELETE FROM WORKS WHERE
+		WORKSID=#{classPid}
 	</delete>
-	
-	<!--  服务商-作品查找 -袁楠文 6-30 13:15 -->
-	<select id="Workmodification" resultType="oss.bean.Workinformation" parameterType="oss.bean.Condition" resultMap="workinfolist">
-		SELECT a.WORKSID,a.USERID,a.WORKSNAME,a.CLASSIFICATIONID,a.WORKSPRICE,a.WORKSNUM,a.WORKSSTATUSID ,b.USERNAME,c.CLASSIFICATIONNAME,d.PARAMETERNAME,a.URL,a.WORKSCONTEXT
+
+	<!-- 服务商-作品查找 -袁楠文 6-30 13:15 -->
+	<select id="Workmodification"
+		resultType="oss.bean.Workinformation"
+		parameterType="oss.bean.Condition" resultMap="workinfolist">
+		SELECT
+		a.WORKSID,a.USERID,a.WORKSNAME,a.CLASSIFICATIONID,a.WORKSPRICE,a.WORKSNUM,a.WORKSSTATUSID
+		,b.USERNAME,c.CLASSIFICATIONNAME,d.PARAMETERNAME,a.URL,a.WORKSCONTEXT
 		FROM WORKS a,USERS b,CLASSIFICATION c,PARAM d
-		WHERE a.USERID=b.USERID and a.CLASSIFICATIONID=c.CLASSIFICATIONID and a.WORKSSTATUSID=d.PARAMETERID 
+		WHERE a.USERID=b.USERID
+		and a.CLASSIFICATIONID=c.CLASSIFICATIONID and
+		a.WORKSSTATUSID=d.PARAMETERID
 		<if test="classPid != null and classPid !='' and classPid!=171120">
-			and  a.WORKSID = #{classPid}
+			and a.WORKSID = #{classPid}
 		</if>
 	</select>
-	
-	<!--  服务商-作品修改 -袁楠文 6-30 15:35 -->
+
+	<!-- 服务商-作品修改 -袁楠文 6-30 15:35 -->
 	<update id="Modificationofwork" parameterType="oss.bean.Works">
-		update WORKS set WORKSNAME=#{worksName},CLASSIFICATIONID=#{classificationId},WORKSCONTEXT=#{worksContext},URL=#{url},WORKSPRICE=#{worksPrice} where WORKSID=#{worksId}
+		update WORKS set
+		WORKSNAME=#{worksName},CLASSIFICATIONID=#{classificationId},WORKSCONTEXT=#{worksContext},URL=#{url},WORKSPRICE=#{worksPrice}
+		where WORKSID=#{worksId}
 	</update>
 	
+	<select id="serviceProvidersDetailsList"
+		resultType="oss.bean.Users" parameterType="oss.bean.Users">
+
+		select * from Users where userID=#{userID}
+	</select>
+
+	
+
 </mapper>

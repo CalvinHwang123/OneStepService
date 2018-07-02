@@ -136,4 +136,10 @@ public class PortalBizImpl implements PortalBiz {
 		return portalMapper.serviceProviders(condition);
 	}
 
+	@Override
+	public Users serviceProvidersDetailsList(Users users) {
+		// TODO Auto-generated method stub
+		return portalMapper.serviceProvidersDetailsList(users);
+	}
+
 }

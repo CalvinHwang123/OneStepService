@@ -78,15 +78,25 @@ public class PortalHandler {
 		return mav;
 	}
 
-	// 华清修改：前端需求详情
+	// 华清修改：前端服务商详情
 
-	@RequestMapping("/demandDetailsList.action")
-	public ModelAndView demandDetailsList(HttpServletRequest req, Demands demands) {
-		Demands dem = portalBizImpl.demandDetailsList(demands);
+	@RequestMapping("/serviceProvidersDetailsList.action")
+	public ModelAndView serviceProvidersDetailsList(HttpServletRequest req, Users users) {
+		Users dem = portalBizImpl.serviceProvidersDetailsList(users);
 		req.setAttribute("dem", dem);
 		ModelAndView mav = new ModelAndView("/foreground/demandDetails");
 		return mav;
 	}
+	
+	// 华清修改：前端需求详情
+
+		@RequestMapping("/demandDetailsList.action")
+		public ModelAndView demandDetailsList(HttpServletRequest req, Demands demands) {
+			Demands dem = portalBizImpl.demandDetailsList(demands);
+			req.setAttribute("dem", dem);
+			ModelAndView mav = new ModelAndView("/foreground/demandDetails");
+			return mav;
+		}
 
 	// 获取雇主故事列表 黄绍鹏6-19 10:23
 	@RequestMapping("/userStoryList.action")

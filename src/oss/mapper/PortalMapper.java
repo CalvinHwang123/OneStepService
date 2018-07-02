@@ -32,6 +32,7 @@ public interface PortalMapper {
 	// 华清修改：前端需求详情
 	public Demands demandDetailsList(Demands demands);
 
+
 	// 服务商-我发布的作品数据 -袁楠文 6-29 9:41
 	public List<Workinformation> MyforegroundList(Condition condition);
 
@@ -46,4 +47,9 @@ public interface PortalMapper {
 
 	// 服务商-作品修改 -袁楠文 6-30 15:35
 	public int Modificationofwork(Works works);
+
+	
+	// 华清修改：前端服务商详情
+	public Users serviceProvidersDetailsList(Users users);
+
 }
