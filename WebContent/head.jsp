@@ -187,24 +187,23 @@
 								<li><a href="BusiManage/userPersonal.action">雇主中心</a></li>
 							</ul></li>
 
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"><i
-								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
-								class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="offers.html">立即开店赚钱</a></li>
-								<li><a href="offers.html">具体开店流程</a></li>
-								<li><a href="offers.html">开店须知</a></li>
-							</ul></li>
+<!-- 						<li class="dropdown head-dpdn"><a href="#" -->
+<!-- 							class="dropdown-toggle" data-toggle="dropdown"><i -->
+<!-- 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span -->
+<!-- 								class="caret"></span></a> -->
+<!-- 							<ul class="dropdown-menu"> -->
+<!-- 								<li><a href="offers.html">立即开店赚钱</a></li> -->
+<!-- 								<li><a href="offers.html">具体开店流程</a></li> -->
+<!-- 								<li><a href="offers.html">开店须知</a></li> -->
+<!-- 							</ul></li> -->
 					</c:if>
 					<c:if test="${forelogin.userType == 2}">
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span
-								class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="BusiManage/userPersonal.action">雇主中心</a></li>
-
-							</ul></li>
+<!-- 						<li class="dropdown head-dpdn"><a href="#" -->
+<!-- 							class="dropdown-toggle" data-toggle="dropdown"> 我是雇主<span -->
+<!-- 								class="caret"></span></a> -->
+<!-- 							<ul class="dropdown-menu"> -->
+<!-- 								<li><a href="BusiManage/userPersonal.action">雇主中心</a></li> -->
+<!-- 							</ul></li> -->
 
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"><i
@@ -218,23 +217,19 @@
 						class="dropdown-toggle" data-toggle="dropdown"> 网站导航<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="Portal/ruleList.action">规则中心</a></li>
 							<li><a href="Portal/userStoryList.action">雇主故事</a></li>
 							<li><a href="Portal/foreViolationsList.action">曝光台</a></li>
 							<li><a href="Portal/successCaseList.action">成功案例</a></li>
 							<li><a href="Portal/creditQuery.action">信用查询</a></li>
-
-
+						</ul></li>
+					<li class="dropdown head-dpdn"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">大厅入口<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="Portal/workInfoList.action">作品大厅</a></li>
 							<li><a href="Portal/beforeDemandsList.action">需求大厅</a></li>
 							<li><a href="Portal/serviceProviders.action">服务商大厅</a></li>
-
 						</ul></li>
-					<li class="dropdown head-dpdn"><a href="contact.html"
-						class="dropdown-toggle"><i class="fa fa-map-marker"
-							aria-hidden="true"></i> 定位</a></li>
-					<li class="dropdown head-dpdn"><a href="card.html"
-						class="dropdown-toggle"><i class="fa fa-credit-card-alt"
-							aria-hidden="true"></i> 我的银行卡</a></li>
 					<li class="dropdown head-dpdn"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"> <i
 							class="fa fa-question-circle" aria-hidden="true"></i>帮助 <span
@@ -286,44 +281,17 @@
 			<!-- header-three -->
 			<div class="container">
 				<div class="menu1">
-					<div class="cd-dropdown-wrapper">
-						<a class="cd-dropdown-trigger" href="#0">购买作品</a>
-						<nav class="cd-dropdown"> <a href="#0" class="cd-close">Close</a>
-						<ul class="cd-dropdown-content">
-							<li><a href="Portal/workInfoList.action"
-								style="color: orange;">作品大厅</a></li>
-							<c:forEach items="${firstClassMap}" var="one" varStatus="s">
-								<li class="has-children"><a href="#"><c:out
-											value="${one.key}"></c:out></a>
-									<ul class="cd-secondary-dropdown is-hidden"
-										style="padding-bottom: 1em;">
-										<li class="has-children">
-											<ul class="is-hidden">
-												<c:forEach items="${one.value}" var="secondMap">
-													<c:forEach items="${secondMap}" var="second">
-														<li><a href="products.html"><c:out
-																	value="${second.value}"></c:out></a></li>
-													</c:forEach>
-												</c:forEach>
-											</ul>
-										</li>
-									</ul></li>
-							</c:forEach>
-						</ul>
-						<!-- .cd-dropdown-content --> </nav>
-						<!-- .cd-dropdown -->
-					</div>
-					<!-- .cd-dropdown-wrapper -->
+					<a class="normalMenu" href="Portal/workInfoList.action">作品大厅</a>
 				</div>
-
 				<div class="menu1">
 					<a class="normalMenu" href="Portal/beforeDemandsList.action">需求大厅</a>
 				</div>
-
+				<div class="menu1">
+					<a class="normalMenu" href="Portal/serviceProviders.action">服务商大厅</a>
+				</div>
 				<div class="move-text">
 					<div class="marquee">
-						<a href="offers.html"> 今日红包优惠卡入口 </a>| <a href="offers.html">
-							今日红包优惠卡入口 </a>|
+						<a href="Portal/ruleList.action">帝六人欢迎您！交易须知：规则中心</a>
 					</div>
 					<script type="text/javascript"
 						src="portal/js/jquery.marquee.min.js"></script>

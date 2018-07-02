@@ -20,7 +20,7 @@
 <script type="text/javascript" src="./js/xadmin.js"></script>
 <!-- 引入 ECharts 文件 -->
     <script src="./js/echarts.min.js"></script>
-<title>曝光台</title>
+<title>曝光台————帝六人</title>
 
 <style type="text/css">
 ui, li {
