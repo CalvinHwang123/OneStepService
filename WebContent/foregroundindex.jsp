@@ -27,7 +27,7 @@
 				</div>
 				<div class="item">
 					<!-- Second-Slide -->
-					<img src="portal/images/8.jpg" alt="" class="img-responsive" />
+					<img src="portal/images/图片2.jpg" alt="" class="img-responsive" />
 					<div class="carousel-caption kb_caption kb_caption_right">
 						<h3 data-animation="animated fadeInDown">找专业的人，做专业的事</h3>
 						<h4 data-animation="animated fadeInUp">Find professional

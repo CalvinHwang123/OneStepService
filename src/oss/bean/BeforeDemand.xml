@@ -19,20 +19,39 @@
 			and demandstatusid = 2 and demandTitle like '%${title}%'
 		</if>
 		
-		<if test="ascenDing ==1">
-			 order by releaseTime asc
+		<if test="descenDingOrder == 1">
+			order by releaseTime asc
 		</if>
-		<if test="ascenDing ==11">
+		<if test="descenDingOrder == 11">
 			 order by releaseTime desc
 		</if>
 		
-		<if test="ascenDing ==4">
+		<if test="descenDingOrder == 4">
 			 order by demandPrice asc
 		</if>
-		<if test="ascenDing ==44">
+		<if test="descenDingOrder == 44">
 			 order by demandPrice desc
 		</if>
+		<if test="descenDingOrder == 3">
+			 order by tenderNumber asc
+		</if>
+		<if test="descenDingOrder == 33">
+			 order by tenderNumber desc
+		</if>
 	</select>
+	
+	<select id="serviceProviders" parameterType="oss.bean.Condition" resultType="oss.bean.Users">
+		select * from Users where  1=1
+	
+
+		<if test="title != null and title != ''">
+			 and userName like '%${title}%'
+		</if>
+		
+		
+	</select>
+	
+	
 	
    <select id="demandDetailsList" resultType="oss.bean.Demands" parameterType="oss.bean.Demands">
 		

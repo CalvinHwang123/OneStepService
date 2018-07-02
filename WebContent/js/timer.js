@@ -9,13 +9,12 @@
 	function timer(){
 		for (var i = 0; i < timers.length; i++) {
 			var timer = timers.eq(i);
-		var startDate=timer.attr("startTime");
-		startDate=startDate.replace(new RegExp("-","gm"),"/");
-		var days = timer.attr("days");
-		var startTime=((new Date(startDate)).getTime()+days*86400000)/1000;
-		var overTime = (new Date()).getTime()/1000;
+		var asoftDate=timer.attr("asofttime");
+		asoftDate=asoftDate.replace(new RegExp("-","gm"),"/");
+		var asoftTime=((new Date(asoftDate)).getTime())/1000;
+		var currentTime = (new Date()).getTime()/1000;
 		//剩余毫秒数
-		var ts=startTime-overTime;
+		var ts=asoftTime-currentTime;
 		var dd = parseInt(ts/60/60/24,10);//计算剩余的天数
 		var hh = parseInt(ts/60/60%24,10);//计算剩余的小时数
 		var mm = parseInt(ts/60%60,10);//计算剩余的分钟数

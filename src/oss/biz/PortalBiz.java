@@ -37,6 +37,8 @@ public interface PortalBiz {
 
 	// 华清修改 前端需求大厅列表
 	public List<Demands> beforeDemandsList(Condition condition);
+	// 华清修改 前端服务商大厅列表
+		public List<Users> serviceProviders(Condition condition);
 
 	// 华清修改：前端需求详情
 	public Demands demandDetailsList(Demands demands);

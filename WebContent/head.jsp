@@ -240,6 +240,7 @@
 
 
 							<li><a href="Portal/beforeDemandsList.action">需求大厅</a></li>
+							<li><a href="Portal/serviceProviders.action">服务商大厅</a></li>
 
 						</ul></li>
 					<li class="dropdown head-dpdn"><a href="contact.html"
@@ -269,8 +270,8 @@
 					<h6>DLR.COM</h6>
 				</div>
 				<div class="header-search">
-					<form action="#" method="post">
-						<input type="search" name="Search" placeholder="搜索需求" required="">
+					<form action="Portal/beforeDemandsList.action" method="post">
+						<input type="search"  name="title" value="${condition.title}" placeholder="搜索需求" required="">
 						<button type="submit" class="btn btn-default"
 							aria-label="Left Align">
 							<i class="fa fa-search" aria-hidden="true"> </i>

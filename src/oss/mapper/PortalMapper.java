@@ -6,6 +6,7 @@ import oss.annotation.MyRepository;
 import oss.bean.Condition;
 import oss.bean.Demands;
 import oss.bean.Rulee;
+import oss.bean.Users;
 import oss.bean.Workinformation;
 
 
@@ -23,6 +24,9 @@ public interface PortalMapper {
 
 	// 华清修改 前端需求大厅列表
 	public List<Demands> beforeDemandsList(Condition condition);
+	
+	// 华清修改 前端服务商大厅列表
+	public List<Users> serviceProviders(Condition condition);
 
 	// 华清修改：前端需求详情
 	public Demands demandDetailsList(Demands demands);

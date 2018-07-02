@@ -14,9 +14,9 @@
 
 	<!-- startTime是发布时间，days是拍卖持续天数 -->
 	剩余时间：
-	<span class="timer" startTime="2018-06-22 23:29:59" days="5"></span>
+	<span class="timer" asoftTime="2018-06-30 23:29:59" ></span>
 	<br> 剩余时间：
-	<span class="timer" startTime="2018-06-23 10:29:59" days="3"></span>
+	<span class="timer" asoftTime="2018-07-01 10:29:59"></span>
 
 
 

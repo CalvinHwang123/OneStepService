@@ -111,7 +111,8 @@ public class PortalHandler {
 	public ModelAndView beforeDemandsList(HttpServletRequest req,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
-		System.out.println("portalManageBizImpl=" + portalManageBizImpl);
+		System.out.println("DescendingOrder="+condition.getDescenDingOrder());
+		System.out.println("beWorksPrice="+req.getParameter("beWorksPrice"));
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
 		List<Demands> demandsList = portalBizImpl.beforeDemandsList(condition);
@@ -124,6 +125,27 @@ public class PortalHandler {
 		System.out.println("起始金额="+condition.getBeWorksPrice());
 		return mav;
 	}
+	
+	// 吴华清修改：获取前端需求大厅列表
+		@RequestMapping("/serviceProviders.action")
+		public ModelAndView serviceProviders(HttpServletRequest req,
+				@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
+				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+			
+			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+			PageHelper.startPage(pageNum, pageSize);
+			List<Users> serviceProviders = portalBizImpl.serviceProviders(condition);
+			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+			PageInfo pageInfo = new PageInfo<>(serviceProviders, pageSize);
+		
+			req.setAttribute("pageInfo", pageInfo);
+			req.setAttribute("condition", condition);
+			ModelAndView mav = new ModelAndView("/foreground/serviceProviders");
+		
+			return mav;
+		}
+	
+	
 
 	// 前端曝光台请求 by hlq 2018-06-16 13:36
 	@RequestMapping("/foreViolationsList.action")
