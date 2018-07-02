@@ -254,8 +254,8 @@
 
 										<p>
 											<%-- <em class="list-task-reward">&yen;${dem.userName}</em> --%><a
-												class="list-task-title" title="${dem.userName }"
-												href="Portal/demandDetailsList.action?demandID=${dem.userName}"
+												class="list-task-title" title="${dem.userID }"
+												href="BusiManage/serviceDetails.action?userID=${dem.userID}"
 												target="_blank" data-zbjlog="{obj:'main'}">${dem.userName }</a>
 										</p>
 
