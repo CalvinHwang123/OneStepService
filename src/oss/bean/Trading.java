@@ -8,6 +8,7 @@ public class Trading {
 	private Long amountType;
 	private String tradingTime;
 	private Users checkUsers;
+	private Demands checkDemands;
 	public Trading() {
 		
 	}
@@ -66,6 +67,14 @@ public class Trading {
 
 	public void setCheckUsers(Users checkUsers) {
 		this.checkUsers = checkUsers;
+	}
+
+	public Demands getCheckDemands() {
+		return checkDemands;
+	}
+
+	public void setCheckDemands(Demands checkDemands) {
+		this.checkDemands = checkDemands;
 	}
 	
 }

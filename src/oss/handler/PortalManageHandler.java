@@ -120,9 +120,6 @@ public class PortalManageHandler {
 			return "操作失败";
 		}
 	}
-
-	private Links links;
-
 	@RequestMapping("/linksList.action")
 	public ModelAndView linksList(HttpServletRequest req,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
@@ -132,7 +129,7 @@ public class PortalManageHandler {
 		PageInfo pageInfo = new PageInfo<>(linksList, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
-		ModelAndView mav = new ModelAndView("LinksList");
+		ModelAndView mav = new ModelAndView("background/LinksList");
 		return mav;
 	}
 
@@ -254,7 +251,7 @@ public class PortalManageHandler {
 		List<Classification> classlist = systemManegeBizImpl.oneclassMenu();
 		req.setAttribute("classlist", classlist);
 		req.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("DynaList");
+		ModelAndView mav = new ModelAndView("background/DynaList");
 		return mav;
 	}
 
@@ -290,7 +287,7 @@ public class PortalManageHandler {
 		PageInfo pageInfo = new PageInfo<>(ListInfo, pageSize);
 		System.out.println(pageInfo.getTotal());
 		req.setAttribute("pageInfo", pageInfo);
-		ModelAndView mav = new ModelAndView("InfoList");
+		ModelAndView mav = new ModelAndView("background/InfoList");
 		return mav;
 	}
 

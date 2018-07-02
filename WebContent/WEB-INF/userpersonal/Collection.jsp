@@ -3,14 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>雇主中心-我的合作</title>
+<title>雇主中心-我的收藏</title>
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
 
 	<div class='order-wrap'>
-		<form id="pageForm" action="BusiManage/cooperationList.action">
+		<form id="pageForm" action="BusiManage/userServiceList.action">
 			<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 				id='utopia_widget_6'>
 				<!-- 隐藏域 每页条数 -->
@@ -38,40 +38,43 @@
 				<div class='options'>
 					<div class="table-responsive">
 						<div class="add-products">
-							<div class="container">
+							<div class="container" style="width: 100%;">
 								<h3 class="w3ls-title"></h3>
-								<div class="add-products-row">
+								<div class="add-products-row" >
 									<c:forEach items="${pageInfo.list}" var="i" begin="0"
 										varStatus="s">
-										<c:if test="${i.checkUsers.imageUrl == null}">
-											<div class="info-item">
-												<img class="info-img" alt="服务商1"
+		
+										<c:if test="${i.imageUrl == null}">
+											<div class="info-item" style="width:100%;border-bottom: 10px solid white;" >
+											
+											
+												<img class="info-img" 
 													style="background:url(<%=basePath%>/portal/images/detail.png)no-repeat 0px 0px; background-size: cover;">
 												<div class="content-wrap">
 													<h4 class="info-title text-overflow">
 														<a class="link-hover"
-															href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
-															<c:out value="${i.checkUsers.userName}"></c:out>
+															href="BusiManage/serviceDetails.action?userID=${i.userID}">
+															<c:out value="${i.userName}"></c:out>
 														</a>
 													</h4>
-													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
+													<div class="info-content">${i.userIntroduction}</div>
 												</div>
 											</div>
 										</c:if>
-										<c:if test="${i.checkUsers.imageUrl != null}">
-											<div class="info-item">
+										<c:if test="${i.imageUrl != null}">
+											<div class="info-item"  style="width:100%;border-bottom: 10px solid white;">
 												<img
-													src="${i.checkUsers.imageUrl};a.c=200x150&amp;a.g=Center"
-													class="info-img" alt="从贫困村到“中国最美休闲乡村”逆袭，这三个村子有话说">
+													src="${i.imageUrl};a.c=200x150&amp;a.g=Center"
+													class="info-img" alt="${i.userName}">
 
 												<div class="content-wrap">
 													<h4 class="info-title text-overflow">
 														<a class="link-hover"
-															href="Portal/successCase.action?successCaseID=${i.checkUsers.userAccount}">
-															<c:out value="${i.checkUsers.userName}"></c:out>
+															href="BusiManage/serviceDetails.action?userID=${i.userID}">
+															<c:out value="${i.userName}"></c:out>
 														</a>
 													</h4>
-													<div class="info-content">近几年，乡村旅游发展得如火如荼，尤其是随着乡村振兴战略的深入推动，发挥着“引擎”作用的乡村旅游也更“火”了起来，乡村旅游迎来了自发展以来最好的时期。</div>
+													<div class="info-content">${i.userIntroduction}</div>
 												</div>
 											</div>
 										</c:if>
@@ -83,7 +86,7 @@
 
 	</div>
 
-	<form id="pageForm" action="BusiManage/cooperationList.action">
+	<form id="pageForm" action="BusiManage/userServiceList.action">
 		<div class="page">
 			<c:choose>
 				<c:when test="${pageInfo.getPages() == 0}">

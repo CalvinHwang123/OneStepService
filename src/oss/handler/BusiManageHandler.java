@@ -263,7 +263,7 @@ public class BusiManageHandler {
 		List<Classification> classlist = systemManegeBizImpl.oneclassMenu();
 		req.setAttribute("classlist", classlist);
 		req.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("WorksList");
+		ModelAndView mav = new ModelAndView("background/WorksList");
 		return mav;
 	}
 
@@ -279,7 +279,7 @@ public class BusiManageHandler {
 	public ModelAndView usersInfo(HttpServletRequest request, Users users) {
 		Users usersList = busiManageBizImpl.updateUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("PersonInfo");
+		ModelAndView mav = new ModelAndView("userpersonal/PersonInfo");
 		return mav;
 	}
 
@@ -315,7 +315,7 @@ public class BusiManageHandler {
 		users.setUserAccount(userAcc);
 		Users usersList = busiManageBizImpl.SelectUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("PersonInfo");
+		ModelAndView mav = new ModelAndView("userpersonal/PersonInfo");
 		return mav;
 	}
 
@@ -326,15 +326,14 @@ public class BusiManageHandler {
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		HttpSession session = request.getSession();
 		Users users2 = (Users) session.getAttribute("forelogin");
-		String userAcc = users2.getUserAccount();
-		condition.setTitle(userAcc);
+		condition.setClassPid(users2.getUserID().intValue());
 		PageHelper.startPage(pageNum, pageSize);
 		List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
 		PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
 		System.out.println(pageInfo.getTotal());
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("TradingList");
+		ModelAndView mav = new ModelAndView("userpersonal/TradingList");
 		return mav;
 	}
 
@@ -373,7 +372,7 @@ public class BusiManageHandler {
 			PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
 			System.out.println(pageInfo.getTotal());
 			request.setAttribute("pageInfo", pageInfo);	
-			ModelAndView mav = new ModelAndView("CreditList");
+			ModelAndView mav = new ModelAndView("userpersonal/CreditList");
 			return mav;		
 	}
 
@@ -409,15 +408,15 @@ public class BusiManageHandler {
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
 		HttpSession session = request.getSession();
 		Users users2 = (Users) session.getAttribute("forelogin");
-		String userAcc = users2.getUserAccount();
-		condition.setTitle(userAcc);
+		condition.setClassPid(users2.getUserID().intValue());		
 		PageHelper.startPage(pageNum, pageSize);
-		List<userService> listTrading = busiManageBizImpl.userServiceList(condition);
-		PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+		List<Users> listTrading = busiManageBizImpl.userServiceList(condition);
+		PageInfo<Users> pageInfo = new PageInfo<Users>(listTrading, pageSize);
 		System.out.println(pageInfo.getTotal());
 		request.setAttribute("pageInfo", pageInfo);
+		System.out.println("pageInfo:"+pageInfo.getList());	
 		request.setAttribute("condition", condition);
-		ModelAndView mav = new ModelAndView("Collection");
+		ModelAndView mav = new ModelAndView("userpersonal/Collection");
 		return mav;
 	}
 
@@ -449,7 +448,7 @@ public class BusiManageHandler {
 					 HttpSession session=request.getSession();        
 						Users users2=(Users) session.getAttribute("forelogin");
 						String userAcc=users2.getUserAccount();			
-						condition.setTitle(userAcc);
+					condition.setTitle(userAcc);
 					PageHelper.startPage(pageNum, pageSize);
 					List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
 					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
@@ -468,15 +467,67 @@ public class BusiManageHandler {
 					 HttpSession session=request.getSession();        
 						Users users2=(Users) session.getAttribute("forelogin");
 						String userAcc=users2.getUserAccount();			
-						condition.setTitle(userAcc);
+						condition.setClassPid(users2.getUserID().intValue());	
 					PageHelper.startPage(pageNum, pageSize);
-					List<userService> listTrading = busiManageBizImpl.cooperationList(condition);
-					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+					List<Users> listTrading = busiManageBizImpl.cooperationList(condition);
+					PageInfo<Users> pageInfo = new PageInfo<Users>(listTrading, pageSize);
 					System.out.println(pageInfo.getTotal());
-					request.setAttribute("pageInfo", pageInfo);	
+					request.setAttribute("pageInfo", pageInfo);
 					request.setAttribute("condition", condition);
-					ModelAndView mav = new ModelAndView("Cooperation");
+					ModelAndView mav = new ModelAndView("userpersonal/Cooperation");
 					return mav;		
 				}
+				//验证当前密码  wwj   6-30
+				@RequestMapping("/SelectpwdByAcc.action")
+				public @ResponseBody String SelectpwdByAcc(HttpServletRequest request,@RequestBody Users users) {
+					String flag="error" ;
+					HttpSession session=request.getSession();        
+						Users users2=(Users) session.getAttribute("forelogin");
+						String pwd=users2.getUserPwd();
+					if(pwd.equals(users.getUserPwd())) {
+						flag="success";
+					}else {
+						flag="error";
+					}
+					return flag;		
+				}	
+				//确认密码  wwj  6-30
+				@RequestMapping("/confirmPwd.action")
+				public @ResponseBody String ConfirmPwd(HttpServletRequest request,@RequestBody Condition condition) {
+					String flag="error" ;
+					if(condition.getStartDate().equals(condition.getEndDate())) {
+						flag="success";
+					}else {
+						flag="error";
+					}
+					return flag;		
+				}	
 				
+				//
+				//确认密码  wwj  6-30
+				@RequestMapping("/updateUsersPwdById.action")
+				public @ResponseBody String updateUsersPwdById(HttpServletRequest request,@RequestBody Users users) {
+					 HttpSession session=request.getSession();        
+						Users users2=(Users) session.getAttribute("forelogin");
+						String userAcc=users2.getUserAccount();			
+						users.setUserAccount(userAcc);
+						busiManageBizImpl.updateUsersPwdById(users);
+					return "success";		
+				}
+				//修改密码页面   wwj  6-30
+				@RequestMapping("/UpdatePwd.action")
+				public ModelAndView UpdatePwd(HttpServletRequest req) {
+					ModelAndView mav = new ModelAndView("userpersonal/UpdatePwd");
+					return mav;
+				}		
+				//服务商详情
+				@RequestMapping("/serviceDetails.action")
+				public ModelAndView ServiceDetails(HttpServletRequest request,Users users) {					
+					Users Service=busiManageBizImpl.serviceDetails(users);
+					request.setAttribute("Service", Service);
+					List<Works> works =busiManageBizImpl.serviceWorks(users);
+					request.setAttribute("works", works);
+					ModelAndView mav = new ModelAndView("userpersonal/ServiceDetails");
+					return mav;		
+				}	
 }

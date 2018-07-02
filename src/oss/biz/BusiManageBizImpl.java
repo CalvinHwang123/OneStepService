@@ -170,43 +170,42 @@ public class BusiManageBizImpl implements BusiManageBiz {
 
 	// 收藏
 	@Override
-	public List<userService> userServiceList(Condition condition) {
-	
+	public List<Users> userServiceList(Condition condition) {
+
 		return busiManageMapper.userServiceList(condition);
 	}
 
-	//by hsp 6-28 11:05 检查服务商是否投过该需求的标
+	// by hsp 6-28 11:05 检查服务商是否投过该需求的标
 	@Override
 	public Tender checkIsBidded(Tender tender) {
 		return busiManageMapper.selectTenderByID(tender);
 	}
 
-	
-	//by hsp 6-28 11:25 查找具体的需求
+	// by hsp 6-28 11:25 查找具体的需求
 	@Override
 	public Demands selectDemand(Tender tender) {
 		return busiManageMapper.selectDemandByID(tender);
 	}
 
-	
-	//by hsp 6-28 11:36投标成功后，需求的剩余投标数量-1
+	// by hsp 6-28 11:36投标成功后，需求的剩余投标数量-1
 	@Override
 	public int deductTenderNumber(Demands demands) {
 		return busiManageMapper.updateDemandTenderNumber(demands);
 	}
 
-	
-	//by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
+	// by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
 	@Override
 	public int bidding(Tender tender) {
 		return busiManageMapper.insertTender(tender);
 	}
-//合作  wwj
+
+	// 合作 wwj
 	@Override
-	public List<userService> cooperationList(Condition condition) {
-		
+	public List<Users> cooperationList(Condition condition) {
+
 		return busiManageMapper.cooperationList(condition);
 	}
+
 	// 发布作品 hlq 2018-06-27 20:23
 	@Override
 	public boolean publishWorks(Works works) {
@@ -218,4 +217,24 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public boolean updateWorksNumById(Works works) {
 		return busiManageMapper.updateWorksNumById(works) > 0;
 	}
+
+	// 修改密码 wwj 16:19
+	@Override
+	public int updateUsersPwdById(Users users) {
+
+		return busiManageMapper.updateUsersPwdById(users);
+	}
+
+	// 服务商详情
+	@Override
+	public Users serviceDetails(Users users) {
+		return busiManageMapper.serviceDetails(users);
+	}
+	//服务商详情   wwj  7-1
+	@Override
+	public List<Works> serviceWorks(Users users) {
+		
+		return busiManageMapper.serviceWorks(users);
+	}
+
 }

@@ -64,5 +64,11 @@
 		update Works set
 		worksNum=worksNum+1 where worksId=#{worksId}
 	</update>
+	
+<!-- 	服務商作品 -->
+	<select id="serviceWorks" resultType="oss.bean.Works"
+		parameterType="oss.bean.Users">
+		select * from works where userID=#{userID}
+	</select>
 </mapper>
 	

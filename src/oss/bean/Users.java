@@ -17,7 +17,7 @@ public class Users {
 	private Long userType;// 用户类型
 	private String imageUrl;           
 	private  Credit  credit;
-
+private userService checkUsers;
 	public Users() {
 
 	}
@@ -133,6 +133,12 @@ public class Users {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public userService getCheckUsers() {
+		return checkUsers;
+	}
+	public void setCheckUsers(userService checkUsers) {
+		this.checkUsers = checkUsers;
 	}
 
 }

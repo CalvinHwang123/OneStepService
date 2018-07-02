@@ -63,13 +63,13 @@
 <!-- web-fonts -->
 <script src="portal/js/jquery-2.2.3.min.js"></script>
 <script src="portal/js/owl.carousel.js"></script>
-
 <script type="text/javascript" src="portal/js/md5.js"></script>
 <link rel="stylesheet" href="portal/css/jigsaw.css">
+<link rel="stylesheet" href="portal/css/toastr.css">
 <script src="portal/js/jquery-scrolltofixed-min.js"
 	type="text/javascript"></script>
-	<script src="portal/js/login.js" type="text/javascript"></script>
 <script src="portal/js/toastr.js" type="text/javascript"></script>
+	<script src="portal/js/login.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {
 		$("#owl-demo").owlCarousel({
