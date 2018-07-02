@@ -60,7 +60,6 @@
 														截止时间为：${dem.asoftTime}
 													</c:when>
 												<c:when test="${dem.demandstatusid == 3}">等待中标结果</c:when>
-												
 												<c:when test="${dem.demandstatusid == 5}">
 													<c:if
 														test="${dem.tenderID == sessionScope.forelogin.userID}">
@@ -71,7 +70,15 @@
 														未中标！
 													</c:if>
 												</c:when>
-												<c:when test="${dem.demandstatusid == 6 && dem.tenderID == sessionScope.forelogin.userID}">等待收款</c:when>
+												<c:when test="${dem.demandstatusid == 6 && dem.tenderID == sessionScope.forelogin.userID}">
+														等待收款
+												</c:when>
+												<c:when test="${dem.demandstatusid == 7 && dem.tenderID == sessionScope.forelogin.userID}">
+														订单结束
+												</c:when>
+												<c:otherwise>
+														未中标！
+												</c:otherwise>
 											</c:choose></li>
 										<li class="orderoptions"><a class="btn btn-info btn-sm"
 											target="_blank"
@@ -100,7 +107,7 @@
 								<div class="order-proccess J-proccess">
 									<div class="proccess-line" style="width: 70.2%;">
 										<c:choose>
-											<c:when test="${dem.demandstatusid == 6}">
+											<c:when test="${dem.demandstatusid == 7}">
 												<div class="progress-bar" role="progressbar"
 													aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
 													style="width: 100%; height: 1px;">
