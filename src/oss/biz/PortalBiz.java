@@ -42,6 +42,8 @@ public interface PortalBiz {
 
 	// 华清修改：前端需求详情
 	public Demands demandDetailsList(Demands demands);
+	// 华清修改：前端服务商详情
+		public Users serviceProvidersDetailsList(Users users);
 
 	// 服务商-我发布的作品数据 -袁楠文 6-29 9:41
 	public List<Workinformation> MyforegroundList(Condition condition);
