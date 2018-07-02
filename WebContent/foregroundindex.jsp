@@ -16,7 +16,7 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<!-- First-Slide -->
-					<img src="portal/images/5.jpg" alt="" class="img-responsive" />
+					<img src="portal/images/主页1.jpg" alt="" class="img-responsive" />
 					<div class="carousel-caption kb_caption kb_caption_right">
 						<h3 data-animation="animated flipInX">
 							超过187,863 <span>设计人才</span> 供您挑选
@@ -27,7 +27,7 @@
 				</div>
 				<div class="item">
 					<!-- Second-Slide -->
-					<img src="portal/images/图片2.jpg" alt="" class="img-responsive" />
+					<img src="portal/images/timg.jpg" alt="" class="img-responsive" />
 					<div class="carousel-caption kb_caption kb_caption_right">
 						<h3 data-animation="animated fadeInDown">找专业的人，做专业的事</h3>
 						<h4 data-animation="animated fadeInUp">Find professional
@@ -37,7 +37,7 @@
 
 				<div class="item">
 					<!-- Third-Slide -->
-					<img src="portal/images/3.jpg" alt="" class="img-responsive" />
+					<img src="portal/images/主页3.jpg" alt="" class="img-responsive" />
 					<div class="carousel-caption kb_caption kb_caption_center">
 						<h3 data-animation="animated fadeInLeft">为6,000,000企业主提供服务</h3>
 						<h4 data-animation="animated flipInX">Providing service for
@@ -82,11 +82,7 @@
 								aria-hidden="true"></i>
 								<h5>服务行业</h5>
 						</a></li>
-						<li role="presentation"><a href="#james" role="tab"
-							id="james-tab" data-toggle="tab"> <i class="fa fa-gift"
-								aria-hidden="true"></i>
-								<h5>食品行业</h5>
-						</a></li>
+						
 						<li role="presentation"><a href="#decor" role="tab"
 							id="decor-tab" data-toggle="tab"> <i class="fa fa-home"
 								aria-hidden="true"></i>
@@ -1255,38 +1251,31 @@
 	<!-- deals -->
 	<div class="deals">
 		<div class="container">
-			<h3 class="w3ls-title">当日交易</h3>
+			<h3 class="w3ls-title">精选行业分类</h3>
 			<div class="deals-row">
-				<div class="col-md-3 focus-grid">
+				<div class="col-md-2 focus-grid">
 					<a href="products.html" class="wthree-btn">
 						<div class="focus-image">
 							<i class="fa fa-mobile"></i>
 						</div>
-						<h4 class="clrchg">品牌设计</h4>
+						<h4 class="clrchg">手机行业</h4>
 					</a>
 				</div>
-				<div class="col-md-3 focus-grid">
+				<div class="col-md-2 focus-grid">
 					<a href="products.html" class="wthree-btn wthree1">
 						<div class="focus-image">
 							<i class="fa fa-laptop"></i>
 						</div>
-						<h4 class="clrchg">营销传播</h4>
+						<h4 class="clrchg">IT行业</h4>
 					</a>
 				</div>
-				<div class="col-md-3 focus-grid">
-					<a href="products4.html" class="wthree-btn wthree2">
-						<div class="focus-image">
-							<i class="fa fa-wheelchair"></i>
-						</div>
-						<h4 class="clrchg">网站建设</h4>
-					</a>
-				</div>
-				<div class="col-md-3 focus-grid">
+				
+				<div class="col-md-2 focus-grid">
 					<a href="products3.html" class="wthree-btn wthree3">
 						<div class="focus-image">
 							<i class="fa fa-home"></i>
 						</div>
-						<h4 class="clrchg">软件开发</h4>
+						<h4 class="clrchg">装修行业</h4>
 					</a>
 				</div>
 				<div class="col-md-2 focus-grid w3focus-grid-mdl">
@@ -1294,7 +1283,7 @@
 						<div class="focus-image">
 							<i class="fa fa-book"></i>
 						</div>
-						<h4 class="clrchg">电商服务</h4>
+						<h4 class="clrchg">文化教育</h4>
 					</a>
 				</div>
 				<div class="col-md-2 focus-grid w3focus-grid-mdl">
@@ -1310,23 +1299,16 @@
 						<div class="focus-image">
 							<i class="fa fa-gamepad"></i>
 						</div>
-						<h4 class="clrchg">工业设计</h4>
+						<h4 class="clrchg">游戏行业</h4>
 					</a>
 				</div>
-				<div class="col-md-2 focus-grid w3focus-grid-mdl">
-					<a href="products5.html" class="wthree-btn wthree">
-						<div class="focus-image">
-							<i class="fa fa-shopping-basket"></i>
-						</div>
-						<h4 class="clrchg">工程设计</h4>
-					</a>
-				</div>
+				
 				<div class="col-md-2 focus-grid w3focus-grid-mdl">
 					<a href="products7.html" class="wthree-btn wthree5">
 						<div class="focus-image">
 							<i class="fa fa-medkit"></i>
 						</div>
-						<h4 class="clrchg">餐饮行业</h4>
+						<h4 class="clrchg">医疗行业</h4>
 					</a>
 				</div>
 				<div class="col-md-2 focus-grid w3focus-grid-mdl">
@@ -1334,41 +1316,27 @@
 						<div class="focus-image">
 							<i class="fa fa-car"></i>
 						</div>
-						<h4 class="clrchg">游戏</h4>
+						<h4 class="clrchg">汽车行业</h4>
 					</a>
 				</div>
-				<div class="col-md-3 focus-grid">
+				<div class="col-md-2 focus-grid">
 					<a href="products5.html" class="wthree-btn wthree2">
 						<div class="focus-image">
 							<i class="fa fa-cutlery"></i>
 						</div>
-						<h4 class="clrchg">农林牧渔</h4>
+						<h4 class="clrchg">餐饮行业</h4>
 					</a>
 				</div>
-				<div class="col-md-3 focus-grid">
+				<div class="col-md-2 focus-grid">
 					<a href="products4.html" class="wthree-btn wthree5">
 						<div class="focus-image">
 							<i class="fa fa-futbol-o"></i>
 						</div>
-						<h4 class="clrchg">旅游行业</h4>
+						<h4 class="clrchg">运动行业</h4>
 					</a>
 				</div>
-				<div class="col-md-3 focus-grid">
-					<a href="products2.html" class="wthree-btn wthree3">
-						<div class="focus-image">
-							<i class="fa fa-gamepad"></i>
-						</div>
-						<h4 class="clrchg">工程设计</h4>
-					</a>
-				</div>
-				<div class="col-md-3 focus-grid">
-					<a href="products6.html" class="wthree-btn ">
-						<div class="focus-image">
-							<i class="fa fa-gift"></i>
-						</div>
-						<h4 class="clrchg">IT服务</h4>
-					</a>
-				</div>
+				
+				
 				<div class="clearfix"></div>
 			</div>
 		</div>
