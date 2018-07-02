@@ -58,8 +58,8 @@
 				<c:forEach var="i" items="${pageInfo.list}">
 					<div class="col-md-3 product-grids">
 						<div class="agile-products">
-							<a href=<%=path + "/Portal/worksIntroduction.action?worksId="%>
-								+${i.worksId}><img src=<%=path%> +${i.url}
+							<a href=<%=path + "/Portal/worksIntroduction.action?worksId="%>${i.worksId}>
+							<img src=<%=path%> +${i.url}
 								class="img-responsive" alt="img"></a>
 							<div class="agile-product-text">
 								<h5>

@@ -45,7 +45,7 @@
 						<li>发布时间: 2018-6-23</li>
 					</ul>
 				</div>
-				<p class="single-price-text">作品介绍.</p>
+				<p class="single-price-text">${i.workScontext}</p>
 				<form action="#" method="post">
 					<input name="cmd" value="_cart" type="hidden"> <input
 						name="add" value="1" type="hidden"> <input

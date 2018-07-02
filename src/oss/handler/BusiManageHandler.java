@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
@@ -24,10 +25,12 @@ import oss.bean.Tender;
 import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Workinformation;
 import oss.bean.Works;
 import oss.bean.userService;
 import oss.bean.Demands;
 import oss.biz.BusiManageBiz;
+import oss.biz.PortalBiz;
 import oss.biz.SystemManegeBiz;
 import oss.util.DateUtil;
 
@@ -43,6 +46,8 @@ public class BusiManageHandler {
 	private BusiManageBiz busiManageBizImpl;
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
+	@Resource
+	private PortalBiz portalBizImpl;
 
 	// 华清修改：查询雇主信息
 	@RequestMapping("/UserList.action")
@@ -283,12 +288,12 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// 服务商个人信息修改
+	// 服务商个人信息修改-袁楠文 6-28
 	@RequestMapping("/facilitatorusersInfo.action")
 	public ModelAndView facilitatorusersInfo(HttpServletRequest request, Users users) {
 		Users usersList = busiManageBizImpl.updateUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("/foreground/myOrder");
+		ModelAndView mav = new ModelAndView("/foreground/myAccount");
 		return mav;
 	}
 
@@ -301,7 +306,7 @@ public class BusiManageHandler {
 		users.setUserAccount(userAcc);
 		Users usersList = busiManageBizImpl.SelectUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("/foreground/myOrder");
+		ModelAndView mav = new ModelAndView("/foreground/myAccount");
 		return mav;
 
 	}
@@ -355,55 +360,55 @@ public class BusiManageHandler {
 	public ModelAndView userPersonal(HttpServletRequest req, Demands demands) {
 		// 根据用户ID查找用户的订单
 
-		ModelAndView mav = new ModelAndView("userpersonal/myorder");
+		ModelAndView mav = new ModelAndView("userpersonal/myAccount");
 		return mav;
 	}
 
 	// 信用明细
 	@RequestMapping("/creditList.action")
 	public ModelAndView creditList(HttpServletRequest request,
-				@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
-				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
-			 HttpSession session=request.getSession();        
-			Users users2=(Users) session.getAttribute("forelogin");
-			String userAcc=users2.getUserAccount();
-			condition.setTitle(userAcc);
-			PageHelper.startPage(pageNum, pageSize);
-			List<Credit> listCredit = busiManageBizImpl.creditList(condition);
-			PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
-			System.out.println(pageInfo.getTotal());
-			request.setAttribute("pageInfo", pageInfo);	
-			ModelAndView mav = new ModelAndView("CreditList");
-			return mav;		
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		HttpSession session = request.getSession();
+		Users users2 = (Users) session.getAttribute("forelogin");
+		String userAcc = users2.getUserAccount();
+		condition.setTitle(userAcc);
+		PageHelper.startPage(pageNum, pageSize);
+		List<Credit> listCredit = busiManageBizImpl.creditList(condition);
+		PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
+		System.out.println(pageInfo.getTotal());
+		request.setAttribute("pageInfo", pageInfo);
+		ModelAndView mav = new ModelAndView("CreditList");
+		return mav;
 	}
 
 	// by hsp 6-28 13:50 服务商投标
 	@RequestMapping("/bidding.action")
-	public @ResponseBody String bidding(HttpServletRequest req,@RequestBody Tender tender) {
-		System.out.println("需求ID："+tender.getDemandID());
-		System.out.println("投标的服务商ID："+tender.getUserID());
-		System.out.println("发布需求的雇主ID："+tender.getReleaserID());
+	public @ResponseBody String bidding(HttpServletRequest req, @RequestBody Tender tender) {
+		System.out.println("需求ID：" + tender.getDemandID());
+		System.out.println("投标的服务商ID：" + tender.getUserID());
+		System.out.println("发布需求的雇主ID：" + tender.getReleaserID());
 		Tender isBidding = busiManageBizImpl.checkIsBidded(tender);
-		if (isBidding != null) {//证明该服务商已经透过该标
+		if (isBidding != null) {// 证明该服务商已经透过该标
 			return "bidded";
-		}else{//该服务商未投标，进行投标操作
-			//查找具体的需求数据
+		} else {// 该服务商未投标，进行投标操作
+				// 查找具体的需求数据
 			Demands demands = busiManageBizImpl.selectDemand(tender);
-			if (demands.getTenderNumber() > 0) {//判断该需求是否已经投满
-				//1  更改需求表中  该需求的剩余投标数量，   -1
-				demands.setTenderNumber(demands.getTenderNumber()-1);
+			if (demands.getTenderNumber() > 0) {// 判断该需求是否已经投满
+				// 1 更改需求表中 该需求的剩余投标数量， -1
+				demands.setTenderNumber(demands.getTenderNumber() - 1);
 				int updateTenderNumber = busiManageBizImpl.deductTenderNumber(demands);
-				//2  往tender投标需求关系表中，insert投标的数据
+				// 2 往tender投标需求关系表中，insert投标的数据
 				int bidding = busiManageBizImpl.bidding(tender);
-			}else {//说明需求已经投满了，告知服务商该需求已无法再投标
+			} else {// 说明需求已经投满了，告知服务商该需求已无法再投标
 				return "full";
 			}
-			return"success";
+			return "success";
 		}
 	}
-		
-		// 雇主收藏  wwj   6-27 15:39
-				@RequestMapping("/userServiceList.action")
+
+	// 雇主收藏 wwj 6-27 15:39
+	@RequestMapping("/userServiceList.action")
 	public ModelAndView userServiceList(HttpServletRequest request,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
@@ -421,7 +426,7 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// 服务商信用明细
+	// 服务商信用明细-袁楠文 6-28
 	@RequestMapping("/facilitatorCreditList.action")
 	public ModelAndView facilitatorCreditList(HttpServletRequest request,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
@@ -430,7 +435,9 @@ public class BusiManageHandler {
 		Users users2 = (Users) session.getAttribute("forelogin");
 		String userAcc = users2.getUserAccount();
 		condition.setTitle(userAcc);
-		condition.setClassPid(171120);
+		if (condition.getClassPid() == 0) {
+			condition.setClassPid(171120);
+		}
 		PageHelper.startPage(pageNum, pageSize);
 		List<Credit> listCredit = busiManageBizImpl.creditList(condition);
 		PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
@@ -441,42 +448,114 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// 服务商交易明细
+	// 服务商交易明细-袁楠文 6-28
 	@RequestMapping("/facilitatortradingList.action")
-				public ModelAndView facilitatorTradingList(HttpServletRequest request,
-						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
-						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
-					 HttpSession session=request.getSession();        
-						Users users2=(Users) session.getAttribute("forelogin");
-						String userAcc=users2.getUserAccount();			
-						condition.setTitle(userAcc);
-					PageHelper.startPage(pageNum, pageSize);
-					List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
-					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
-					System.out.println(pageInfo.getTotal());
-					request.setAttribute("pageInfo", pageInfo);	
-					request.setAttribute("condition", condition);
-					ModelAndView mav = new ModelAndView("foreground/facilitatorTrading");
-					return mav;		
-				}
-				
-				// 雇主合作  wwj   6-28  11:31
-				@RequestMapping("/cooperationList.action")
-				public ModelAndView cooperationList(HttpServletRequest request,
-						@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
-						@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum,Condition condition) {
-					 HttpSession session=request.getSession();        
-						Users users2=(Users) session.getAttribute("forelogin");
-						String userAcc=users2.getUserAccount();			
-						condition.setTitle(userAcc);
-					PageHelper.startPage(pageNum, pageSize);
-					List<userService> listTrading = busiManageBizImpl.cooperationList(condition);
-					PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
-					System.out.println(pageInfo.getTotal());
-					request.setAttribute("pageInfo", pageInfo);	
-					request.setAttribute("condition", condition);
-					ModelAndView mav = new ModelAndView("Cooperation");
-					return mav;		
-				}
-				
+	public ModelAndView facilitatorTradingList(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		HttpSession session = request.getSession();
+		Users users2 = (Users) session.getAttribute("forelogin");
+		String userAcc = users2.getUserAccount();
+		condition.setTitle(userAcc);
+		PageHelper.startPage(pageNum, pageSize);
+		List<Trading> listTrading = busiManageBizImpl.tradingList(condition);
+		PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+		System.out.println(pageInfo.getTotal());
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("foreground/facilitatorTrading");
+		return mav;
+	}
+
+	// 雇主合作 wwj 6-28 11:31
+	@RequestMapping("/cooperationList.action")
+	public ModelAndView cooperationList(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		HttpSession session = request.getSession();
+		Users users2 = (Users) session.getAttribute("forelogin");
+		String userAcc = users2.getUserAccount();
+		condition.setTitle(userAcc);
+		PageHelper.startPage(pageNum, pageSize);
+		List<userService> listTrading = busiManageBizImpl.cooperationList(condition);
+		PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+		System.out.println(pageInfo.getTotal());
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("Cooperation");
+		return mav;
+	}
+
+	// 服务商-我发布的作品数据 -袁楠文 6-29 9:41
+	@RequestMapping("/MyforegroundList.action")
+	public ModelAndView MyforegroundList(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "3") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		HttpSession session = request.getSession();
+		Users users2 = (Users) session.getAttribute("forelogin");
+		int userid = users2.getUserID().intValue();
+		condition.setClassPid(userid);
+		PageHelper.startPage(pageNum, pageSize);
+		List<Workinformation> myworkinfolist = portalBizImpl.MyforegroundList(condition);
+		PageInfo pageInfo = new PageInfo<>(myworkinfolist, pageSize);
+		System.out.println(pageInfo.getTotal());
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("condition", condition);
+		request.setAttribute("myworkinfolist", myworkinfolist);
+		ModelAndView mav = new ModelAndView("Myforeground");
+		return mav;
+	}
+	// 服务商-作品上架/下架 -袁楠文 6-30 11:15
+	@RequestMapping("/Workoffshelf.action")
+	public @ResponseBody String Workoffshelf(HttpServletRequest request,Condition condition) {
+		String flg="error";
+		int workid=Integer.valueOf(request.getParameter("workid"));
+		int workstypeid=Integer.valueOf(request.getParameter("workstypeid"));
+		condition.setClassPid(workid);
+		condition.setBeWorksPrice(workstypeid);
+		int Workoffshelfnum = portalBizImpl.Workoffshelf(condition);
+		if (Workoffshelfnum!=0) {
+			flg="success";
+		}
+		return flg;
+	}
+	
+	// 服务商-作品删除 -袁楠文 6-30 12:45
+	@RequestMapping("/Worksdel.action")
+	public @ResponseBody String Worksdel(HttpServletRequest request,Condition condition) {
+		String flg="error";
+		int workid=Integer.valueOf(request.getParameter("workid"));
+		condition.setClassPid(workid);
+		int Workoffshelfnum = portalBizImpl.Worksdel(condition);
+		if (Workoffshelfnum!=0) {
+			flg="success";
+		}
+		return flg;
+	}
+	
+	// 服务商-作品查找 -袁楠文 6-30 13:15
+		@RequestMapping(value="/Workmodification.action", produces = "application/json; charset=utf-8")
+		public @ResponseBody String Workmodification(HttpServletRequest request,Condition condition) {
+			String flg="error";
+			int workid=Integer.valueOf(request.getParameter("workid"));
+			condition.setClassPid(workid);
+			List<Workinformation> Workoffshelfinfo = portalBizImpl.Workmodification(condition);
+			if (Workoffshelfinfo.size()!=0) {
+				Gson gson=new Gson();
+				flg=gson.toJson(Workoffshelfinfo);
+			}
+			return flg;
+		}
+		
+	// 服务商-作品修改 -袁楠文 6-30 15:35
+		@RequestMapping("/Modificationofwork.action")
+		public @ResponseBody String Modificationofwork(@RequestBody Works works) {
+			String flg="error";
+			System.out.println(works.getWorksId());
+			int Workoffshelfnum = portalBizImpl.Modificationofwork(works);
+			if (Workoffshelfnum!=0) {
+				flg="success";
+			}
+			return flg;
+		}	
 }

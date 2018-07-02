@@ -97,7 +97,7 @@
 				</dt>
 
 				<dd>
-					<a class='J_menuItem ' href='/collection-provider'
+					<a class='J_menuItem ' href='BusiManage/MyforegroundList.action'
 						data-linkid='10132978'
 						data-extra-path='/collection-service,/collection-task'
 						target='_self'>我发布的作品</a>
