@@ -102,11 +102,11 @@
 									</div>
 									<div class="sub-content-wrap" style="width: 32%;">
 										<div class="content">服务商参与</div>
-										<div class="content-time">2018-06-08</div>
+										<div class="content-time"></div>
 									</div>
 									<div class="sub-content-wrap" style="width: 32%;">
-										<div class="content">交易关闭</div>
-										<div class="content-time">2018-06-08</div>
+										<div class="content">交易完成</div>
+										<div class="content-time"></div>
 									</div>
 								</div>
 							</div>
