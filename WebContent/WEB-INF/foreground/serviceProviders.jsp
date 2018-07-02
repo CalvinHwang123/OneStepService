@@ -71,16 +71,16 @@
 				<div class="list-filter filter-along">
 
 					<form id="pageForm" class="layui-form layui-col-md12 x-so"
-						action="Portal/beforeDemandsList.action">
+						action="Portal/serviceProviders.action">
 
-					<dl>
+					<%-- <dl>
 							<dt>按分类查询:</dt>
 							<dd>
 
 
 								 <a
 									data-linkid="10002783" href="" class='selected' rel="nofollow">全部</a><input
-									type="text" name="title" value="${condition.title}"
+									type="text"  name="classIficaTion" value="${condition.classIficaTion}" 
 									placeholder="请输入关键字" autocomplete="off" class="layui-input">
 								<button type="submit" class="ui-btn ui-btn-link"
 									data-linkid="10034048">
@@ -89,7 +89,7 @@
 
 
 							</dd>
-						</dl>
+						</dl> --%>
 
 						<dl>
 							<dt>按名称查询:</dt>
@@ -138,24 +138,10 @@
 				<div class="list-sortby clearfix tab-filter">
 
 					<div class="list-sorttag">
-						<a href="Portal/beforeDemandsList.action" class="selected">综合</a>
+						<a href="Portal/beforeDemandsList.action" class="selected">服务商名称</a>
 
 						
-								<a href="javascript:void(0);" onclick="changetime(11)">发布时间<i
-									id="iconfont" class="iconfont">&#xe80c;</i></a>
-							
-							
-
-
-					
-								<a href="javascript:void(0);" onclick="changetime(33)">可投标数<i
-									id="iconfont" class="iconfont">&#xe80c;</i></a>
-						
-
-						
-						
-								<a href="javascript:void(0);" onclick="changetime(44)">价格<i
-									id="iconfont" class="iconfont">&#xe80c;</i></a>
+								
 							
 
 
@@ -164,7 +150,7 @@
 
 
 
-					<div class="ui-dropdown task-area-select J-selector-id" data-url=""
+					<!-- <div class="ui-dropdown task-area-select J-selector-id" data-url=""
 						data-url-s="/t_d#ID#.html" data-area-pid="" data-area-cid="">
 						<a href="" target="_blank" class="map-entry"
 							data-linkid="10033176">
@@ -242,7 +228,7 @@
 							</ul>
 							<div class="province-list-box"></div>
 						</div>
-					</div>
+					</div> -->
 
 
 				</div>
@@ -267,32 +253,31 @@
 									<td>
 
 										<p>
-											<em class="list-task-reward">服务商名称：</em><a
+											<%-- <em class="list-task-reward">&yen;${dem.userName}</em> --%><a
 												class="list-task-title" title="${dem.userName }"
 												href="Portal/demandDetailsList.action?demandID=${dem.userName}"
 												target="_blank" data-zbjlog="{obj:'main'}">${dem.userName }</a>
 										</p>
 
-										<p class="list-task-ctn">${dem.userName }</p>
+										<p class="list-task-ctn">${dem.userIntroduction }</p>
 									</td>
 									<td>
 										<p class="normal-p">
-											<span class="text">发布时间为：${dem.userName }</span>
+											<span class="text">联系方式：${dem.userPhone	 }</span>
 										</p>
 									</td>
 									<td><p class="normal-p">
 											<a class="blue" rel="nofollow"
 												href="//task.zbj.com/13655206/#bid-erea" target="_blank"
-												data-zbjlog="{obj:'main'}">大大</a><span
-												class="text">参与</span><span class="text"> | </span> <span
-												class="text">招标中</span>
+												data-zbjlog="{obj:'main'}">邮箱</a><span class="text"> | </span> <span
+												class="text">${dem.userEmail}</span>
 										</p>
 										<p class="normal-p">
-											<span style="white-space: nowrap; color: #999;">仅剩<span
-												class="highlight">${dem.userName}</span>个投标机会
+											<span style="white-space: nowrap; color: #999;">公司地址：<span
+												class="highlight">${dem.userAddress}</span>
 											</span>
 										</p></td>
-									<td><span class="text">截止时间为：${dem.userName }</span> </td>
+									<td><span class="text">信用分：${dem.userCredit }</span> </td>
 
 								</tr>
 						

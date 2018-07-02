@@ -48,14 +48,25 @@
 			 and userName like '%${title}%'
 		</if>
 		
+		<if test="classIficaTion != null and classIficaTion != ''">
+			 and userName like '%${classIficaTion}%'
+		</if>
+		
 		
 	</select>
+	
+	
 	
 	
 	
    <select id="demandDetailsList" resultType="oss.bean.Demands" parameterType="oss.bean.Demands">
 		
 		select * from demands where demandID=#{demandID}
+	</select>
+	
+	<select id="serviceProvidersDetailsList" resultType="oss.bean.Users" parameterType="oss.bean.Users">
+		
+		select * from Users where userID=#{userID}
 	</select>
 	
 	
