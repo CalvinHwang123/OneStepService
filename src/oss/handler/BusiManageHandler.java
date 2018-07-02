@@ -25,10 +25,12 @@ import oss.bean.Tender;
 import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
+import oss.bean.Workinformation;
 import oss.bean.Works;
 import oss.bean.userService;
 import oss.bean.Demands;
 import oss.biz.BusiManageBiz;
+import oss.biz.PortalBiz;
 import oss.biz.SystemManegeBiz;
 import oss.util.DateUtil;
 
@@ -44,6 +46,8 @@ public class BusiManageHandler {
 	private BusiManageBiz busiManageBizImpl;
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
+	@Resource
+	private PortalBiz portalBizImpl;
 
 	// 华清修改：查询雇主信息
 	@RequestMapping("/UserList.action")
@@ -284,12 +288,12 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// 服务商个人信息修改
+	// 服务商个人信息修改-袁楠文 6-28
 	@RequestMapping("/facilitatorusersInfo.action")
 	public ModelAndView facilitatorusersInfo(HttpServletRequest request, Users users) {
 		Users usersList = busiManageBizImpl.updateUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("/foreground/myOrder");
+		ModelAndView mav = new ModelAndView("/foreground/myAccount");
 		return mav;
 	}
 
@@ -302,7 +306,7 @@ public class BusiManageHandler {
 		users.setUserAccount(userAcc);
 		Users usersList = busiManageBizImpl.SelectUsersByAcc(users);
 		request.setAttribute("usersList", usersList);
-		ModelAndView mav = new ModelAndView("/foreground/myOrder");
+		ModelAndView mav = new ModelAndView("/foreground/myAccount");
 		return mav;
 
 	}
@@ -357,8 +361,7 @@ public class BusiManageHandler {
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum) {
 		// 根据用户ID查找用户的需求
 		PageHelper.startPage(pageNum, pageSize);
-		List<Demands> demandsList = busiManageBizImpl
-				.usersDemandsList((Users) req.getSession().getAttribute("forelogin"));
+		List<Demands> demandsList = busiManageBizImpl.usersDemandsList((Users) req.getSession().getAttribute("forelogin"));
 		PageInfo pageInfo = new PageInfo<>(demandsList, pageSize);
 		req.setAttribute("pageInfo", pageInfo);
 		ModelAndView mav = new ModelAndView("userpersonal/mydemands");
@@ -427,7 +430,7 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// 服务商信用明细
+	// 服务商信用明细-袁楠文 6-28
 	@RequestMapping("/facilitatorCreditList.action")
 	public ModelAndView facilitatorCreditList(HttpServletRequest request,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
@@ -436,7 +439,9 @@ public class BusiManageHandler {
 		Users users2 = (Users) session.getAttribute("forelogin");
 		String userAcc = users2.getUserAccount();
 		condition.setTitle(userAcc);
-		condition.setClassPid(171120);
+		if (condition.getClassPid() == 0) {
+			condition.setClassPid(171120);
+		}
 		PageHelper.startPage(pageNum, pageSize);
 		List<Credit> listCredit = busiManageBizImpl.creditList(condition);
 		PageInfo pageInfo = new PageInfo<>(listCredit, pageSize);
@@ -447,7 +452,7 @@ public class BusiManageHandler {
 		return mav;
 	}
 
-	// 服务商交易明细
+	// 服务商交易明细-袁楠文 6-28
 	@RequestMapping("/facilitatortradingList.action")
 	public ModelAndView facilitatorTradingList(HttpServletRequest request,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
@@ -590,4 +595,77 @@ public class BusiManageHandler {
 		ModelAndView mav = new ModelAndView("userpersonal/ServiceDetails");
 		return mav;
 	}
+
+	// 服务商-我发布的作品数据 -袁楠文 6-29 9:41
+	@RequestMapping("/MyforegroundList.action")
+	public ModelAndView MyforegroundList(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "3") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		HttpSession session = request.getSession();
+		Users users2 = (Users) session.getAttribute("forelogin");
+		int userid = users2.getUserID().intValue();
+		condition.setClassPid(userid);
+		PageHelper.startPage(pageNum, pageSize);
+		List<Workinformation> myworkinfolist = portalBizImpl.MyforegroundList(condition);
+		PageInfo pageInfo = new PageInfo<>(myworkinfolist, pageSize);
+		System.out.println(pageInfo.getTotal());
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("condition", condition);
+		request.setAttribute("myworkinfolist", myworkinfolist);
+		ModelAndView mav = new ModelAndView("Myforeground");
+		return mav;
+	}
+	// 服务商-作品上架/下架 -袁楠文 6-30 11:15
+	@RequestMapping("/Workoffshelf.action")
+	public @ResponseBody String Workoffshelf(HttpServletRequest request,Condition condition) {
+		String flg="error";
+		int workid=Integer.valueOf(request.getParameter("workid"));
+		int workstypeid=Integer.valueOf(request.getParameter("workstypeid"));
+		condition.setClassPid(workid);
+		condition.setBeWorksPrice(workstypeid);
+		int Workoffshelfnum = portalBizImpl.Workoffshelf(condition);
+		if (Workoffshelfnum!=0) {
+			flg="success";
+		}
+		return flg;
+	}
+	
+	// 服务商-作品删除 -袁楠文 6-30 12:45
+	@RequestMapping("/Worksdel.action")
+	public @ResponseBody String Worksdel(HttpServletRequest request,Condition condition) {
+		String flg="error";
+		int workid=Integer.valueOf(request.getParameter("workid"));
+		condition.setClassPid(workid);
+		int Workoffshelfnum = portalBizImpl.Worksdel(condition);
+		if (Workoffshelfnum!=0) {
+			flg="success";
+		}
+		return flg;
+	}
+	
+	// 服务商-作品查找 -袁楠文 6-30 13:15
+		@RequestMapping(value="/Workmodification.action", produces = "application/json; charset=utf-8")
+		public @ResponseBody String Workmodification(HttpServletRequest request,Condition condition) {
+			String flg="error";
+			int workid=Integer.valueOf(request.getParameter("workid"));
+			condition.setClassPid(workid);
+			List<Workinformation> Workoffshelfinfo = portalBizImpl.Workmodification(condition);
+			if (Workoffshelfinfo.size()!=0) {
+				Gson gson=new Gson();
+				flg=gson.toJson(Workoffshelfinfo);
+			}
+			return flg;
+		}
+		
+	// 服务商-作品修改 -袁楠文 6-30 15:35
+		@RequestMapping("/Modificationofwork.action")
+		public @ResponseBody String Modificationofwork(@RequestBody Works works) {
+			String flg="error";
+			System.out.println(works.getWorksId());
+			int Workoffshelfnum = portalBizImpl.Modificationofwork(works);
+			if (Workoffshelfnum!=0) {
+				flg="success";
+			}
+			return flg;
+		}
 }

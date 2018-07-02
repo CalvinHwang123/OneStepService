@@ -47,10 +47,6 @@
 				</div>
 				<p class="single-price-text">作品介绍.</p>
 				<form name=alipayment id="form_pay" action="alipay.trade.page.pay.jsp" method="post" target="_blank">
-					<%-- <input name="cmd" value="_cart" type="hidden"> <input
-						name="add" value="1" type="hidden"> <input
-						name="w3ls_item" value="${i.worksName}" type="hidden"> <input
-						name="amount" value="${i.worksPrice}" type="hidden"> --%>
 					<input id="WIDout_trade_no" name="WIDout_trade_no" type="hidden">
 					<input id="WIDsubject" name="WIDsubject" value="${i.worksName }" type="hidden">
 					<input id="WIDtotal_amount" name="WIDtotal_amount" value="${i.worksPrice}" type="hidden">

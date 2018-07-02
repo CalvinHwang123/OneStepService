@@ -13,7 +13,7 @@ import oss.bean.Demands;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
-
+import oss.bean.Works;
 import oss.mapper.PortalMapper;
 import oss.bean.Violations2;
 import oss.mapper.BusiManageMapper;
@@ -87,6 +87,47 @@ public class PortalBizImpl implements PortalBiz {
 	public Demands demandDetailsList(Demands demands) {
 		// TODO Auto-generated method stub
 		return portalMapper.demandDetailsList(demands);
+	}
+	// 服务商-我发布的作品数据 -袁楠文 6-29 9:41
+	@Override
+	public List<Workinformation> MyforegroundList(Condition condition) {
+		// TODO 自动生成的方法存根
+		List<Workinformation> workinfolist = portalMapper.MyforegroundList(condition);
+		return workinfolist;
+	}
+
+	// 服务商-作品上架/下架 -袁楠文 6-30 11:15
+	@Override
+	public int Workoffshelf(Condition condition) {
+		// TODO 自动生成的方法存根
+		int Workoffshelfnum = portalMapper.Workoffshelf(condition);
+		return Workoffshelfnum;
+	}
+
+	// 服务商-作品删除 -袁楠文 6-30 12:45
+	@Override
+	public int Worksdel(Condition condition) {
+		// TODO 自动生成的方法存根
+		
+		int Workoffshelfnum = portalMapper.Worksdel(condition);
+		return Workoffshelfnum;
+	}
+
+	// 服务商-作品查找 -袁楠文 6-30 13:15
+	@Override
+	public List<Workinformation> Workmodification(Condition condition) {
+		// TODO 自动生成的方法存根
+		List<Workinformation> workinfolist = portalMapper.Workmodification(condition);
+		return workinfolist;
+	}
+	
+	// 服务商-作品修改 -袁楠文 6-30 15:35
+	@Override
+	public int Modificationofwork(Works works) {
+		// TODO 自动生成的方法存根
+		
+		int Workoffshelfnum = portalMapper.Modificationofwork(works);
+		return Workoffshelfnum;
 	}
 
 	@Override

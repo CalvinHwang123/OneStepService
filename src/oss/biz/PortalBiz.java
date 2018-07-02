@@ -9,7 +9,7 @@ import oss.bean.Demands;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Workinformation;
-
+import oss.bean.Works;
 import oss.bean.Violations2;
 
 /*
@@ -42,5 +42,20 @@ public interface PortalBiz {
 
 	// 华清修改：前端需求详情
 	public Demands demandDetailsList(Demands demands);
+
+	// 服务商-我发布的作品数据 -袁楠文 6-29 9:41
+	public List<Workinformation> MyforegroundList(Condition condition);
+
+	// 服务商-作品下架 -袁楠文 6-30 11:15
+	int Workoffshelf(Condition condition);
+
+	// 服务商-作品删除 -袁楠文 6-30 12:45
+	int Worksdel(Condition condition);
+
+	// 服务商-作品查找 -袁楠文 6-30 13:15
+	List<Workinformation> Workmodification(Condition condition);
+
+	// 服务商-作品修改 -袁楠文 6-30 15:35
+	int Modificationofwork(Works works);
 
 }
