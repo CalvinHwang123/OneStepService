@@ -8,7 +8,6 @@
 <body>
 	<%@ include file="/head.jsp"%>
 	<%@ include file="/WEB-INF/includeLeft.jsp"%>
-
 	<div class='order-wrap'>
 		<form id="pageForm" action="BusiManage/userServiceList.action">
 			<div class='order-top-banner' id='utopia_widget_7'>
