@@ -340,7 +340,6 @@
 
       function delAll (argument) {
          var deleteIDs = tableCheck.getData();
-         alert(deleteIDs.length);
          if (deleteIDs.length == 2) {
         	 layer.msg('请选择要删除的成功案例!',{icon:2,time:1000});
         	 return;
@@ -350,7 +349,6 @@
          for (var i = 0; i < deleteIDs.length; i++) {
  				var data =	{"successCaseID":deleteIDs[i]};
  				deleteCases.push(data);
- 				alert(deleteCases);
  		}
          $.ajax({
  			url:"PortalManage/deleteStory.action",

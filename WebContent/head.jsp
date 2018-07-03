@@ -141,7 +141,7 @@
 <script src="portal/js/bootstrap.js"></script>
 </head>
 <body>
-	<input type="hidden" id="loginUser" value="${sessionScope.forelogin}" />
+	<input type="hidden" id="loginUser" value="${sessionScope.forelogin}" userTypeID="${sessionScope.forelogin.userType}"/>
 	<!-- header -->
 	<div class="header">
 		<div class="w3ls-header">
@@ -575,7 +575,6 @@
                     var now_city=class_obj[now_province][k];
                     
                     for (var m in now_city) {
-                    	/* alert(now_city[m]); */
                     	$("#second_classification").append('<option value='+m+'>'+now_city[m]+'</option>');
                     }
                 }
@@ -624,7 +623,6 @@
                     var now_second_class=class_obj[now_first_class][k];
                     
                     for (var m in now_second_class) {
-                    	/* alert(now_city[m]); */
                     	$("#second_classification2").append('<option value='+m+'>'+now_second_class[m]+'</option>');
                     }
                 }
@@ -720,6 +718,10 @@
 			if ($("#loginUser").val() == "") {
 				$('#redirectLoginModal').modal("show");
 			}else{
+				if ($("#loginUser").attr("userTypeID") != 1) {
+					  layer.msg('您是服务商，无法发布需求!',{icon:2,time:1000});
+					  return;
+				}
 				document.getElementById("formRelease").submit();
 			}
 		}

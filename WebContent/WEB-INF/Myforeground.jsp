@@ -249,7 +249,6 @@ function changePageSize(pageSize) {
                     var now_city=class_obj[now_province][k];
                     
                     for (var m in now_city) {
-                    	/* alert(now_city[m]); */
                     	$("#second_classification3").append('<option value='+m+'>'+now_city[m]+'</option>');
                     }
                 }

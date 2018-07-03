@@ -36,7 +36,6 @@
         $(function(){
             //页面加载完毕后开始执行的事件
             var class_json = '${classJson}';
-            alert(class_json);
             var class_obj=eval('('+class_json+')');
             for (var key in class_obj)
             {
@@ -50,7 +49,6 @@
                     var now_city=class_obj[now_province][k];
                     
                     for (var m in now_city) {
-                    	/* alert(now_city[m]); */
                     	$("#second_classification").append('<option value="'+now_city[m]+'">'+now_city[m]+'</option>');
                     }
                     
@@ -58,9 +56,6 @@
             });
         });
         
-        function clickMe() {
-        	alert($("#second_classification").val());
-        }
     </script>
 </body>
 </html>

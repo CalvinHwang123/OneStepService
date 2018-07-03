@@ -495,28 +495,28 @@ function mysubmit() {
 	var patt2 = new RegExp("^[0-9]*$");
 	
 	if(!patt2.test(beWorks)){
-		alert("输入的数量只能是数字！");
+		layer.msg('输入的数量只能是数字！',{icon:2,time:1000});
 		return ;
 		}
 	if(!patt2.test(endWorks)){
-		alert("输入的数量只能是数字！");
+		layer.msg('输入的数量只能是数字！',{icon:2,time:1000});
 		return ;
 		}
 	if (beWorks.length == 0||endWorks.length == 0)
 	{
-		alert("输入的不能为空！");
+		layer.msg('输入的不能为空！',{icon:2,time:1000});
 		return ;
 	}
 	
 	
 	if (beWorks>endWorks)
 	{
-		alert("起始金额不能大于最大金额！");
+		layer.msg('起始金额不能大于最大金额！',{icon:2,time:1000});
 		return ;
 	}
 	
 	if (beWorks==0||endWorks==0) {
-		alert("最小金额不能为0");
+		layer.msg('最小金额不能为0！',{icon:2,time:1000});
 		return ;
 	}
 
@@ -534,14 +534,14 @@ function mysubmit2() {
 	
 	if (start.length == 0||end.length == 0)
 	{
-		alert("输入的不能为空！");
+		layer.msg('输入的不能为空！',{icon:2,time:1000});
 		return ;
 	}
 	
 	
 	if (start>end)
 	{
-		alert("起始日期不能小于最终日期！");
+		layer.msg('起始日期不能小于最终日期！',{icon:2,time:1000});
 		return ;
 	}
 	
