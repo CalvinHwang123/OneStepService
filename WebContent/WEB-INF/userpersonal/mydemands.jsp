@@ -41,6 +41,9 @@
 									<li class="orderprice">￥：${dem.demandPrice}</li>
 									<li class="ordertime">${dem.releaseTime}</li>
 									<li class="orderstate"><c:choose>
+											<c:when test="${dem.demandstatusid == 1}">
+														等待审核中
+													</c:when>
 											<c:when test="${dem.demandstatusid == 2}">
 														投标进行中<br>
 														截止时间为：${dem.asoftTime}

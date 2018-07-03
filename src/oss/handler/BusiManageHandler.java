@@ -1,6 +1,7 @@
 package oss.handler;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.chenssy.keyword.SensitiveWord;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
@@ -347,8 +349,13 @@ public class BusiManageHandler {
 	public ModelAndView releaseDemand(HttpServletRequest req, Demands demands) {
 		demands.setReleaseTime(DateUtil.getCurrentDate());
 		demands.setTenderNumber(8L);
-		// 测试，投标状态id为2，已通过审核，
-		demands.setDemandstatusid(2L);
+		Set<String> contentSet = SensitiveWord.checkSensitiveWord(demands.getDemandContent());
+		Set<String> titleSet = SensitiveWord.checkSensitiveWord(demands.getDemandTitle());
+		if (contentSet.size()!=0 || titleSet.size()!=0 ) {//说明有敏感词汇不通过
+			demands.setDemandstatusid(1L);
+		}else {
+			demands.setDemandstatusid(2L);
+		}
 		busiManageBizImpl.releaseDemand(demands);
 		ModelAndView mav = new ModelAndView("../foregroundindex");
 		return mav;
@@ -488,6 +495,7 @@ public class BusiManageHandler {
 	}
 
 	// by hsp 6-30 15:36 雇主查看需求的投标者
+	
 	@RequestMapping(value = "/findTender.action", produces = "application/json; charset=utf-8")
 	public @ResponseBody String findTender(HttpServletRequest req, @RequestBody Demands demands) {
 		List<Users> serverList = busiManageBizImpl.biddedServerList(demands);
