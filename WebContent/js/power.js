@@ -110,11 +110,16 @@ $(function(){
 			url:  path+"/SystemManage/updatePower.action",
 			contentType : "application/json;charset=utf-8",   
 			data: JSON.stringify({"roleID":roleID,"powerMenus":powers}),
+			dateType:"application/json",
 			type: "POST",
 			success:function(data){
 				alert(data+"更改成功");
-				$("#grantAuthorityModal").modal('hide');	
-			}
+				$("#grantAuthorityModal").modal('hide');
+				
+			},
+		    error : function (){
+                alert('提交失败');
+            }
 		})	
 	})
 })

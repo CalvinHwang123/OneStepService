@@ -4,13 +4,13 @@ import java.util.List;
 
 import oss.bean.Condition;
 import oss.bean.Credit;
+import oss.bean.Demands;
+import oss.bean.Tender;
+import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
 import oss.bean.userService;
-import oss.bean.Demands;
-import oss.bean.Tender;
-import oss.bean.Trading;
 
 /*
  * 业务管理Biz业务接口
@@ -100,12 +100,19 @@ public interface BusiManageBiz {
 
 	// by hsp 6-28 11:58投标成功，往投标需求关系表Tender中插入数据
 	public int bidding(Tender tender);
-	
-	//合作  wwj  6-28
-		public List<userService> cooperationList(Condition condition);
-	
+
+	// 合作 wwj 6-28
+	public List<userService> cooperationList(Condition condition);
+
 	// 发布作品 hlq 2018-06-27 20:22
 	public boolean publishWorks(Works works);
+
 	// 修改成交量
 	public boolean updateWorksNumById(Works works);
+
+	// jhx 6.29 通过条件查找账务
+	public List<Trading> findTraByCondition(Condition cd);
+
+	// jhx 6.29 查找所有用户
+	public List<Users> findAllUser();
 }

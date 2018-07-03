@@ -14,6 +14,10 @@
 		select * from EMPS 
 	</select>
 	
+	<select id="findAllEmpRole" resultType="oss.bean.EmpRole">
+	select * from EmpRole
+	</select>
+	
 	<select id="findByCondition" parameterType="oss.bean.Condition" resultType="oss.bean.Emps">
 		select * from EMPS where 1=1
 		
@@ -30,16 +34,31 @@
 		insert into EMPS 
 		(EMPID,EMPACCOUNT,EMPPWD,EMPNAME,EMPPHONE,EMPIDENTITY,EMPEMAIL,EMPADDRESS,EMPSTATUSID)
 		VALUES
-		(#{empID},#{empAccount},#{empPwd},#{empName},#{empPhone},#{empIdentity},#{empEmail},#{empAddress},#{empStatusID})
+		(#{empID,jdbcType=VARCHAR},#{empAccount},#{empPwd},#{empName},#{empPhone},#{empIdentity},#{empEmail},#{empAddress},#{empStatusID})
 	</insert>
 	
-	<delete id="deleteEmp" parameterType="String" >
-	delete  from EMPS where roleId=#{id}
+	<insert id="addEmpRole" parameterType="oss.bean.EmpRole">
+		<selectKey keyProperty="empRoleID" order="BEFORE"
+			resultType="long">
+			select empRoleSEQ.nextval from dual
+		</selectKey>
+		insert into EmpRole 
+		(empRoleID,empID,roleID)
+		VALUES
+		(#{empRoleID,jdbcType=VARCHAR},#{empID},#{roleID})
+	</insert>
+	
+	<delete id="deleteEmp" parameterType="Long" >
+	delete  from EMPS where EMPID=#{id}
 	</delete>
 	
-<!-- 	<update id="updateEmp" parameterType="Emps" > -->
+	<update id="updateEmp" parameterType="oss.bean.Emps" >
+	update EMPS SET EMPACCOUNT=#{empAccount},EMPPWD=#{empPwd},EMPNAME=#{empName},EMPPHONE=#{empPhone},EMPIDENTITY=#{empIdentity},EMPEMAIL=#{empEmail},EMPADDRESS=#{empAddress},EMPSTATUSID=#{empStatusID} where EMPID=#{empID} 
+	</update>
 	
-<!-- 	</update> -->
+	<update id="updateEmpRole" parameterType="oss.bean.EmpRole" >
+	update EmpRole SET roleID=#{roleID} where EMPID=#{empID} 
+	</update>
 	
 	<update id="disable" parameterType="Long" >
 	update EMPS SET empStatusID=2 where empID=#{id}

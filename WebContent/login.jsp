@@ -18,6 +18,7 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script type="text/javascript" src="./portal/js/md5.js"></script>
 </head>
 <body class="login-bg">
     
@@ -25,15 +26,62 @@
         <div class="message">管理登录</div>
         <div id="darkbannerwrap"></div>
         
-        <form action="SystemManage/login.action" method="post" class="layui-form" >
-            <input name="empname" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <form action="SystemManage/login.action" method="post" class="layui-form" id="login_form">
+            <input id="empname" name="empname" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <br><span id="span1"></span>
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <input id="pwd" name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <br><span id="span2"></span>
             <hr class="hr15">
-            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <input id="login" value="登录" lay-submit lay-filter="login" style="width:100%;" type="button">
             <hr class="hr20" >
         </form>
     </div>
-
 </body>
+
+<script>
+$("#login").on("click", function() {
+	var empname = $("#empname").val();
+	var pwd = $("#pwd").val();
+	var pwd1 = $.md5(pwd);
+	alert("加密之后的密码为==="+pwd1);
+	var newEmp = {
+		"empAccount" : empname,
+		"empPwd" : pwd1
+	};
+	
+		$.ajax({
+			url : "SystemManage/checkLogin.action",
+			// 数据发送方式
+			type : "post",
+			// 接受数据格式
+			dataType : "text",
+			contentType : "application/json;charset=utf-8",
+			// 要传递的数据
+			data : JSON.stringify(newEmp),
+			async : true,
+			// 回调函数，接受服务器端返回给客户端的值，即result值
+			success : 
+				login
+		});
+	
+});
+
+function login(result) {
+	if (result == "success") {
+		$("#login_form").submit();
+	} else if (result == "fail") {
+		alert("账号失效");
+	} else if (result == "pwdFail"){
+		alert("密码错误");
+	}else{
+		alert("此账号不存在");	 
+		$("#login_form").attr("action", "login.jsp")
+		$("#login_form").submit();
+	}
+}
+</script>
+
+
+
 </html>

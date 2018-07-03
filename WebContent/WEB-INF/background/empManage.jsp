@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>员工管理</title>
+<title>财务对账</title>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="./css/font.css">
 <link rel="stylesheet" href="./css/xadmin.css">
@@ -33,7 +33,7 @@
 	<div class="x-body">
 		<div class="layui-row">
 			<form id="pageForm" class="layui-form layui-col-md12 x-so"
-				action="BusiManage/UserList.action">
+				action="SystemManage/empManage.action">
 				<!-- 隐藏域 每页条数 -->
 				<input type="hidden" id="pageSizeInput" name="pageSize"
 					value="${emplist.getPageSize() }">
@@ -73,7 +73,7 @@
 						<th>姓名</th>
 						<th>手机</th>
 						<th>邮箱</th>
-<!-- 						<th>角色</th> -->
+						<th>角色</th>
 						<th>账号状态</th>
 						<th>操作</th>
 				</thead>
@@ -87,7 +87,7 @@
 
 								<td>
 									<div class="layui-unselect layui-form-checkbox"
-										lay-skin="primary" data-id='2'>
+										lay-skin="primary" data-id='${emp.empID }'>
 										<i class="layui-icon">&#xe605;</i>
 									</div>
 								</td>
@@ -95,7 +95,21 @@
 								<td>${emp.empName }</td>
 								<td>${emp.empPhone }</td>
 								<td>${emp.empEmail }</td>
-<%-- 								<td>${emp.empEmail }</td> --%>
+								<td>
+								<c:forEach var="empRole" items="${empRoleList}">
+								<c:if test="${emp.empID==empRole.empID}">
+								<c:forEach var="role" items="${roleList}">
+								<c:if test="${empRole.roleID==role.roleID}">
+								<c:out value="${role.roleName}">${role.roleName}</c:out>
+								</c:if>
+								</c:forEach>
+								</c:if>
+								
+								
+								</c:forEach>
+								
+								
+								</td>
 								<td><c:if test="${emp.empStatusID==1 }">
 										<span class="layui-btn layui-btn-normal layui-btn-mini">启用</span>
 									</c:if> <c:if test="${emp.empStatusID==2 }">
@@ -106,7 +120,7 @@
 								<input onclick="changeStatus(this,'${emp.empID}','${emp.empStatusID}')" title="${emp.empStatusID}"
 									style="height: 30px; width: 125px;" value="更改状态"
 									class=" Reset   layui-btn layui-btn-primary"> 
-									<input onclick="updataInfo('${emp.empID}')" title="${emp.empID }"
+									<input onclick="getEmpInfo('${emp.empID}')" title="${emp.empID }"
 									style="height: 30px; width: 125px;" value="修改信息"
 									class=" Reset   layui-btn layui-btn-primary">
 									<a title="删除" onclick="member_del(this,${emp.empID})"
@@ -269,14 +283,14 @@
 				<div class="layui-input-block">
 					<button type="button" class="layui-btn" onclick="addEmp()">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary"
-						onclick="resetNewStory()">重置</button>
+						>重置</button>
 				</div>
 			</div>
 		</form>
 	</div>
 	
 	<div style="display: none;" id="updateEmp">
-		<form class="layui-form" action="PortalManage/userStoryList.action"
+		<form class="layui-form" action=""
 			id="editEmpForm">
 			<div class="layui-form-item">
 				<label class="layui-form-label">账号</label>
@@ -364,9 +378,9 @@
 			
 			<div class="layui-form-item">
 				<div class="layui-input-block">
-					<button type="button" class="layui-btn" onclick="addEmp()">立即提交</button>
+					<button id="update" type="button" class="layui-btn" onclick="updateEmp()" title="">立即提交</button>
 					<button type="reset" class="layui-btn layui-btn-primary"
-						onclick="resetNewStory()">重置</button>
+						>重置</button>
 				</div>
 			</div>
 		</form>

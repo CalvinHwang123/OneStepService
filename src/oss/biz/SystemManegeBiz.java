@@ -4,10 +4,12 @@ import java.util.List;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
+import oss.bean.EmpRole;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Role;
 import oss.bean.RolePower;
+import oss.bean.Trading;
 
 /*
  * 系统管理Biz业务接口
@@ -44,17 +46,26 @@ public interface SystemManegeBiz {
 	// jhx 6.26 查找所有员工
 	public List<Emps> findAllEmp();
 
+	// jhx 6.26 查找所有员工角色表
+	public List<EmpRole> findAllEmpRole();
+
 	// jhx 6.26 按条件查找员工
 	public List<Emps> findByCondition(Condition cd);
 
 	// jhx 6.26 添加员工
 	public Long addEmp(Emps emp);
 
+	// jhx 6.26 添加员工角色
+	public Long addEmpRole(EmpRole er);
+
 	// jhx 6.26 删除员工
-	public Long deleteEmp(String empID);
+	public Long deleteEmp(Long empID);
 
 	// jhx 6.26 修改员工资料
 	public Long updateEmp(Emps emp);
+
+	// jhx 6.26 修改员工角色
+	public Long updateEmpRole(EmpRole er);
 
 	// jhx 6.26 修改员工账号状态 禁用
 	public Long disable(Long empID);
@@ -64,6 +75,9 @@ public interface SystemManegeBiz {
 
 	// jhx 6.27 通过id查找员工信息
 	public Emps findEmpById(Long empID);
+
+	// jhx 6.27 按日期查找交易明细
+	public List<Trading> everydayMoney(Condition ct);
 
 	// 一级分类唯一验证 袁楠文 2018-6-14 10:50
 	public List<Object> Classuniquequery(String oneclassname);

@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
+import oss.bean.EmpRole;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Role;
 import oss.bean.RolePower;
+import oss.bean.Trading;
 import oss.mapper.SystemManegeMapper;
 
 /*
@@ -99,6 +101,13 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		return systemManegeMapper.findAllEmp();
 	}
 
+	// jhx 6.26 查找所有员工角色表
+	@Override
+	public List<EmpRole> findAllEmpRole() {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.findAllEmpRole();
+	}
+
 	// jhx 6.26 按条件查找员工
 	@Override
 	public List<Emps> findByCondition(Condition cd) {
@@ -113,9 +122,16 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 		return systemManegeMapper.addEmp(emp);
 	}
 
+	// jhx 6.26 添加新员工角色
+	@Override
+	public Long addEmpRole(EmpRole er) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.addEmpRole(er);
+	}
+
 	// jhx 6.26 删除员工
 	@Override
-	public Long deleteEmp(String empID) {
+	public Long deleteEmp(Long empID) {
 		// TODO Auto-generated method stub
 		return systemManegeMapper.deleteEmp(empID);
 	}
@@ -125,6 +141,13 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 	public Long updateEmp(Emps emp) {
 		// TODO Auto-generated method stub
 		return systemManegeMapper.updateEmp(emp);
+	}
+
+	// jhx 6.26 修改员工角色
+	@Override
+	public Long updateEmpRole(EmpRole er) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.updateEmpRole(er);
 	}
 
 	// jhx 6.26 修改员工账号状态 禁用
@@ -146,6 +169,13 @@ public class SystemManegeBizImpl implements SystemManegeBiz {
 	public Emps findEmpById(Long empID) {
 		// TODO Auto-generated method stub
 		return systemManegeMapper.findEmpById(empID);
+	}
+
+	// jhx 6.27 按日期查找交易明细
+	@Override
+	public List<Trading> everydayMoney(Condition ct) {
+		// TODO Auto-generated method stub
+		return systemManegeMapper.everydayMoney(ct);
 	}
 
 	// 一级分类唯一验证 袁楠文 2018-6-14 10:50

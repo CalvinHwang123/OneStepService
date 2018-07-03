@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +22,14 @@ import com.github.pagehelper.PageInfo;
 
 import oss.bean.Classification;
 import oss.bean.Condition;
+import oss.bean.EmpRole;
 import oss.bean.Emps;
 import oss.bean.Menu;
 import oss.bean.Role;
 import oss.bean.RolePower;
+import oss.bean.Trading;
+import oss.bean.Users;
+import oss.biz.BusiManageBiz;
 import oss.biz.SystemManegeBiz;
 
 /*
@@ -37,25 +42,43 @@ public class SystemManageHandler {
 	String flg = "error";
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
+	@Resource
+	private BusiManageBiz busiManageBizImpl;
 	ModelAndView mav;
+
+	// 验证员工账号
+	@RequestMapping("/checkLogin.action")
+	public @ResponseBody String checkLogin(HttpServletRequest req, @RequestBody Emps emp) {
+		System.out.println(emp.getEmpAccount());
+		String flag = "error";
+		Emps emp1 = systemManegeBizImpl.findEmp(emp.getEmpAccount());
+
+		if (emp1 != null) {
+			if (emp1.getEmpPwd().equals(emp.getEmpPwd())) {
+				if (emp1.getEmpStatusID() == 2) {
+					flag = "fail";
+				} else {
+					req.getSession().setAttribute("empss", emp1);
+					flag = "success";
+					// request.getSession().setAttribute("forelogin", forelogin);
+				}
+			} else {
+				System.out.println(emp1.getEmpPwd());
+				System.out.println(emp.getEmpPwd());
+				flag = "pwdFail";
+			}
+
+		} else {
+			flag = "error";
+		}
+		return flag;
+	}
 
 	// jhx 查找用户（登录）2018-6-14
 	@RequestMapping("/login.action")
-	public ModelAndView empLogin(HttpServletRequest req) {
-		String empAccount = req.getParameter("empname");
-		String empPwd = req.getParameter("password");
-		System.out.println("用户名为==" + empAccount + "密码为==" + empPwd);
-		Emps emp = systemManegeBizImpl.findEmp(empAccount);
-		System.out.println("登陆员工为" + emp);
-		if (emp != null && emp.getEmpPwd().equals(empPwd)) {
-			req.getSession().setAttribute("empss", emp);
-			System.out.println("登录成功");
-			mav = new ModelAndView("redirect:menu.action");
+	public ModelAndView empLogin() {
 
-		} else {
-			System.out.println("登陆失败");
-			mav = new ModelAndView("empLoginFail");
-		}
+		mav = new ModelAndView("redirect:menu.action");
 
 		return mav;
 
@@ -108,28 +131,30 @@ public class SystemManageHandler {
 	}
 
 	// jhx 提交角色权限更改 6.22
-	@RequestMapping(value = "/updatePower.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@RequestMapping("/updatePower.action")
 	public @ResponseBody String updatePower(@RequestBody Map<String, Object> rePower) {
-		System.out.println("到后台了");
+		System.out.println("到后台提交更改权限");
 		// "roleID":roleID,"powerMenus":powers
 		Object id = rePower.get("roleID");
 		Long roleID = Long.valueOf(String.valueOf(id));
 		ArrayList<Long> twoMenus = (ArrayList<Long>) rePower.get("powerMenus");
-		System.out.println("======角色ID为" + roleID);
-		System.out.println("======权限ID为" + twoMenus);
+		// System.out.println("======角色ID为" + roleID);
+		// System.out.println("======权限ID为" + twoMenus);
 		systemManegeBizImpl.deleteRolePower(roleID);
 		for (int i = 0; i < twoMenus.size(); i++) {
 			RolePower rp = new RolePower();
 			Long menuID = Long.valueOf(String.valueOf(twoMenus.get(i)));
 			Long powerID = systemManegeBizImpl.findPowerID(menuID);
-			System.out.println("权限ID为====" + powerID);
+			// System.out.println("权限ID为====" + powerID);
 			rp.setRoleID(roleID);
 			rp.setPowerID(powerID);
 
 			systemManegeBizImpl.updateRolePower(rp);
 		}
-
-		return "success";
+		String data = "success";
+		// Gson data = new Gson();
+		// data.toJson("success");
+		return data;
 	}
 
 	// jhx 员工管理 6.26
@@ -146,9 +171,11 @@ public class SystemManageHandler {
 		PageInfo pageInfo = new PageInfo<>(emplist, pageSize);
 		System.out.println(pageInfo.getTotal());
 		List<Role> roleList = systemManegeBizImpl.roleList();
+		List<EmpRole> empRoleList = systemManegeBizImpl.findAllEmpRole();
 		req.setAttribute("roleList", roleList);
 		req.setAttribute("emplist", pageInfo);
 		req.setAttribute("condition", condition);
+		req.setAttribute("empRoleList", empRoleList);
 		mav = new ModelAndView("background/empManage");
 		return mav;
 
@@ -156,7 +183,7 @@ public class SystemManageHandler {
 
 	// 更改用户状态 jhx 6.27
 	@RequestMapping("/changeStatus.action")
-	public @ResponseBody String Disable(HttpServletRequest req, @RequestBody Emps emp) {
+	public @ResponseBody String Disable(@RequestBody Emps emp) {
 		System.out.println("禁用");
 		System.out.println("禁用员工为=====" + emp.getEmpStatusID());
 		if (emp.getEmpStatusID() == 1) {
@@ -170,15 +197,30 @@ public class SystemManageHandler {
 
 	// 新增工作人员 jhx 6.27
 	@RequestMapping("/addNewEmp.action")
-	public @ResponseBody String addNewEmp(HttpServletRequest req, @RequestBody Emps emp) {
+	public @ResponseBody String addNewEmp(@RequestBody Map<String, Object> allInfo) {
 		System.out.println("新增员工");
-		System.out.println("新增员工=====" + emp.getEmpName());
-		// if (emp.getEmpStatusID() == 1) {
-		// systemManegeBizImpl.disable(emp.getEmpID());
-		// } else {
-		// systemManegeBizImpl.enable(emp.getEmpID());
-		// }
-
+		Map empMap = (Map) allInfo.get("newEmp");
+		Emps newEmp = new Emps();
+		newEmp.setEmpAccount(empMap.get("empAccount").toString());
+		newEmp.setEmpPwd(empMap.get("empPwd").toString());
+		newEmp.setEmpName(empMap.get("empName").toString());
+		newEmp.setEmpPhone(empMap.get("empPhone").toString());
+		newEmp.setEmpIdentity(empMap.get("empIdentity").toString());
+		newEmp.setEmpEmail(empMap.get("empEmail").toString());
+		newEmp.setEmpAddress(empMap.get("empAddress").toString());
+		Long statusID = Long.valueOf(empMap.get("empStatusID").toString());
+		newEmp.setEmpStatusID(statusID);
+		System.out.println(newEmp.getEmpAccount());
+		systemManegeBizImpl.addEmp(newEmp);
+		System.out.println(newEmp.getEmpAccount());
+		Long empID = systemManegeBizImpl.findEmp(newEmp.getEmpAccount()).getEmpID();
+		Object id = allInfo.get("roleID");
+		Long roleID = Long.valueOf(String.valueOf(id));
+		EmpRole er = new EmpRole();
+		er.setEmpID(empID);
+		er.setRoleID(roleID);
+		System.out.println(er);
+		systemManegeBizImpl.addEmpRole(er);
 		return "success";
 	}
 
@@ -190,6 +232,84 @@ public class SystemManageHandler {
 		Emps emp = systemManegeBizImpl.findEmpById(empID);
 
 		return emp;
+	}
+
+	// 更新工作人员 jhx 6.27
+	@RequestMapping("/updateEmp.action")
+	public @ResponseBody String updateEmp(@RequestBody Map<String, Object> allInfo) {
+		System.out.println("新增员工");
+		Map empMap = (Map) allInfo.get("updateEmp");
+		Emps emp = new Emps();
+		Long empID = Long.valueOf(empMap.get("empID").toString());
+		emp.setEmpID(empID);
+		emp.setEmpAccount(empMap.get("empAccount").toString());
+		emp.setEmpPwd(empMap.get("empPwd").toString());
+		emp.setEmpName(empMap.get("empName").toString());
+		emp.setEmpPhone(empMap.get("empPhone").toString());
+		emp.setEmpIdentity(empMap.get("empIdentity").toString());
+		emp.setEmpEmail(empMap.get("empEmail").toString());
+		emp.setEmpAddress(empMap.get("empAddress").toString());
+		Long statusID = Long.valueOf(empMap.get("empStatusID").toString());
+		emp.setEmpStatusID(statusID);
+		// System.out.println(newEmp.getEmpAccount());
+		systemManegeBizImpl.updateEmp(emp);
+
+		// systemManegeBizImpl.addEmp(newEmp);
+		// System.out.println(newEmp.getEmpAccount());
+		// Long empID = systemManegeBizImpl.findEmp(newEmp.getEmpAccount()).getEmpID();
+		Object id = allInfo.get("roleID");
+		Long roleID = Long.valueOf(String.valueOf(id));
+		EmpRole er = new EmpRole();
+		er.setEmpID(empID);
+		er.setRoleID(roleID);
+		System.out.println(er);
+		systemManegeBizImpl.updateEmpRole(er);
+		return "success";
+	}
+
+	// 删除员工 jhx 6.27
+	@RequestMapping("/delateEmp.action")
+	public @ResponseBody String delateEmp(HttpServletRequest req, @RequestBody Long empID) {
+		System.out.println("删除员工");
+		System.out.println("删除员工id为" + empID);
+		systemManegeBizImpl.deleteEmp(empID);
+
+		return "success";
+	}
+
+	// 删除员工 jhx 6.27
+	@RequestMapping("/delateEmps.action")
+	public @ResponseBody String delateEmp(@RequestBody List<String> empList) {
+		System.out.println("批量删除");
+		System.out.println("violationsID list size=" + empList.size());
+		// for (int i = 0; i <= empList.size(); i++) {
+		// systemManegeBizImpl.deleteEmp(empList[i]);
+		// }
+
+		// return "删除成功";
+
+		return flg;
+	}
+
+	// jhx 获取账户交易明细表 6-29
+	@RequestMapping("/trading.action")
+	public ModelAndView TradingList(HttpServletRequest request,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+		HttpSession session = request.getSession();
+		// Users users2 = (Users) session.getAttribute("forelogin");
+		// String userAcc = users2.getUserAccount();
+		// condition.setTitle(userAcc);
+		PageHelper.startPage(pageNum, pageSize);
+		List<Trading> listTrading = busiManageBizImpl.findTraByCondition(condition);
+		PageInfo pageInfo = new PageInfo<>(listTrading, pageSize);
+		System.out.println(pageInfo.getTotal());
+		List<Users> listUser = busiManageBizImpl.findAllUser();
+		request.setAttribute("listUser", listUser);
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("background/trading");
+		return mav;
 	}
 
 	// 类型数据添加 袁楠文 2018-6-16 12:17

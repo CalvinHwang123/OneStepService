@@ -47,6 +47,7 @@ function openAddEmp(){
 //
 //		}
 //	})
+	
 	layer.open({
 			      type: 1,
 			      title:"新增员工",
@@ -56,7 +57,8 @@ function openAddEmp(){
 			    });
 }
 
-function updataInfo(roleID){//修改信息
+//修改信息之得到员工信息 
+function getEmpInfo(roleID){
 //	ajax
 	$.ajax({
 		url :  "SystemManage/empInfo.action",
@@ -75,7 +77,8 @@ function updataInfo(roleID){//修改信息
 			
 		}
 	});
-//	$('#editempIdentity').val('123')
+	$('#update').attr('title',roleID)
+	
 	layer.open({
 	      type: 1,
 	      title:"修改信息",
@@ -85,9 +88,55 @@ function updataInfo(roleID){//修改信息
 	    })
 }
 
-
-function addEmp(){//添加员工
+//更新员工信息
+function updateEmp(){
+	
 	  layer.confirm('确认要提交吗？',function(index){
+
+		  var empID=$("#update").attr("title");
+		  var empAccount=$("#editempAccount").val();
+		  var empPwd=$("#editempPwd").val();
+		  var empName =$("#editempName").val();
+		  var empPhone=$("#editempPhone").val();
+		  var empIdentity=$("#editempIdentity").val();
+		  var empEmail=$("#editempEmail").val();
+		  var empAddress=$("#editempAddress").val();
+		  var roleID=$("#editrole_select").val();
+		  var empStatusID=1;
+		  var updateEmp={"empID":empID,"empAccount":empAccount, "empPwd":empPwd,"empName":empName
+				        ,"empPhone":empPhone,"empIdentity":empIdentity,"empEmail":empEmail,
+				        "empAddress":empAddress,"empStatusID":empStatusID};
+
+		  var allInfo={"roleID":roleID,"updateEmp":updateEmp}
+		  alert("转换数据为===="+JSON.stringify(allInfo)); 
+		  $.ajax({
+   			url:"SystemManage/updateEmp.action",
+   			type:"post",
+   			dataType:"text",
+   			contentType : "application/json;charset=utf-8",
+   			data:JSON.stringify(allInfo),
+   			async:true,
+   			success:function(msg){//
+   				layer.closeAll();
+   				layer.msg('修改成功!', {
+					icon : 5,
+					time : 3000
+				});
+   			  	window.location.reload();
+   			}
+   		})
+	  })
+}
+
+
+
+
+
+//添加员工
+function addEmp(){
+	
+	  layer.confirm('确认要提交吗？',function(index){
+
 		  var empAccount=$("#newempAccount").val();
 		  var empPwd=$("#newempPwd").val();
 		  var empName =$("#newempName").val();
@@ -95,21 +144,27 @@ function addEmp(){//添加员工
 		  var empIdentity=$("#newempIdentity").val();
 		  var empEmail=$("#newempEmail").val();
 		  var empAddress=$("#newempAddress").val();
+		  var roleID=$("#role_select").val();
 		  var empStatusID=1;
 		  var newEmp={"empAccount":empAccount, "empPwd":empPwd,"empName":empName
 				        ,"empPhone":empPhone,"empIdentity":empIdentity,"empEmail":empEmail,
 				        "empAddress":empAddress,"empStatusID":empStatusID};
 
-//		  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
+		  var allInfo={"roleID":roleID,"newEmp":newEmp}
+		  alert("转换数据为===="+JSON.stringify(allInfo)); 
 		  $.ajax({
    			url:"SystemManage/addNewEmp.action",
    			type:"post",
    			dataType:"text",
    			contentType : "application/json;charset=utf-8",
-   			data:JSON.stringify(newEmp),
+   			data:JSON.stringify(allInfo),
    			async:true,
    			success:function(msg){//
    				layer.closeAll();
+   				layer.msg('添加成功!', {
+					icon : 5,
+					time : 3000
+				});
    			  	window.location.reload();
    			}
    		})
@@ -190,53 +245,63 @@ function changeStatus(obj,id,sid){
 function member_del(obj, id) {
 	layer.confirm('确认要删除吗？', function(index) {
 		// 发异步删除数据
-//		 $.ajax({
-//    			url:"PortalManage/deleteStory.action",
-//    			type:"post",
-//    			dataType:"text",
-//    			contentType:"application/json",
-//    			data:JSON.stringify(deleteStorys),
-//    			async:true,
-//    			success:function(msg){//
-//    				alert(msg);
-//                 layer.msg('已删除!',{icon:1,time:1000});
-//                 window.location.reload();
-//    			}
-//    		})
-		
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!', {
-			icon : 1,
-			time : 1000
-		});
+		 $.ajax({
+    			url:"SystemManage/delateEmp.action",
+    			type:"post",
+    			dataType:"text",
+    			contentType:"application/json",
+    			data:JSON.stringify(id),
+    			async:true,
+    			success:function(msg){//
+    				alert(msg+"删除成功");
+                 layer.msg('已删除!',{icon:1,time:1000});
+                 window.location.reload();
+    			}
+    		})	
+//		$(obj).parents("tr").remove();
+//		layer.msg('已删除!', {
+//			icon : 1,
+//			time : 1000
+//		});
 	});
 }
 
 function delAll(argument) {
 
-	var data = tableCheck.getData();
-
-	layer.confirm('确认要删除吗？' + data, function(index) {
-		// 捉到所有被选中的，发异步进行删除
-//		$.ajax({
-// 			url:"PortalManage/deleteStory.action",
-// 			type:"post",
-// 			dataType:"text",
-// 			contentType:"application/json",
-// 			data:JSON.stringify(deleteStorys),
-// 			async:true,
-// 			success:function(msg){//
-// 				alert(msg);
-//              layer.msg('已删除!',{icon:1,time:1000});
-//              window.location.reload();
-// 			}
-// 		})
+	 var deleteIDs = tableCheck.getData();
+//	 alert(deleteIDs);
+     if (deleteIDs.length == 0) {
+    	 layer.msg('请选择要删除的员工!',{icon:2,time:1000});
+    	 return;
+	 }
+    layer.confirm('确认要删除吗？',function(index){
+		var deleteEmps=[];
+     for (var i = 0; i < deleteIDs.length; i++) {
+    	 alert("单个"+deleteIDs[i]);
+				var data =	{"storyID":deleteIDs[i]};
+				deleteEmps.push(data);
+		}
+     alert("所有ID为"+deleteEmps);
+     $.ajax({
+			url:"SystemManage/deleteEmps.action",
+			type:"post",
+			dataType:"text",
+			contentType:"application/json",
+			data:JSON.stringify(deleteEmps),
+			async:true,
+			success:function(msg){//
+				alert(msg);
+          layer.msg('已删除!',{icon:1,time:1000});
+          window.location.reload();
+			}
+		})
+    });
 		
-		layer.msg('删除成功', {
-			icon : 1
-		});
-		$(".layui-form-checked").not('.header').parents('tr').remove();
-	});
+//		layer.msg('删除成功', {
+//			icon : 1
+//		});
+//		$(".layui-form-checked").not('.header').parents('tr').remove();
+//	});
 }
 
 $(document).on('blur','#editreempPwd,#editempPwd',function(){

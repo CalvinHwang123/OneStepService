@@ -133,7 +133,7 @@
 						<li><a _href="BusiManage/providerList.action"> <i class="iconfont">&#xe6a7;</i>
 								<cite>服务商管理</cite>
 						</a></li>
-						<li><a _href="admin-cate.html"> <i class="iconfont">&#xe6a7;</i>
+						<li><a _href=<%=path+"/SystemManage/trading.action" %>> <i class="iconfont">&#xe6a7;</i>
 								<cite>财务对账</cite>
 						</a></li>
 						<li><a _href="BusiManage/demandList.action"> <i class="iconfont">&#xe6a7;</i>

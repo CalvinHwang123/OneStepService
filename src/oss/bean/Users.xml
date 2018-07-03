@@ -157,6 +157,12 @@
 		where userAccount=#{userAccount}
 	</update>
 
+
+<select id="findAllUser"  resultType="oss.bean.Users">
+		select * from Users 
+	</select>
+
+
 </mapper>
 
 
