@@ -70,7 +70,7 @@
 
 					<th>序号</th>
 					<th>雇主</th>
-					<th>服务商</th>
+<!-- 					<th>服务商</th> -->
 					<th>交易金额</th>
 					<th>资金类型</th>
 					<th>时间</th>
@@ -98,7 +98,7 @@
 											</c:if>
 											</c:forEach>
 											</td>
-											<td><c:out value="${i.userId}"></c:out></td>
+<%-- 											<td><c:out value="${i.userId}"></c:out></td> --%>
 											<td><c:out value="${i.amount}"></c:out></td>
 											<td>
 											<c:if test="${i.amountType==1}">
