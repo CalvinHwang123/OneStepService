@@ -12,7 +12,6 @@ import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
-import oss.bean.userService;
 
 /*
  * 业务管理Mapper接口
@@ -89,7 +88,6 @@ public interface BusiManageMapper {
 	// 信用明细
 	public List<Credit> creditList(Condition condition);
 
-
 	// 收藏
 	public List<Users> userServiceList(Condition condition);
 
@@ -158,12 +156,20 @@ public interface BusiManageMapper {
 
 	// by hsp 7-1 14:31 服务商发货
 	public int updateDemandStatusToSendGood(Demands demands);
+
 	// 修改密码 wwj 16:13
 	public abstract int updateUsersPwdById(Users users);
-	
-	//服务商详情   wwj  7-1
+
+	// 服务商详情 wwj 7-1
 	public abstract Users serviceDetails(Users users);
-	
-	//服务商详情   wwj  7-1
-		public abstract List<Works> serviceWorks(Users users);
+
+	// 服务商详情 wwj 7-1
+	public abstract List<Works> serviceWorks(Users users);
+
+	// jhx 6.29 通过条件查找账务
+	public List<Trading> findTraByCondition(Condition cd);
+
+	// jhx 6.29 查找所有用户
+	public List<Users> findAllUser();
+
 }

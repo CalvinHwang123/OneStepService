@@ -151,6 +151,7 @@
 		where userAccount=#{userAccount}
 	</update>
 
+
 	<!-- 用户表修改余额 hlq 2018-06-29 14:02 -->
 	<update id="updateUserBalanceById"  parameterType="oss.bean.Users" >
 		update Users set
@@ -176,6 +177,13 @@
 		parameterType="oss.bean.Users">
 		select * from Users where userID=#{userID}
 	</select>
+
+
+<select id="findAllUser"  resultType="oss.bean.Users">
+		select * from Users 
+	</select>
+
+
 </mapper>
 
 

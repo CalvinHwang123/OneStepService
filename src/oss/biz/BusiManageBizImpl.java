@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 
 import oss.bean.Condition;
 import oss.bean.Credit;
-import oss.bean.Users;
-import oss.bean.Violations;
-import oss.bean.Works;
-import oss.bean.userService;
 import oss.bean.Demands;
 import oss.bean.Orders;
 import oss.bean.Tender;
 import oss.bean.Trading;
+import oss.bean.Users;
+import oss.bean.Violations;
+import oss.bean.Works;
 import oss.mapper.BusiManageMapper;
 
 /*
@@ -171,6 +170,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 
 	// 收藏
 	@Override
+
 	public List<Users> userServiceList(Condition condition) {
 
 		return busiManageMapper.userServiceList(condition);
@@ -204,6 +204,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	@Override
 
 	public List<Users> cooperationList(Condition condition) {
+
 		return busiManageMapper.cooperationList(condition);
 	}
 
@@ -224,14 +225,14 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public List<Demands> serversBidsList(Users users) {
 		return busiManageMapper.selectBidsByServerID(users);
 	}
-	
+
 	// 增加订单 hlq 2018-06-29 11:19
 	@Override
 	public boolean addOrders(Orders orders) {
 		return busiManageMapper.addOrders(orders) > 0;
 	}
 
-	// 修改用户余额  hlq 2018-06-29 14:07
+	// 修改用户余额 hlq 2018-06-29 14:07
 	@Override
 	public boolean updateUserBalanceById(Users users) {
 		return busiManageMapper.updateUserBalanceById(users) > 0;
@@ -275,22 +276,22 @@ public class BusiManageBizImpl implements BusiManageBiz {
 
 	// by hsp 7-1 12:45 雇主确认收货
 	@Override
-	public String confirmReceipt(Demands demands,Users users) {
-		//1 判断雇主余额是否充足
+	public String confirmReceipt(Demands demands, Users users) {
+		// 1 判断雇主余额是否充足
 		demands.setUserID(users.getUserID());
 		users = busiManageMapper.isSufficientFunds(demands);
 		if (users == null) {
 			return "NotEnough";
 		}
-		//2 如果充足，雇主扣款，
+		// 2 如果充足，雇主扣款，
 		users.setUserBalance(users.getUserBalance() - demands.getDemandPrice());
 		busiManageMapper.deductUsersBalance(users);
-		
-		//3 服务商加款
-		demands.setDemandPrice(demands.getDemandPrice()+busiManageMapper.serverBalance(demands));
+
+		// 3 服务商加款
+		demands.setDemandPrice(demands.getDemandPrice() + busiManageMapper.serverBalance(demands));
 		busiManageMapper.addServerBalance(demands);
-		
-		//4 更改需求状态为已付款
+
+		// 4 更改需求状态为已付款
 		busiManageMapper.updateDemandStatusToConfirmReceipt(demands);
 		return "ConfirmSuccess";
 	}
@@ -300,10 +301,11 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public String sendGood(Demands demands) {
 		String sendResult = "error";
 		if (busiManageMapper.updateDemandStatusToSendGood(demands) != 0) {
-			sendResult ="success";
+			sendResult = "success";
 		}
 		return sendResult;
 	}
+
 	// 修改密码 wwj 16:19
 	@Override
 	public int updateUsersPwdById(Users users) {
@@ -316,10 +318,26 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public Users serviceDetails(Users users) {
 		return busiManageMapper.serviceDetails(users);
 	}
-	//服务商详情   wwj  7-1
+
+	// 服务商详情 wwj 7-1
 	@Override
 	public List<Works> serviceWorks(Users users) {
-		
+
 		return busiManageMapper.serviceWorks(users);
 	}
+
+	// jhx 6.29 通过条件查找账务
+
+	@Override
+	public List<Trading> findTraByCondition(Condition cd) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.findTraByCondition(cd);
+	}
+
+	// jhx 6.29 查找所有用户
+	@Override
+	public List<Users> findAllUser() {
+		return busiManageMapper.findAllUser();
+	}
+
 }

@@ -43,6 +43,23 @@
 		trading (tradingId,userId,amount,amountType,tradingTime,userId2)
 		values(#{tradingId},#{userId},#{amount},#{amountType},#{tradingTime},#{userId2})
 	</insert>
+
+	<!--财务对账-->
+	<select id="findTraByCondition" resultType="oss.bean.Trading" parameterType="oss.bean.Condition" >
+		select * from Trading  where 1=1
+		<if
+			test="startDate != null and endDate != null and startDate !='' and endDate !=''">
+			and tradingTime between '#{startDate} 00:00:00' and'#{endDate} 23:59:59'
+		</if>
+	</select>
+	
+	
+	
+	<!-- 按天金额查询 -->
+	<select id="everydayMoney" parameterType="oss.bean.Condition" resultType="oss.bean.Trading">
+		select * from trading where tradingTime between '#{startDate} 00:00:00' and'#{endDate} 23:59:59'
+	</select>
+	
 </mapper>
 
 

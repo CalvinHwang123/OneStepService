@@ -11,7 +11,6 @@ import oss.bean.Trading;
 import oss.bean.Users;
 import oss.bean.Violations;
 import oss.bean.Works;
-import oss.bean.userService;
 
 /*
  * 业务管理Biz业务接口
@@ -103,14 +102,16 @@ public interface BusiManageBiz {
 	public int bidding(Tender tender);
 
 	// 合作 wwj 6-28
+
 	public List<Users> cooperationList(Condition condition);
 
 	// 发布作品 hlq 2018-06-27 20:22
 	public boolean publishWorks(Works works);
 
 	// 修改成交量 hlq
+
 	public boolean updateWorksNumById(Works works);
-	
+
 	// by hsp 6-28 20：50 服务商查看自己已投过的标 列表
 	public List<Demands> serversBidsList(Users users);
 
@@ -143,11 +144,19 @@ public interface BusiManageBiz {
 
 	// by hsp 7-1 14:31 服务商发货
 	public String sendGood(Demands demands);
-	
+
 	// 修改密码 wwj 16:13
 	public abstract int updateUsersPwdById(Users users);
-	//服务商详情   wwj  7-1
-		public abstract Users serviceDetails(Users users);
-		//服务商做作品详情   wwj  7-1
-				public abstract List<Works> serviceWorks(Users users);
+
+	// 服务商详情 wwj 7-1
+	public abstract Users serviceDetails(Users users);
+
+	// 服务商做作品详情 wwj 7-1
+	public abstract List<Works> serviceWorks(Users users);
+
+	// jhx 6.29 通过条件查找账务
+	public List<Trading> findTraByCondition(Condition cd);
+
+	// jhx 6.29 查找所有用户
+	public List<Users> findAllUser();
 }
