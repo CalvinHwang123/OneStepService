@@ -44,19 +44,16 @@
 								userSelection = document.getSelection();
 								isDelete = userSelection.focusOffset;
 								if (userSelection.focusOffset == 0) {
-									alert("回车不包含内容");
 								}
 								});
 							
 						});
 
 		function sendFile(file, editor, $editable) {
-			alert("上傳文件");
 			$(".note-toolbar.btn-toolbar").append('正在上传图片');
 			var filename = false;
 			try {
 				filename = file['name'];
-				alert(filename);
 			} catch (e) {
 				filename = false;
 			}
@@ -82,7 +79,6 @@
 				processData : false,
 				contentType : false,
 				success : function(data) {
-					alert(data.path);
 					for (var i = 0; i < $('.summernote').length; i++) {
 						$('.summernote').eq(i).summernote('insertImage', data.path);
 					}

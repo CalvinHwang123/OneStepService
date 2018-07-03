@@ -227,7 +227,6 @@
 			}
 // 			选择中标者
 			function chooseTender(serverID,demandID){
-				alert(serverID+"    "+demandID);
 				layer.confirm("是否确定选择该服务商为中标者？",function(index){
 					var demands = {"demandID":demandID,"tenderID":serverID};
 					$.ajax({

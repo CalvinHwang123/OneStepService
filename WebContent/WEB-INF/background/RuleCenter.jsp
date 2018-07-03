@@ -349,7 +349,6 @@
        			data:JSON.stringify(deleteRulee),
        			async:true,
        			success:function(msg){//
-       				alert(msg);
                     layer.msg('已删除!',{icon:1,time:1000});
                     window.location.reload();
        			}
@@ -381,7 +380,6 @@
  			data:JSON.stringify(deleteStorys),
  			async:true,
  			success:function(msg){//
- 				alert(msg);
               layer.msg('已删除!',{icon:1,time:1000});
               window.location.reload();
  			}

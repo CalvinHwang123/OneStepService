@@ -71,13 +71,11 @@ function login(result) {
 	if (result == "success") {
 		$("#login_form").submit();
 	} else if (result == "fail") {
-		alert("账号失效");
+		layer.msg('账号失效！',{icon:2,time:1000});
 	} else if (result == "pwdFail"){
-		alert("密码错误");
+		layer.msg('密码错误！',{icon:2,time:1000});
 	}else{
-		alert("此账号不存在");	 
-		$("#login_form").attr("action", "login.jsp")
-		$("#login_form").submit();
+		layer.msg('此账号不存在！',{icon:2,time:1000});
 	}
 }
 </script>

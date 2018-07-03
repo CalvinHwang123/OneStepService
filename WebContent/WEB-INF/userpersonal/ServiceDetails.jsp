@@ -19,14 +19,23 @@
 	<div class="wthree-offers">
 		<div class="container">
 			<h3 class="w3ls-title w3ls-title1">${Service.userName}</h3>
+			<c:if test="${sessionScope.forelogin == null}">
+				<button class="w3ls-cart w3ls-cart-like" style="width:10%;"
+					onclick = "collectServer()">
+					<i class="fa fa-heart-o" aria-hidden="true"></i>收藏店铺
+				</button>
+			</c:if>
+			<c:if test="${sessionScope.forelogin != null}">
+				<button class="w3ls-cart w3ls-cart-like" style="width:10%;"
+					onclick = "collectServer()">
+					<i class="fa fa-heart-o" aria-hidden="true"></i>收藏店铺
+				</button>
+			</c:if>
 			<div class="w3ls-add-grids w3agile-add-products">
 				<a href="#">
-					<h4>
-						TOP 10 TRENDS FOR YOU FLAT <span>20%</span> OFF
-					</h4> <!-- 					<h6>Shop now <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></h6> -->
 				</a>
 			</div>
-
+			
 			<div class="offer-bottom">
 				<div class="col-md-6 offer-bottom-grids">
 					<div class="offer-bottom-grids-info2">
@@ -44,7 +53,7 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-
+			<h3 class="w3ls-title w3ls-title1">服务商的作品</h3>
 			<c:forEach var="i"  items="${works}" varStatus="status">				
 				<div class="offer-card-row">
 					<div class="col-md-4 offer-card-grids" style="margin: 10px">
@@ -64,5 +73,15 @@
 	<!-- //login-page -->
 	<!-- //footer-top -->
 	<%@include file="/end.jsp"%>
+	<script type="text/javascript">
+	//收藏服务商
+	function collectServer(){
+		
+		
+		
+	}
+	
+	
+	</script>
 </body>
 </html>
