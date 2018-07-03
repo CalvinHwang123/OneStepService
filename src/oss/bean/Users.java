@@ -17,7 +17,9 @@ public class Users {
 	private Long userType;// 用户类型
 	private String imageUrl;           
 	private  Credit  credit;
-private userService checkUsers;
+    private userService checkUsers;
+    private userService checkTrading;
+    private userService checkDemands1;
 	public Users() {
 
 	}
@@ -139,6 +141,18 @@ private userService checkUsers;
 	}
 	public void setCheckUsers(userService checkUsers) {
 		this.checkUsers = checkUsers;
+	}
+	public userService getCheckTrading() {
+		return checkTrading;
+	}
+	public void setCheckTrading(userService checkTrading) {
+		this.checkTrading = checkTrading;
+	}
+	public userService getCheckDemands1() {
+		return checkDemands1;
+	}
+	public void setCheckDemands1(userService checkDemands1) {
+		this.checkDemands1 = checkDemands1;
 	}
 
 }

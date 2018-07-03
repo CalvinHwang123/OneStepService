@@ -56,7 +56,7 @@
 		</selectKey>
 		insert into
 		Dynamics(dynamicId,dynamicTitle,dynamicContext,dynamicTime,classificationId)
-		values(#{dynamicId},#{dynamicTitle},#{dynamicContext},#{dynamicTime}),#{classificationId}
+		values(#{dynamicId},#{dynamicTitle},#{dynamicContext},#{dynamicTime},#{classificationId})
 	</insert>
 
 </mapper>

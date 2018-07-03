@@ -248,11 +248,21 @@
     }
     
     function addRulee(){//添加新规则
-		  layer.confirm('确认要提交吗？',function(index){
-			  
+		  layer.confirm('确认要提交吗？',function(index){			  
 			  var ruleTitle=$("#newRuleTitle").val();
 			  var ruleContext =$('.summernote').eq(0).summernote('code');
 			 /*  var coverUrl=$("#newStoryImageURL").val(); */
+			 if (ruleTitle == "") {
+    				  layer.msg('标题不能为空!',{icon:2,time:1000});
+    				  return ;
+    		       }  if (ruleTitle.length>20) {
+    				  layer.msg('标题不能超过20!',{icon:2,time:1000});
+    				  return ;
+    		       } 
+			 if (ruleContext == "") {
+    				  layer.msg('内容不能为空!',{icon:2,time:1000});
+    				  return ;
+    		       }
 			  var newStory={"ruleTitle":ruleTitle,"ruleContext":ruleContext};
 			  console.log(newStory);
 			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
@@ -297,7 +307,17 @@
 //   			  var ruleContext=$("#updateruleContext").val();
               var ruleContext= $('.summernote').eq(1).summernote('code');
   			  var ruleID=updateA.attr("ruleID");
-  			 
+  			if (ruleTitle == "") {
+				  layer.msg('标题不能为空!',{icon:2,time:1000});
+				  return ;
+		       }  if (ruleTitle.length>20) {
+				  layer.msg('标题不能超过20!',{icon:2,time:1000});
+				  return ;
+		       } 
+		 if (ruleContext == "") {
+				  layer.msg('内容不能为空!',{icon:2,time:1000});
+				  return ;
+		       }
   			  var updateStory={"ruleID":ruleID,"ruleTitle":ruleTitle,"ruleContext":ruleContext};
   			  console.log($('.summernote').eq(1).summernote('code'));
   			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 

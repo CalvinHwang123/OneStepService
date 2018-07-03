@@ -4,10 +4,10 @@
 <mapper namespace="oss.mapper.BusiManageMapper">
 	<!--交易明细 -->
 	<select id="tradingList" resultMap="TradingMap" parameterType="oss.bean.Condition">
-		select
+		  select
 		A.Tradingid,a.amount,a.demandId,a.amountType,a.tradingTime,c.demandTitle
-		from Trading a ,demands c
-		where A.Userid=#{classPid} and a.demandId = c.demandId
+		from Trading a ,demands c,users b
+		where A.Userid=#{classPid} and a.demandId = c.demandId 
 		<if
 			test="startDate != null and endDate != null and startDate !='' and endDate !=''">
 			and tradingTime between #{startDate} and #{endDate}
@@ -16,16 +16,12 @@
 	<resultMap type="oss.bean.Trading" id="TradingMap">
 		<id property="tradingId" column="tradingId" />
 		<result property="userId" column="userId" />
+		<result property="userId2" column="userId2" />
 		<result property="amount" column="amount" />
 		<result property="demandId" column="demandId" />
 		<result property="amountType" column="amountType" />
 		<result property="tradingTime" column="tradingTime" />
-<!-- 		<association property="checkUsers" javaType="oss.bean.Users"> -->
-<!-- 			<id property="userID" column="userID" /> -->
-<!-- 			<result property="userAccount" column="userAccount" /> -->
-<!-- 			<result property="userName" column="userName" /> -->
-<!-- 			<result property="userBalance" column="userBalance" /> -->
-<!-- 		</association> -->
+
 		<association property="checkDemands" javaType="oss.bean.Demands">
 			<id property="demandID" column="demandID" />
 			<result property="demandTitle" column="demandTitle" />
@@ -33,14 +29,16 @@
 			<result property="demandTitle" column="demandTitle" />
 		</association>
 	</resultMap>
-	
-	<!-- 新增交易记录  hlq 2018-06-29 14:54-->
+
+	<!-- 新增交易记录 hlq 2018-06-29 14:54 -->
 	<insert id="AddTrading" parameterType="oss.bean.Trading">
-		<selectKey keyProperty="tradingId" order="BEFORE" resultType="long">
+		<selectKey keyProperty="tradingId" order="BEFORE"
+			resultType="long">
 			select tradingSeq.nextval from dual
 		</selectKey>
 		insert into
-		trading (tradingId,userId,amount,amountType,tradingTime,userId2)
+		trading
+		(tradingId,userId,amount,amountType,tradingTime,userId2)
 		values(#{tradingId},#{userId},#{amount},#{amountType},#{tradingTime},#{userId2})
 	</insert>
 </mapper>

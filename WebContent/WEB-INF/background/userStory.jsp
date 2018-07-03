@@ -235,6 +235,17 @@
 //   			  var storyContext=$("#updateStoryContext").val();
   			  var storyContext=$('.summernote').eq(1).summernote('code');
   			  var storyID=updateA.attr("storyID");
+  			 if (storyTitle == "") {
+				  layer.msg('标题不能为空!',{icon:2,time:1000});
+				  return ;
+		       } if (storyTitle.length>20) {
+				  layer.msg('标题不能超过20!',{icon:2,time:1000});
+				  return ;
+		       }
+			  if (storyContext == "") {
+				  layer.msg('内容不能为空!',{icon:2,time:1000});
+				  return ;
+		       }
   			  var updateStory={"storyID":storyID,"storyTitle":storyTitle,"storyContext":storyContext};
   			  console.log($('.summernote').eq(1).summernote('code'));
   			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
@@ -258,14 +269,27 @@
     	
     	function addStory(){//添加新雇主故事
     		  layer.confirm('确认要提交吗？',function(index){
-    			  if ($("#newStoryImageURL").val() == "") {
-    				  layer.msg('请选择封面进行上传!',{icon:1,time:1000});
-    				  return ;
-				  }
     			  var storyTitle=$("#newStoryTitle").val();
     			  var userID=$("#newUserID").val();
     			  var storyContext =$('.summernote').eq(0).summernote('code');
     			  var coverUrl=$("#newStoryImageURL").val();
+    			  if (storyTitle == "") {
+    				  layer.msg('标题不能为空!',{icon:2,time:1000});
+    				  return ;
+    		       } if (storyTitle.length>20) {
+    				  layer.msg('标题不能超过20!',{icon:2,time:1000});
+    				  return ;
+    		       } if (userID == "") {
+    				  layer.msg('雇主ID不能为空!',{icon:2,time:1000});
+    				  return ;
+    		       }
+    			  if (storyContext == "") {
+    				  layer.msg('内容不能为空!',{icon:2,time:1000});
+    				  return ;
+    		       }  if ($("#newStoryImageURL").val() == "") {
+    				  layer.msg('请选择封面进行上传!',{icon:1,time:1000});
+    				  return ;
+				  }
     			  var newStory={"storyTitle":storyTitle, "userID":userID,"storyContext":storyContext
     					        ,"imageURL":coverUrl};
     			  console.log(newStory);

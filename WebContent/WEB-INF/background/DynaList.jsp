@@ -24,8 +24,7 @@
 </head>
 <body>
 	<div class="x-nav">
-		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
-			<a> <cite>导航元素88</cite></a>
+		<span class="layui-breadcrumb"> <a href="">门户管理员</a> <a href="">行业动态</a>
 		</span> <a class="layui-btn layui-btn-small"
 			style="line-height: 1.6em; margin-top: 3px; float: right"
 			href="javascript:location.replace(location.href);" title="刷新"> <i
@@ -43,10 +42,12 @@
 					value="${pageInfo.getPageNum()}"> <input type="hidden"
 					id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}"> <input
-					class="layui-input" placeholder="开始日" name="startDate" id="start" value="${condition.startDate}">
-				<input class="layui-input" placeholder="截止日" name="endDate" id="end" value="${condition.endDate}">
-				<input type="text" name="title" placeholder="请输入动态标题"
-					autocomplete="off" class="layui-input"  value="${condition.title}">
+					class="layui-input" placeholder="开始日" name="startDate" id="start"
+					value="${condition.startDate}"> <input class="layui-input"
+					placeholder="截止日" name="endDate" id="end"
+					value="${condition.endDate}"> <input type="text"
+					name="title" placeholder="请输入动态标题" autocomplete="off"
+					class="layui-input" value="${condition.title}">
 				<div class="layui-input-inline">
 					<select name="classPid">
 						<option value="0"></option>
@@ -107,10 +108,10 @@
 							<td><c:out value="${i.dynamicTime}"></c:out></td>
 							<td><c:out value="${i.checkClass.classificationName}"></c:out></td>
 							<td class="td-manage"><a title="编辑"
-								onclick="openUpdateDyna(this,'${i.dynamicId}','${i.dynamicTitle}','${i.dynamicContext}','${i.dynamicTime}')"
-								href="javascript:;"> <i class="layui-icon">&#xe642;</i>
-							</a> <a title="删除" onclick="member_del(this,'${i.dynamicId}')"
-								href="javascript:;"> <i class="layui-icon">&#xe640;</i>
+								onclick="openUpdateDyna(this,'${i.dynamicId}','${i.dynamicTitle}','${i.dynamicContext}','${i.dynamicTime}')">
+									<i class="layui-icon">&#xe642;</i>
+							</a> <a title="删除" onclick="member_del(this,'${i.dynamicId}')">
+									<i class="layui-icon">&#xe640;</i>
 							</a></td>
 						</tr>
 					</c:forEach>
@@ -235,14 +236,14 @@
 				<div class="layui-input-block">
 					<input type="text" name="linksname" required lay-verify="required"
 						placeholder="请输入标题" autocomplete="off" class="layui-input"
-						id="newDynaTitle1">
+						id="newDynaTitle1" lay-verify="nikename">
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">动态内容</label>
 				<div class="layui-input-block">
 					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
-						id="newDynaCon1"></textarea>
+						id="newDynaCon1" lay-verify="pass"></textarea>
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -329,6 +330,22 @@
 					"dynamicId" : dynamicId,
 					"classificationId":classificationId
 				};
+				 if(DynaTitle== null||DynaTitle==""){
+						layer.msg('标题不能为空',{icon:2,time:1000});
+					}else if(DynaCon==null||DynaCon==""){
+						layer.msg('内容不能为空',{icon:2,time:1000});
+					}else if(DynaTime==null||DynaTime==""){
+						layer.msg('时间不能为空',{icon:2,time:1000});
+					}else if(classificationId==null||classificationId==""){
+						layer.msg('分类名称不能为空',{icon:2,time:1000});
+					}
+					else if(DynaTitle.length>50){
+						layer.msg('标题长度超过50',{icon:2,time:1000});
+					}
+					else if(InfoCon.length>1000){
+						layer.msg('内容长度超过1000',{icon:2,time:1000});
+					}
+					else if(DynaTitle!= null||DynaTitle!=""||DynaCon!=null||DynaCon!=""||DynaTime!=null||DynaTime!=""||classificationId!=null||classificationId!=""){
 				$.ajax({
 					url : "PortalManage/updateDynaById.action",
 					type : "post",
@@ -341,12 +358,12 @@
 						window.location.reload();
 					}
 				})
-			})
-		}
+			}
+		})
+      }
 		//增加动态
 		function AddDyna() {
-			layer.confirm('确认要提交吗？', function(index) {
-
+			layer.confirm('确认要提交吗？', function(index) {	
 				var DynaTitle = $("#newDynaTitle1").val();
 				var DynaCon = $("#newDynaCon1").val();
 				var DynaTime = $("#test2").val();
@@ -358,6 +375,22 @@
 					"dynamicId" : dynamicId,
 					"classificationId":classificationId
 				};
+				 if(DynaTitle== null||DynaTitle==""){
+						layer.msg('标题不能为空',{icon:2,time:1000});
+					}else if(DynaCon==null||DynaCon==""){
+						layer.msg('内容不能为空',{icon:2,time:1000});
+					}else if(DynaTime==null||DynaTime==""){
+						layer.msg('时间不能为空',{icon:2,time:1000});
+					}else if(classificationId==null||classificationId==""){
+						layer.msg('分类名称不能为空',{icon:2,time:1000});
+					}
+					else if(DynaTitle.length>50){
+						layer.msg('标题长度超过50',{icon:2,time:1000});
+					}
+					else if(InfoCon.length>1000){
+						layer.msg('内容长度超过1000',{icon:2,time:1000});
+					}
+					else if(DynaTitle!= null||DynaTitle!=""||DynaCon!=null||DynaCon!=""||DynaTime!=null||DynaTime!=""||classificationId!=null||classificationId!=""){
 				$.ajax({
 					url : "PortalManage/addDyna.action",
 					type : "post",
@@ -370,12 +403,9 @@
 						window.location.reload();
 					}
 				})
+					}
 			})
-		}
-		
-		
-
-		
+		}	
 	</script>
 
 	<script>
@@ -420,11 +450,15 @@
 		/*用户-删除*/
 		function member_del(obj, id) {
 			layer.confirm('确认要删除吗？', function(index) {
+				var deleteDyna=[];
+				var data =	{"dynamicId":id};
+				deleteDyna.push(data);
 				$.ajax({
 					url : "PortalManage/deleteDynaById.action",
 					type : "POST",
-					data : "dynamicId=" + id,
 					dataType : "text",
+					contentType:"application/json",
+		  			data:JSON.stringify(deleteDyna),
 					async : true,
 					success : function(msg) {
 						//发异步删除数据
