@@ -159,4 +159,17 @@ public interface BusiManageBiz {
 
 	// jhx 6.29 查找所有用户
 	public List<Users> findAllUser();
+
+	// 服务商交易购买的作品 7-2  ynw 13:34
+	public abstract List<Orders> facilitatororderWorksList(Condition condition);
+
+	// 发送/接收购买的作品 7-3 9:35
+	public abstract int sendreceiveorderWorkst(Orders orders);
+
+	// 查询用户余额 7-3 13:48
+	public abstract List<Users> querybalance(Orders orders);
+
+	//支付作品价格 
+	public abstract int Modifiedamount(Orders orders);
+
 }

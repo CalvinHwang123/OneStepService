@@ -64,7 +64,7 @@
 </head>
 <body style="background-color: white;">
 	<div class='sub'>
-		<div class='menu' >
+		<div class='menu'>
 
 			<dl>
 				<dt>
@@ -72,14 +72,21 @@
 				</dt>
 
 				<dd>
-					<a class='J_menuItem '  href='BusiManage/facilitatortradingList.action' data-linkid='10132975'
-						target='_self'>我的订单</a>
+					<a class='J_menuItem '
+						href='BusiManage/facilitatortradingList.action'
+						data-linkid='10132975' target='_self'>我的订单</a>
 
 				</dd>
 
 				<dd>
-					<a class='J_menuItem ' href='BusiManage/serverBidsList.action' data-linkid='10132976'
-						target='_self'>我的投标</a>
+					<a class='J_menuItem ' href='Portal/facilitatororderWorksList.action?classPid=${sessionScope.forelogin.userID}' data-linkid='10132977'
+						target='_self'>我的作品订单</a>
+
+				</dd>
+
+				<dd>
+					<a class='J_menuItem ' href='BusiManage/serverBidsList.action'
+						data-linkid='10132976' target='_self'>我的投标</a>
 
 				</dd>
 
@@ -112,13 +119,15 @@
 				</dt>
 
 				<dd>
-					<a class='J_menuItem J_accountLink' href='BusiManage/Individualcenter.action'
-						data-linkid='10132981' target='_blank'>我的账户</a>
+					<a class='J_menuItem J_accountLink'
+						href='BusiManage/Individualcenter.action' data-linkid='10132981'
+						target='_blank'>我的账户</a>
 
 				</dd>
 
 				<dd>
-					<a class='J_menuItem '  href='BusiManage/facilitatorCreditList.action'
+					<a class='J_menuItem '
+						href='BusiManage/facilitatorCreditList.action'
 						data-linkid='10157962' target='_blank'>我的信用</a>
 
 				</dd>

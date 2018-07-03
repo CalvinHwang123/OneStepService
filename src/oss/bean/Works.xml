@@ -93,24 +93,60 @@
 			<result property="worksContext" column="worksContext" />
 			<result property="worksPrice" column="worksPrice" />
 		</association>
+		<association property="users" javaType="oss.bean.Users">
+			<result property="userName" column="userName" />
+			<result property="userBalance" column="userBalance" />
+		</association>
 	</resultMap>
 	<select id="selectOrderWorksByUserId" parameterType="oss.bean.Condition" resultMap="orderWorksMap">
-	select orders.orderId as orderId, orders.userId as userId,
+	select orders.orderId as orderId, orders.userId as userId,users.USERNAME as USERNAME,
 	orders.orderStatusId as orderStatusId,
 	orders.orderTime as orderTime, works.worksId as worksId,
 	works.classificationId as classificationId, works.worksName as worksName, 
 	works.worksContext as worksContext, works.worksPrice as worksPrice
-	from orders, works where orders.worksId = works.worksId and orders.userId =
+	from orders, works,users where orders.worksId = works.worksId and works.USERID=users.USERID and orders.userId =
 	#{classPid}
 	<if
 		test="startDate != null and endDate != null and startDate != '' and endDate != ''">
 		and orders.orderTime between '${startDate} 00:00:00' and '${endDate} 23:59:59'
 	</if>
 </select>
+<!--  服务商交易购买的作品 7-2 ynw 13:34 -->
+<select id="facilitatororderWorksList" parameterType="oss.bean.Condition" resultMap="orderWorksMap">
+		select orders.orderId as orderId, orders.userId as userId,users.USERNAME as USERNAME,
+	orders.orderStatusId as orderStatusId,
+	orders.orderTime as orderTime, works.worksId as worksId,
+	works.classificationId as classificationId, works.worksName as worksName, 
+	works.worksContext as worksContext, works.worksPrice as worksPrice
+	from orders, works,users where orders.worksId = works.worksId and orders.USERID=users.USERID and works.USERID =
+	#{classPid}
+	<if
+		test="startDate != null and endDate != null and startDate != '' and endDate != ''">
+		and orders.orderTime between '${startDate} 00:00:00' and '${endDate} 23:59:59'
+	</if>
+</select>
+
 <!-- 	服務商作品 -->
 	<select id="serviceWorks" resultType="oss.bean.Works"
 		parameterType="oss.bean.Users">
 		select * from works where userID=#{userID}
+	</select>
+	
+	<!--  发送/接收购买的作品 7-3 9:35 -->
+	<update id="sendreceiveorderWorkst" parameterType="oss.bean.Orders">
+		update orders set
+		orderStatusId=#{orderStatusId} where orderId=#{orderId}
+	</update>
+	
+	<!--  支付作品价格  -->
+	<update id="Modifiedamount" parameterType="oss.bean.Orders">
+		update users set
+		userBalance=#{worksPrice} where userID=#{userId}
+	</update>
+	
+	<!-- 查询用户余额 7-3 13:48 -->
+	<select id="querybalance" parameterType="oss.bean.Orders" resultType="oss.bean.Users">
+		select * from users where userID=#{userId}
 	</select>
 </mapper>
 	

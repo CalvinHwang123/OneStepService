@@ -186,16 +186,15 @@
 							<ul class="dropdown-menu">
 								<li><a href="BusiManage/userPersonal.action">雇主中心</a></li>
 							</ul></li>
-
-<!-- 						<li class="dropdown head-dpdn"><a href="#" -->
-<!-- 							class="dropdown-toggle" data-toggle="dropdown"><i -->
-<!-- 								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span -->
-<!-- 								class="caret"></span></a> -->
-<!-- 							<ul class="dropdown-menu"> -->
-<!-- 								<li><a href="offers.html">立即开店赚钱</a></li> -->
-<!-- 								<li><a href="offers.html">具体开店流程</a></li> -->
-<!-- 								<li><a href="offers.html">开店须知</a></li> -->
-<!-- 							</ul></li> -->
+						<li class="dropdown head-dpdn"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"><i
+								class="fa fa-gift" aria-hidden="true"></i> 我是服务商<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">			
+								<li><a href="offers.html">立即开店赚钱</a></li>
+								<li><a href="offers.html">具体开店流程</a></li>
+								<li><a href="offers.html">开店须知</a></li>
+							</ul></li>
 					</c:if>
 					<c:if test="${forelogin.userType == 2}">
 <!-- 						<li class="dropdown head-dpdn"><a href="#" -->
