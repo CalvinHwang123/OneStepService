@@ -86,7 +86,7 @@ function changePageSize(pageSize) {
 			$("#updateUserID").val(userID);
 			layer.open({
 			      type: 1,
-			      title:"修改违规记录",
+			      title:"需求详情",
 			      area: ['600px', '410px'],
 			      shadeClose: false, //点击遮罩关闭
 			      content: $('#details')
@@ -105,7 +105,7 @@ function changePageSize(pageSize) {
 			$("#userID").val(userID);
 			layer.open({
 			      type: 1,
-			      title:"修改违规记录",
+			      title:"扣除信用分",
 			      area: ['800px', '450px'],
 			      shadeClose: false, //点击遮罩关闭
 			      content: $('#deducTion')

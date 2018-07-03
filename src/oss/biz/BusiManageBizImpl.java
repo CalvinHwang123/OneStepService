@@ -32,11 +32,7 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		return busiManageMapper.listUser(condition);
 	}
 
-	@Override
-	public int updatePow(long lo) {
-		// TODO Auto-generated method stub
-		return busiManageMapper.updatePow(lo);
-	}
+	
 
 	@Override
 	public int Blacklist(long lo) {
@@ -321,5 +317,13 @@ public class BusiManageBizImpl implements BusiManageBiz {
 	public List<Works> serviceWorks(Users users) {
 		
 		return busiManageMapper.serviceWorks(users);
+	}
+
+
+
+	@Override
+	public int updatePow(Users users) {
+		// TODO Auto-generated method stub
+		return busiManageMapper.updatePow(users);
 	}
 }

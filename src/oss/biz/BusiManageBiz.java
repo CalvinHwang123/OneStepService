@@ -37,7 +37,7 @@ public interface BusiManageBiz {
 	public List<Demands> demandList(Condition condition);
 
 	// 华清修改：重置密码
-	public int updatePow(long lo);
+			public int updatePow(Users users);
 
 	// 华清修改：加入黑名单
 	public int Blacklist(long lo);

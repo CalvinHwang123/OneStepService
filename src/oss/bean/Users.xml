@@ -6,9 +6,9 @@
 
 
 	<!-- 华清修改：重置密码 -->
-	<update id="updatePow" parameterType="long">
+	<update id="updatePow" parameterType="oss.bean.Users">
 		update Users set userPwd
-		=123456 where userID=#{userID}
+		=#{userPwd} where userID=#{userID}
 
 	</update>
 
@@ -101,9 +101,7 @@
 
 	<!-- 华清修改：用户表扣除用户信用分 -->
 	<update id="userCreditScore" parameterType="oss.bean.Credit">
-
-
-		update Users set
+        update Users set
 		userCredit =(select userCredit from Users where
 		userID=#{userID})-#{creditPoints} where userID=#{userID}
 	</update>

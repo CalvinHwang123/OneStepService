@@ -103,16 +103,16 @@
 								<td>
 								 <c:if test="${demand.demandstatusid==1 }">
 									<span
-										class="  layui-btn layui-btn-normal layui-btn-mini">未审核</span>
+										class="   layui-btn-sm layui-btn layui-btn-radius layui-btn-normal">未审核</span>
 								</c:if>
 								<c:if test="${demand.demandstatusid==2 }">
 									<span
-										class="  layui-btn layui-btn-normal layui-btn-mini">审核通过</span>
+										class="  layui-btn-sm layui-btn layui-btn-radius layui-btn-warm">审核通过</span>
 								</c:if> 
 								
 								<c:if test="${demand.demandstatusid==3 }">
 									<span
-										class="  layui-btn layui-btn-normal layui-btn-mini">已拒绝</span>
+										class="  layui-btn-sm layui-btn layui-btn-radius layui-btn-danger">已拒绝</span>
 								</c:if> 
 								
 						            </td>
@@ -120,38 +120,38 @@
 								<c:if test="${demand.demandstatusid==1 }">
 								<input onclick="examine()" title="${demand.demandID }"
 									style="height: 30px; width: 65px;" value="通过"
-									class="examine  layui-btn layui-btn-primary">
+									class="examine  layui-btn-sm layui-btn layui-btn-radius">
 								
 								</c:if>
 								 <c:if test="${demand.demandstatusid==2 }">
 								<input  title="${demand.demandID }"
 									style="height: 30px; width: 100px;" value="已审核"
-									class="  layui-btn layui-btn-primary">
+									class="  layui-btn-sm layui-btn layui-btn-radius">
 								
 								</c:if>
 								
 							
 								 <c:if test="${demand.demandstatusid==1 }">
 								<input onclick="Audited()" title="${demand.demandID }"
-									style="height: 30px; width: 65px;" value="拒绝通过"
-									class="Audited  layui-btn layui-btn-primary">
+									style="height: 30px; width: 65px;" value="拒绝"
+									class="Audited  layui-btn-sm layui-btn layui-btn-radius">
 								</c:if>	
 								
 								 <c:if test="${demand.demandstatusid==3 }">
 								<input title="${demand.demandID }"
 									style="height: 30px; width: 125px;" value="已拒绝通过"
-									class="Audited  layui-btn layui-btn-primary">
+									class="Audited  layui-btn-sm layui-btn layui-btn-radius">
 								</c:if>	
 									
 								<input onclick="openUpdateViolations('${demand.demandID}','${demand.demandTitle}','${demand.demandContent}',
                			 '${demand.demandRequire}','${demand.userID}')" 
 									style="height: 30px; width: 65px;" value="查看"
-									class="See  layui-btn layui-btn-primary">
+									class="See  layui-btn-sm layui-btn layui-btn-radius">
 									
 								<input onclick="deduction('${demand.demandID}','${demand.demandTitle}','${demand.demandContent}',
                			 '${demand.demandRequire}','${demand.userID}')" 
 									style="height: 30px; width: 125px;" value="扣除信用分"
-									class="Blacklist  layui-btn layui-btn-primary">
+									class="Blacklist  layui-btn-sm layui-btn layui-btn-radius">
 								
 								 <!-- <input type="hidden" name="userID" id="userID"> --></td>
 
