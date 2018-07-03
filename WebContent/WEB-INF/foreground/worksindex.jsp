@@ -62,7 +62,7 @@
 							<img src=<%=path%>${i.url} class="img-responsive" alt="img"></a>
 							<div class="agile-product-text">
 								<h5>
-									<a href="single.html">作品:<c:out value="${i.worksName}"></c:out></a>
+									<a href=<%=path + "/Portal/worksIntroduction.action?worksId="%>${i.worksId}>作品:<c:out value="${i.worksName}"></c:out></a>
 								</h5>
 								<h6>
 									作者:
@@ -78,15 +78,15 @@
 								</h6>
 								<!-- <del>$50</del> -->
 
-								<form action="#" method="post">
-									<input name="cmd" value="_cart" type="hidden"> <input
-										name="add" value="1" type="hidden"> <input
-										name="w3ls_item" value="Snacks" type="hidden"> <input
-										name="amount" value="40.00" type="hidden">
-									<button type="submit" class="w3ls-cart pw3ls-cart">
-										<i class="fa fa-cart-plus" aria-hidden="true"></i> 添加到购物车
-									</button>
-								</form>
+<!-- 								<form action="#" method="post"> -->
+<!-- 									<input name="cmd" value="_cart" type="hidden"> <input -->
+<!-- 										name="add" value="1" type="hidden"> <input -->
+<!-- 										name="w3ls_item" value="Snacks" type="hidden"> <input -->
+<!-- 										name="amount" value="40.00" type="hidden"> -->
+<!-- 									<button type="submit" class="w3ls-cart pw3ls-cart"> -->
+<!-- 										<i class="fa fa-cart-plus" aria-hidden="true"></i> 添加到购物车 -->
+<!-- 									</button> -->
+<!-- 								</form> -->
 							</div>
 						</div>
 					</div>

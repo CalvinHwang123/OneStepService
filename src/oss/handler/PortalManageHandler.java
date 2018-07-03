@@ -31,7 +31,9 @@ import oss.bean.Rulee;
 
 import oss.bean.UserStory;
 import oss.bean.Violations;
+import oss.bean.Workinformation;
 import oss.biz.FacilitatorBiz;
+import oss.biz.PortalBiz;
 import oss.biz.PortalManageBiz;
 import oss.biz.SystemManegeBiz;
 /*
@@ -44,6 +46,8 @@ import oss.util.DateUtil;
 public class PortalManageHandler {
 	private HttpSession session;
 	
+	@Resource
+	private PortalBiz portalBizImpl;
 	@Resource
 	private PortalManageBiz portalManageBizImpl;
 	@Resource
@@ -322,6 +326,10 @@ public class PortalManageHandler {
 		String classJson = new Gson().toJson(firstClassMap);
 //		req.setAttribute("classJson", classJson);
 //		req.setAttribute("linksList", linksList);
+		PageHelper.startPage(1, 8);
+		List<Workinformation> workinfolist = portalBizImpl.workInfoList(new Condition());
+		PageInfo pageInfo = new PageInfo<>(workinfolist, 8);
+		req.setAttribute("pageInfo", pageInfo);
 		session.setAttribute("classJson", classJson);
 		session.setAttribute("firstClassMap", firstClassMap);
 		session.setAttribute("linksList", linksList);
