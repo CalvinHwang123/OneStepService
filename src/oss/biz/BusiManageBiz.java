@@ -110,7 +110,7 @@ public interface BusiManageBiz {
 
 	// 修改成交量 hlq
 	public boolean updateWorksNumById(Works works);
-	
+
 	// by hsp 6-28 20：50 服务商查看自己已投过的标 列表
 	public List<Demands> serversBidsList(Users users);
 
@@ -143,11 +143,25 @@ public interface BusiManageBiz {
 
 	// by hsp 7-1 14:31 服务商发货
 	public String sendGood(Demands demands);
-	
+
 	// 修改密码 wwj 16:13
 	public abstract int updateUsersPwdById(Users users);
-	//服务商详情   wwj  7-1
-		public abstract Users serviceDetails(Users users);
-		//服务商做作品详情   wwj  7-1
-				public abstract List<Works> serviceWorks(Users users);
+
+	// 服务商详情 wwj 7-1
+	public abstract Users serviceDetails(Users users);
+
+	// 服务商做作品详情 wwj 7-1
+	public abstract List<Works> serviceWorks(Users users);
+
+	// 服务商交易购买的作品 7-2  ynw 13:34
+	public abstract List<Orders> facilitatororderWorksList(Condition condition);
+
+	// 发送/接收购买的作品 7-3 9:35
+	public abstract int sendreceiveorderWorkst(Orders orders);
+
+	// 查询用户余额 7-3 13:48
+	public abstract List<Users> querybalance(Orders orders);
+
+	//支付作品价格 
+	public abstract int Modifiedamount(Orders orders);
 }

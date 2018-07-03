@@ -9,8 +9,7 @@
 <html>
 <head>
 <script type="text/javascript" src=<%=basepath + "/js/jquery.js"%>></script>
-<script type="text/javascript" src=<%=basepath + "/lib/layui/layui.js"%>
-	charset="utf-8"></script>
+<script type="text/javascript" src=<%=basepath + "/lib/layui/layui.js"%> charset="utf-8"></script>
 <script type="text/javascript" src=<%=basepath + "/js/xadmin.js"%>></script>
 <script type="text/javascript" src=<%=basepath + "/js/Myforeground.js"%>></script>
 <title>我发布的作品</title>

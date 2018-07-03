@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String basepath = request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>我购买的作品</title>
+<title>我的作品订单</title>
 <script type="text/javascript" src=<%=basepath + "/js/jquery.js"%>></script>
 <script type="text/javascript" src=<%=basepath + "/lib/layui/layui.js"%> charset="utf-8"></script>
 <script type="text/javascript" src=<%=basepath + "/js/xadmin.js"%>></script>
@@ -15,10 +15,19 @@
 </head>
 <body>
 	<%@ include file="/head.jsp"%>
-	<%@ include file="/WEB-INF/includeLeft.jsp"%>
-
-		<div class='order-wrap'>
-			<form id="pageForm" action="Portal/orderWorksList.action?classPid=${sessionScope.forelogin.userID }">
+	<div class="col-md-12 column">
+		<div class="row clearfix">
+			<div class="col-md-3 column">
+				<br> <br>
+				<div class="col-md-2 column"></div>
+				<div class="col-md-8 column " style="box-shadow: 10px 10px 5px #888888;">
+					<%@ include file="/facilitator-left.jsp"%>
+				</div>
+				<div class="col-md-2 column"></div>
+			</div>
+		<div class="col-md-9 column">
+			<div class='order-wrap'>
+			<form id="pageForm" action="Portal/facilitatororderWorksList.action?classPid=${sessionScope.forelogin.userID}">
 				<div class='top-nav-wrap order-top-nav J-state' data-state='0'
 					id='utopia_widget_6'>
 					<!-- 隐藏域 每页条数 -->
@@ -54,8 +63,8 @@
 										<th>作品名称</th>
 										<th>订单状态</th>
 										<th>订单时间</th>
-										<th>服务商</th>
-										<th>查看作品</th>
+										<th>雇主</th>
+										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -76,12 +85,11 @@
 											<td><c:out value="${order.orderTime}"></c:out></td>
 											<td><c:out value="${order.users.userName}"></c:out></td>
 											<td>
-												<c:if test="${order.orderStatusId==1}">
-											<button class="btn btn-primary" disabled="disabled">等待作品发送..</button>
+											<c:if test="${order.orderStatusId==1}">
+											<a class="btn btn-primary" title="${order.orderId}" id="${order.orderStatusId}">确定发送</a>
 											</c:if>
 											<c:if test="${order.orderStatusId==2}">
-											<input type="hidden" id="userid" name="${order.works.worksPrice}" title="${sessionScope.forelogin.userID}">
-											<a class="btn btn-primary"  title="${order.orderId}" id="${order.orderStatusId}">确认接收</a>
+											<button class="btn btn-primary" disabled="disabled">等待雇主接收</button>
 											</c:if>
 											<c:if test="${order.orderStatusId==3}">
 											<a class="btn btn-primary" onclick="openShowWorks('${order.works.worksName}', '${order.works.worksContext}', '${order.works.worksPrice}')">查看</a>
@@ -249,8 +257,9 @@ function openShowWorks(worksName, worksContext, worksPrice) {
 };
 
 </script>
-<%@include file="/end.jsp"%>
   <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		</div>
+	</div>
 </body>
 </html>

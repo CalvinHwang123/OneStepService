@@ -4,11 +4,12 @@ public class Orders {
 
 	private Long orderId;
 	private Long userId;
+	private Users users;
 	private Long orderStatusId;
 	private Long worksId;
 	private String orderTime;
 	private Works works;
-	
+	private Long worksPrice;
 	public Orders() {
 	}
 	public Long getOrderId() {
@@ -47,6 +48,20 @@ public class Orders {
 	}
 	public void setWorks(Works works) {
 		this.works = works;
+	}
+	
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	
+	public Long getWorksPrice() {
+		return worksPrice;
+	}
+	public void setWorksPrice(Long worksPrice) {
+		this.worksPrice = worksPrice;
 	}
 	@Override
 	public String toString() {

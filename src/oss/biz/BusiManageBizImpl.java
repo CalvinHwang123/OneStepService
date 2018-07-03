@@ -322,4 +322,34 @@ public class BusiManageBizImpl implements BusiManageBiz {
 		
 		return busiManageMapper.serviceWorks(users);
 	}
+
+	// 服务商交易购买的作品 7-2  ynw 13:34
+	@Override
+	public List<Orders> facilitatororderWorksList(Condition condition) {
+		// TODO 自动生成的方法存根
+		return busiManageMapper.facilitatororderWorksList(condition);
+	}
+
+	// 发送/接收购买的作品 7-3 9:35
+	@Override
+	public int sendreceiveorderWorkst(Orders orders) {
+		// TODO 自动生成的方法存根
+		int sendreceiveorderWorkst = busiManageMapper.sendreceiveorderWorkst(orders);
+		return sendreceiveorderWorkst;
+	}
+
+	// 查询用户余额 7-3 13:48
+	@Override
+	public List<Users> querybalance(Orders orders) {
+		// TODO 自动生成的方法存根
+		List<Users> querybalance = busiManageMapper.querybalance(orders);
+		return querybalance;
+	}
+	//支付作品价格 
+	@Override
+	public int Modifiedamount(Orders orders) {
+		// TODO 自动生成的方法存根
+		int Modifiedamount = busiManageMapper.Modifiedamount(orders);
+		return Modifiedamount;
+	}
 }

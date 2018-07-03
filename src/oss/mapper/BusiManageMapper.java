@@ -89,7 +89,6 @@ public interface BusiManageMapper {
 	// 信用明细
 	public List<Credit> creditList(Condition condition);
 
-
 	// 收藏
 	public List<Users> userServiceList(Condition condition);
 
@@ -158,12 +157,25 @@ public interface BusiManageMapper {
 
 	// by hsp 7-1 14:31 服务商发货
 	public int updateDemandStatusToSendGood(Demands demands);
+
 	// 修改密码 wwj 16:13
 	public abstract int updateUsersPwdById(Users users);
-	
-	//服务商详情   wwj  7-1
+
+	// 服务商详情 wwj 7-1
 	public abstract Users serviceDetails(Users users);
-	
-	//服务商详情   wwj  7-1
-		public abstract List<Works> serviceWorks(Users users);
+
+	// 服务商详情 wwj 7-1
+	public abstract List<Works> serviceWorks(Users users);
+
+	// 服务商交易购买的作品 7-2 ynw 13:34
+	public abstract List<Orders> facilitatororderWorksList(Condition condition);
+
+	// 发送/接收购买的作品 7-3 9:35
+	public abstract int sendreceiveorderWorkst(Orders orders);
+
+	// 查询用户余额 7-3 13:48
+	public abstract List<Users> querybalance(Orders orders);
+
+	//支付作品价格 
+	public abstract int Modifiedamount(Orders orders);
 }

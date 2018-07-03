@@ -52,7 +52,7 @@ public class PortalHandler {
 	@Resource
 	private SystemManegeBiz systemManegeBizImpl;
 	@Resource
-	private BusiManageBiz busiManageBizImpl; 
+	private BusiManageBiz busiManageBizImpl;
 
 	// 前端规则中心页面跳转
 	@RequestMapping("/ruleList.action")
@@ -111,8 +111,8 @@ public class PortalHandler {
 	public ModelAndView beforeDemandsList(HttpServletRequest req,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
 			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
-		System.out.println("DescendingOrder="+condition.getDescenDingOrder());
-		System.out.println("beWorksPrice="+req.getParameter("beWorksPrice"));
+		System.out.println("DescendingOrder=" + condition.getDescenDingOrder());
+		System.out.println("beWorksPrice=" + req.getParameter("beWorksPrice"));
 		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
 		PageHelper.startPage(pageNum, pageSize);
 		List<Demands> demandsList = portalBizImpl.beforeDemandsList(condition);
@@ -122,30 +122,28 @@ public class PortalHandler {
 		req.setAttribute("pageInfo", pageInfo);
 		req.setAttribute("condition", condition);
 		ModelAndView mav = new ModelAndView("/foreground/demands");
-		System.out.println("起始金额="+condition.getBeWorksPrice());
+		System.out.println("起始金额=" + condition.getBeWorksPrice());
 		return mav;
 	}
-	
+
 	// 吴华清修改：获取前端需求大厅列表
-		@RequestMapping("/serviceProviders.action")
-		public ModelAndView serviceProviders(HttpServletRequest req,
-				@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
-				@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
-			
-			// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
-			PageHelper.startPage(pageNum, pageSize);
-			List<Users> serviceProviders = portalBizImpl.serviceProviders(condition);
-			// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
-			PageInfo pageInfo = new PageInfo<>(serviceProviders, pageSize);
-		
-			req.setAttribute("pageInfo", pageInfo);
-			req.setAttribute("condition", condition);
-			ModelAndView mav = new ModelAndView("/foreground/serviceProviders");
-		
-			return mav;
-		}
-	
-	
+	@RequestMapping("/serviceProviders.action")
+	public ModelAndView serviceProviders(HttpServletRequest req,
+			@RequestParam(value = "pageSize", required = true, defaultValue = "7") int pageSize,
+			@RequestParam(value = "pageNum", required = true, defaultValue = "1") int pageNum, Condition condition) {
+
+		// 在这里调用PageHelper类的静态方法，后面要紧跟Mapper查询数据库的方法
+		PageHelper.startPage(pageNum, pageSize);
+		List<Users> serviceProviders = portalBizImpl.serviceProviders(condition);
+		// 把查询结果，封装成pageInfo对象，该对象中包含了该数据库中的许多参数，包括记录总条数等
+		PageInfo pageInfo = new PageInfo<>(serviceProviders, pageSize);
+
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		ModelAndView mav = new ModelAndView("/foreground/serviceProviders");
+
+		return mav;
+	}
 
 	// 前端曝光台请求 by hlq 2018-06-16 13:36
 	@RequestMapping("/foreViolationsList.action")
@@ -298,7 +296,7 @@ public class PortalHandler {
 		ModelAndView mav = new ModelAndView("foreground/singlesuccesscase");
 		return mav;
 	}
-	
+
 	// 购买作品，修改成交量 hlq 2018-06-27 21:43
 	@RequestMapping(value = "/purchaseWorks.action", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String purchaseWorks(HttpServletRequest req, @RequestBody Orders orders) {
@@ -307,12 +305,12 @@ public class PortalHandler {
 		orders.setOrderTime(DateUtil.getCurrentDate());
 		// 新增订单记录
 		busiManageBizImpl.addOrders(orders);
-		
+
 		Works works = busiManageBizImpl.selectWorksById(orders.getWorksId());
-		
+
 		// 修改成交量
 		busiManageBizImpl.updateWorksNumById(works);
-		
+
 		// 修改用户余额
 		Users employer = new Users();
 		employer.setUserID(orders.getUserId());
@@ -322,7 +320,7 @@ public class PortalHandler {
 		provider.setUserID(works.getUserId());
 		provider.setUserBalance(Long.parseLong(works.getWorksPrice()));// 服务商本次增加的金额
 		busiManageBizImpl.updateUserBalanceById(provider);// 服务商增加余额
-		
+
 		// 新增交易记录
 		Trading trading = new Trading();
 		trading.setUserId(orders.getUserId());
@@ -331,16 +329,16 @@ public class PortalHandler {
 		trading.setAmountType(1L);
 		trading.setTradingTime(DateUtil.getCurrentDate());
 		busiManageBizImpl.AddTrading(trading);
-		
+
 		return "success";
 	}
-	
+
 	// 查看的购买的作品请求
 	@RequestMapping("/orderWorksList.action")
 	public ModelAndView orderWorksList(HttpServletRequest req,
 			@RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Condition condition) {
-//		Long userId = Long.valueOf(condition.getClassPid());
+		// Long userId = Long.valueOf(condition.getClassPid());
 		PageHelper.startPage(pageNum, pageSize);
 		List<Orders> orderList = busiManageBizImpl.selectOrderWorksByUserId(condition);
 		System.out.println("orderList size = " + orderList.size());
@@ -349,4 +347,29 @@ public class PortalHandler {
 		req.setAttribute("condition", condition);
 		return new ModelAndView("userpersonal/myOrderWorks");
 	}
+
+	// 服务商交易购买的作品 7-2 13:34
+	@RequestMapping("/facilitatororderWorksList.action")
+	public ModelAndView facilitatororderWorksList(HttpServletRequest req,
+			@RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Condition condition) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<Orders> orderList = busiManageBizImpl.facilitatororderWorksList(condition);
+		PageInfo<Orders> pageInfo = new PageInfo<>(orderList, pageSize);
+		req.setAttribute("pageInfo", pageInfo);
+		req.setAttribute("condition", condition);
+		return new ModelAndView("serverpersonal/facilitatorOrderWorks");
+	}
+
+	// 发送/接收购买的作品 7-3 9:35
+	@RequestMapping("/sendreceiveorderWorkst.action")
+	public @ResponseBody String sendreceiveorderWorkst(@RequestBody Orders orders) {
+		String flg = "error";
+		int sendreceiveorderWorkst = busiManageBizImpl.sendreceiveorderWorkst(orders);
+		if (sendreceiveorderWorkst != 0) {
+			flg = "success";
+		}
+		return flg;
+	}
+
 }
