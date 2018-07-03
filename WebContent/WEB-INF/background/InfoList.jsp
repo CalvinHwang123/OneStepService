@@ -23,8 +23,8 @@
 </head>
 <body>
 	<div class="x-nav">
-		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
-			<a> <cite>导航元素88</cite></a>
+		<span class="layui-breadcrumb"> <a href="">门户管理员</a> <a href="">最新资讯</a>
+
 		</span> <a class="layui-btn layui-btn-small"
 			style="line-height: 1.6em; margin-top: 3px; float: right"
 			href="javascript:location.replace(location.href);" title="刷新"> <i
@@ -42,10 +42,12 @@
 					value="${pageInfo.getPageNum()}"> <input type="hidden"
 					id="currentPageInput" name="pageNum"
 					value="${pageInfo.getPageNum()}"> <input
-					class="layui-input" placeholder="开始日" name="startDate" id="start" value="${condition.startDate}">
-				<input class="layui-input" placeholder="截止日" name="endDate" id="end" value="${condition.endDate}">
-				<input type="text" name="title" placeholder="请输入资讯标题"
-					autocomplete="off" class="layui-input" value="${condition.title}">
+					class="layui-input" placeholder="开始日" name="startDate" id="start"
+					value="${condition.startDate}"> <input class="layui-input"
+					placeholder="截止日" name="endDate" id="end"
+					value="${condition.endDate}"> <input type="text"
+					name="title" placeholder="请输入资讯标题" autocomplete="off"
+					class="layui-input" value="${condition.title}">
 				<button class="layui-btn" lay-submit="" lay-filter="sreach">
 					<i class="layui-icon">&#xe615;</i>
 				</button>
@@ -82,12 +84,12 @@
 					<c:forEach var="i" items="${pageInfo.list}" begin="0"
 						varStatus="status">
 						<tr>
-						<td>
-							<div class="layui-unselect layui-form-checkbox"
-								lay-skin="primary" data-id='${i.informationId}'>
-								<i class="layui-icon">&#xe605;</i>
-							</div>
-						</td>
+							<td>
+								<div class="layui-unselect layui-form-checkbox"
+									lay-skin="primary" data-id='${i.informationId}'>
+									<i class="layui-icon">&#xe605;</i>
+								</div>
+							</td>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getInformationTitle()}"></c:out></td>
 							<td><c:out value="${i.getInformationContext()}"></c:out></td>
@@ -172,11 +174,11 @@
 	</div>
 
 	<div id="update" style="display: none">
-		<form class="layui-form" action="">
+		<form class="layui-form" action="" id="update">
 			<div class="layui-form-item">
 				<label class="layui-form-label">资讯标题</label>
 				<div class="layui-input-block">
-					<input type="text" name="linksname" required lay-verify="required"
+					<input type="text" name="linksname" lay-verify="linksname"
 						placeholder="请输入标题" autocomplete="off" class="layui-input"
 						id="newInfoTitle">
 				</div>
@@ -185,7 +187,7 @@
 				<label class="layui-form-label">资讯内容</label>
 				<div class="layui-input-block">
 					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
-						id="newInfoCon"></textarea>
+						id="newInfoCon" lay-verify="newInfoCon"></textarea>
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -205,11 +207,11 @@
 	</div>
 
 	<div id="add" style="display: none">
-		<form class="layui-form" action="">
+		<form class="layui-form" action="" id="form1">
 			<div class="layui-form-item">
 				<label class="layui-form-label">资讯标题</label>
 				<div class="layui-input-block">
-					<input type="text" name="linksname" required lay-verify="required"
+					<input type="text" name="linksname" required lay-verify="nikename"
 						placeholder="请输入标题" autocomplete="off" class="layui-input"
 						id="newInfoTitle1">
 				</div>
@@ -218,7 +220,7 @@
 				<label class="layui-form-label">资讯内容</label>
 				<div class="layui-input-block">
 					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
-						id="newInfoCon1"></textarea>
+						id="newInfoCon1" lay-verify="pass"></textarea>
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -279,7 +281,6 @@
 		//修改资讯
 		function UpdateInfo() {
 			layer.confirm('确认要提交吗？', function(index) {
-
 				var InfoTitle = $("#newInfoTitle").val();
 				var InfoCon = $("#newInfoCon").val();
 				var InfoTime = $("#test1").val();
@@ -289,6 +290,19 @@
 					"informationTime" : InfoTime,
 					"informationId":infoid
 				};
+				if(InfoTitle== null||InfoTitle==""){
+					layer.msg('标题不能为空',{icon:2,time:1000});
+				}else if(InfoCon==null||InfoCon==""){
+					layer.msg('内容不能为空',{icon:2,time:1000});
+				}else if(InfoTime==null||InfoTime==""){
+					layer.msg('时间不能为空',{icon:2,time:1000});
+				}else if(InfoTitle.length>1000){
+					layer.msg('标题长度超过50',{icon:2,time:1000});
+				}
+				else if(InfoCon.length>1000){
+					layer.msg('内容长度超过1000',{icon:2,time:1000});
+				}
+				else if(InfoTitle!= null||InfoTitle!=""||InfoCon!=null||InfoCon!=""||InfoTime!=null||InfoTime!=""){
 				$.ajax({
 					url : "PortalManage/updateInfoById.action",
 					type : "post",
@@ -301,14 +315,14 @@
 						window.location.reload();
 					}
 				})
+				}
 			})
 		}
 		
 		
 		//增加资讯
 		function AddInfo() {
-			layer.confirm('确认要提交吗？', function(index) {
-
+			layer.confirm('确认要提交吗？', function(index) {						
 				var InfoTitle = $("#newInfoTitle1").val();
 				var InfoCon = $("#newInfoCon1").val();
 				var InfoTime = $("#test2").val();
@@ -318,6 +332,19 @@
 					"informationTime" : InfoTime,
 					"informationId":infoid
 				};
+				if(InfoTitle== null||InfoTitle==""){
+					layer.msg('标题不能为空',{icon:2,time:1000});
+				}else if(InfoCon==null||InfoCon==""){
+					layer.msg('内容不能为空',{icon:2,time:1000});
+				}else if(InfoTime==null||InfoTime==""){
+					layer.msg('时间不能为空',{icon:2,time:1000});
+				}else if(InfoTitle.length>1000){
+					layer.msg('标题长度超过50',{icon:2,time:1000});
+				}
+				else if(InfoCon.length>1000){
+					layer.msg('内容长度超过1000',{icon:2,time:1000});
+				}
+				else if(InfoTitle!= null||InfoTitle!=""||InfoCon!=null||InfoCon!=""||InfoTime!=null||InfoTime!=""){
 				$.ajax({
 					url : "PortalManage/addInfo.action",
 					type : "post",
@@ -330,6 +357,7 @@
 						window.location.reload();
 					}
 				})
+				}
 			})
 		}
 		
@@ -376,11 +404,16 @@ layui.use('laydate', function(){
 		/*用户-删除*/
 		function member_del(obj, id) {
 			layer.confirm('确认要删除吗？', function(index) {
+				var deleteInfo=[];
+				var data =	{"informationId":id};
+  				deleteInfo.push(data);
 				$.ajax({
 					url : "PortalManage/deleteInfoById.action",
 					type : "POST",
 					data : "informationId=" + id,
 					dataType : "text",
+					contentType:"application/json",
+		  			data:JSON.stringify(deleteInfo),
 					async : true,
 					success : function(msg) {
 						//发异步删除数据

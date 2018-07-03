@@ -112,12 +112,19 @@
 				var newName = {
 					"userPwd" : pwd1
 				};
-				if (params == "" || params == null) {
-					layer.msg('请输入密码!', {
+				if (params == "") {
+					layer.msg('旧密码不能为空!', {
 						icon : 2,
 						time : 1000
 					});
-				} else if (params != "" || params != null) {
+					return;
+				}if (params.length<6) {
+					layer.msg('旧密码长度不能小于6位!', {
+						icon : 2,
+						time : 1000
+					});
+					return;
+				}
 					$.ajax({
 						url : "BusiManage/SelectpwdByAcc.action",
 						// 数据发送方式
@@ -131,45 +138,58 @@
 						// 回调函数，接受服务器端返回给客户端的值，即result值
 						success : show
 					});
-				}
 			})
 
-			$("#inputWarning").blur(
-					function() {
-						var newpwd = $("#inputWarn").val();
-						var pwd2 = $.md5(newpwd);
-						var params = $(this).val();
-						var pwd1 = $.md5(params);
-						var newName = {
-							"startDate" : pwd2,
-							"endDate" : pwd1
-						};
-						if (newpwd == "" || newpwd == null) {
-							layer.msg('请输入密码!', {
-								icon : 2,
-								time : 1000
-							});
-						}else if(params == "" || params == null){
-							layer.msg('请输入密码!', {
-								icon : 2,
-								time : 1000
-							});
-						}else if(newpwd != "" || newpwd != null||params != "" || params != null){			
-							$.ajax({
-								url : "BusiManage/confirmPwd.action",
-								// 数据发送方式
-								type : "post",
-								// 接受数据格式
-								dataType : "text",
-								contentType : "application/json;charset=utf-8",
-								// 要传递的数据
-								data : JSON.stringify(newName),
-								async : true,
-								// 回调函数，接受服务器端返回给客户端的值，即result值
-								success : ConfirmPwd
-							});
-						}
-					})
+			$("#inputWarning").blur(function() {
+				var newpwd = $("#inputWarn").val();
+				var pwd2 = $.md5(newpwd);
+				var params = $(this).val();
+				var pwd1 = $.md5(params);
+				var newName = {
+					"startDate" : pwd2,
+					"endDate" : pwd1
+				};
+				if (newpwd == "") {
+					layer.msg('新密码不能为空!', {
+						icon : 2,
+						time : 1000
+					});
+					return;
+				}if (newpwd.length<6) {
+					layer.msg('新密码长度不能小于6位!', {
+						icon : 2,
+						time : 1000
+					});
+					return;
+				}
+				if (params == "") {
+					layer.msg('确认密码不能为空!', {
+						icon : 2,
+						time : 1000
+					});
+					return;
+				}if (params.length<6) {
+					layer.msg('确认密码长度不能小于6位!', {
+						icon : 2,
+						time : 1000
+					});
+					return;
+				}
+				
+				$.ajax({
+					url : "BusiManage/confirmPwd.action",
+					// 数据发送方式
+					type : "post",
+					// 接受数据格式
+					dataType : "text",
+					contentType : "application/json;charset=utf-8",
+					// 要传递的数据
+					data : JSON.stringify(newName),
+					async : true,
+					// 回调函数，接受服务器端返回给客户端的值，即result值
+					success : ConfirmPwd
+				});
+			})
 
 			//修改密码
 			$("#save").on("click", function() {

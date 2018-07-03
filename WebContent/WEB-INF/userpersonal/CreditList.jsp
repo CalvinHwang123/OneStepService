@@ -25,7 +25,7 @@
 				<div class="form-inline">
 					<font size="3" face="sans serif">信用类型:</font> 
 					<select class="form-control" name="classPid" >
-						<option value=0></option>
+						<option value=0>请选择信用类型</option>
 						<option value=1>完成</option>
 						<option value=2>违约</option>
 					</select>

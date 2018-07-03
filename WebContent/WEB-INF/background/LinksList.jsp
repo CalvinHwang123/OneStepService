@@ -23,8 +23,7 @@
 </head>
 <body>
 	<div class="x-nav">
-		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
-			<a> <cite>导航元素88</cite></a>
+		<span class="layui-breadcrumb"> <a href="">门户管理员</a> <a href="">友情链接</a>
 		</span> <a class="layui-btn layui-btn-small"
 			style="line-height: 1.6em; margin-top: 3px; float: right"
 			href="javascript:location.replace(location.href);" title="刷新"> <i
@@ -51,8 +50,7 @@
 		<button class="layui-btn layui-btn-danger" onclick="delAll()">
 			<i class="layui-icon"></i>批量删除
 		</button>
-		<button class="layui-btn"
-			onclick="openAddLinks()">
+		<button class="layui-btn" onclick="openAddLinks()">
 			<i class="layui-icon"></i>增加
 		</button>
 		<span class="x-right" style="line-height: 40px">共有数据：<c:out
@@ -78,12 +76,12 @@
 					<c:forEach var="i" items="${pageInfo.list}" begin="0"
 						varStatus="status">
 						<tr>
-						<td>
-							<div class="layui-unselect layui-form-checkbox"
-								lay-skin="primary" data-id='${i.linksid}'>
-								<i class="layui-icon">&#xe605;</i>
-							</div>
-						</td>
+							<td>
+								<div class="layui-unselect layui-form-checkbox"
+									lay-skin="primary" data-id='${i.linksid}'>
+									<i class="layui-icon">&#xe605;</i>
+								</div>
+							</td>
 							<td><c:out value="${status.index+1}"></c:out></td>
 							<td><c:out value="${i.getLinksname()}"></c:out></td>
 							<td><c:out value="${i.getLinksurl()}"></c:out></td>
@@ -191,15 +189,15 @@
 			</div>
 		</form>
 	</div>
-<!-- 增加链接 -->
+	<!-- 增加链接 -->
 	<div id="addLinks" style="display: none">
 		<form class="layui-form" action="">
-				<div class="layui-form-item">
+			<div class="layui-form-item">
 				<label class="layui-form-label">地址名称</label>
 				<div class="layui-input-block">
-					<input type="text" name="linksname" required lay-verify="linksname1"
-						placeholder="请输入地址" autocomplete="off" class="layui-input"
-						id="newLinksName1">
+					<input type="text" name="linksname" required
+						lay-verify="linksname1" placeholder="请输入地址" autocomplete="off"
+						class="layui-input" id="newLinksName1">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -267,6 +265,17 @@
 			  var LinksName=$("#newLinksName").val();
 			  var LinksUrl=$("#newLinksUrl").val();
 			  var newLinks={"linksname":LinksName, "linksurl":LinksUrl,"linksid":linksid};
+			  if(LinksName== null||InfoTitle==""){
+					layer.msg('名称不能为空',{icon:2,time:1000});
+				}else if(LinksUrl==null||InfoCon==""){
+					layer.msg('地址不能为空',{icon:2,time:1000});
+				}else if(LinksName.length>15){
+					layer.msg('标题长度超过50',{icon:2,time:1000});
+				}
+				else if(InfoCon.length>255){
+					layer.msg('地址长度超过255',{icon:2,time:1000});
+				}
+				else if(LinksName!= null||LinksName!=""||LinksUrl!=null||LinksUrl!=""){
 			  $.ajax({
 	       			url:"PortalManage/updateById.action",
 	       			type:"post",
@@ -279,6 +288,7 @@
 	       			  	window.location.reload();
 	       			}
 	       		})
+				}
 		  })
 	}
 	
@@ -291,6 +301,17 @@
 			var newLinks = {
 					"linksname":LinksName, "linksurl":LinksUrl,"linksid":linksid
 			};
+			 if(LinksName== null||InfoTitle==""){
+					layer.msg('名称不能为空',{icon:2,time:1000});
+				}else if(LinksUrl==null||InfoCon==""){
+					layer.msg('地址不能为空',{icon:2,time:1000});
+				}else if(LinksName.length>15){
+					layer.msg('标题长度超过50',{icon:2,time:1000});
+				}
+				else if(InfoCon.length>255){
+					layer.msg('地址长度超过255',{icon:2,time:1000});
+				}
+				else if(LinksName!= null||LinksName!=""||LinksUrl!=null||LinksUrl!=""){
 			$.ajax({
 				url : "PortalManage/addlinks.action",
 				type : "post",
@@ -303,6 +324,7 @@
 					window.location.reload();
 				}
 			})
+				}
 		})
 	}
 	
@@ -327,11 +349,15 @@
 		/*用户-删除*/
 		function member_del(obj, id) {
 			layer.confirm('确认要删除吗？', function(index) {
+				var deleteLinks=[];
+				var data =	{"linksid":id};
+				deleteLinks.push(data);
 				$.ajax({
 					url : "PortalManage/deleteById.action",
 					type : "POST",
-					data : "linksid=" + id,
 					dataType : "text",
+					contentType:"application/json",
+					data : JSON.stringify(deleteLinks),
 					async : true,
 					success : function(msg) {
 						//发异步删除数据
@@ -374,22 +400,6 @@
 		 		})
 			});
 		}
-		
-		
-		 //自定义验证规则
-        form.verify({
-        	linksname1: function(value){
-            if(value.length < 0){
-              return '输入不能为空';
-            }
-          }
-          ,linkurl1: [/[^s]+/, '输入地址错误']
-//           ,repass: function(value){
-//               if($('#L_pass').val()!=$('#L_repass').val()){
-//                   return '两次密码不一致';
-//               }
-//           }
-        });
 	</script>
 	<script>
 		var _hmt = _hmt || [];

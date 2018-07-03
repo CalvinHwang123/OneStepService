@@ -90,17 +90,19 @@
 						<td><c:out value="${successCase.successCaseTitle}"></c:out></td>
 						<td><c:out value="${successCase.successCaseTime}"></c:out></td>
 						<td class="td-manage"><a title="编辑" class="updateA"
-							successCaseContext='${successCase.successCaseContext}' successCaseID="${successCase.successCaseID}"
-							href="javascript:;"> <i class="layui-icon">&#xe642;</i>
-						</a><a title="删除" onclick="member_del(this,${successCase.successCaseID})"
+							successCaseContext='${successCase.successCaseContext}'
+							successCaseID="${successCase.successCaseID}" href="javascript:;">
+								<i class="layui-icon">&#xe642;</i>
+						</a><a title="删除"
+							onclick="member_del(this,${successCase.successCaseID})"
 							href="javascript:;"> <i class="layui-icon">&#xe640;</i>
 						</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-<!-- 		分頁页脚 -->
-	<%@ include file="/pagefoot.jsp" %>
+		<!-- 		分頁页脚 -->
+		<%@ include file="/pagefoot.jsp"%>
 	</div>
 	<div style="display: none;" id="newCaseLayer">
 		<form class="layui-form" action="PortalManage/userStoryList.action"
@@ -108,9 +110,9 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">标题</label>
 				<div class="layui-input-block">
-					<input type="text" name="successCaseTitle" required lay-verify="required"
-						placeholder="请输入标题" autocomplete="off" class="layui-input"
-						id="newCaseTitle">
+					<input type="text" name="successCaseTitle" required
+						lay-verify="required" placeholder="请输入标题" autocomplete="off"
+						class="layui-input" id="newCaseTitle">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -119,8 +121,8 @@
 					<button type="button" class="layui-btn" id="cover">
 						<i class="layui-icon">&#xe67c;</i>选择封面
 					</button>
-					<input type="hidden" name="imageURL" id="newCaseImageURL" value=""/>
-					<label  id="coverLabel" >请选择成功案例的封面图片...</label>
+					<input type="hidden" name="imageURL" id="newCaseImageURL" value="" />
+					<label id="coverLabel">请选择成功案例的封面图片...</label>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
@@ -146,16 +148,17 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">标题</label>
 				<div class="layui-input-block">
-					<input type="text" name="successCaseTitle" required lay-verify="required"
-						placeholder="请输入标题" autocomplete="off" class="layui-input"
-						id="updateSuccessCaseTitle">
+					<input type="text" name="successCaseTitle" required
+						lay-verify="required" placeholder="请输入标题" autocomplete="off"
+						class="layui-input" id="updateSuccessCaseTitle">
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
 				<label class="layui-form-label">主文</label>
 				<div class="layui-input-block">
 					<%@ include file="/summernote.jsp"%>
-					<input type="hidden" name="successCaseContext" id="updateSuccessCaseContext" />
+					<input type="hidden" name="successCaseContext"
+						id="updateSuccessCaseContext" />
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -225,6 +228,18 @@
 //   			  var successCaseContext=$("#updateSuccessCaseContext").val();
   		      var successCaseContext=$('.summernote').eq(1).summernote('code');
   			  var successCaseID=updateA.attr("successCaseID");
+  			 if(successCaseTitle==""||successCaseTitle==null){
+   			  layer.msg('标题不能为空!',{icon:2,time:1000});
+   			  return ;
+   		  } 
+			  if(successCaseTitle.length>20){
+   			  layer.msg('标题长度不能超过20!',{icon:2,time:1000});
+   			  return ;
+   		  } 
+			  if (successCaseContext == "") {
+				  layer.msg('内容不能为空!',{icon:2,time:1000});
+				  return ;
+		       }
   			  var updateCase={"successCaseID":successCaseID,"successCaseTitle":successCaseTitle,"successCaseContext":successCaseContext};
   			  console.log($('.summernote').eq(1).summernote('code'));
   			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
@@ -248,17 +263,31 @@
     	
     	function addCase(){//添加成功案例
     		  layer.confirm('确认要提交吗？',function(index){
-    			  if ($("#newCaseImageURL").val() == "") {
-    				  layer.msg('请选择封面进行上传!',{icon:1,time:1000});
-    				  return ;
-				  }
+    		 
     			  var successCaseTitle=$("#newCaseTitle").val();
     			  var successCaseContext =$('.summernote').eq(0).summernote('code');
     			  var coverUrl=$("#newCaseImageURL").val();
+    			  if(successCaseTitle==""||successCaseTitle==null){
+        			  layer.msg('标题不能为空!',{icon:2,time:1000});
+        			  return ;
+        		  } 
+    			  if(successCaseTitle.length>20){
+        			  layer.msg('标题长度不能超过20!',{icon:2,time:1000});
+        			  return ;
+        		  } 
+        		  if ($("#newCaseImageURL").val() == "") {
+        				  layer.msg('请选择封面进行上传!',{icon:2,time:1000});
+        				  return ;
+    			   }
+        		  if (successCaseContext == "") {
+    				  layer.msg('内容不能为空!',{icon:2,time:1000});
+    				  return ;
+    		       }
     			  var newCase={"successCaseTitle":successCaseTitle,"successCaseContext":successCaseContext
     					        ,"imageURL":coverUrl};
     			  console.log(newCase);
     			  var index = layer.load(2); //又换了种风格，并且设定最长等待10秒 
+    			 
     			  $.ajax({
     	       			url:"PortalManage/addSuccessCase.action",
     	       			type:"post",
