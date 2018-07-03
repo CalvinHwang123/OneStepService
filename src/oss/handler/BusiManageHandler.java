@@ -113,7 +113,7 @@ public class BusiManageHandler {
 	public @ResponseBody String updatePow(HttpServletRequest req, @RequestBody Users users) {
 
 		System.out.println("重置密码");
-		busiManageBizImpl.updatePow(users.getUserID());
+		busiManageBizImpl.updatePow(users);
 		return "success";
 	}
 

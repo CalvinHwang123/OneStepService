@@ -21,6 +21,7 @@
 	charset="utf-8"></script>
 <script type="text/javascript" src="./js/xadmin.js"></script>
 <script type="text/javascript" src="./js/users.js"></script>
+<script type="text/javascript" src="portal/js/md5.js"></script>
 </head>
 <body>
 	<div class="x-nav">
@@ -95,47 +96,45 @@
 								<td>${user.userBalance }</td>
 								<td>${user.userCredit }</td>
 								<td><c:if test="${user.userStatusID==1 }">
-										<span class="layui-btn layui-btn-normal layui-btn-mini">启用</span>
+										<span class="layui-btn-sm  layui-btn layui-btn-radius layui-btn-normal" >启用</span>
 									</c:if> <c:if test="${user.userStatusID==2 }">
-										<span class="layui-btn layui-btn-normal layui-btn-mini">禁用</span>
+										<span class="layui-btn-sm   layui-btn layui-btn-radius layui-btn-disabled">禁用</span>
 									</c:if> <c:if test="${user.userStatusID==3 }">
-										<span class="layui-btn layui-btn-normal layui-btn-mini">黑名单</span>
+										<span class="layui-btn-sm   layui-btn layui-btn-radius layui-btn-danger">黑名单</span>
 									</c:if></td>
 								<td><input onclick="Reset()" title="${user.userID }"
 									style="height: 30px; width: 125px;" value="重置"
-									class=" Reset   layui-btn layui-btn-primary"> <c:if
+									class=" Reset   layui-btn-sm layui-btn layui-btn-radius"> 
+									<input type="hidden" name="userPwd" class="pwd"
+						            placeholder="userPwd" required="" value="123456">
+									<c:if
 										test="${user.userStatusID==1 }">
-										<a onclick="member_stop(this,'${user.userID}')"
+										
+										<input onclick="member_stop(this,'${user.userID}')" title="${user.userStatusID }"
+									style="height: 30px; width: 125px;" value="禁用"
+									class=" Reset   layui-btn-sm layui-btn layui-btn-radius">
+										<%-- <a onclick="member_stop(this,'${user.userID}')"
 											href="javascript:;" title="${user.userStatusID }"> <i
 											class="layui-icon">&#xe601;</i>
-										</a>
+										</a> --%>
 									</c:if> <c:if test="${user.userStatusID==2 }">
-										<a onclick="member_stop(this,'${user.userID}')"
-											href="javascript:;" title="${user.userStatusID }"> <i
-											class="layui-icon">&#xe62f;</i>
-										</a>
-									</c:if> 
-									<c:if test="${user.userStatusID==3 }">
-										<a onclick="member_stop(this,'${user.userID}')"
-											href="javascript:;" title="${user.userStatusID }"> <i
-											class="layui-icon">&#xe62f;</i>
-										</a>
-									</c:if> 
-									
-									<c:if test="${user.userStatusID==3 }">
+										<input onclick="member_stop(this,'${user.userID}')" title="${user.userStatusID }"
+									style="height: 30px; width: 125px;" value="启用"
+									class=" Reset   layui-btn-sm layui-btn layui-btn-radius">
+									</c:if> <c:if test="${user.userStatusID==3 }">
 										<input onclick="cancelBlacklist()" title="${user.userID }"
 											style="height: 30px; width: 125px;" value="取消黑名单"
-											class="cancelBlacklist  layui-btn layui-btn-primary">
+											class="cancelBlacklist  layui-btn-sm layui-btn layui-btn-radius">
 
 									</c:if> <c:if test="${user.userStatusID==1 }">
 										<input onclick="Blacklist()" title="${user.userID }"
 											style="height: 30px; width: 125px;" value="加入黑名单"
-											class="Blacklist  layui-btn layui-btn-primary">
+											class="Blacklist  layui-btn-sm layui-btn layui-btn-radius">
 
 									</c:if> <c:if test="${user.userStatusID==2 }">
 										<input onclick="Blacklist()" title="${user.userID }"
 											style="height: 30px; width: 125px;" value="加入黑名单"
-											class="Blacklist  layui-btn layui-btn-primary">
+											class="Blacklist  layui-btn-sm layui-btn layui-btn-radius">
 
 									</c:if> <!-- <input type="hidden" name="userID" id="userID"> --></td>
 

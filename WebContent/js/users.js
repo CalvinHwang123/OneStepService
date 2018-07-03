@@ -65,7 +65,7 @@ function cancelBlacklist() {
 			success : function(msg) {//
 				layer.closeAll();
 				layer.msg('取消成功，账号为启用状态!', {
-					icon : 5,
+					icon : 1,
 					time : 3000
 				});
 				window.location.reload();
@@ -79,9 +79,13 @@ function cancelBlacklist() {
 function Reset() {
 	layer.confirm('确认要重置吗？', function(index) {
 		var userID = $(".Reset").attr("title");
-
+		
+		var pwd = $(".pwd").val();
+		
+		var pwd1 = $.md5(pwd);
 		var newStory = {
-			"userID" : userID
+			"userID" : userID,
+			"userPwd" : pwd1
 
 		};
 		$.ajax({
@@ -94,7 +98,7 @@ function Reset() {
 			success : function(msg) {//
 				layer.closeAll();
 				layer.msg('重置密码成功!', {
-					icon : 5,
+					icon : 1,
 					time : 3000
 				});
 				window.location.reload();
@@ -130,7 +134,7 @@ function member_stop(obj, id){
 						$(obj).parents("tr").find(".td-status").find('span')
 								.addClass('layui-btn-disabled').html('已停用');
 						layer.msg('已停用!', {
-							icon : 5,
+							icon : 1,
 							time : 3000
 						});
 						window.location.reload();
@@ -161,7 +165,7 @@ function member_stop(obj, id){
 						$(obj).parents("tr").find(".td-status").find('span')
 								.addClass('layui-btn-disabled').html('已启用');
 						layer.msg('已启用!', {
-							icon : 5,
+							icon : 1,
 							time : 3000
 						});
 						window.location.reload();
