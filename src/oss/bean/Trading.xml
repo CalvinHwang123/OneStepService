@@ -6,8 +6,8 @@
 	<select id="tradingList" resultMap="TradingMap" parameterType="oss.bean.Condition">
 		  select
 		A.Tradingid,a.amount,a.demandId,a.amountType,a.tradingTime,c.demandTitle
-		from Trading a ,demands c,users b
-		where A.Userid=#{classPid} and a.demandId = c.demandId 
+		from Trading a ,demands c
+		where A.Userid=#{classPid} and a.demandId = c.demandId ORDER BY a.tradingtime DESC
 		<if
 			test="startDate != null and endDate != null and startDate !='' and endDate !=''">
 			and tradingTime between #{startDate} and #{endDate}
