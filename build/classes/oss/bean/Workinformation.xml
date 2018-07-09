@@ -4,7 +4,7 @@
 <mapper namespace="oss.mapper.PortalMapper">
 	<!-- 前端 作品 数据 袁楠文 2018-6-19 22:45 -->
 	<select id="workInfoList" resultType="oss.bean.Workinformation" parameterType="oss.bean.Condition" resultMap="workinfolist">
-		SELECT a.WORKSID,a.USERID,a.WORKSNAME,a.CLASSIFICATIONID,a.WORKSPRICE,a.WORKSNUM,a.WORKSSTATUSID ,b.USERNAME,c.CLASSIFICATIONNAME,d.PARAMETERNAME,a.WORKSCONTEXT
+		SELECT a.WORKSID,a.USERID,a.WORKSNAME,a.CLASSIFICATIONID,a.url,a.WORKSPRICE,a.WORKSNUM,a.WORKSSTATUSID ,b.USERNAME,c.CLASSIFICATIONNAME,d.PARAMETERNAME,a.WORKSCONTEXT
 		FROM WORKS a,USERS b,CLASSIFICATION c,PARAM d
 		WHERE a.USERID=b.USERID and a.CLASSIFICATIONID=c.CLASSIFICATIONID and a.WORKSSTATUSID=d.PARAMETERID 
 		<if test="beWorksPrice != null and beWorksPrice!=171120 and endWorksPrice != null and endWorksPrice != 171120 and beWorksPrice !='' and endWorksPrice !='' ">

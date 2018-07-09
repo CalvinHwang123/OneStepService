@@ -59,7 +59,7 @@
 					<div class="col-md-3 product-grids">
 						<div class="agile-products">
 							<a href=<%=path + "/Portal/worksIntroduction.action?worksId="%>${i.worksId}>
-							<img src=<%=path%>${i.url} class="img-responsive" alt="img"></a>
+							<img src="${i.url}" class="img-responsive" alt="img"></a>
 							<div class="agile-product-text">
 								<h5>
 									<a href=<%=path + "/Portal/worksIntroduction.action?worksId="%>${i.worksId}>作品:<c:out value="${i.worksName}"></c:out></a>

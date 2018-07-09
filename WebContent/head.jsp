@@ -722,7 +722,13 @@
 					  layer.msg('您是服务商，无法发布需求!',{icon:2,time:1000});
 					  return;
 				}
+				
+				$('#formRelease').data('bootstrapValidator').validate();//手动对表单进行校检
+				if (!$('#formRelease').data('bootstrapValidator').isValid()) {//判断校检是否通过
+				    return;
+				}else {
 				document.getElementById("formRelease").submit();
+				}
 			}
 		}
 		
@@ -849,7 +855,14 @@
 			if ($("#loginUser").val() == "") {
 				$('#redirectLoginModal').modal("show");
 			}else{
+
+				$('#formPublishWorks').data('bootstrapValidator').validate();//手动对表单进行校检
+				if (!$('#formPublishWorks').data('bootstrapValidator').isValid()) {//判断校检是否通过
+				    return;
+				}else {
 				document.getElementById('formPublishWorks').submit();
+				}
+				
 			}
 		}
 	</script>

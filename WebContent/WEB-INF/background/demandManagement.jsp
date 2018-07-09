@@ -75,7 +75,7 @@
 						</th> -->
 
 						<th>需求ID</th>
-						
+						<th>需求标题</th>
 						<th>发布日期</th>
 						<th>截标时间</th>
 						<th>需求状态</th>
@@ -96,7 +96,7 @@
 									</div>
 								</td> -->
 								<td>${demand.demandID }</td>
-								
+								<td>${demand.demandTitle }</td>
 								<td>${demand.releaseTime }</td>
 								<td>${demand.asoftTime }</td>
 							
@@ -249,18 +249,6 @@
 						id="updateViolationsWhy">
 				</div>
 			</div>
-			
-			<div class="layui-form-item layui-form-text">
-				<label class="layui-form-label">具体要求</label>
-				<div class="layui-input-block">
-					<input type="text" name="violationsWhy" class="layui-textarea" lay-verify="required"
-						required autocomplete="off" class="layui-input"
-						id="updateViolationsResult">
-				</div>
-			</div>
-			
-			
-			
 		</form>
 	</div>
 	

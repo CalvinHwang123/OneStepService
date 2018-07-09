@@ -74,7 +74,7 @@
 					<th>序号</th>
 					<th>故事标题</th>
 					<th>故事日期</th>
-					<th>雇主ID</th>
+<!-- 					<th>雇主ID</th> -->
 					<th>操作</th>
 			</thead>
 			<tbody>
@@ -90,7 +90,7 @@
 						<td><c:out value="${s.index+1}"></c:out></td>
 						<td><c:out value="${story.storyTitle}"></c:out></td>
 						<td><c:out value="${story.storyTime}"></c:out></td>
-						<td><c:out value="${story.userID}"></c:out></td>
+<%-- 						<td><c:out value="${story.userID}"></c:out></td> --%>
 						<td class="td-manage"><a title="编辑" class="updateA"
 							storyContext='${story.storyContext}' storyID="${story.storyID}"
 							href="javascript:;"> <i class="layui-icon">&#xe642;</i>
@@ -115,14 +115,14 @@
 						id="newStoryTitle">
 				</div>
 			</div>
-			<div class="layui-form-item">
-				<label class="layui-form-label">雇主ID</label>
-				<div class="layui-input-block">
-					<input type="text" name="userID" required lay-verify="required"
-						placeholder="请输入雇主ID" autocomplete="off" class="layui-input"
-						id="newUserID">
-				</div>
-			</div>
+<!-- 			<div class="layui-form-item"> -->
+<!-- 				<label class="layui-form-label">雇主ID</label> -->
+<!-- 				<div class="layui-input-block"> -->
+<!-- 					<input type="text" name="userID" required lay-verify="required" -->
+<!-- 						placeholder="请输入雇主ID" autocomplete="off" class="layui-input" -->
+<!-- 						id="newUserID"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="layui-form-item">
 				<label class="layui-form-label">封面</label>
 				<div class="layui-input-block">

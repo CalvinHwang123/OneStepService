@@ -22,7 +22,6 @@ function changePageSize(pageSize) {
 		function examine() {
 			layer.confirm('确认审核通过吗？', function(index) {
 				var demandID = $(".examine").attr("title");
-				alert(demandID);
 				var newdemandID = {
 					"demandID" : demandID
 				};

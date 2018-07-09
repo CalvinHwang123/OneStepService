@@ -44,7 +44,6 @@ $("#login").on("click", function() {
 	var empname = $("#empname").val();
 	var pwd = $("#pwd").val();
 	var pwd1 = $.md5(pwd);
-	alert("加密之后的密码为==="+pwd1);
 	var newEmp = {
 		"empAccount" : empname,
 		"empPwd" : pwd1

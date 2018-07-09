@@ -34,7 +34,7 @@
 		<selectKey keyProperty="storyID" order="BEFORE" resultType="java.lang.Long" >
 			select userStorySeq.nextval  from dual 
 		</selectKey>
-		insert into UserStory (storyID,storyTitle,userID,storyContext,storyTime,stickTime,imageURL) values 
-		(#{storyID},#{storyTitle},#{userID},#{storyContext},#{storyTime},#{stickTime},#{imageURL})
+		insert into UserStory (storyID,storyTitle,storyContext,storyTime,stickTime,imageURL) values 
+		(#{storyID},#{storyTitle},#{storyContext},#{storyTime},#{stickTime},#{imageURL})
 	</insert>
 </mapper>

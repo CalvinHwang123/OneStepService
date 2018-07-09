@@ -6,22 +6,22 @@
 	<!-- 华清修改：前端需求列表查询 -->
 	<select id="beforeDemandsList"
 		parameterType="oss.bean.Condition" resultType="oss.bean.Demands">
-		select * from demands where 1=1
+		select * from demands where 1=1 and demandstatusid = 2 
 
 		<if
 			test="startDate != null and endDate != null and startDate != '' and endDate != ''">
-			and demandstatusid = 2 and releaseTime between '${startDate}
+			and releaseTime between '${startDate}
 			00:00:00' and '${endDate} 23:59:59'
 		</if>
 
 		<if
 			test="beWorksPrice != null and endWorksPrice != null and beWorksPrice != '' and endWorksPrice != ''">
-			and demandstatusid = 2 and demandPrice between #{beWorksPrice}
+			and demandPrice between #{beWorksPrice}
 			and #{endWorksPrice}
 		</if>
 
 		<if test="title != null and title != ''">
-			and demandstatusid = 2 and demandTitle like '%${title}%'
+			and demandTitle like '%${title}%'
 		</if>
 
 		<if test="descenDingOrder == 1">
